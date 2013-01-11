@@ -14,15 +14,19 @@ gem 'mysql2'
 # gem 'protected_attributes'
 # gem 'acts-as-taggable-on'
 
+gem 'haml'
+gem 'haml-rails'
+
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
 gem 'turbolinks'
 
-gem 'state_machine'
+gem 'sanitize'
 gem 'nested_set'
+gem 'state_machine'
 
 gem 'paperclip', '2.3.6'
-gem 'sanitize'
+gem 'rmagick'
 
 # Gems used only for assets and not required
 # in production environments by default.
