@@ -1,0 +1,17 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Ignore bundler config.
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# local config files
+Gemfile.lock
+.rvmrc
+
+# OS files
+.DS_Store
+.DS_Store?
+Thumbs.db
