@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-source 'http://gems.github.com'
+# source 'http://gems.github.com'
 
 gem 'rails',     github: 'rails/rails'
 gem 'arel',      github: 'rails/arel'
@@ -11,8 +11,10 @@ gem 'mysql2'
 # Tags need refactor for Rails MassAttrProtect
 
 # gem 'strong_parameters'
-# gem 'protected_attributes'
+gem 'protected_attributes', git: 'https://github.com/rails/protected_attributes.git'
 # gem 'acts-as-taggable-on'
+
+gem 'sorcery'
 
 gem 'haml'
 gem 'haml-rails', git: 'git://github.com/indirect/haml-rails.git'
@@ -38,6 +40,9 @@ group :assets do
 end
 
 group :test, :development do
+  gem 'faker'
+  gem 'factory_girl'
+
   gem "rspec-rails",        :git => "git://github.com/rspec/rspec-rails.git"
   gem "rspec",              :git => "git://github.com/rspec/rspec.git"
   gem "rspec-core",         :git => "git://github.com/rspec/rspec-core.git"

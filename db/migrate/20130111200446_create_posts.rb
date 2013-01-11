@@ -4,9 +4,9 @@ class CreatePosts < ActiveRecord::Migration
       t.integer :user_id
 
       # ID's
-      t.string  :short_id,    null: false, default: ''
-      t.string  :slug_id,     null: false, default: ''
-      t.string  :friendly_id, null: false, default: ''
+      t.string  :short_id
+      t.string  :slug_id
+      t.string  :friendly_id
       
       # Meta
       t.string :author

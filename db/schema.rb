@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130111160148) do
+ActiveRecord::Schema.define(version: 20130111211245) do
 
-  create_table "posts", force: true do |t|
+  create_table "articles", force: true do |t|
     t.integer  "user_id"
-    t.string   "short_id",           default: "",      null: false
-    t.string   "slug_id",            default: "",      null: false
-    t.string   "friendly_id",        default: "",      null: false
+    t.string   "short_id"
+    t.string   "slug_id"
+    t.string   "friendly_id"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -40,5 +40,79 @@ ActiveRecord::Schema.define(version: 20130111160148) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "posts", force: true do |t|
+    t.integer  "user_id"
+    t.string   "short_id"
+    t.string   "slug_id"
+    t.string   "friendly_id"
+    t.string   "author"
+    t.string   "keywords"
+    t.string   "description"
+    t.string   "copyright"
+    t.string   "title"
+    t.text     "raw_intro"
+    t.text     "raw_content"
+    t.text     "intro"
+    t.text     "content"
+    t.string   "main_image_url"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth",              default: 0
+    t.integer  "files_count",        default: 0
+    t.integer  "files_size",         default: 0
+    t.datetime "first_published_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recipes", force: true do |t|
+    t.integer  "user_id"
+    t.string   "short_id"
+    t.string   "slug_id"
+    t.string   "friendly_id"
+    t.string   "author"
+    t.string   "keywords"
+    t.string   "description"
+    t.string   "copyright"
+    t.string   "title"
+    t.text     "raw_intro"
+    t.text     "raw_content"
+    t.text     "intro"
+    t.text     "content"
+    t.string   "main_image_url"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth",              default: 0
+    t.integer  "files_count",        default: 0
+    t.integer  "files_size",         default: 0
+    t.datetime "first_published_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "login",                           null: false
+    t.string   "username",                        null: false
+    t.string   "email"
+    t.string   "crypted_password"
+    t.string   "salt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "remember_me_token"
+    t.datetime "remember_me_token_expires_at"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_token_expires_at"
+    t.datetime "reset_password_email_sent_at"
+  end
+
+  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token"
 
 end
