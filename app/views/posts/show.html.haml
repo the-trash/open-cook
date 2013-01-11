@@ -1,0 +1,39 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @post.user_id
+%p
+  %b Author:
+  = @post.author
+%p
+  %b Keywords:
+  = @post.keywords
+%p
+  %b Description:
+  = @post.description
+%p
+  %b Copyright:
+  = @post.copyright
+%p
+  %b Title:
+  = @post.title
+%p
+  %b Raw content:
+  = @post.raw_content
+%p
+  %b Content:
+  = @post.content
+%p
+  %b Main image url:
+  = @post.main_image_url
+%p
+  %b State:
+  = @post.state
+%p
+  %b First published at:
+  = @post.first_published_at
+
+= link_to 'Edit', edit_post_path(@post)
+\|
+= link_to 'Back', posts_path

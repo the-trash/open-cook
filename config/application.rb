@@ -14,6 +14,6 @@ module TheApp
     # Custom directories with classes and modules you want to be autoloadable.
     # config.autoload_paths += %W(#{config.root}/extras)
 
-    config.active_record.whitelist_attributes = false
+    # config.active_record.whitelist_attributes = false
   end
 end

@@ -1,0 +1,39 @@
+%h1 Listing posts
+
+%table
+  %tr
+    %th User
+    %th Author
+    %th Keywords
+    %th Description
+    %th Copyright
+    %th Title
+    %th Raw content
+    %th Content
+    %th Main image url
+    %th State
+    %th First published at
+    %th
+    %th
+    %th
+
+  - @posts.each do |post|
+    %tr
+      %td= post.user_id
+      %td= post.author
+      %td= post.keywords
+      %td= post.description
+      %td= post.copyright
+      %td= post.title
+      %td= post.raw_content
+      %td= post.content
+      %td= post.main_image_url
+      %td= post.state
+      %td= post.first_published_at
+      %td= link_to 'Show', post
+      %td= link_to 'Edit', edit_post_path(post)
+      %td= link_to 'Destroy', post, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Post', new_post_path

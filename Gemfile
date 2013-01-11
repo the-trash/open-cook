@@ -15,7 +15,7 @@ gem 'mysql2'
 # gem 'acts-as-taggable-on'
 
 gem 'haml'
-gem 'haml-rails'
+gem 'haml-rails', git: 'git://github.com/indirect/haml-rails.git'
 
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
