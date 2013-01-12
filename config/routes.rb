@@ -1,7 +1,7 @@
 TheApp::Application.routes.draw do
-  resources :posts
+  root to: 'posts#index'
 
-  root to: 'welcome#index'
+  resources :posts
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

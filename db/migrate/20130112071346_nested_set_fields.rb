@@ -1,0 +1,12 @@
+class NestedSetFields < ActiveRecord::Migration
+  def change
+    [:posts, :aricles, :recipes, :blogs, :menus].each do |table_name|
+      change_table table_name do |t|
+        t.integer :parent_id
+        t.integer :lft
+        t.integer :rgt
+        t.integer :depth, default: 0
+      end
+    end
+  end
+end

@@ -9,13 +9,28 @@
 10.times do |i|
   name = Faker::Name.name
 
-  User.create!(
-      username: name,
-      login:    name.downcase.gsub(/[\ \._]/, '-'),
-      password: "password#{i.next}"
+  # Users
+  user = User.new(
+    username: name,
+    login:    name.downcase.gsub(/[\ \._]/, '-'),
+    password: "password#{i.next}"
   )
+  user.save!
 
-  p 'User done'
+  puts 'User done'
+
+  # Posts
+  10.times do |j|
+    post       = user.posts.new
+    post.title = "Post U:#{i.next} P:#{j.next}"
+    post.state = [:draft, :published, :deleted].sample
+    post.save!
+
+    puts 'Post done'
+  end
+
+
 end
 
-p 'Total user count', User.count
+puts 'Total User count: ', User.count
+puts 'Total Post count: ', Post.count
