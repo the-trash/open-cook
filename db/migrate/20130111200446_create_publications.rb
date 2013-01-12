@@ -3,6 +3,7 @@ class CreatePublications < ActiveRecord::Migration
     [:posts, :aricles, :recipes, :blogs].each do |table_name|
       create_table table_name do |t|
         t.integer :user_id
+        t.integer :hub_id
         
         # Meta
         t.string :author

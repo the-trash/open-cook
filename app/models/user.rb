@@ -5,8 +5,10 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
   # Relations
+  has_many :hubs
+
   has_many :posts
-  has_many :menus
+  has_many :blogs
   has_many :recipes
   has_many :articles
 
