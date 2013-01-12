@@ -1,3 +1,5 @@
+# include ActiveModel::ForbiddenAttributesProtection
+
 class Post < ActiveRecord::Base
   include BaseSorts
   include BaseStates
@@ -5,7 +7,9 @@ class Post < ActiveRecord::Base
   # def to_param; self.slug_id; end
   belongs_to :user
 
-  validates_presence_of :user, :title
+  attr_accessible :user_id, :title, :state
+
+  validates_presence_of  :user_id, :title
 
   # short_id    => p1345
   # slug_id     => my-first-blog-post

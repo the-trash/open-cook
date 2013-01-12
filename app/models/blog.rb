@@ -1,2 +1,1 @@
-class Blog < Post
-end
+class Blog < Post; end
