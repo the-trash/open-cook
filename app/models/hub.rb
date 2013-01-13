@@ -1,4 +1,7 @@
 class Hub < ActiveRecord::Base
+  include BaseSorts
+  include BaseStates
+    
   belongs_to :user
 
   has_many :pages
@@ -8,7 +11,7 @@ class Hub < ActiveRecord::Base
   has_many :articles
 
   # Scopes
-  scope :of_, ->(type) { where(state: :published, hub_type: type) }
+  scope :of_, ->(type) { where(hub_type: type) }
 
   # Validations
   validates_presence_of :user, :title, :hub_type

@@ -8,4 +8,17 @@
     = csrf_meta_tags
 
   %body
-    = yield
+    .body#top
+      = render 'layouts/items/main_menu'
+      .header &nbsp;
+
+      .content
+        %table.layout
+          %tr
+            %td.left= render 'layouts/items/sidebar'
+
+            %td.center= yield
+            %td.right
+
+      .footer_guarantor &nbsp;
+    .footer

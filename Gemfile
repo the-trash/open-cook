@@ -26,6 +26,7 @@ gem 'turbolinks'
 gem 'sanitize'
 gem 'nested_set'
 gem 'state_machine'
+gem 'compass'
 
 gem 'paperclip', '2.3.6'
 gem 'rmagick'

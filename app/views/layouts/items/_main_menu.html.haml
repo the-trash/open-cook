@@ -1,0 +1,5 @@
+%ul.main_menu
+  - @user.hubs.of_(:pages).each do |hub|
+    %li
+      - hub.pages.published.each do |page|
+        %span= page.title
