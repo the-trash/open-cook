@@ -1,4 +1,4 @@
-%h1 Listing posts
+%h1 Listing #{@klass.to_s.pluralize}
 
 %table
   %tr
@@ -31,9 +31,9 @@
       %td= post.state
       %td= post.first_published_at
       %td= link_to 'Show', post
-      %td= link_to 'Edit', edit_post_path(post)
-      %td= link_to 'Destroy', post, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Edit', url_for(controller: controller_name, action: :edit, id: post)
+      %td= link_to 'Destroy', post, :method => :delete, :data => { confirm: 'Are you sure?' }
 
 %br
 
-= link_to 'New Post', new_post_path
+= link_to "New #{@klass.to_s}", url_for(controller: controller_name, action: :new)

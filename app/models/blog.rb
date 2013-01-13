@@ -1,1 +1,3 @@
-class Blog < Post; end
+class Blog < ActiveRecord::Base
+  include BasePublication
+end

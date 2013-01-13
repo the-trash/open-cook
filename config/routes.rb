@@ -1,7 +1,13 @@
 TheApp::Application.routes.draw do
-  root to: 'posts#index'
+  root to: 'welcome#index'
 
+  # post set
+  resources :hubs
+  resources :pages
   resources :posts
+  resources :blogs
+  resources :recipes
+  resources :articles
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

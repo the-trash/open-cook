@@ -13,8 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20130112071835) do
 
-  create_table "aricles", force: true do |t|
+  create_table "articles", force: true do |t|
     t.integer  "user_id"
+    t.integer  "hub_id"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 20130112071835) do
 
   create_table "blogs", force: true do |t|
     t.integer  "user_id"
+    t.integer  "hub_id"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -69,18 +71,46 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "friendly_id"
   end
 
-  create_table "menus", force: true do |t|
+  create_table "hubs", force: true do |t|
     t.integer  "user_id"
     t.string   "title"
-    t.string   "main_image_url"
-    t.integer  "show_count",     default: 0
-    t.string   "state",          default: "draft"
+    t.string   "hub_type",    default: "pages"
+    t.string   "state"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",          default: 0
+    t.integer  "depth",       default: 0
+    t.string   "short_id"
+    t.string   "slug_id"
+    t.string   "friendly_id"
+  end
+
+  create_table "pages", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "hub_id"
+    t.string   "author"
+    t.string   "keywords"
+    t.string   "description"
+    t.string   "copyright"
+    t.string   "title"
+    t.text     "raw_intro"
+    t.text     "raw_content"
+    t.text     "intro"
+    t.text     "content"
+    t.string   "main_image_url"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.datetime "first_published_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth",              default: 0
+    t.integer  "files_count",        default: 0
+    t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "slug_id"
     t.string   "friendly_id"
@@ -88,6 +118,7 @@ ActiveRecord::Schema.define(version: 20130112071835) do
 
   create_table "posts", force: true do |t|
     t.integer  "user_id"
+    t.integer  "hub_id"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -116,6 +147,7 @@ ActiveRecord::Schema.define(version: 20130112071835) do
 
   create_table "recipes", force: true do |t|
     t.integer  "user_id"
+    t.integer  "hub_id"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -131,7 +163,6 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.datetime "first_published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "menu_id"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"

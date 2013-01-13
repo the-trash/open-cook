@@ -1,3 +1,3 @@
-class Recipe < Post
-  belongs_to :menu
+class Recipe < ActiveRecord::Base
+  include BasePublication
 end
