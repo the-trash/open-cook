@@ -1,3 +1,7 @@
+%h1 Current user
+%p= current_user.try(:login) || link_to('login', login_path)
+%p= link_to 'Logout', logout_path, :method => :delete, :data => { confirm: 'Are you sure?' }
+
 %h1 List of Post-like entities
 
 - [:pages, :posts, :blogs, :recipes, :articles].each do |name|

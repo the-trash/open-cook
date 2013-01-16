@@ -176,8 +176,9 @@ ActiveRecord::Schema.define(version: 20130112071835) do
 
   create_table "users", force: true do |t|
     t.string   "login",                                       null: false
-    t.string   "username",                                    null: false
+    t.string   "username"
     t.string   "email"
+    t.string   "open_password"
     t.string   "crypted_password"
     t.string   "salt"
     t.datetime "created_at"

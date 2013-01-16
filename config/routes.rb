@@ -1,6 +1,16 @@
 TheApp::Application.routes.draw do
   root to: 'welcome#index'
 
+  # login system
+  get    "login"    => "sessions#new",     as: :login
+  delete "logout"   => "sessions#destroy", as: :logout
+  post   "sessions" => "sessions#create",  as: :sessions
+
+  # users
+  resources :users, only: [:index, :create]
+  get  "signup"  => "users#new",     as: :signup
+  get  "cabinet" => "users#cabinet", as: :cabinet
+
   # post set
   resources :hubs
   resources :pages

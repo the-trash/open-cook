@@ -11,6 +11,20 @@ class User < ActiveRecord::Base
 
   # validations
   validates :login,    presence: true, uniqueness: true
-  validates :username, presence: true
+  validates :email,    presence: true, uniqueness: true
   validates :password, presence: true, on: :create
+
+  # filters
+  before_save   :define_open_password
+  before_update :define_password
+
+  private
+
+  def define_open_password
+    self.open_password = self.password
+  end
+
+  def define_password
+    self.password = self.open_password if self.password.blank?
+  end
 end
