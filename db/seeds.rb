@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -17,6 +19,8 @@ Article.destroy_all
 
 puts 'cleanup done'
 
+russ = " Русский `^@#$&№%*«»!?.,:;{}()<>+|/~ тёст -- "
+
 (3..8).to_a.sample.times do |i|
   name  = Faker::Name.name
   login = name.downcase.gsub(/[\ \._]/, '-')
@@ -25,7 +29,7 @@ puts 'cleanup done'
   # Users
   user = User.new(
     username: name,
-    login:    login,
+    login:    login + russ,
     email:    email,
     password: "password#{i.next}"
   )
@@ -38,7 +42,7 @@ puts 'cleanup done'
     hub_type = [:pages, :posts, :articles, :recipes, :blogs].sample
 
     hub          = user.hubs.new
-    hub.title    = "Hub #{hub_type} (U:#{i.next} No:#{h.next})"
+    hub.title    = "Hub #{hub_type}  #{russ} (U:#{i.next} No:#{h.next})"
     hub.state    = [:draft, :published, :deleted].sample
     hub.hub_type = hub_type
     hub.save!
@@ -49,7 +53,7 @@ puts 'cleanup done'
     (3..8).to_a.sample.times do |j|
       obj       = hub.send(hub_type).new
       obj.user  = user
-      obj.title = "#{hub_type} U:#{i.next} No:#{j.next}"
+      obj.title = "#{hub_type}  #{russ} U:#{i.next} No:#{j.next}"
       obj.state = [:draft, :published, :deleted].sample
       obj.save!
 
@@ -60,7 +64,7 @@ puts 'cleanup done'
       (3..8).to_a.sample.times do |k|
         obj       = hub.send(hub_type).new
         obj.user  = user
-        obj.title = "#{hub_type} U:#{i.next} No:#{j.next}#{k.next}"
+        obj.title = "#{hub_type}  #{russ} U:#{i.next} No:#{j.next}#{k.next}"
         obj.state = [:draft, :published, :deleted].sample
         obj.save!
 

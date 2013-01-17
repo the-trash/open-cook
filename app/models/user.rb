@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   include DefaultRole
   include DefineOpenPassword
 
+  before_validation :prepare_login, on: :create
+
   def to_param; self.login end
 
   # Relations
@@ -18,4 +20,10 @@ class User < ActiveRecord::Base
   validates :login,    presence: true, uniqueness: true
   validates :email,    presence: true, uniqueness: true
   validates :password, presence: true, on: :create
+
+  private
+
+  def prepare_login
+    self.login = Russian::translit(self.login).parameterize
+  end
 end

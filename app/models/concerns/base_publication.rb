@@ -4,6 +4,7 @@ module BasePublication
   included do
     acts_as_nested_set scope: :user
 
+    include Slugger
     include BaseSorts
     include BaseStates
 
