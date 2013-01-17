@@ -174,6 +174,15 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "friendly_id"
   end
 
+  create_table "roles", force: true do |t|
+    t.string   "name",        null: false
+    t.string   "title",       null: false
+    t.text     "description", null: false
+    t.text     "the_role",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "login",                                       null: false
     t.string   "username"
@@ -181,6 +190,7 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "open_password"
     t.string   "crypted_password"
     t.string   "salt"
+    t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_me_token"

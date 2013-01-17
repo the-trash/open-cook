@@ -18,12 +18,15 @@ Article.destroy_all
 puts 'cleanup done'
 
 10.times do |i|
-  name = Faker::Name.name
-
+  name  = Faker::Name.name
+  login = name.downcase.gsub(/[\ \._]/, '-')
+  email = "#{login}@gmail.com"
+  
   # Users
   user = User.new(
     username: name,
-    login:    name.downcase.gsub(/[\ \._]/, '-'),
+    login:    login,
+    email:    email,
     password: "password#{i.next}"
   )
   user.save!

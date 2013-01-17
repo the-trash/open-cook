@@ -1,21 +1,27 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.all
+  end
+
+  def show
+    @user = User.where(login: params[:id]).first
+  end
+
   def new
-    @new_user = User.new
+    @user = User.new
   end
 
   def create
-    @new_user = User.new(params[:user])
+    @user = User.new(params[:user])
     if @new_user.save
-      login(@new_user.login, @new_user.open_password, false)
+      login(@user.login, @user.open_password, false)
       redirect_to root_url, :notice => t('.created')
     else
       render :new
     end
   end
 
-  def index
-    @users = User.all
-  end
-
+  # secured
   def cabinet; end
+
 end

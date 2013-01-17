@@ -20,4 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  sessions:
+    new: Login
+    login: Login
+    logout: Logout
+    create:
+      alert: "Login or Password was invalid"
+      notice: "Logged in!"
+    destroy:
+      noticce: "Logged out!"
+  users:
+    index: Users list

@@ -17,7 +17,13 @@
           %tr
             %td.left= render 'layouts/items/sidebar'
 
-            %td.center= yield
+            %td.center
+              - unless flash.empty?
+                = flash[:notice]
+                = flash[:error]
+                = flash[:alert]
+
+              = yield
             %td.right
 
       .footer_guarantor &nbsp;

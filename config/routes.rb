@@ -7,7 +7,7 @@ TheApp::Application.routes.draw do
   post   "sessions" => "sessions#create",  as: :sessions
 
   # users
-  resources :users, only: [:index, :create]
+  resources :users, only: [:index, :show, :create]
   get  "signup"  => "users#new",     as: :signup
   get  "cabinet" => "users#cabinet", as: :cabinet
 

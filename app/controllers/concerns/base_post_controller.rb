@@ -6,7 +6,8 @@ module BasePostController
     before_action :set_post,  only: [:show, :edit, :update, :destroy]
 
     def index
-      @posts = @klass.fresh.published
+      user   = User.where(login: params[:user]).first || @root
+      @posts = user.send(controller_name).fresh.published
       render 'posts/index'
     end
 

@@ -1,9 +1,9 @@
-= form_for @new_user do |f|
-  - if @new_user.errors.any?
+= form_for @user do |f|
+  - if @user.errors.any?
     .error_messages
       %h2 Form is invalid
       %ul
-        - for message in @new_user.errors.full_messages
+        - for message in @user.errors.full_messages
           %li= message
   .field
     = f.label :login

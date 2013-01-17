@@ -8,6 +8,8 @@ gem 'arel',      github: 'rails/arel'
 
 gem 'mysql2'
 
+# gem 'rails-i18n'
+
 # Tags need refactor for Rails MassAttrProtect
 
 # gem 'strong_parameters',    git: 'https://github.com/rails/strong_parameters.git', :tag => "v0.1.6"
@@ -27,6 +29,10 @@ gem 'sanitize'
 gem 'nested_set'
 gem 'state_machine'
 gem 'compass'
+
+# my gems
+gem 'the_role'          , path: '/home/the_teacher/rails/rails4/the_role'
+gem 'the_sortable_tree' , path: '/home/the_teacher/rails/rails4/the_sortable_tree'
 
 gem 'paperclip', '2.3.6'
 gem 'rmagick'
@@ -56,6 +62,7 @@ end
 
 # Use unicorn as the app server
 # gem 'unicorn'
+gem 'thin'
 
 # Deploy with Capistrano
 # gem 'capistrano', group: :development

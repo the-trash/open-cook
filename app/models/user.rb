@@ -1,6 +1,11 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
+  include DefaultRole
+  include DefineOpenPassword
+
+  def to_param; self.login end
+
   # Relations
   has_many :hubs
   has_many :pages
@@ -13,18 +18,4 @@ class User < ActiveRecord::Base
   validates :login,    presence: true, uniqueness: true
   validates :email,    presence: true, uniqueness: true
   validates :password, presence: true, on: :create
-
-  # filters
-  before_save   :define_open_password
-  before_update :define_password
-
-  private
-
-  def define_open_password
-    self.open_password = self.password
-  end
-
-  def define_password
-    self.password = self.open_password if self.password.blank?
-  end
 end
