@@ -5,9 +5,11 @@ module BasePostController
     before_action :set_klass
     before_action :set_post,  only: [:show, :edit, :update, :destroy]
 
+    include TheSortableTreeController::Rebuild
+
     def index
       user   = User.where(login: params[:user]).first || @root
-      @posts = user.send(controller_name).fresh.published
+      @posts = user.send(controller_name).nested_set.published
       render 'posts/index'
     end
 

@@ -17,6 +17,9 @@
  *= require base/headers
  *= require base/scaffolds
 
+ *= require tree
+ *= require sortable_tree
+
  *= require layout
 
  */

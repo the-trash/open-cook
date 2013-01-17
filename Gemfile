@@ -14,7 +14,6 @@ gem 'mysql2'
 
 # gem 'strong_parameters',    git: 'https://github.com/rails/strong_parameters.git', :tag => "v0.1.6"
 gem 'protected_attributes', git: 'https://github.com/rails/protected_attributes.git'
-gem 'acts-as-taggable-on'
 
 gem 'sorcery'
 
@@ -24,11 +23,13 @@ gem 'haml-rails', git: 'git://github.com/indirect/haml-rails.git'
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'compass'
 
+gem 'russian'
 gem 'sanitize'
 gem 'nested_set'
 gem 'state_machine'
-gem 'compass'
+gem 'acts-as-taggable-on'
 
 # my gems
 gem 'the_role'          , path: '/home/the_teacher/rails/rails4/the_role'

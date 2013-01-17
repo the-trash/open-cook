@@ -1,39 +1,12 @@
 %h1 Listing #{@klass.to_s.pluralize}
 
-%table
-  %tr
-    %th User
-    %th Author
-    %th Keywords
-    %th Description
-    %th Copyright
-    %th Title
-    %th Raw content
-    %th Content
-    %th Main image url
-    %th State
-    %th First published at
-    %th
-    %th
-    %th
-
-  - @posts.each do |post|
-    %tr
-      %td= post.user_id
-      %td= post.author
-      %td= post.keywords
-      %td= post.description
-      %td= post.copyright
-      %td= post.title
-      %td= post.raw_content
-      %td= post.content
-      %td= post.main_image_url
-      %td= post.state
-      %td= post.first_published_at
-      %td= link_to 'Show', post
-      %td= link_to 'Edit', url_for(controller: controller_name, action: :edit, id: post)
-      %td= link_to 'Destroy', post, :method => :delete, :data => { confirm: 'Are you sure?' }
+%ol.sortable_tree{ data: { rebuild_url: url_for(controller: controller_name, action: :rebuild) } }= build_server_tree @posts, type: :sortable
 
 %br
 
 = link_to "New #{@klass.to_s}", url_for(controller: controller_name, action: :new)
+
+-# %ol.tree= build_server_tree @posts
+-# link_to 'Show', post
+-# link_to 'Edit', url_for(controller: controller_name, action: :edit, id: post)
+-# link_to 'Destroy', post, :method => :delete, :data => { confirm: 'Are you sure?' }

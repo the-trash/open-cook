@@ -11,13 +11,20 @@ TheApp::Application.routes.draw do
   get  "signup"  => "users#new",     as: :signup
   get  "cabinet" => "users#cabinet", as: :cabinet
 
+  concern :sortable_tree do
+    collection do
+      get  :manage
+      post :rebuild
+    end
+  end
+
   # post set
-  resources :hubs
-  resources :pages
-  resources :posts
-  resources :blogs
-  resources :recipes
-  resources :articles
+  resources :hubs,     concerns: :sortable_tree
+  resources :pages,    concerns: :sortable_tree
+  resources :posts,    concerns: :sortable_tree
+  resources :blogs,    concerns: :sortable_tree
+  resources :recipes,  concerns: :sortable_tree
+  resources :articles, concerns: :sortable_tree
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

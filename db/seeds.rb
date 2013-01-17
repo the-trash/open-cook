@@ -17,7 +17,7 @@ Article.destroy_all
 
 puts 'cleanup done'
 
-10.times do |i|
+(3..8).to_a.sample.times do |i|
   name  = Faker::Name.name
   login = name.downcase.gsub(/[\ \._]/, '-')
   email = "#{login}@gmail.com"
@@ -34,7 +34,7 @@ puts 'cleanup done'
   puts "=> User #{i} done"
 
   Hub
-  10.times do |h|
+  (3..8).to_a.sample.times do |h|
     hub_type = [:pages, :posts, :articles, :recipes, :blogs].sample
 
     hub          = user.hubs.new
@@ -46,7 +46,7 @@ puts 'cleanup done'
     puts "Hub #{h.next} done"
 
     # create nested objects
-    10.times do |j|
+    (3..8).to_a.sample.times do |j|
       obj       = hub.send(hub_type).new
       obj.user  = user
       obj.title = "#{hub_type} U:#{i.next} No:#{j.next}"
@@ -54,6 +54,21 @@ puts 'cleanup done'
       obj.save!
 
       puts "#{hub_type} U:#{i.next} No:#{j.next} - done!"
+      parent_obj = obj
+
+      puts "SUB CREATING"
+      (3..8).to_a.sample.times do |k|
+        obj       = hub.send(hub_type).new
+        obj.user  = user
+        obj.title = "#{hub_type} U:#{i.next} No:#{j.next}#{k.next}"
+        obj.state = [:draft, :published, :deleted].sample
+        obj.save!
+
+        obj.move_to_child_of(parent_obj)
+
+        puts "#{hub_type} U:#{i.next} No:#{j.next}#{k.next} - done!"
+      end
+
     end
   end
 end
