@@ -1,57 +1,71 @@
-# encoding: UTF-8
+# # encoding: UTF-8
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+User
+  -> Role
+  -< Hubs:
+      pages (book)
+      posts (section)
+      blogs (month) -> callback
+      recipes (menus)
+      articles
+      notes
+      menus -< links
+  -< Comments
+  -< UploadedFiles
 
-book = {
-  'Program' => {
-    'Lexical Structure' => [
-      'Comments',
-      'Documentation',
-      'Whitespace',
-      'Literals',
-      'Identifiers'
-    ]
-  }
-}
 
-def create_hub user, title
-  obj          = user.send(:hubs).new
-  obj.title    = title
-  obj.hub_type = :book
-  obj.state    = :published
-  obj.save!
-  obj
-end
+# # This file should contain all the record creation needed to seed the database with its default values.
+# # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
+# #
+# # Examples:
+# #
+# #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+# #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-def build_page_tree user, book, parent_obj = nil
-  book.each_pair do |key, value|
-    obj = create_hub(user, key)
-    obj.move_to_child_of(parent_obj) if parent_obj
-    parent_obj = obj
+# book = {
+#   'Program' => {
+#     'Lexical Structure' => [
+#       'Comments',
+#       'Documentation',
+#       'Whitespace',
+#       'Literals',
+#       'Identifiers'
+#     ]
+#   }
+# }
 
-    if value.is_a? Hash
-      build_page_tree(user, value, parent_obj)
-    end
+# def create_hub user, title
+#   obj          = user.send(:hubs).new
+#   obj.title    = title
+#   obj.hub_type = :book
+#   obj.state    = :published
+#   obj.save!
+#   obj
+# end
 
-    if value.is_a? Array
-      value.each do |key|
-        obj = create_hub(user, key)
-        obj.move_to_child_of(parent_obj)
-      end
-    end
+# def build_page_tree user, book, parent_obj = nil
+#   book.each_pair do |key, value|
+#     obj = create_hub(user, key)
+#     obj.move_to_child_of(parent_obj) if parent_obj
+#     parent_obj = obj
 
-  end
-end
+#     if value.is_a? Hash
+#       build_page_tree(user, value, parent_obj)
+#     end
 
-build_page_tree(User.first, book)
+#     if value.is_a? Array
+#       value.each do |key|
+#         obj = create_hub(user, key)
+#         obj.move_to_child_of(parent_obj)
+#       end
+#     end
 
-Hub.roots.of_(:book).last.self_and_descendants
+#   end
+# end
+
+# build_page_tree(User.first, book)
+
+# Hub.roots.of_(:book).last.self_and_descendants
 
 # User.destroy_all
 
