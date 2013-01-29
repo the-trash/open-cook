@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "main_image_url"
     t.integer  "show_count",         default: 0
     t.string   "state",              default: "draft"
+    t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -57,6 +58,7 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "main_image_url"
     t.integer  "show_count",         default: 0
     t.string   "state",              default: "draft"
+    t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -76,6 +78,7 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "title"
     t.string   "hub_type",    default: "pages"
     t.string   "state"
+    t.string   "legacy_url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
@@ -102,6 +105,7 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "main_image_url"
     t.integer  "show_count",         default: 0
     t.string   "state",              default: "draft"
+    t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -131,6 +135,7 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "main_image_url"
     t.integer  "show_count",         default: 0
     t.string   "state",              default: "draft"
+    t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -160,6 +165,7 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "main_image_url"
     t.integer  "show_count",         default: 0
     t.string   "state",              default: "draft"
+    t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -198,6 +204,8 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
+    t.integer  "total_files_count",               default: 0
+    t.integer  "total_files_size",                default: 0
     t.integer  "files_count",                     default: 0
     t.integer  "files_size",                      default: 0
   end

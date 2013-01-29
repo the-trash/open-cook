@@ -1,0 +1,4 @@
+%ul.left_menu
+  - @user.hubs.of_(:posts).each do |hub|
+    - hub.posts.published.each do |post|
+      %li= post.title

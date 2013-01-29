@@ -9,13 +9,13 @@
 
   %body
     .body#top
-      = render 'layouts/items/main_menu'
+      = render 'layouts/items/top_menu'
       .header &nbsp;
 
       .content
         %table.layout
           %tr
-            %td.left= render 'layouts/items/sidebar'
+            %td.left= render 'layouts/items/left_menu'
 
             %td.center
               - unless flash.empty?

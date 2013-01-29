@@ -7,6 +7,8 @@ class CreateHubs < ActiveRecord::Migration
       t.string :hub_type, default: :pages
       t.string :state
 
+      t.string :legacy_url
+
       t.timestamps
     end
   end

@@ -23,7 +23,9 @@ gem 'haml-rails', git: 'git://github.com/indirect/haml-rails.git'
 gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
 gem 'turbolinks'
+
 gem 'compass'
+# gem 'compass-rails'
 
 gem 'russian'
 gem 'sanitize'
@@ -34,6 +36,8 @@ gem 'acts-as-taggable-on'
 # my gems
 gem 'the_role'          , path: '/home/the_teacher/rails/rails4/the_role'
 gem 'the_sortable_tree' , path: '/home/the_teacher/rails/rails4/the_sortable_tree'
+#gem 'the_comments'     , path: '/home/the_teacher/rails/rails4/the_comments'
+#gem 'the_attachments'  , path: '/home/the_teacher/rails/rails4/the_attachments'
 
 gem 'paperclip', '2.3.6'
 gem 'rmagick'

@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   # @root - root user
   # current_user - logined user
   before_action -> { @root = User.first }
+  before_action -> { @user = User.first }
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

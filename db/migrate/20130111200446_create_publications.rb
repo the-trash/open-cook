@@ -24,6 +24,8 @@ class CreatePublications < ActiveRecord::Migration
         t.integer :show_count, default: 0
         t.string  :state,      default: :draft
 
+        t.string :legacy_url
+
         # DateTime
         t.datetime :first_published_at
         t.timestamps

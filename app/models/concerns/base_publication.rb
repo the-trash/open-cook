@@ -13,6 +13,8 @@ module BasePublication
     belongs_to :user
     validates_presence_of :user, :title
 
+    attr_accessible :lft, :rgt, :parent_id, :depth
+
     # attr_accessible :name
     # attr_protected  :admin
 

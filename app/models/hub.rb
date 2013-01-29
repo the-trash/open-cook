@@ -10,6 +10,9 @@ class Hub < ActiveRecord::Base
   has_many :recipes
   has_many :articles
 
+  acts_as_nested_set scope: :user
+  attr_accessible :lft, :rgt, :parent_id, :depth
+
   # Scopes
   scope :of_, ->(type) { where(hub_type: type) }
 
