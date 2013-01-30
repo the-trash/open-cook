@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130112071835) do
+ActiveRecord::Schema.define(version: 20130130171802) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -41,6 +41,24 @@ ActiveRecord::Schema.define(version: 20130112071835) do
     t.string   "short_id"
     t.string   "slug_id"
     t.string   "friendly_id"
+  end
+
+  create_table "audits", force: true do |t|
+    t.integer  "user_id"
+    t.string   "obj_id"
+    t.string   "obj_type"
+    t.string   "controller_name"
+    t.string   "action_name"
+    t.string   "ip"
+    t.string   "remote_ip"
+    t.string   "fullpath"
+    t.string   "referer"
+    t.string   "user_agent"
+    t.string   "remote_addr"
+    t.string   "remote_host"
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "blogs", force: true do |t|

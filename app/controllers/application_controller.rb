@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   # current_user - logined user
   before_action -> { @root = User.first }
   before_action -> { @user = User.first }
+  after_action  -> { (@audit || Audit.new.init(self)).save }
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
