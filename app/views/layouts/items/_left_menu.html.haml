@@ -1,4 +1,3 @@
 %ul.left_menu
-  - @user.hubs.of_(:posts).each do |hub|
-    - hub.posts.published.each do |post|
-      %li= post.title
+  - @user.hubs.of_(:menu).published.each do |hub|
+    %li= link_to hub.title, menu_path(hub)

@@ -2,6 +2,7 @@
 
 User.destroy_all
 Hub.destroy_all
+Recipe.destroy_all
 
 5.times do |i|
   name  = Faker::Name.name
@@ -25,13 +26,16 @@ User.all.each_with_index do |user, u|
       hub_type: :menu
     )
 
+    hub.update_attribute(:state, :published)
     puts "Menu u:#{u.next} m:#{m.next} created"
+
     10.times do |r|
       user.recipes.create!(
         hub: hub,
         title: "Recipe #{r.next} (u:#{u.next})",
         raw_content: Faker::Lorem.paragraphs(3)
       )
+      puts "Recipe r:#{r.next} m:#{m.next} u:#{u.next} created"
     end
   end
 end

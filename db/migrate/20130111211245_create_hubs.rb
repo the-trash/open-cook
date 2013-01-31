@@ -5,7 +5,7 @@ class CreateHubs < ActiveRecord::Migration
 
       t.string :title
       t.string :hub_type
-      t.string :state
+      t.string :state, default: :draft
 
       t.string :legacy_url
 
