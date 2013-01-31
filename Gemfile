@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 # source 'http://gems.github.com'
+# Delete all gems: gem list | cut -d" " -f1 | xargs gem uninstall -aIx
 
 gem 'rails',     github: 'rails/rails'
 gem 'arel',      github: 'rails/arel'

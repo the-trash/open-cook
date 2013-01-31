@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20130130171802) do
   create_table "hubs", force: true do |t|
     t.integer  "user_id"
     t.string   "title"
-    t.string   "hub_type",    default: "pages"
+    t.string   "hub_type"
     t.string   "state"
     t.string   "legacy_url"
     t.datetime "created_at"
