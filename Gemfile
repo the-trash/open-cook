@@ -31,17 +31,17 @@ gem 'russian'
 gem 'sanitize'
 gem 'nested_set'
 gem 'state_machine'
-gem 'acts-as-taggable-on'
+# gem 'acts-as-taggable-on'
 
 # my gems
-gem 'the_role'            , path: '/home/the_teacher/rails/rails4/the_role'
-gem 'the_sortable_tree'   , path: '/home/the_teacher/rails/rails4/the_sortable_tree'
+# gem 'the_role'            , path: '/home/the_teacher/rails/rails4/the_role'
+# gem 'the_sortable_tree'   , path: '/home/the_teacher/rails/rails4/the_sortable_tree'
 #gem 'the_comments'       , path: '/home/the_teacher/rails/rails4/the_comments'
 #gem 'the_uploaded_files' , path: '/home/the_teacher/rails/rails4/the_uploaded_files'
 #gem 'the_audit'          , path: '/home/the_teacher/rails/rails4/the_audit'
 
-gem 'paperclip', '2.3.6'
-gem 'rmagick'
+# gem 'paperclip', '2.3.6'
+# gem 'rmagick'
 
 # Gems used only for assets and not required
 # in production environments by default.
