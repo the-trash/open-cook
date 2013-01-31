@@ -2,18 +2,22 @@ module BasePublication
   extend ActiveSupport::Concern
 
   included do
-    acts_as_nested_set scope: :user
-
     include Slugger
     include BaseSorts
     include BaseStates
 
     include TheSortableTree::Scopes
 
-    belongs_to :user
-    validates_presence_of :user, :title
-
+    # nested set
+    acts_as_nested_set scope: :user
     attr_accessible :lft, :rgt, :parent_id, :depth
+
+    # relations
+    belongs_to :user
+    belongs_to :hub
+
+    validates_presence_of :user, :hub, :title
+    attr_accessible :user, :hub, :title, :raw_content
 
     # attr_accessible :name
     # attr_protected  :admin

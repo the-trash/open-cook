@@ -18,16 +18,20 @@ Hub.destroy_all
   puts "User #{i.next} created"
 end
 
-User.all.each_with_index do |user, i|
-  10.times do |j|
+User.all.each_with_index do |user, u|
+  10.times do |m|
     hub = user.hubs.create!(
-      title: "Menu #{j.next} (u:#{i.next})",
+      title: "Menu #{m.next} (u:#{u.next})",
       hub_type: :menu
     )
 
-    puts "Menu u:#{i.next} m:#{j.next} created"
-    10.times do |k|
-      puts hub.title
+    puts "Menu u:#{u.next} m:#{m.next} created"
+    10.times do |r|
+      user.recipes.create!(
+        hub: hub,
+        title: "Recipe #{r.next} (u:#{u.next})",
+        raw_content: Faker::Lorem.paragraphs(3)
+      )
     end
   end
 end
