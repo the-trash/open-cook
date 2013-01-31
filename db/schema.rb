@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "user_id"
     t.string   "title"
     t.string   "hub_type"
-    t.string   "state"
+    t.string   "state",       default: "draft"
     t.string   "legacy_url"
     t.datetime "created_at"
     t.datetime "updated_at"

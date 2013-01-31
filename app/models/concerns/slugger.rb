@@ -1,11 +1,20 @@
+# friendly_id h11149+menu-10-u-5  # uniq
+# slug_id     menu-10-u-5         # not unique => not for basic search
+# short_id    h11149              # uniq
+# id          50                  # uniq
+
 module Slugger
   extend ActiveSupport::Concern
 
-  included do
-    before_validation :build_short_id, on: :create
-    before_save       :build_slugs
+  SEPARATOR = "+"
 
-    def slug_separator; "+" ;end
+  included do
+    def to_param; self.friendly_id end
+
+    validates_presence_of :slug_id, :short_id, :friendly_id
+
+    before_validation :build_short_id
+    before_validation :build_slugs
 
     def build_short_id
       return unless self.short_id.blank?
@@ -21,12 +30,16 @@ module Slugger
         article: :a
       }[klass]
 
+      prefix  ||= 'x'
+      rnd_num   = 99999
+
       # build short_id
-      short_id = [prefix, rand(99999)].join
+      short_id = [prefix, rand(rnd_num)].join
 
       # rebuild if find identically short_id
-      while self.class.to_s.camelize.constantize.where(short_id: short_id).first
-        short_id = [prefix, rand(99999)].join
+      while self.class.where(short_id: short_id).first
+        puts "IDENTICAL SHORT_ID => rebuild"
+        short_id = [prefix, rand(rnd_num)].join
       end
 
       # set short_id 
@@ -36,7 +49,18 @@ module Slugger
     def build_slugs
       unless self.title.blank?
         self.slug_id     = Russian::translit(self.title).parameterize 
-        self.friendly_id = [self.short_id, self.slug_id].join slug_separator
+        self.friendly_id = [self.short_id, self.slug_id].join Slugger::SEPARATOR
+      end
+    end
+
+  end
+
+  module ClassMethods
+    def slug_where id
+      if Regexp.new("\\#{Slugger::SEPARATOR}") =~ id
+        where(friendly_id: id)
+      else
+        id.size == id.to_i.to_s.size ? where(id: id) : where(short_id: id)
       end
     end
 

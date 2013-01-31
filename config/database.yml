@@ -2,16 +2,7 @@ development:
   adapter: mysql2
   database: the_app_dev
   host: localhost
-  username: zykin
-  password: zykin
-  encoding: utf8
-  timeout: 5000
-
-test:
-  adapter: mysql2
-  database: the_app_test
-  host: localhost
-  username: zykin
-  password: zykin
+  username: root
+  password: qwerty
   encoding: utf8
   timeout: 5000
