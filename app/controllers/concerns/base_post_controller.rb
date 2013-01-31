@@ -4,6 +4,7 @@ module BasePostController
   included do
     before_action :set_klass
     before_action :set_post,  only: [:show, :edit, :update, :destroy]
+    after_action -> { @audit = Audit.new.init(self, @post) }, only: [:create, :show, :update, :edit, :destroy]
 
     include TheSortableTreeController::Rebuild
 

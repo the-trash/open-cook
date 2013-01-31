@@ -1,17 +1,17 @@
 # # encoding: UTF-8
 
-User
-  -> Role
-  -< Hubs:
-      pages (book)
-      posts (section)
-      blogs (month) -> callback
-      recipes (menus)
-      articles
-      notes
-      menus -< links
-  -< Comments
-  -< UploadedFiles
+# User
+#   -> Role
+#   -< Hubs:
+#       pages (book)
+#       posts (section)
+#       blogs (month) -> callback
+#       recipes (menus)
+#       articles
+#       notes
+#       menus -< links
+#   -< Comments
+#   -< UploadedFiles
 
 
 # # This file should contain all the record creation needed to seed the database with its default values.
@@ -78,73 +78,73 @@ User
 
 # puts 'cleanup done'
 
-# russ = " Русский `^@#$&№%*«»!?.,:;{}()<>+|/~ тёст -- "
+russ = " Русский `^@#$&№%*«»!?.,:;{}()<>+|/~ тёст -- "
 
-# (3..8).to_a.sample.times do |i|
-#   name  = Faker::Name.name
-#   login = name.downcase.gsub(/[\ \._]/, '-')
-#   email = "#{login}@gmail.com"
+(3..8).to_a.sample.times do |i|
+  name  = Faker::Name.name
+  login = name.downcase.gsub(/[\ \._]/, '-')
+  email = "#{login}@gmail.com"
   
-#   # Users
-#   user = User.new(
-#     username: name,
-#     login:    login + russ,
-#     email:    email,
-#     password: "password#{i.next}"
-#   )
-#   user.save!
+  # Users
+  user = User.new(
+    username: name,
+    login:    login + russ,
+    email:    email,
+    password: "password#{i.next}"
+  )
+  user.save!
 
-#   if i == 0
-#     hub          = user.hubs.new
-#     hub.title    = "Ruby Book"
-#     hub.state    = :published
-#     hub.hub_type = :book
-#     hub.save!
+  if i == 0
+    hub          = user.hubs.new
+    hub.title    = "Ruby Book"
+    hub.state    = :published
+    hub.hub_type = :book
+    hub.save!
 
-#     book_contents
-#   end
+    # book_contents
+  end
 
-#   puts "=> User #{i} done"
+  puts "=> User #{i} done"
 
-#   Hub
-#   (3..8).to_a.sample.times do |h|
-#     hub_type = [:pages, :posts, :articles, :recipes, :blogs].sample
+  Hub
+  (3..8).to_a.sample.times do |h|
+    hub_type = [:pages, :posts, :articles, :recipes, :blogs].sample
 
-#     hub          = user.hubs.new
-#     hub.title    = "Hub #{hub_type}  #{russ} (U:#{i.next} No:#{h.next})"
-#     hub.state    = [:draft, :published, :deleted].sample
-#     hub.hub_type = hub_type
-#     hub.save!
+    hub          = user.hubs.new
+    hub.title    = "Hub #{hub_type}  #{russ} (U:#{i.next} No:#{h.next})"
+    hub.state    = [:draft, :published, :deleted].sample
+    hub.hub_type = hub_type
+    hub.save!
 
-#     puts "Hub #{h.next} done"
+    puts "Hub #{h.next} done"
 
-#     # create nested objects
-#     (3..8).to_a.sample.times do |j|
-#       obj       = hub.send(hub_type).new
-#       obj.user  = user
-#       obj.title = "#{hub_type}  #{russ} U:#{i.next} No:#{j.next}"
-#       obj.state = [:draft, :published, :deleted].sample
-#       obj.save!
+    # create nested objects
+    (3..8).to_a.sample.times do |j|
+      obj       = hub.send(hub_type).new
+      obj.user  = user
+      obj.title = "#{hub_type}  #{russ} U:#{i.next} No:#{j.next}"
+      obj.state = [:draft, :published, :deleted].sample
+      obj.save!
 
-#       puts "#{hub_type} U:#{i.next} No:#{j.next} - done!"
-#       parent_obj = obj
+      puts "#{hub_type} U:#{i.next} No:#{j.next} - done!"
+      parent_obj = obj
 
-#       puts "SUB CREATING"
-#       (3..8).to_a.sample.times do |k|
-#         obj       = hub.send(hub_type).new
-#         obj.user  = user
-#         obj.title = "#{hub_type}  #{russ} U:#{i.next} No:#{j.next}#{k.next}"
-#         obj.state = [:draft, :published, :deleted].sample
-#         obj.save!
+      puts "SUB CREATING"
+      (3..8).to_a.sample.times do |k|
+        obj       = hub.send(hub_type).new
+        obj.user  = user
+        obj.title = "#{hub_type}  #{russ} U:#{i.next} No:#{j.next}#{k.next}"
+        obj.state = [:draft, :published, :deleted].sample
+        obj.save!
 
-#         obj.move_to_child_of(parent_obj)
+        obj.move_to_child_of(parent_obj)
 
-#         puts "#{hub_type} U:#{i.next} No:#{j.next}#{k.next} - done!"
-#       end
+        puts "#{hub_type} U:#{i.next} No:#{j.next}#{k.next} - done!"
+      end
 
-#     end
-#   end
-# end
+    end
+  end
+end
 
 # puts "Total User count: #{User.count}"
 # puts "Total Post count: #{Page.count}"
