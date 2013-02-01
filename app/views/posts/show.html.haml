@@ -1,16 +1,9 @@
 %p#notice= notice
 
--#
-  %p
-    %b Main image url:
-    = @post.main_image_url
-
 %h2= @post.title
 %p= raw @post.intro
 %p= raw @post.content
 
-= link_to 'Edit', url_for(controller: @post.controller_name, action: :edit, id: @post)
-
--#  
-  \|
-  = link_to 'Back', url_for(controller: @post.controller_name, action: :index)
+= link_to 'Edit', edit_url(@post)
+\|
+= link_to 'Back', index_url(controller_name)

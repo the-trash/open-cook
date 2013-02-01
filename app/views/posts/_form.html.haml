@@ -10,11 +10,11 @@
     = f.label :title
     = f.text_field :title
   .field
-    = f.label :intro
-    = f.text_area :intro
+    %p Вводная часть
+    = f.text_area :intro, class: :redactor_intro
   .field
-    = f.label :content
-    = f.text_area :content
+    %p Основное содержимое
+    = f.text_area :content, class: :redactor_content
   .field
     = f.label :state
     = f.text_field :state

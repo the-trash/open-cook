@@ -20,6 +20,8 @@
  *= require sortable_tree
  *= require nested_options
 
+ *= require redactor
+
  *= require layout/base
  *= require layout/top_menu
  *= require layout/left_menu

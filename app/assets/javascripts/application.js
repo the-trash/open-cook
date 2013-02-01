@@ -18,3 +18,7 @@
 
 //= require jquery.ui.nestedSortable
 //= require sortable_tree/initializer
+
+//= require redactor
+//= require redactor_ru
+//= require redactor/initialize
