@@ -4,7 +4,7 @@ class MenusController < ApplicationController
 
   def show
     @menu    = Hub.friendly_where(params[:id]).published.first
-    @recipes = @menu.recipes
+    @recipes = @menu.recipes.published
     render 'menus/show'
   end
 

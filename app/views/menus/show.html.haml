@@ -3,4 +3,4 @@
 %h4= @menu.title
 
 - @recipes.each do |recipe|
-  %p= recipe.title
+  %h3= link_to recipe.title, recipe_url(recipe)
