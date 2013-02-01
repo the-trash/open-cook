@@ -25,7 +25,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 gem 'compass'
-# gem 'kaminari'
+gem 'kaminari'
 
 gem 'russian'
 gem 'sanitize'

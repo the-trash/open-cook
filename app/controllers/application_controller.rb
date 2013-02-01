@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   # @root - root user
   # current_user - logined user
   before_action -> { @root = User.first }
-  before_action -> { @user = User.first }
+  before_action -> { @user = User.where(params[:user_id]).first || @root }
+
   after_action  -> { (@audit || Audit.new.init(self)).save }
 
   # Prevent CSRF attacks by raising an exception.

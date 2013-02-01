@@ -1,26 +1,5 @@
--# %h1 Listing #{@klass.to_s.pluralize}
-- @posts = Hub.roots.of_(:book).last.self_and_descendants
+- @posts.each do |post|
+  %p
+    = link_to post.title, url_for(controller: post.controller_name, action: :show, id: post)
 
-%h1 Ruby Language
-%h4 Table of contents
-
--# options = build_server_tree(@posts, type: :select_options)
-= select_tag :pages, nested_options(@posts, :selected => Hub.last), class: :select_options
-
--#
-  %h1 Ruby Language
-  %h4 Table of contents
-
-  - sortable_options = { max_levels: 5, rebuild_url: url_for(controller: :hubs, action: :rebuild) }
-  %ol.sortable_tree{ data: sortable_options }= build_server_tree @posts, type: :sortable
-
-  %br
-
-  = link_to "New #{@klass.to_s}", url_for(controller: :hubs, action: :new)
-
-  %ol.tree= build_server_tree @posts
-
--# %ol.tree= build_server_tree @posts
--# link_to 'Show', post
--# link_to 'Edit', url_for(controller: controller_name, action: :edit, id: post)
--# link_to 'Destroy', post, :method => :delete, :data => { confirm: 'Are you sure?' }
+= paginate @posts

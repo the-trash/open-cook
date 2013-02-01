@@ -1,3 +1,6 @@
 class WelcomeController < ApplicationController
-  def index; end
+  def index
+    @posts = Recipe.published.page(params[:page])
+    render 'posts/index'
+  end
 end

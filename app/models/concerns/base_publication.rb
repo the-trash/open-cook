@@ -7,6 +7,12 @@ module BasePublication
     include TheFriendlyId
     include NestedSetMethods
 
+    paginates_per 25
+
+    def controller_name
+      self.class.to_s.tableize
+    end
+
     # relations
     belongs_to :user
     belongs_to :hub
