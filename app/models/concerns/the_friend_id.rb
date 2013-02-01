@@ -3,7 +3,7 @@
 # short_id    h11149              # uniq
 # id          50                  # uniq
 
-module Slugger
+module TheFriendlyId
   extend ActiveSupport::Concern
 
   SEPARATOR = "+"
@@ -18,7 +18,6 @@ module Slugger
 
     def build_short_id
       return unless self.short_id.blank?
-
       klass  = self.class.to_s.downcase.to_sym
 
       prefix = {
@@ -31,7 +30,7 @@ module Slugger
       }[klass]
 
       prefix  ||= 'x'
-      rnd_num   = 99999
+      rnd_num   = 9999
 
       # build short_id
       short_id = [prefix, rand(rnd_num)].join
@@ -48,16 +47,16 @@ module Slugger
 
     def build_slugs
       unless self.title.blank?
-        self.slug_id     = Russian::translit(self.title).parameterize 
-        self.friendly_id = [self.short_id, self.slug_id].join Slugger::SEPARATOR
+        text_name        = Russian::translit(self.title).parameterize
+        self.friendly_id = [self.short_id, text_name].join TheFriendlyId::SEPARATOR
       end
     end
 
   end
 
   module ClassMethods
-    def slug_where id
-      if Regexp.new("\\#{Slugger::SEPARATOR}") =~ id
+    def friendly_where id
+      if Regexp.new("\\#{TheFriendlyId::SEPARATOR}") =~ id
         where(friendly_id: id)
       else
         id.size == id.to_i.to_s.size ? where(id: id) : where(short_id: id)

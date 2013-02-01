@@ -1,8 +1,0 @@
-development:
-  adapter: mysql2
-  database: the_app_dev
-  host: localhost
-  username: root
-  password: qwerty
-  encoding: utf8
-  timeout: 5000
