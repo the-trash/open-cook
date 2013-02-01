@@ -1,5 +1,4 @@
 # friendly_id h11149+menu-10-u-5  # uniq
-# slug_id     menu-10-u-5         # not unique => not for basic search
 # short_id    h11149              # uniq
 # id          50                  # uniq
 
@@ -11,7 +10,7 @@ module TheFriendlyId
   included do
     def to_param; self.friendly_id end
 
-    validates_presence_of :slug_id, :short_id, :friendly_id
+    validates_presence_of :short_id, :friendly_id
 
     before_validation :build_short_id
     before_validation :build_slugs

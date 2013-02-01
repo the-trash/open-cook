@@ -1,4 +1,6 @@
 %p#notice= notice
 
 %h4= @menu.title
-= @recipes.count
+
+- @recipes.each do |recipe|
+  %p= recipe.title

@@ -1,12 +1,8 @@
 class Hub < ActiveRecord::Base
-  include Slugger
   include BaseSorts
   include BaseStates
-  include TheSortableTree::Scopes
-
-  # nested set
-  acts_as_nested_set scope: :user
-  attr_accessible :lft, :rgt, :parent_id, :depth
+  include TheFriendlyId
+  include NestedSetMethods
 
   # relations
   belongs_to :user

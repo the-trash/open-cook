@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_count",        default: 0
     t.integer  "files_size",         default: 0
     t.string   "short_id"
-    t.string   "slug_id"
     t.string   "friendly_id"
   end
 
@@ -87,7 +86,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_count",        default: 0
     t.integer  "files_size",         default: 0
     t.string   "short_id"
-    t.string   "slug_id"
     t.string   "friendly_id"
   end
 
@@ -104,7 +102,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "rgt"
     t.integer  "depth",       default: 0
     t.string   "short_id"
-    t.string   "slug_id"
     t.string   "friendly_id"
   end
 
@@ -134,7 +131,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_count",        default: 0
     t.integer  "files_size",         default: 0
     t.string   "short_id"
-    t.string   "slug_id"
     t.string   "friendly_id"
   end
 
@@ -164,7 +160,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_count",        default: 0
     t.integer  "files_size",         default: 0
     t.string   "short_id"
-    t.string   "slug_id"
     t.string   "friendly_id"
   end
 
@@ -194,7 +189,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_count",        default: 0
     t.integer  "files_size",         default: 0
     t.string   "short_id"
-    t.string   "slug_id"
     t.string   "friendly_id"
   end
 
