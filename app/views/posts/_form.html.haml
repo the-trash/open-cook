@@ -1,3 +1,4 @@
+
 = form_for @post do |f|
   - if @post.errors.any?
     #error_explanation
@@ -5,10 +6,22 @@
       %ul
         - @post.errors.full_messages.each do |msg|
           %li= msg
-
   .field
-    = f.label :user_id
-    = f.number_field :user_id
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :intro
+    = f.text_area :intro
+  .field
+    = f.label :content
+    = f.text_area :content
+  .field
+    = f.label :state
+    = f.text_field :state
+  .actions
+    = f.submit 'Save'
+
+-#
   .field
     = f.label :author
     = f.text_field :author
@@ -22,22 +35,8 @@
     = f.label :copyright
     = f.text_field :copyright
   .field
-    = f.label :title
-    = f.text_field :title
-  .field
-    = f.label :raw_content
-    = f.text_area :raw_content
-  .field
-    = f.label :content
-    = f.text_area :content
-  .field
     = f.label :main_image_url
     = f.text_field :main_image_url
   .field
-    = f.label :state
-    = f.text_field :state
-  .field
     = f.label :first_published_at
     = f.datetime_select :first_published_at
-  .actions
-    = f.submit 'Save'

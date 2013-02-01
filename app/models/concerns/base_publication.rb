@@ -7,6 +7,8 @@ module BasePublication
     include TheFriendlyId
     include NestedSetMethods
 
+    before_save :prepare_content
+
     paginates_per 25
 
     def controller_name
@@ -20,5 +22,12 @@ module BasePublication
     attr_accessible :user, :hub, :title, :raw_content
 
     validates_presence_of :user, :hub, :title
+
+    private
+
+    def prepare_content
+      self.intro   = "<i>#{self.raw_intro}</i>"
+      self.content = "<b>#{self.raw_content}</b>"
+    end
   end
 end
