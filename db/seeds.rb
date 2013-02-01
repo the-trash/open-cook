@@ -26,15 +26,16 @@ User.all.each_with_index do |user, u|
       hub_type: :menu
     )
 
-    hub.update_attribute(:state, :published)
+    hub.update_attribute(:state, [:draft, :published].sample)
     puts "Menu u:#{u.next} m:#{m.next} created"
 
     10.times do |r|
-      user.recipes.create!(
+      recipe = user.recipes.create!(
         hub: hub,
         title: "Recipe #{r.next} (u:#{u.next})",
         raw_content: Faker::Lorem.paragraphs(3)
       )
+      recipe.update_attribute(:state, [:draft, :published].sample)
       puts "Recipe r:#{r.next} m:#{m.next} u:#{u.next} created"
     end
   end
