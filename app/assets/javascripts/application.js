@@ -11,9 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 
-//= require jquery
+//= require jquery-1.8.3
 //= require jquery-ui
 //= require jquery_ujs
+
 //= require turbolinks
 
 //= require jquery.ui.nestedSortable

@@ -10,7 +10,7 @@ module BasePostController
 
     def index
       user   = User.where(login: params[:user]).first || @root
-      @posts = user.send(controller_name).nested_set.published
+      @posts = user.send(controller_name).nested_set.published.page(params[:page])
       render 'posts/index'
     end
 

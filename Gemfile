@@ -33,9 +33,6 @@ gem 'nested_set'
 gem 'state_machine'
 # gem 'acts-as-taggable-on'
 
-gem "less-rails"
-gem "twitter-bootstrap-rails"
-
 # my gems
 
 # w
@@ -67,6 +64,8 @@ group :assets do
   gem 'sass-rails',      github: 'rails/sass-rails'
   gem 'coffee-rails',    github: 'rails/coffee-rails'
   gem 'uglifier', '>= 1.0.3'
+
+  gem 'bootstrap-sass', '~> 2.2.2.0'
 end
 
 group :test, :development do

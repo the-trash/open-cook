@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include RedirectBack
   include SorceryAddons
 
+  layout 'bootstrap_fixed'
+
   # @user - to show
   # @root - root user
   # current_user - logined user
