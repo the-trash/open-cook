@@ -28,8 +28,10 @@
       .row
         .span3
           = render 'layouts/items/bootstrap/left_menu'
-        .span9
+        .span6
           = yield
+        .span3
+          = render 'layouts/items/bootstrap/left_menu'
     
       %footer
         %p &copy; Company 2013

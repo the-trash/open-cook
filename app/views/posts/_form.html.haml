@@ -10,10 +10,12 @@
     = f.label :title
     = f.text_field :title
   .field
-    %p Вводная часть
+    %p
+      %b Вводная часть
     = f.text_area :intro, class: :redactor_intro
   .field
-    %p Основное содержимое
+    %p
+      %b Основное содержимое
     = f.text_area :content, class: :redactor_content
   .field
     = f.label :state

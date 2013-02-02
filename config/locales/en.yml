@@ -20,6 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  views:
+    pagination:
+      first: "&laquo; Первая"
+      last: "Последняя &raquo;"
+      previous: "&lsaquo; Туда"
+      next: "Сюда &rsaquo;"
+      truncate: "..."
   sessions:
     new: Login
     login: Login

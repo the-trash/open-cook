@@ -33,8 +33,8 @@ User.all.each_with_index do |user, u|
       recipe = user.recipes.create!(
         hub: hub,
         title: "Recipe #{r.next} (u:#{u.next})",
-        raw_intro: Faker::Lorem.paragraphs(3),
-        raw_content: Faker::Lorem.paragraphs(3)
+        raw_intro: Faker::Lorem.paragraphs(3).join,
+        raw_content: Faker::Lorem.paragraphs(3).join
       )
       recipe.update_attribute(:state, [:draft, :published].sample)
       puts "Recipe r:#{r.next} m:#{m.next} u:#{u.next} created"

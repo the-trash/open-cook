@@ -19,8 +19,7 @@ module BasePublication
     belongs_to :user
     belongs_to :hub
 
-    attr_accessible :user, :hub, :title, :raw_content
-
+    attr_accessible :user, :hub, :title, :raw_intro, :raw_content
     validates_presence_of :user, :hub, :title
 
     private
