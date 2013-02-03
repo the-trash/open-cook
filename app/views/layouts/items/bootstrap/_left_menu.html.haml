@@ -2,5 +2,5 @@
   %h3 Меню
   %ul.nav.nav-list
     -#%li.nav-header Меню
-    - @user.hubs.of_(:menu).published.each do |hub|
+    - @user.hubs.of_(:recipes).published.each do |hub|
       %li= link_to hub.title, menu_path(hub)

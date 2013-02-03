@@ -10,10 +10,11 @@
       .container.nav-collapse
         %ul.nav
           %li= link_to t('users.index'), users_url
-          %li
-            - if current_user
-              = link_to current_user.login, cabinet_url
-              = link_to t('sessions.logout'), logout_url, method: :delete
-            - else
-              = link_to t('sessions.new'), login_url
+          - if current_user
+            %li
+              = link_to cabinet_url do
+                User: #{ current_user.login }
+            %li= link_to t('sessions.logout'), logout_url, method: :delete
+          - else
+            %li= link_to t('sessions.new'), login_url
 

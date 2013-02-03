@@ -2,7 +2,14 @@
 
 User.destroy_all
 Role.destroy_all
+
 Hub.destroy_all
+
+Post.destroy_all
+Page.destroy_all
+Blog.destroy_all
+Article.destroy_all
+
 Recipe.destroy_all
 
 #######################################################
@@ -59,7 +66,7 @@ puts "Roles created"
 ######################################################
 # Create Users
 ######################################################
-5.times do |i|
+40.times do |i|
   name  = Faker::Name.name
   login = name.downcase.gsub(/[\ \._]/, '-')
   email = "#{login}@gmail.com"
@@ -84,9 +91,7 @@ User.first.update_attributes(role: Role.where(name: :admin).first)
 ######################################################
 # Create Hub
 ######################################################
-
 # create_hub(:menu, 3, :recipes, user, 2)
-
 def create_hub type, number, posts_type, user, user_index
   name = type.capitalize
   hub = user.hubs.create!(
@@ -96,7 +101,7 @@ def create_hub type, number, posts_type, user, user_index
   hub.update_attribute(:state, [:draft, :published].sample)
   puts "#{name} u:#{user_index} h:#{number} created"
 
-  10.times do |r|
+  20.times do |r|
     post_name = posts_type.to_s.singularize.capitalize
     post = user.send(posts_type).create!(
       hub: hub,
@@ -112,44 +117,74 @@ end
 ######################################################
 # Create data for authors
 ######################################################
+User.with_role(:admin).each_with_index do |user, u|
+  20.times do |m|
+    create_hub(:posts, m.next, :posts, user, u.next)
+    create_hub(:pages, m.next, :pages, user, u.next)
+    create_hub(:blogs, m.next, :blogs, user, u.next)
+    create_hub(:articles, m.next, :articles, user, u.next)
+    create_hub(:recipes, m.next, :recipes, user, u.next)
+  end
+end
+
 User.with_role(:author).each_with_index do |user, u|
-  10.times do |m|
-    create_hub(:menu, m.next, :recipes, user, u.next)
+  20.times do |m|
+    create_hub(:posts, m.next, :posts, user, u.next)
+    create_hub(:pages, m.next, :pages, user, u.next)
+    create_hub(:blogs, m.next, :blogs, user, u.next)
+    create_hub(:articles, m.next, :articles, user, u.next)
+    create_hub(:recipes, m.next, :recipes, user, u.next)
   end
 end
 
 ######################################################
+# Info fn
+######################################################
+def hub_info(type)
+  puts "Hub of #{type} count: #{Hub.of_(type).count}"
+  puts "Hub of #{type} published count: #{Hub.of_(type).published.count}"
+  puts "Hub of #{type} draft count: #{Hub.of_(type).draft.count}"
+  puts "~" * 20
+end
+
+def model_info model
+  puts "#{model} count: #{model.count}"
+  puts "#{model} published count: #{model.published.count}"
+  puts "#{model} draft count: #{model.draft.count}"
+  puts "~" * 20
+end
+######################################################
 # Create data for authors
 ######################################################
 _num = 20
-
 puts "~" * _num
 
 puts "Total User count: #{User.count}"
-
 puts "~" * _num
 
 puts "Admins count: #{User.with_role(:admin).count}"
 puts "Authors count: #{User.with_role(:author).count}"
 puts "Users count: #{User.with_role(:user).count}"
-
 puts "~" * _num
 
 puts "Hubs count: #{Hub.count}"
-
 puts "~" * _num
 
-puts "Menu Hub count: #{Hub.of_(:menu).count}"
-puts "Menu Hub published count: #{Hub.of_(:menu).published.count}"
-puts "Menu Hub draft count: #{Hub.of_(:menu).draft.count}"
+hub_info(:pages)
+model_info(Page)
 
-puts "~" * _num
+hub_info(:posts)
+model_info(Post)
 
-puts "Recipes count: #{Recipe.count}"
-puts "Recipes published count: #{Recipe.published.count}"
-puts "Recipes draft count: #{Recipe.draft.count}"
+hub_info(:blogs)
+model_info(Blog)
 
-puts "~" * _num
+hub_info(:articles)
+model_info(Article)
+
+hub_info(:recipes)
+model_info(Recipe)
+
 
 # User
 #   -> Role

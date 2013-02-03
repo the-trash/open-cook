@@ -21,10 +21,14 @@
     = stylesheet_link_tag "bootstrap", :media => "all"
     %link(href="favicon.ico" rel="shortcut icon")
   %body
-    .container
+    .container    
       .row
         .span12
           = render 'layouts/items/bootstrap/top_menu'
+      .row
+        .span12
+          %center
+            %h3 Site of: #{ @user.login }
       .row
         .span3
           = render 'layouts/items/bootstrap/left_menu'

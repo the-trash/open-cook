@@ -1,2 +1,5 @@
-%h1 Users#cabinet
-%p Find me in app/views/users/cabinet.html.haml
+%h3 Cabinet of: #{@user.login}
+
+%ul
+  - [:pages, :posts, :blogs, :recipes, :articles].each do |controller_name|
+    %li= link_to "#{controller_name} (#{@user.send(controller_name).count})", [@user, controller_name]

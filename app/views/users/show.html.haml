@@ -2,7 +2,3 @@
 
 %h3= @user.login
 %h3= @user.username
-
-- [:pages, :posts, :blogs, :recipes, :articles].each do |name|
-  = link_to "#{name} (#{@user.send(name).count})", url_for(controller: name, user: @user)
-  \|

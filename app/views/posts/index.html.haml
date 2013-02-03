@@ -1,8 +1,9 @@
 = paginate @posts
 
 - @posts.each do |post|
-  %h2= link_to post.title, url_for(controller: post.controller_name, action: :show, id: post)
+  %h2= link_to post.title, post
   %p= raw post.intro
+  %p= post_info post
   %hr
 
 = paginate @posts
