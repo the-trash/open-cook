@@ -1,10 +1,65 @@
-# # encoding: UTF-8
+# encoding: UTF-8
 
 User.destroy_all
+Role.destroy_all
 Hub.destroy_all
 Recipe.destroy_all
 
-5.times do |i|
+#######################################################
+# Create Roles
+#######################################################
+
+  # Admin
+  Role.create!(
+    name: :admin,
+    title: "Admin Role",
+    description: "Role for admin",
+    the_role: {
+      system: { administrator: true }
+    }.to_json
+  )
+
+  # Author
+  roles_set = {}
+  roles_set[:users] = { cabinet: true }
+  [:pages, :posts, :articles, :recipes, :blogs].each do |name|
+    roles_set[name] = {
+      index:   true,
+      new:     true,
+      create:  true,
+      show:    true,
+      edit:    true,
+      update:  true,
+      rebuild: true,
+      destroy: true
+    }
+  end
+
+  Role.create!(
+    name: :author,
+    title: "Author Role",
+    description: "Role for Authors",
+    the_role: roles_set.to_json
+  )
+
+  # User
+  Role.create!(
+    name: :user,
+    title: "User Role",
+    description: "Role for Users",
+    the_role: {
+      users: {
+        cabinet: true
+      }
+    }.to_json
+  )
+
+puts "Roles created"
+
+######################################################
+# Create Users
+######################################################
+100.times do |i|
   name  = Faker::Name.name
   login = name.downcase.gsub(/[\ \._]/, '-')
   email = "#{login}@gmail.com"
@@ -15,11 +70,21 @@ Recipe.destroy_all
     email:    email,
     password: "password#{i.next}"
   )
+  # with different roles
+  role_name = [:user, :user, :author].sample
+  user.update_attributes(role: Role.where(name: role_name).first)
 
-  puts "User #{i.next} created"
+  puts "User #{i.next} role:#{role_name} created"
 end
 
-User.all.each_with_index do |user, u|
+# set Admin
+# update with validations
+User.first.update_attributes(role: Role.where(name: :admin).first)
+
+######################################################
+# Create data for authors
+######################################################
+User.with_role(:author).each_with_index do |user, u|
   10.times do |m|
     hub = user.hubs.create!(
       title: "Menu #{m.next} (u:#{u.next})",
@@ -41,6 +106,39 @@ User.all.each_with_index do |user, u|
     end
   end
 end
+
+######################################################
+# Create data for authors
+######################################################
+_num = 20
+
+puts "~" * _num
+
+puts "Total User count: #{User.count}"
+
+puts "~" * _num
+
+puts "Admins count: #{User.with_role(:admin).count}"
+puts "Authors count: #{User.with_role(:author).count}"
+puts "Users count: #{User.with_role(:user).count}"
+
+puts "~" * _num
+
+puts "Hubs count: #{Hub.count}"
+
+puts "~" * _num
+
+puts "Menu Hub count: #{Hub.of_(:menu).count}"
+puts "Menu Hub published count: #{Hub.of_(:menu).published.count}"
+puts "Menu Hub draft count: #{Hub.of_(:menu).draft.count}"
+
+puts "~" * _num
+
+puts "Recipes count: #{Recipe.count}"
+puts "Recipes published count: #{Recipe.published.count}"
+puts "Recipes draft count: #{Recipe.draft.count}"
+
+puts "~" * _num
 
 # User
 #   -> Role
@@ -187,10 +285,3 @@ end
 #     end
 #   end
 # end
-
-# puts "Total User count: #{User.count}"
-# puts "Total Post count: #{Page.count}"
-# puts "Total Post count: #{Post.count}"
-# puts "Total Blog count: #{Blog.count}"
-# puts "Total Recipes count: #{Recipe.count}"
-# puts "Total Article count: #{Article.count}"

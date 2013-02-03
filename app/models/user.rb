@@ -21,6 +21,11 @@ class User < ActiveRecord::Base
   validates :email,    presence: true, uniqueness: true
   validates :password, presence: true, on: :create
 
+  # replace in TheRole
+  def self.with_role name
+    Role.where(name: name).first.users
+  end
+
   private
 
   def prepare_login
