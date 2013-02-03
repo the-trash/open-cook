@@ -59,7 +59,7 @@ puts "Roles created"
 ######################################################
 # Create Users
 ######################################################
-100.times do |i|
+5.times do |i|
   name  = Faker::Name.name
   login = name.downcase.gsub(/[\ \._]/, '-')
   email = "#{login}@gmail.com"
@@ -82,28 +82,39 @@ end
 User.first.update_attributes(role: Role.where(name: :admin).first)
 
 ######################################################
+# Create Hub
+######################################################
+
+# create_hub(:menu, 3, :recipes, user, 2)
+
+def create_hub type, number, posts_type, user, user_index
+  name = type.capitalize
+  hub = user.hubs.create!(
+    title: "#{name} #{number} (u:#{user_index})",
+    hub_type: type
+  )
+  hub.update_attribute(:state, [:draft, :published].sample)
+  puts "#{name} u:#{user_index} h:#{number} created"
+
+  10.times do |r|
+    post_name = posts_type.to_s.singularize.capitalize
+    post = user.send(posts_type).create!(
+      hub: hub,
+      title: "#{post_name} #{r.next} (u:#{user_index})",
+      raw_intro: Faker::Lorem.paragraphs(3).join,
+      raw_content: Faker::Lorem.paragraphs(3).join
+    )
+    post.update_attribute(:state, [:draft, :published].sample)
+    puts "#{post_name} r:#{r.next} h:#{number} u:#{user_index} created"
+  end
+end
+
+######################################################
 # Create data for authors
 ######################################################
 User.with_role(:author).each_with_index do |user, u|
   10.times do |m|
-    hub = user.hubs.create!(
-      title: "Menu #{m.next} (u:#{u.next})",
-      hub_type: :menu
-    )
-
-    hub.update_attribute(:state, [:draft, :published].sample)
-    puts "Menu u:#{u.next} m:#{m.next} created"
-
-    10.times do |r|
-      recipe = user.recipes.create!(
-        hub: hub,
-        title: "Recipe #{r.next} (u:#{u.next})",
-        raw_intro: Faker::Lorem.paragraphs(3).join,
-        raw_content: Faker::Lorem.paragraphs(3).join
-      )
-      recipe.update_attribute(:state, [:draft, :published].sample)
-      puts "Recipe r:#{r.next} m:#{m.next} u:#{u.next} created"
-    end
+    create_hub(:menu, m.next, :recipes, user, u.next)
   end
 end
 
