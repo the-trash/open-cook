@@ -23,7 +23,14 @@ class ApplicationController < ActionController::Base
   end
 
   def define_user
-    @user   = params[:user_id] == 0 ? User.where(params[:user_id]).first : User.where(login: params[:user_id]).first
-    @user ||= @root
+    @user = @root
+    if params[:user_id]
+      @user = if params[:user_id].to_i.to_s == params[:user_id]
+        User.where(params[:user_id]).first
+      else
+        User.where(login: params[:user_id]).first
+      end
+    end
   end
+
 end

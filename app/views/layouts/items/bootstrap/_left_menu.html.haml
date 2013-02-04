@@ -1,3 +1,18 @@
+- if current_user
+  .well.sidebar-nav
+    %h5 Ваш профиль на сайте:
+    = image_tag "http://lorempixel.com/180/180/people/"
+    %h5 User: #{ link_to current_user.username, user_url(current_user) }
+    %p Role: #{ current_user.role.title }
+    %hr
+    %ul.nav.nav-list
+      %li
+        - [:blogs, :posts, :pages, :recipes, :articles].each do |type|
+          = link_to [current_user, type] do
+            = type.capitalize
+            \:
+            = current_user.blogs.published.count
+
 .well.sidebar-nav
   %h3 Меню
   %ul.nav.nav-list

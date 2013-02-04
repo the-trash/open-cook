@@ -10,6 +10,7 @@
       .container.nav-collapse
         %ul.nav
           %li= link_to t('users.index'), users_url
+          %li= link_to 'События на сайте', '#'
           - if current_user
             %li
               = link_to cabinet_url do

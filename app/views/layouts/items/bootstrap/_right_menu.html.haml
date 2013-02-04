@@ -1,0 +1,18 @@
+- unless current_user == @user
+  .well.sidebar-nav
+    %h5 Вы просматриваете профиль:
+    = image_tag "http://lorempixel.com/180/180/people/"
+    %h5 User: #{ link_to @user.username, user_url(@user) }
+    %p Role: #{ @user.role.title }
+    %hr
+    %ul.nav.nav-list
+      %li
+        - [:blogs, :posts, :pages, :recipes, :articles].each do |type|
+          = link_to [@user, type] do
+            = type.capitalize
+            \:
+            = @user.blogs.published.count
+
+.well.sidebar-nav
+  %h5 Теги
+  %hr
