@@ -5,7 +5,11 @@ class CreateHubs < ActiveRecord::Migration
 
       t.string :title
       t.string :hub_type
-      t.string :state, default: :draft
+
+      t.integer :show_count, default: 0
+
+      t.string :state,            default: :draft       # draft | published
+      t.string :moderation_state, default: :unmoderated # unmoderated | moderated | blocked
 
       t.string :legacy_url
 

@@ -10,12 +10,12 @@ module BasePostController
 
     def index
       user   = User.where(login: params[:user]).first || @root
-      @posts = user.send(controller_name).nested_set.published.page(params[:page])
+      @posts = user.send(controller_name).nested_set.with_states(:published).page(params[:page])
       render 'posts/index'
     end
 
     def show
-      @post = @post.published.first
+      @post = @post.with_states(:published).first
       @user = @post.user
       @post.increment!(:show_count)
       render 'posts/show'

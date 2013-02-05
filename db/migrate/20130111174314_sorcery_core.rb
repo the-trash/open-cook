@@ -9,7 +9,9 @@ class SorceryCore < ActiveRecord::Migration
       t.string :salt,             :default => nil
 
       # the_role
-      t.integer :role_id,         :default => nil
+      t.integer :role_id,    default: nil
+      t.integer :show_count, default: 0
+      t.string  :state,      default: :active # active | banned
 
       t.timestamps
     end

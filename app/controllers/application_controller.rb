@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include RedirectBack
   include SorceryAddons
+  include TheRoleAddons
 
   layout 'bootstrap_fixed'
 
@@ -10,16 +11,7 @@ class ApplicationController < ActionController::Base
   before_action :define_root
   before_action :define_user
 
-  # role
-  def access_denied
-    render :text => 'access_denied: requires an role' and return
-  end
-
-  alias_method :login_required,     :require_login
-  alias_method :role_access_denied, :access_denied
-  #~ role
-
-  after_action -> { (@audit || Audit.new.init(self)).save }
+  after_action  :save_audit
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -40,6 +32,10 @@ class ApplicationController < ActionController::Base
         User.where(login: params[:user_id]).first
       end
     end
+  end
+
+  def save_audit
+    (@audit || Audit.new.init(self)).save
   end
 
 end
