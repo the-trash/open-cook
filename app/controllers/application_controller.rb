@@ -10,7 +10,16 @@ class ApplicationController < ActionController::Base
   before_action :define_root
   before_action :define_user
 
-  after_action  -> { (@audit || Audit.new.init(self)).save }
+  # role
+  def access_denied
+    render :text => 'access_denied: requires an role' and return
+  end
+
+  alias_method :login_required,     :require_login
+  alias_method :role_access_denied, :access_denied
+  #~ role
+
+  after_action -> { (@audit || Audit.new.init(self)).save }
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

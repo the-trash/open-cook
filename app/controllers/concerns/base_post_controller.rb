@@ -16,6 +16,7 @@ module BasePostController
 
     def show
       @post = @post.published.first
+      @user = @post.user
       @post.increment!(:show_count)
       render 'posts/show'
     end

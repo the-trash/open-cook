@@ -27,7 +27,6 @@ TheApp::Application.routes.draw do
 
   # post set
   resources :hubs,     concerns: :sortable_tree
-  resources :menus,    concerns: :sortable_tree
   resources :pages,    concerns: :sortable_tree
   resources :posts,    concerns: :sortable_tree
   resources :blogs,    concerns: :sortable_tree

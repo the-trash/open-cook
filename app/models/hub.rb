@@ -4,6 +4,10 @@ class Hub < ActiveRecord::Base
   include TheFriendlyId
   include NestedSetMethods
 
+  def controller_name
+    self.class.to_s.tableize
+  end
+    
   # relations
   belongs_to :user
   has_many   :pages
