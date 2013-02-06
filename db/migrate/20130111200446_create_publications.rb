@@ -1,6 +1,6 @@
 class CreatePublications < ActiveRecord::Migration
   def change
-    [:notes, :pages, :posts, :articles, :recipes, :blogs].each do |table_name|
+    [:pages, :posts, :articles, :recipes, :blogs, :notes, :hubs].each do |table_name|
       create_table table_name do |t|
         t.integer :user_id
         t.integer :hub_id
@@ -18,14 +18,6 @@ class CreatePublications < ActiveRecord::Migration
 
         t.text   :intro
         t.text   :content
-
-        # Ext
-        t.string  :main_image_url
-        t.integer :show_count,       default: 0
-        t.string  :state,            default: :draft       # draft | published
-        t.string  :moderation_state, default: :unmoderated # unmoderated | moderated | blocked
-
-        t.text :moderator_note
 
         t.string :legacy_url
 

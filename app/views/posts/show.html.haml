@@ -1,6 +1,7 @@
 %p#notice= notice
 
 %h2= @post.title
+= image_tag "http://lorempixel.com/460/200/nightlife/?#{rand}"
 %p= raw @post.intro
 %p= raw @post.content
 %p= post_info @post

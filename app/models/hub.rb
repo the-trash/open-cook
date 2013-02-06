@@ -10,9 +10,11 @@ class Hub < ActiveRecord::Base
     
   # relations
   belongs_to :user
+
   has_many   :pages
   has_many   :posts
   has_many   :blogs
+  has_many   :notes
   has_many   :recipes
   has_many   :articles
 

@@ -8,6 +8,7 @@ Hub.destroy_all
 Post.destroy_all
 Page.destroy_all
 Blog.destroy_all
+Note.destroy_all
 Article.destroy_all
 
 Recipe.destroy_all
@@ -66,7 +67,7 @@ puts "Roles created"
 ######################################################
 # Create Users
 ######################################################
-40.times do |i|
+5.times do |i|
   name  = Faker::Name.name
   login = name.downcase.gsub(/[\ \._]/, '-')
   email = "#{login}@gmail.com"
@@ -101,7 +102,7 @@ def create_hub type, number, posts_type, user, user_index
   hub.update_attribute(:state, [:draft, :published].sample)
   puts "#{name} u:#{user_index} h:#{number} created"
 
-  20.times do |r|
+  3.times do |r|
     post_name = posts_type.to_s.singularize.capitalize
     post = user.send(posts_type).create!(
       hub: hub,
@@ -109,7 +110,7 @@ def create_hub type, number, posts_type, user, user_index
       raw_intro: Faker::Lorem.paragraphs(3).join,
       raw_content: Faker::Lorem.paragraphs(3).join
     )
-    post.update_attribute(:state, [:draft, :published].sample)
+    post.send("to_#{[:draft, :published, :deleted].sample}")
     puts "#{post_name} r:#{r.next} h:#{number} u:#{user_index} created"
   end
 end
@@ -118,20 +119,22 @@ end
 # Create data for authors
 ######################################################
 User.with_role(:admin).each_with_index do |user, u|
-  20.times do |m|
+  3.times do |m|
     create_hub(:posts, m.next, :posts, user, u.next)
-    create_hub(:pages, m.next, :pages, user, u.next)
     create_hub(:blogs, m.next, :blogs, user, u.next)
+    create_hub(:pages, m.next, :pages, user, u.next)
+    create_hub(:notes, m.next, :notes, user, u.next)
     create_hub(:articles, m.next, :articles, user, u.next)
     create_hub(:recipes, m.next, :recipes, user, u.next)
   end
 end
 
 User.with_role(:author).each_with_index do |user, u|
-  20.times do |m|
+  3.times do |m|
     create_hub(:posts, m.next, :posts, user, u.next)
-    create_hub(:pages, m.next, :pages, user, u.next)
     create_hub(:blogs, m.next, :blogs, user, u.next)
+    create_hub(:pages, m.next, :pages, user, u.next)
+    create_hub(:notes, m.next, :notes, user, u.next)
     create_hub(:articles, m.next, :articles, user, u.next)
     create_hub(:recipes, m.next, :recipes, user, u.next)
   end
@@ -142,15 +145,15 @@ end
 ######################################################
 def hub_info(type)
   puts "Hub of #{type} count: #{Hub.of_(type).count}"
-  puts "Hub of #{type} published count: #{Hub.of_(type).published.count}"
-  puts "Hub of #{type} draft count: #{Hub.of_(type).draft.count}"
+  puts "Hub of #{type} published count: #{Hub.of_(type).with_state(:published).count}"
+  puts "Hub of #{type} draft count: #{Hub.of_(type).with_state(:draft).count}"
   puts "~" * 20
 end
 
 def model_info model
   puts "#{model} count: #{model.count}"
-  puts "#{model} published count: #{model.published.count}"
-  puts "#{model} draft count: #{model.draft.count}"
+  puts "#{model} published count: #{model.with_state(:published).count}"
+  puts "#{model} draft count: #{model.with_state(:draft).count}"
   puts "~" * 20
 end
 ######################################################
@@ -179,12 +182,14 @@ model_info(Post)
 hub_info(:blogs)
 model_info(Blog)
 
+hub_info(:notes)
+model_info(Note)
+
 hub_info(:articles)
 model_info(Article)
 
 hub_info(:recipes)
 model_info(Recipe)
-
 
 # User
 #   -> Role

@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :pages
   has_many :posts
   has_many :blogs
+  has_many :notes
   has_many :recipes
   has_many :articles
 

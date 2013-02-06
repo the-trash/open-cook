@@ -25,9 +25,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.text     "raw_content"
     t.text     "intro"
     t.text     "content"
-    t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
     t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
@@ -36,6 +33,11 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth",              default: 0
+    t.string   "main_image_url"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
+    t.text     "moderator_note"
     t.integer  "files_count",        default: 0
     t.integer  "files_size",         default: 0
     t.string   "short_id"
@@ -72,9 +74,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.text     "raw_content"
     t.text     "intro"
     t.text     "content"
-    t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
     t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
@@ -83,6 +82,11 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth",              default: 0
+    t.string   "main_image_url"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
+    t.text     "moderator_note"
     t.integer  "files_count",        default: 0
     t.integer  "files_size",         default: 0
     t.string   "short_id"
@@ -91,16 +95,63 @@ ActiveRecord::Schema.define(version: 20130130171802) do
 
   create_table "hubs", force: true do |t|
     t.integer  "user_id"
+    t.integer  "hub_id"
+    t.string   "author"
+    t.string   "keywords"
+    t.string   "description"
+    t.string   "copyright"
     t.string   "title"
-    t.string   "hub_type"
-    t.string   "state",       default: "draft"
+    t.text     "raw_intro"
+    t.text     "raw_content"
+    t.text     "intro"
+    t.text     "content"
     t.string   "legacy_url"
+    t.datetime "first_published_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "hub_type"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth",              default: 0
+    t.string   "main_image_url"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
+    t.text     "moderator_note"
+    t.integer  "files_count",        default: 0
+    t.integer  "files_size",         default: 0
+    t.string   "short_id"
+    t.string   "friendly_id"
+  end
+
+  create_table "notes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "hub_id"
+    t.string   "author"
+    t.string   "keywords"
+    t.string   "description"
+    t.string   "copyright"
+    t.string   "title"
+    t.text     "raw_intro"
+    t.text     "raw_content"
+    t.text     "intro"
+    t.text     "content"
+    t.string   "legacy_url"
+    t.datetime "first_published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",       default: 0
+    t.integer  "depth",              default: 0
+    t.string   "main_image_url"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
+    t.text     "moderator_note"
+    t.integer  "files_count",        default: 0
+    t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
   end
@@ -117,9 +168,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.text     "raw_content"
     t.text     "intro"
     t.text     "content"
-    t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
     t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
@@ -128,6 +176,11 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth",              default: 0
+    t.string   "main_image_url"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
+    t.text     "moderator_note"
     t.integer  "files_count",        default: 0
     t.integer  "files_size",         default: 0
     t.string   "short_id"
@@ -146,9 +199,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.text     "raw_content"
     t.text     "intro"
     t.text     "content"
-    t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
     t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
@@ -157,6 +207,11 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth",              default: 0
+    t.string   "main_image_url"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
+    t.text     "moderator_note"
     t.integer  "files_count",        default: 0
     t.integer  "files_size",         default: 0
     t.string   "short_id"
@@ -175,9 +230,6 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.text     "raw_content"
     t.text     "intro"
     t.text     "content"
-    t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
     t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
@@ -186,6 +238,11 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth",              default: 0
+    t.string   "main_image_url"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
+    t.text     "moderator_note"
     t.integer  "files_count",        default: 0
     t.integer  "files_size",         default: 0
     t.string   "short_id"
@@ -202,13 +259,22 @@ ActiveRecord::Schema.define(version: 20130130171802) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "login",                                       null: false
+    t.string   "login",                                              null: false
     t.string   "username"
     t.string   "email"
     t.string   "open_password"
     t.string   "crypted_password"
     t.string   "salt"
     t.integer  "role_id"
+    t.integer  "show_count",                      default: 0
+    t.string   "state",                           default: "active"
+    t.integer  "hubs_count",                      default: 0
+    t.integer  "pages_count",                     default: 0
+    t.integer  "posts_count",                     default: 0
+    t.integer  "blogs_count",                     default: 0
+    t.integer  "notes_count",                     default: 0
+    t.integer  "recipes_count",                   default: 0
+    t.integer  "articles_count",                  default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_me_token"
