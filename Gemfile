@@ -36,9 +36,11 @@ gem 'state_machine'
 # my gems
 
 # w
-gem 'the_role'            , path: '/home/zykin/work/projects/old_code/myg/the_role'
-gem 'the_audit'           , path: '/home/zykin/work/projects/old_code/myg/the_audit'
 gem "the_sortable_tree", "~> 2.3.0"
+gem 'the_role'     , path: '/home/zykin/work/projects/old_code/myg/the_role'
+gem 'the_audit'    , path: '/home/zykin/work/projects/old_code/myg/the_audit'
+gem 'the_comments' , path: '/home/zykin/work/projects/old_code/myg/the_comments'
+
 
 # h
 # gem 'the_role'            , path: '/home/the_teacher/rails/rails4/the_role'
