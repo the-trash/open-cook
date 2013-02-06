@@ -6,18 +6,6 @@ TheApp::Application.routes.draw do
   delete "logout"   => "sessions#destroy", as: :logout
   post   "sessions" => "sessions#create",  as: :sessions
 
-  # users
-  resources :users, only: [:index, :show, :create] do
-    resources :pages
-    resources :posts
-    resources :blogs
-    resources :recipes
-    resources :articles
-  end
-
-  get  "signup"  => "users#new",     as: :signup
-  get  "cabinet" => "users#cabinet", as: :cabinet
-
   concern :sortable_tree do
     collection do
       get  :manage
@@ -25,13 +13,27 @@ TheApp::Application.routes.draw do
     end
   end
 
-  # post set
+  # direct routes
   resources :hubs,     concerns: :sortable_tree
   resources :pages,    concerns: :sortable_tree
   resources :posts,    concerns: :sortable_tree
   resources :blogs,    concerns: :sortable_tree
+  resources :notes,    concerns: :sortable_tree
   resources :recipes,  concerns: :sortable_tree
   resources :articles, concerns: :sortable_tree
+
+  # users
+  resources :users, only: [:index, :show, :create] do
+    resources :pages
+    resources :posts
+    resources :blogs
+    resources :notes
+    resources :recipes
+    resources :articles
+  end
+
+  get  "signup"  => "users#new",     as: :signup
+  get  "cabinet" => "users#cabinet", as: :cabinet
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
