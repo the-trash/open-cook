@@ -6,6 +6,7 @@ module BasePublication
     include BaseStates
     include TheFriendlyId
     include NestedSetMethods
+    # include TheCommentableModel
 
     before_save :prepare_content
 
@@ -21,6 +22,9 @@ module BasePublication
 
     attr_accessible :user, :hub, :title, :raw_intro, :raw_content
     validates_presence_of :user, :hub, :title
+
+    # comments
+    has_many :comments, as: :commentable
 
     private
 

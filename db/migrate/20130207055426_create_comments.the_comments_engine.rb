@@ -1,13 +1,13 @@
 # This migration comes from the_comments_engine (originally 20130101010101)
 class CreateComments < ActiveRecord::Migration
-  def self.up
+  def change
     create_table :comments do |t|
       # relations
       t.integer :user_id
       
       # polymorphic, commentable obj
-      t.integer :obj_id
-      t.string  :obj_type
+      t.integer :commentable_id
+      t.string  :commentable_type
 
       # comment
       t.string :title,    null: false
@@ -16,7 +16,7 @@ class CreateComments < ActiveRecord::Migration
       t.text :raw_content, null: false
       t.text :content,     null: false
 
-      # state machine => :not_approved | :approved
+      # state machine => :not_approved | :approved | deleted
       t.string :state, default: :not_approved
 
       # base user data (BanHammer power)
@@ -32,9 +32,17 @@ class CreateComments < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
 
-  def self.down
-    drop_table :comments
+    # Add fields to User and Commentable Object
+    change_table :users do |t|
+      t.integer :total_comments_count, default: 0
+      t.integer :new_comments_count,   default: 0
+    end
+
+    [:users, :pages, :posts, :articles, :recipes, :blogs, :notes].each do |table_name|
+      change_table table_name do |t|
+        t.integer :comments_count, default: 0
+      end
+    end
   end
 end

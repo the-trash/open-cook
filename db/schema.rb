@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130130171802) do
+ActiveRecord::Schema.define(version: 20130207055426) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "comments_count",     default: 0
   end
 
   create_table "audits", force: true do |t|
@@ -91,6 +92,27 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "comments_count",     default: 0
+  end
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.string   "title",                                     null: false
+    t.string   "contacts",                                  null: false
+    t.text     "raw_content",                               null: false
+    t.text     "content",                                   null: false
+    t.string   "state",            default: "not_approved"
+    t.string   "ip"
+    t.string   "referer"
+    t.string   "user_agent"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth",            default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "hubs", force: true do |t|
@@ -154,6 +176,7 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "comments_count",     default: 0
   end
 
   create_table "pages", force: true do |t|
@@ -185,6 +208,7 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "comments_count",     default: 0
   end
 
   create_table "posts", force: true do |t|
@@ -216,6 +240,7 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "comments_count",     default: 0
   end
 
   create_table "recipes", force: true do |t|
@@ -247,6 +272,7 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "comments_count",     default: 0
   end
 
   create_table "roles", force: true do |t|
@@ -286,6 +312,9 @@ ActiveRecord::Schema.define(version: 20130130171802) do
     t.integer  "total_files_size",                default: 0
     t.integer  "files_count",                     default: 0
     t.integer  "files_size",                      default: 0
+    t.integer  "total_comments_count",            default: 0
+    t.integer  "new_comments_count",              default: 0
+    t.integer  "comments_count",                  default: 0
   end
 
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
