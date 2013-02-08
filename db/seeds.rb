@@ -102,7 +102,7 @@ def create_hub type, number, posts_type, user, user_index
   hub.update_attribute(:state, [:draft, :published].sample)
   puts "#{name} u:#{user_index} h:#{number} created"
 
-  3.times do |r|
+  10.times do |r|
     post_name = posts_type.to_s.singularize.capitalize
     post = user.send(posts_type).create!(
       hub: hub,
@@ -121,24 +121,40 @@ end
 User.with_role(:admin).each_with_index do |user, u|
   3.times do |m|
     create_hub(:posts, m.next, :posts, user, u.next)
-    create_hub(:blogs, m.next, :blogs, user, u.next)
-    create_hub(:pages, m.next, :pages, user, u.next)
-    create_hub(:notes, m.next, :notes, user, u.next)
-    create_hub(:articles, m.next, :articles, user, u.next)
-    create_hub(:recipes, m.next, :recipes, user, u.next)
+    # create_hub(:blogs, m.next, :blogs, user, u.next)
+    # create_hub(:pages, m.next, :pages, user, u.next)
+    # create_hub(:notes, m.next, :notes, user, u.next)
+    # create_hub(:articles, m.next, :articles, user, u.next)
+    # create_hub(:recipes, m.next, :recipes, user, u.next)
   end
 end
 
 User.with_role(:author).each_with_index do |user, u|
   3.times do |m|
     create_hub(:posts, m.next, :posts, user, u.next)
-    create_hub(:blogs, m.next, :blogs, user, u.next)
-    create_hub(:pages, m.next, :pages, user, u.next)
-    create_hub(:notes, m.next, :notes, user, u.next)
-    create_hub(:articles, m.next, :articles, user, u.next)
-    create_hub(:recipes, m.next, :recipes, user, u.next)
+    # create_hub(:blogs, m.next, :blogs, user, u.next)
+    # create_hub(:pages, m.next, :pages, user, u.next)
+    # create_hub(:notes, m.next, :notes, user, u.next)
+    # create_hub(:articles, m.next, :articles, user, u.next)
+    # create_hub(:recipes, m.next, :recipes, user, u.next)
   end
 end
+
+Post.all.each do |post|
+  user = User.all.sample
+  post.comments.create!(
+    user:        user,
+    holder:      post.user,
+    title:       Faker::Lorem.sentence,
+    contacts:    Faker::Lorem.sentence,
+    raw_content: Faker::Lorem.paragraphs(4).join
+  )
+end
+
+    comment = post.comments.create!(
+
+    )
+    comment.send("to_#{[:not_approved, :approved, :deleted].sample}")
 
 ######################################################
 # Info fn

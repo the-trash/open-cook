@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
   has_many :recipes
   has_many :articles
 
+  # Comments relations
+  has_many :comments
+  has_many :created_comments, class_name: :Comment, foreign_key: :owner_id
+
   # validations
   validates :login,    presence: true, uniqueness: true
   validates :email,    presence: true, uniqueness: true

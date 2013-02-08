@@ -99,10 +99,10 @@ ActiveRecord::Schema.define(version: 20130207055426) do
     t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
-    t.string   "title",                                     null: false
-    t.string   "contacts",                                  null: false
-    t.text     "raw_content",                               null: false
-    t.text     "content",                                   null: false
+    t.string   "title"
+    t.string   "contacts"
+    t.text     "raw_content"
+    t.text     "content"
     t.string   "state",            default: "not_approved"
     t.string   "ip"
     t.string   "referer"
@@ -312,8 +312,9 @@ ActiveRecord::Schema.define(version: 20130207055426) do
     t.integer  "total_files_size",                default: 0
     t.integer  "files_count",                     default: 0
     t.integer  "files_size",                      default: 0
-    t.integer  "total_comments_count",            default: 0
-    t.integer  "new_comments_count",              default: 0
+    t.integer  "created_comments_count",          default: 0
+    t.integer  "approved_comments_count",         default: 0
+    t.integer  "not_approved_comments_count",     default: 0
     t.integer  "comments_count",                  default: 0
   end
 
