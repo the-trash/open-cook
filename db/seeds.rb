@@ -141,16 +141,18 @@ User.with_role(:author).each_with_index do |user, u|
 end
 
 Post.all.each do |post|
-  current_user = User.all.sample
+  5.times do
+    current_user = User.all.sample
+    comment = post.comments.create!(
+      user:        current_user,
+      commentable: post,
+      title:       Faker::Lorem.sentence,
+      contacts:    Faker::Lorem.sentence,
+      raw_content: Faker::Lorem.paragraphs(4).join
+    )
+    comment.send("to_#{[:approved, :not_approved, :deleted].sample}")
+  end
 
-  comment = post.comments.create!(
-    user:        current_user,
-    commentable: post,
-    title:       Faker::Lorem.sentence,
-    contacts:    Faker::Lorem.sentence,
-    raw_content: Faker::Lorem.paragraphs(4).join
-  )
-  comment.send("to_#{[:approved, :not_approved, :deleted].sample}")
   puts "Comment created"
 end
 
