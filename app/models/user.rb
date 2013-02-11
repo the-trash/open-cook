@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
 
   # Comments relations
   has_many :comments
-  has_many :created_comments, class_name: :Comment, foreign_key: :owner_id
+  has_many :comcoms, class_name: :Comment, foreign_key: :holder_id
 
   # validations
   validates :login,    presence: true, uniqueness: true

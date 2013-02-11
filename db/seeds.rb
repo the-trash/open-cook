@@ -67,7 +67,7 @@ puts "Roles created"
 ######################################################
 # Create Users
 ######################################################
-5.times do |i|
+3.times do |i|
   name  = Faker::Name.name
   login = name.downcase.gsub(/[\ \._]/, '-')
   email = "#{login}@gmail.com"
@@ -141,20 +141,18 @@ User.with_role(:author).each_with_index do |user, u|
 end
 
 Post.all.each do |post|
-  user = User.all.sample
-  post.comments.create!(
-    user:        user,
-    holder:      post.user,
+  current_user = User.all.sample
+
+  comment = post.comments.create!(
+    user:        current_user,
+    commentable: post,
     title:       Faker::Lorem.sentence,
     contacts:    Faker::Lorem.sentence,
     raw_content: Faker::Lorem.paragraphs(4).join
   )
+  comment.send("to_#{[:approved, :not_approved, :deleted].sample}")
+  puts "Comment created"
 end
-
-    comment = post.comments.create!(
-
-    )
-    comment.send("to_#{[:not_approved, :approved, :deleted].sample}")
 
 ######################################################
 # Info fn
