@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   include RedirectBack
   include SorceryAddons
   include TheRoleAddons
-  include CommentsViewToken
 
   layout 'bootstrap_fixed'
 
