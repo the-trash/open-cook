@@ -6,5 +6,7 @@
 %p= raw @post.content
 %p= post_info @post
 
+= render partial: "comments/tree", locals: { comments_tree: @comments }
+
 -# link_to 'Edit', edit_url(@post)
 -# link_to 'Back', index_url(controller_name)

@@ -12,11 +12,16 @@ class CreateComments < ActiveRecord::Migration
       t.string  :commentable_type
 
       # comment
+      t.string :anchor
+      
       t.string :title
       t.string :contacts
 
       t.text :raw_content
       t.text :content
+
+      # moderation token
+      t.string :view_token
 
       # state machine => :not_approved | :approved | :deleted
       t.string :state, default: :not_approved
@@ -47,7 +52,7 @@ class CreateComments < ActiveRecord::Migration
 
     # Uncomment this. Add fields to User model and Commentable models
     #
-    [:users, :posts].each do |table_name|
+    [:users, :posts, :pages].each do |table_name|
       change_table table_name do |t|
         t.integer :total_comments_count,    default: 0
         t.integer :approved_comments_count, default: 0
