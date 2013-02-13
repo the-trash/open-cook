@@ -150,7 +150,7 @@ Post.all.each do |post|
       contacts:    Faker::Lorem.sentence,
       raw_content: Faker::Lorem.paragraphs(4).join
     )
-    comment.send("to_#{[:approved, :not_approved, :deleted].sample}")
+    comment.send("to_#{[:draft, :published, :deleted].sample}")
   end
 
   puts "Comment created"

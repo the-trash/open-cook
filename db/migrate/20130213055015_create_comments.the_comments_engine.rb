@@ -7,9 +7,13 @@ class CreateComments < ActiveRecord::Migration
       t.integer :user_id
       t.integer :holder_id
       
-      # polymorphic, commentable obj
+      # polymorphic, commentable object
       t.integer :commentable_id
       t.string  :commentable_type
+
+      # denormalization
+      t.string  :commentable_url
+      t.string  :commentable_title
 
       # comment
       t.string :anchor
@@ -23,8 +27,8 @@ class CreateComments < ActiveRecord::Migration
       # moderation token
       t.string :view_token
 
-      # state machine => :not_approved | :approved | :deleted
-      t.string :state, default: :not_approved
+      # state machine => :draft | :published | :deleted
+      t.string :state, default: :draft
 
       # base user data (BanHammer power)
       t.string :ip
@@ -45,19 +49,19 @@ class CreateComments < ActiveRecord::Migration
       # commentable's comments => comcoms (cache)
       # Relation through Comment#holder_id field
       t.integer :total_comcoms_count,    default: 0
-      t.integer :approved_comcoms_count, default: 0
-      t.integer :new_comcoms_count,      default: 0
-      t.integer :del_comcoms_count,      default: 0
+      t.integer :draft_comcoms_count,     default: 0
+      t.integer :published_comcoms_count, default: 0
+      t.integer :deleted_comcoms_count,   default: 0
     end
 
     # Uncomment this. Add fields to User model and Commentable models
     #
-    [:users, :posts, :pages].each do |table_name|
+    [:users, :pages, :posts, :articles, :recipes, :blogs, :notes, :hubs].each do |table_name|
       change_table table_name do |t|
-        t.integer :total_comments_count,    default: 0
-        t.integer :approved_comments_count, default: 0
-        t.integer :new_comments_count,      default: 0
-        t.integer :del_comments_count,      default: 0
+        t.integer :total_comments_count,     default: 0
+        t.integer :draft_comments_count,     default: 0
+        t.integer :published_comments_count, default: 0
+        t.integer :deleted_comments_count,   default: 0
       end
     end
   end

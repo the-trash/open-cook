@@ -17,7 +17,7 @@ module BasePostController
     def show
       @post     = @post.with_states(:published).first
       @user     = @post.user
-      @comments = @post.comments.with_state([:approved, :not_approved]).nested_set
+      @comments = @post.comments.with_state([:draft, :published]).nested_set
 
       @post.increment!(:show_count)
       render 'posts/show'

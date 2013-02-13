@@ -6,7 +6,6 @@ module BasePublication
     include BaseStates
     include TheFriendlyId
     include NestedSetMethods
-    # include TheCommentableModel
 
     before_save :prepare_content
 
@@ -25,6 +24,7 @@ module BasePublication
 
     # comments
     has_many :comments, as: :commentable
+    # attr_accessible :total_comments_count, :draft_comments_count, :published_comments_count, :deleted_comments_count
 
     private
 

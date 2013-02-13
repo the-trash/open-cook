@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130212060639) do
+ActiveRecord::Schema.define(version: 20130213055015) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -32,16 +32,20 @@ ActiveRecord::Schema.define(version: 20130212060639) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",              default: 0
+    t.integer  "depth",                    default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
-    t.string   "moderation_state",   default: "unmoderated"
+    t.integer  "show_count",               default: 0
+    t.string   "state",                    default: "draft"
+    t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",        default: 0
-    t.integer  "files_size",         default: 0
+    t.integer  "files_count",              default: 0
+    t.integer  "files_size",               default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "total_comments_count",     default: 0
+    t.integer  "draft_comments_count",     default: 0
+    t.integer  "published_comments_count", default: 0
+    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "audits", force: true do |t|
@@ -81,16 +85,20 @@ ActiveRecord::Schema.define(version: 20130212060639) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",              default: 0
+    t.integer  "depth",                    default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
-    t.string   "moderation_state",   default: "unmoderated"
+    t.integer  "show_count",               default: 0
+    t.string   "state",                    default: "draft"
+    t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",        default: 0
-    t.integer  "files_size",         default: 0
+    t.integer  "files_count",              default: 0
+    t.integer  "files_size",               default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "total_comments_count",     default: 0
+    t.integer  "draft_comments_count",     default: 0
+    t.integer  "published_comments_count", default: 0
+    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "comments", force: true do |t|
@@ -98,20 +106,22 @@ ActiveRecord::Schema.define(version: 20130212060639) do
     t.integer  "holder_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
+    t.string   "commentable_url"
+    t.string   "commentable_title"
     t.string   "anchor"
     t.string   "title"
     t.string   "contacts"
     t.text     "raw_content"
     t.text     "content"
     t.string   "view_token"
-    t.string   "state",            default: "not_approved"
+    t.string   "state",             default: "draft"
     t.string   "ip"
     t.string   "referer"
     t.string   "user_agent"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",            default: 0
+    t.integer  "depth",             default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -136,16 +146,20 @@ ActiveRecord::Schema.define(version: 20130212060639) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",              default: 0
+    t.integer  "depth",                    default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
-    t.string   "moderation_state",   default: "unmoderated"
+    t.integer  "show_count",               default: 0
+    t.string   "state",                    default: "draft"
+    t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",        default: 0
-    t.integer  "files_size",         default: 0
+    t.integer  "files_count",              default: 0
+    t.integer  "files_size",               default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "total_comments_count",     default: 0
+    t.integer  "draft_comments_count",     default: 0
+    t.integer  "published_comments_count", default: 0
+    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "notes", force: true do |t|
@@ -167,16 +181,20 @@ ActiveRecord::Schema.define(version: 20130212060639) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",              default: 0
+    t.integer  "depth",                    default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
-    t.string   "moderation_state",   default: "unmoderated"
+    t.integer  "show_count",               default: 0
+    t.string   "state",                    default: "draft"
+    t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",        default: 0
-    t.integer  "files_size",         default: 0
+    t.integer  "files_count",              default: 0
+    t.integer  "files_size",               default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "total_comments_count",     default: 0
+    t.integer  "draft_comments_count",     default: 0
+    t.integer  "published_comments_count", default: 0
+    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "pages", force: true do |t|
@@ -198,20 +216,20 @@ ActiveRecord::Schema.define(version: 20130212060639) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",                   default: 0
+    t.integer  "depth",                    default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",              default: 0
-    t.string   "state",                   default: "draft"
-    t.string   "moderation_state",        default: "unmoderated"
+    t.integer  "show_count",               default: 0
+    t.string   "state",                    default: "draft"
+    t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",             default: 0
-    t.integer  "files_size",              default: 0
+    t.integer  "files_count",              default: 0
+    t.integer  "files_size",               default: 0
     t.string   "short_id"
     t.string   "friendly_id"
-    t.integer  "total_comments_count",    default: 0
-    t.integer  "approved_comments_count", default: 0
-    t.integer  "new_comments_count",      default: 0
-    t.integer  "del_comments_count",      default: 0
+    t.integer  "total_comments_count",     default: 0
+    t.integer  "draft_comments_count",     default: 0
+    t.integer  "published_comments_count", default: 0
+    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "posts", force: true do |t|
@@ -233,20 +251,20 @@ ActiveRecord::Schema.define(version: 20130212060639) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",                   default: 0
+    t.integer  "depth",                    default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",              default: 0
-    t.string   "state",                   default: "draft"
-    t.string   "moderation_state",        default: "unmoderated"
+    t.integer  "show_count",               default: 0
+    t.string   "state",                    default: "draft"
+    t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",             default: 0
-    t.integer  "files_size",              default: 0
+    t.integer  "files_count",              default: 0
+    t.integer  "files_size",               default: 0
     t.string   "short_id"
     t.string   "friendly_id"
-    t.integer  "total_comments_count",    default: 0
-    t.integer  "approved_comments_count", default: 0
-    t.integer  "new_comments_count",      default: 0
-    t.integer  "del_comments_count",      default: 0
+    t.integer  "total_comments_count",     default: 0
+    t.integer  "draft_comments_count",     default: 0
+    t.integer  "published_comments_count", default: 0
+    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "recipes", force: true do |t|
@@ -268,16 +286,20 @@ ActiveRecord::Schema.define(version: 20130212060639) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",              default: 0
+    t.integer  "depth",                    default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
-    t.string   "moderation_state",   default: "unmoderated"
+    t.integer  "show_count",               default: 0
+    t.string   "state",                    default: "draft"
+    t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",        default: 0
-    t.integer  "files_size",         default: 0
+    t.integer  "files_count",              default: 0
+    t.integer  "files_size",               default: 0
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "total_comments_count",     default: 0
+    t.integer  "draft_comments_count",     default: 0
+    t.integer  "published_comments_count", default: 0
+    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "roles", force: true do |t|
@@ -318,13 +340,13 @@ ActiveRecord::Schema.define(version: 20130212060639) do
     t.integer  "files_count",                     default: 0
     t.integer  "files_size",                      default: 0
     t.integer  "total_comcoms_count",             default: 0
-    t.integer  "approved_comcoms_count",          default: 0
-    t.integer  "new_comcoms_count",               default: 0
-    t.integer  "del_comcoms_count",               default: 0
+    t.integer  "draft_comcoms_count",             default: 0
+    t.integer  "published_comcoms_count",         default: 0
+    t.integer  "deleted_comcoms_count",           default: 0
     t.integer  "total_comments_count",            default: 0
-    t.integer  "approved_comments_count",         default: 0
-    t.integer  "new_comments_count",              default: 0
-    t.integer  "del_comments_count",              default: 0
+    t.integer  "draft_comments_count",            default: 0
+    t.integer  "published_comments_count",        default: 0
+    t.integer  "deleted_comments_count",          default: 0
   end
 
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
