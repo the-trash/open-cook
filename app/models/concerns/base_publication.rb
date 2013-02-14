@@ -15,6 +15,10 @@ module BasePublication
       self.class.to_s.tableize
     end
 
+    def show_path
+      "/#{controller_name}/#{to_param}"
+    end
+
     # relations
     belongs_to :user
     belongs_to :hub

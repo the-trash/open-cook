@@ -23,3 +23,6 @@
 //= require redactor
 //= require redactor_ru
 //= require redactor/initialize
+
+//= require logger
+//= require the_comments
