@@ -26,6 +26,11 @@ class User < ActiveRecord::Base
   validates :email,    presence: true, uniqueness: true
   validates :password, presence: true, on: :create
 
+  # TheComments
+  def comments_moderator?
+    true
+  end
+
   # replace in TheRole
   def self.with_role name
     Role.where(name: name).first.users
