@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   include SorceryAddons
   include TheRoleAddons
 
+  include TheCommentsController::Cookies
+
   layout 'bootstrap_fixed'
 
   # @user - to show
@@ -13,6 +15,8 @@ class ApplicationController < ActionController::Base
 
   after_action  :save_audit
 
+  
+  
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception

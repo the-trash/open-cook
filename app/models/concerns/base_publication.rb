@@ -19,6 +19,15 @@ module BasePublication
       "/#{controller_name}/#{to_param}"
     end
 
+    # TheComments
+    def commentable_title
+      title
+    end
+
+    def commentable_path
+      show_path
+    end
+
     # relations
     belongs_to :user
     belongs_to :hub

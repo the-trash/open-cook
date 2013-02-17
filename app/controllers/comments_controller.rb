@@ -1,3 +1,3 @@
 class CommentsController < ApplicationController
-  include TheCommentsController
+  include TheCommentsController::Base
 end
