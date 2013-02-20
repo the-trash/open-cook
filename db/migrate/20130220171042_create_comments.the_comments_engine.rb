@@ -34,6 +34,7 @@ class CreateComments < ActiveRecord::Migration
       t.string :ip
       t.string :referer
       t.string :user_agent
+      t.string :comment_time
 
       # nested set
       t.integer :parent_id
@@ -44,11 +45,24 @@ class CreateComments < ActiveRecord::Migration
       t.timestamps
     end
 
+    # Black Lists
+    create_table :ip_black_lists do |t|
+      t.string  :ip
+      t.integer :count, default: 0
+      t.string  :state, default: :warning
+    end
+
+    create_table :user_agent_black_lists do |t|
+      t.string  :user_agent
+      t.integer :count, default: 0
+      t.string  :state, default: :warning
+    end
+
     # Add fields to User and Commentable Object
     change_table :users do |t|
       # commentable's comments => comcoms (cache)
       # Relation through Comment#holder_id field
-      t.integer :total_comcoms_count,    default: 0
+      t.integer :total_comcoms_count,     default: 0
       t.integer :draft_comcoms_count,     default: 0
       t.integer :published_comcoms_count, default: 0
       t.integer :deleted_comcoms_count,   default: 0
@@ -65,5 +79,4 @@ class CreateComments < ActiveRecord::Migration
       end
     end
   end
-
 end

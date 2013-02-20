@@ -7,7 +7,6 @@ module BasePostController
     after_action -> { @audit = Audit.new.init(self, @post) }, only: [:create, :show, :update, :edit, :destroy]
 
     include TheSortableTreeController::Rebuild
-    
     include TheCommentsController::ViewToken
 
     def index
@@ -20,7 +19,6 @@ module BasePostController
       @post     = @post.with_states(:published).first
       @user     = @post.user
       @comments = @post.comments.with_state([:draft, :published]).nested_set
-
       @post.increment!(:show_count)
       render 'posts/show'
     end

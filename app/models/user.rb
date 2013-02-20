@@ -17,19 +17,30 @@ class User < ActiveRecord::Base
   has_many :recipes
   has_many :articles
 
-  # Comments relations
-  has_many :comments
-  has_many :comcoms, class_name: :Comment, foreign_key: :holder_id
-
   # validations
   validates :login,    presence: true, uniqueness: true
   validates :email,    presence: true, uniqueness: true
   validates :password, presence: true, on: :create
 
-  # TheComments
-  def comments_moderator?
-    true
+  def admin?
+    self == User.first
   end
+
+  # TheComments
+  include TheCommentModels::User
+
+  def comment_moderator? comment
+    admin? || id == comment.holder_id
+  end
+
+  def commentable_title
+    login
+  end
+
+  def commentable_path
+    [self.class.to_s.tableize, login].join('/')
+  end
+  
 
   # replace in TheRole
   def self.with_role name
