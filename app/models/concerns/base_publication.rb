@@ -6,10 +6,18 @@ module BasePublication
     include BaseStates
     include TheFriendlyId
     include NestedSetMethods
+    include TheCommentModels::Commentable
 
     before_save :prepare_content
 
     paginates_per 25
+
+    # relations
+    belongs_to :user
+    belongs_to :hub
+
+    attr_accessible :user, :hub, :title, :raw_intro, :raw_content
+    validates_presence_of :user, :hub, :title
 
     def controller_name
       self.class.to_s.tableize
@@ -19,7 +27,6 @@ module BasePublication
       "/#{controller_name}/#{to_param}"
     end
 
-    # TheComments
     def commentable_title
       title
     end
@@ -27,17 +34,6 @@ module BasePublication
     def commentable_path
       show_path
     end
-
-    # relations
-    belongs_to :user
-    belongs_to :hub
-
-    attr_accessible :user, :hub, :title, :raw_intro, :raw_content
-    validates_presence_of :user, :hub, :title
-
-    # comments
-    has_many :comments, as: :commentable
-    # attr_accessible :total_comments_count, :draft_comments_count, :published_comments_count, :deleted_comments_count
 
     private
 
