@@ -1,4 +1,6 @@
 TheComments.configure do |config|
-  config.tolerance_time = 100
-  config.empty_inputs   = [:email, :message]
+  # TheComments.config.param_name = value
+  config.max_reply_depth = 3
+  config.tolerance_time  = 15
+  config.empty_inputs    = [:email, :message]
 end
