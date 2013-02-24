@@ -14,42 +14,42 @@
 ActiveRecord::Schema.define(version: 20130220171042) do
 
 # Could not dump table "articles" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "audits" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "blogs" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "comments" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "hubs" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "ip_black_lists" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "notes" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "pages" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "posts" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "recipes" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "roles" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "user_agent_black_lists" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 # Could not dump table "users" because of following NoMethodError
-#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0x9871708>
+#   private method `valid_type?' called for #<ActiveRecord::ConnectionAdapters::Mysql2Adapter:0xb1982a4>
 
 end
