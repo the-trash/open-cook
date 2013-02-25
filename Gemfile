@@ -36,17 +36,16 @@ gem 'state_machine', git: 'git@github.com:pluginaweek/state_machine.git'
 # my gems
 
 # w
-
-# gem "the_sortable_tree", "~> 2.3.0"
-# gem 'the_role'     , path: '/home/zykin/work/projects/old_code/myg/the_role'
-# gem 'the_audit'    , path: '/home/zykin/work/projects/old_code/myg/the_audit'
-# gem 'the_comments' , path: '/home/zykin/work/projects/old_code/myg/the_comments'
+gem "the_sortable_tree", "~> 2.3.0"
+gem 'the_role'     , path: '/home/zykin/work/projects/old_code/myg/the_role'
+gem 'the_audit'    , path: '/home/zykin/work/projects/old_code/myg/the_audit'
+gem 'the_comments' , path: '/home/zykin/work/projects/old_code/myg/the_comments'
 
 # h
-gem 'the_role'            , path: '/home/the_teacher/rails/rails4/the_role'
-gem 'the_audit'           , path: '/home/the_teacher/rails/rails4/the_audit'
-gem 'the_comments'        , path: '/home/the_teacher/rails/rails4/the_comments'
-gem 'the_sortable_tree'   , path: '/home/the_teacher/rails/rails4/the_sortable_tree'
+# gem 'the_role'            , path: '/home/the_teacher/rails/rails4/the_role'
+# gem 'the_audit'           , path: '/home/the_teacher/rails/rails4/the_audit'
+# gem 'the_comments'        , path: '/home/the_teacher/rails/rails4/the_comments'
+# gem 'the_sortable_tree'   , path: '/home/the_teacher/rails/rails4/the_sortable_tree'
 
 # gem 'the_uploaded_files'  , path: '/home/the_teacher/rails/rails4/the_uploaded_files'
 

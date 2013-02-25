@@ -120,7 +120,7 @@ end
 # Create data for authors
 ######################################################
 User.with_role(:admin).each_with_index do |user, u|
-  3.times do |m|
+  1.times do |m|
     create_hub(:posts, m.next, :posts, user, u.next)
     # create_hub(:blogs, m.next, :blogs, user, u.next)
     # create_hub(:pages, m.next, :pages, user, u.next)
@@ -154,23 +154,25 @@ def create_comment post, parent_comment = nil
       parent_id:   parent_comment.try(:id)
     )
     puts "Comment created #{parent_comment.try(:id)}"
-    comment.send("to_#{[:draft, :published, :deleted].sample}")
+    comment.send("to_#{[:draft, :published].sample}")
     comment
 end
 
 Post.all.each do |post|
   5.times do
     parent = create_comment(post)
-
     5.times do
       parent = create_comment(post, parent)
-
       5.times do
         create_comment(post, parent)
       end
-
     end
   end
+end
+
+Comment.all.shuffle[0..40].each do |comment|
+  comment.to_deleted
+  puts "C: #{comment.id} => to deleted"
 end
 
 ######################################################
@@ -187,6 +189,7 @@ def model_info model
   puts "#{model} count: #{model.count}"
   puts "#{model} published count: #{model.with_state(:published).count}"
   puts "#{model} draft count: #{model.with_state(:draft).count}"
+  puts "#{model} deleted count: #{model.with_state(:deleted).count}"
   puts "~" * 20
 end
 ######################################################
