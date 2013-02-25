@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   end
 
   # TheComments
-  include TheCommentModels::User
+  include TheCommentsUser
 
   def comment_moderator? comment
     admin? || id == comment.holder_id

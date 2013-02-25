@@ -1,3 +1,3 @@
 class Comment < ActiveRecord::Base
-  include TheCommentModels::Comment
+  include TheCommentsBase
 end

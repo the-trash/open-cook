@@ -1,3 +1,3 @@
 class UserAgentBlackList < ActiveRecord::Base
-  include TheCommentModels::BlackUserAgent
+  include TheCommentsBlackUserAgent
 end

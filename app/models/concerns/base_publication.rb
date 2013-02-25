@@ -6,7 +6,7 @@ module BasePublication
     include BaseStates
     include TheFriendlyId
     include NestedSetMethods
-    include TheCommentModels::Commentable
+    include TheCommentsCommentable
 
     before_save :prepare_content
 

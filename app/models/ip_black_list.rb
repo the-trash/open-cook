@@ -1,3 +1,3 @@
 class IpBlackList < ActiveRecord::Base
-  include TheCommentModels::BlackIp
+  include TheCommentsBlackIp
 end
