@@ -16,7 +16,9 @@ module BasePostController
     end
 
     def show
-      @post     = @post.with_states(:published).first
+      visible_states = [:published]
+      # visible_states.push(:draft) if current_user
+      @post     = @post.with_states(visible_states).first
       @user     = @post.user
       @comments = @post.comments.with_state([:draft, :published]).nested_set
       @post.increment!(:show_count)

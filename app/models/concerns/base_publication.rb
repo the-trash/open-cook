@@ -27,14 +27,6 @@ module BasePublication
       "/#{controller_name}/#{to_param}"
     end
 
-    def commentable_title
-      title
-    end
-
-    def commentable_path
-      show_path
-    end
-
     private
 
     def prepare_content

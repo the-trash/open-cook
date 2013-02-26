@@ -11,7 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 
-//= require jquery-1.8.3
+//= require jquery
 //= require jquery-ui
 //= require jquery_ujs
 
