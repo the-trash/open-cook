@@ -2,11 +2,12 @@ module BasePublication
   extend ActiveSupport::Concern
 
   included do
+    include TheCommentsCommentable
+
     include BaseSorts
     include BaseStates
     include TheFriendlyId
     include NestedSetMethods
-    include TheCommentsCommentable
 
     before_save :prepare_content
 
