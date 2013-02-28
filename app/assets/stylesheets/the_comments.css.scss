@@ -1,0 +1,163 @@
+.comments, .comments_tree{
+  font-family: Arial;
+  font-size: 13px;
+
+  .error_notifier{    
+    background-color: #F2DEDE;
+    border-color: #EED3D7;
+    color: #B94A48;
+    
+    border-radius: 4px;
+    margin: 0 0 15px 0;
+    padding: 10px 10px 0 10px;
+    overflow: hidden;
+
+    p{ margin: 0 0 10px 0; }
+  }
+  form{
+    background: white;
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 10px;
+    
+    p{ margin: 0 0 10px 0; }
+
+    input[type=text]{
+      border: 1px solid gray;
+      padding: 4px;
+      width: 75%;
+    }
+    textarea{
+      border: 1px solid gray;
+      font-family: Arial;
+      font-size: 13px;
+      height: 150px;
+      padding: 4px;
+      width: 75%;
+    }
+    .trap{
+      margin: 0; padding: 0;
+      filter: alpha(opacity=0.001);
+      height: 0.1px;
+      opacity: 0.001;
+      overflow: hidden;
+    }
+  }
+}
+
+.comments_tree{
+  margin:0; padding:0;
+  *{ margin: 0; padding: 0; }
+
+  a{ text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+
+  ol{
+    margin: 0;
+    padding: 0 0 0 20px;
+    list-style: none outside none;
+  }
+
+  li{
+    margin-bottom:5px;
+    position: relative;
+    list-style: none outside none;
+  }
+
+  .nested_set{
+    li{
+      border-left: 1px dotted LightGray;
+      padding-left: 5px;
+
+      &.draft{
+        border: none;
+        padding: 0;
+      }
+    }
+  }
+
+  .form_holder{ margin-left: 40px; }
+  
+  .to_draft, .to_published,
+  .to_deleted, .to_spam{
+    text-align:center;
+    background: green;
+    line-height: 130%;
+    color: white;
+    margin-bottom: 3px;
+    padding: 1px;
+  }
+
+  .to_spam{ background: black; }
+  .to_deleted{ background: red; }
+
+  .comment{
+    overflow: hidden; zoom: 1;
+
+    .userpic{
+      overflow: hidden; zoom: 1;
+      float: left;
+      width: 50px;
+
+      img{
+        margin-bottom: 10px;
+      }
+    }
+    .userbar, .cbody{
+      margin: 0 0 5px 55px;
+      padding: 3px;
+    }
+    .userbar {
+      background: #ddd;
+      border-radius: 3px;
+      padding-left: 7px;
+
+      &.unmoderated{ background: #EED3D7; }
+    }
+    .cbody{
+      border-bottom: 1px solid LightGray;
+      padding-bottom: 10px;
+      line-height: 135%;
+      margin-bottom: 0;
+    }
+    .reply{
+      margin: 0 0 5px 55px;
+      font-size: 12px;
+    }
+  }
+
+  .controls{
+    a{
+      font-size:11px;
+      display:block;
+    }
+  }
+
+  .comment{
+    margin-bottom: 10px;
+
+    &.draft{
+      border: 1px solid LightGray;
+      border-radius: 3px;
+      background: #eee;
+      padding: 5px;
+    }
+    &.published{
+      padding: 10px 10px 5px 10px;
+      margin-bottom: 10px;
+      border-radius: 3px;
+    }
+    &.highlighted{ border: 1px dashed #ff6633; }
+  }
+
+  .form_holder{
+    form{ margin: 10px 0; } 
+  }
+}
+.new_comment{
+  .btn{
+    padding: 7px;
+    margin-top: 5px;
+    cursor: pointer;
+  }
+}

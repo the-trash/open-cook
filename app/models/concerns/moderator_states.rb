@@ -1,7 +1,7 @@
 module ModeratorStates
   extend ActiveSupport::Concern
 
-  # not_approved | approved
+  # blocked | approved
   included do
 
     state_machine :moderation_state, namespace: :moderation, :initial => :unmoderated do

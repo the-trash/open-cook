@@ -1,0 +1,4 @@
+.comments#comments
+  %ol.comments_tree
+    = render template: "comments/comment", locals: { tree: comments_tree }
+  = render partial: 'comments/form', locals: { commentable: commentable }

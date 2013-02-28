@@ -5,7 +5,7 @@ module BaseStates
     state_machine :state, :initial => :draft do
       # events
       event :to_draft do 
-        transition all => :blocked
+        transition all => :draft
       end
 
       event :to_published do
