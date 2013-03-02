@@ -1,5 +1,8 @@
 %h3 Cabinet of: #{@user.login}
 
 %ul
+  %li= link_to "Incoming comments #{@user.comcoms_sum}", [:incoming, :comments]
+  %li= link_to "My comments #{@user.comments_sum}", [:my, :comments]
+
   - [:pages, :posts, :blogs, :recipes, :articles].each do |controller_name|
-    %li= link_to "#{controller_name} (#{@user.send(controller_name).count})", [@user, controller_name]
+    %li= link_to "#{controller_name} (#{@user.send(controller_name).with_states(:draft, :published).count})", [:manage, @user, controller_name]

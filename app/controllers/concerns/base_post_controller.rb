@@ -20,9 +20,14 @@ module BasePostController
       # visible_states.push(:draft) if current_user
       @post     = @post.with_states(visible_states).first
       @user     = @post.user
-      @comments = @post.comments.with_state([:draft, :published]).nested_set
+      @comments = @post.comments.with_state(:draft, :published).nested_set
       @post.increment!(:show_count)
       render 'posts/show'
+    end
+
+    # PROTECTED
+    def manage
+      @posts = @user.send(controller_name).with_states(:draft, :published).nested_set.page(params[:page])
     end
 
     def edit
