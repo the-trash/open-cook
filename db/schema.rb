@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 20130220171042) do
     t.string   "commentable_type"
     t.string   "commentable_url"
     t.string   "commentable_title"
+    t.string   "commentable_state"
     t.string   "anchor"
     t.string   "title"
     t.string   "contacts"
