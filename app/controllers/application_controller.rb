@@ -12,11 +12,8 @@ class ApplicationController < ActionController::Base
   # current_user - logined user
   before_action :define_root
   before_action :define_user
-
   after_action  :save_audit
 
-  
-  
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception

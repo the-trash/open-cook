@@ -3,7 +3,9 @@ module BasePostController
 
   included do
     before_action :set_klass
-    before_action :set_post,  only: [:show, :edit, :update, :destroy]
+    before_action :set_post_and_user,   only: [:show, :edit, :update, :destroy]
+    before_action :protect_post_action, only: [:show, :edit, :update, :destroy]
+
     after_action -> { @audit = Audit.new.init(self, @post) }, only: [:create, :show, :update, :edit, :destroy]
 
     include TheSortableTreeController::Rebuild
@@ -16,10 +18,6 @@ module BasePostController
     end
 
     def show
-      visible_states = [:published]
-      # visible_states.push(:draft) if current_user
-      @post     = @post.with_states(visible_states).first
-      @user     = @post.user
       @comments = @post.comments.with_state(:draft, :published).nested_set
       @post.increment!(:show_count)
       render 'posts/show'
@@ -74,9 +72,18 @@ module BasePostController
     end
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = @klass.friendly_where(params[:id])
+    def set_post_and_user
+      @post = @klass.friendly_where(params[:id]).with_states(:published, :draft).first
+      @user = @post.user
     end
+
+    def protect_post_action
+      # TODO; THE ROLE!
+      return true if current_user.owner? @post
+      return true if controller_action.to_sym == :show and @post.published?
+      return render text: 'secured area'
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params

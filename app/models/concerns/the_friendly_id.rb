@@ -61,6 +61,5 @@ module TheFriendlyId
         id.size == id.to_i.to_s.size ? where(id: id) : where(short_id: id)
       end
     end
-
   end
 end
