@@ -26,7 +26,10 @@ gem 'kaminari'
 gem 'russian'
 gem 'sanitize'
 gem 'nested_set'
-gem 'state_machine', git: 'git@github.com:pluginaweek/state_machine.git'
+
+# TheComments
+#   => gem 'state_machine', git: 'git@github.com:pluginaweek/state_machine.git'
+#   => gem "the_sortable_tree", "~> 2.3.0"
 
 gem "haml", :git => "git://github.com/haml/haml.git", :branch => "stable"
 # gem 'acts-as-taggable-on'
@@ -34,7 +37,6 @@ gem "haml", :git => "git://github.com/haml/haml.git", :branch => "stable"
 # my gems
 
 # w
-gem "the_sortable_tree", "~> 2.3.0"
 gem 'the_role'     , path: '/home/zykin/work/projects/old_code/myg/the_role'
 gem 'the_audit'    , path: '/home/zykin/work/projects/old_code/myg/the_audit'
 gem 'the_comments' , path: '/home/zykin/work/projects/old_code/myg/the_comments'
