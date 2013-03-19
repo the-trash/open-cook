@@ -9,7 +9,6 @@ module BasePostController
     after_action -> { @audit = Audit.new.init(self, @post) }, only: [:create, :show, :update, :edit, :destroy]
 
     include TheSortableTreeController::Rebuild
-    include TheCommentsController::ViewToken
 
     def index
       user   = User.where(login: params[:user]).first || @root
