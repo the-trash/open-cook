@@ -54,8 +54,8 @@ gem 'the_comments' , path: '/home/zykin/work/projects/old_code/myg/the_comments'
 
 group :development do
   # Use unicorn as the app server
-  # gem 'unicorn'
-  gem 'thin'
+  gem 'unicorn'
+  # gem 'thin'
 end
 
 # Gems used only for assets and not required
