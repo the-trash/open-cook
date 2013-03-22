@@ -3,6 +3,7 @@
 %ul
   %li= link_to "My comments #{@user.my_comments.count}", [:my, :comments]
   %li= link_to "Incoming comments #{@user.comcoms_sum}", [:incoming, :comments]
+  %li= link_to "New comments #{@user.draft_comcoms_count}", [:new, :comment]
   %li= link_to "Deleted comments #{@user.deleted_comcoms_count}", [:trash, :comments]
 
   - [:pages, :posts, :blogs, :recipes, :articles].each do |controller_name|

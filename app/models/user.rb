@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
 
   # TheComments
   include TheCommentsUser
+  include TheCommentsCommentable
 
   def comment_moderator? comment
     admin? || id == comment.holder_id
@@ -40,7 +41,6 @@ class User < ActiveRecord::Base
   def commentable_path
     [self.class.to_s.tableize, login].join('/')
   end
-  
 
   # replace in TheRole
   def self.with_role name
