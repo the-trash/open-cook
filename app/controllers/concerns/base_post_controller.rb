@@ -79,9 +79,9 @@ module BasePostController
 
     def protect_post_action
       # TODO; THE ROLE!
-      return true if current_user.owner? @post
-      return true if controller_action.to_sym == :show and @post.published?
-      return render text: 'secured area'
+      # return true if current_user.owner? @post
+      # return true if controller_action.to_sym == :show and @post.published?
+      # return render text: 'secured area'
     end
 
 
