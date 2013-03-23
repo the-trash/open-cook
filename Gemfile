@@ -50,8 +50,8 @@ gem 'the_comments'        , path: '/home/the_teacher/rails/rails4/the_comments'
 
 group :development do
   # Use unicorn as the app server
-  # gem 'unicorn'
-  gem 'thin'
+  gem 'unicorn'
+  # gem 'thin'
 end
 
 # Gems used only for assets and not required

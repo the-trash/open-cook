@@ -9,7 +9,6 @@ module BasePostController
     after_action -> { @audit = Audit.new.init(self, @post) }, only: [:create, :show, :update, :edit, :destroy]
 
     include TheSortableTreeController::Rebuild
-    include TheCommentsController::ViewToken
 
     def index
       user   = User.where(login: params[:user]).first || @root
@@ -78,6 +77,7 @@ module BasePostController
     end
 
     def protect_post_action
+      true
       # TODO; THE ROLE!
       # return true if current_user.owner? @post
       # return true if controller_action.to_sym == :show and @post.published?

@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include SorceryAddons
   include TheRoleAddons
 
-  include TheCommentsController::Cookies
+  include TheCommentsController::ViewToken
 
   layout 'bootstrap_fixed'
 
