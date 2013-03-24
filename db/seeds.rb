@@ -159,11 +159,11 @@ def create_comment post, parent_comment = nil
 end
 
 Post.all.each do |post|
-  5.times do
+  3.times do
     parent = create_comment(post)
-    5.times do
+    3.times do
       parent = create_comment(post, parent)
-      5.times do
+      3.times do
         create_comment(post, parent)
       end
     end

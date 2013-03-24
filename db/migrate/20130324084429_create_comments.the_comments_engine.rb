@@ -59,8 +59,11 @@ class CreateComments < ActiveRecord::Migration
       t.string  :state, default: :warning
     end
 
-    # Add fields to User and Commentable Object
+    # Add fields to User Model
     change_table :users do |t|
+      # posted_comments.with_state([:draft,:published])
+      t.integer :my_comments_count, default: 0
+
       # commentable's comments => comcoms (cache)
       # Relation through Comment#holder_id field
       t.integer :draft_comcoms_count,     default: 0
@@ -68,9 +71,9 @@ class CreateComments < ActiveRecord::Migration
       t.integer :deleted_comcoms_count,   default: 0
     end
 
-    # Uncomment this. Add fields to User model and Commentable models
+    # Uncomment this. Add fields Commentable Models
     #
-    [:users, :pages, :posts, :articles, :recipes, :blogs, :notes, :hubs].each do |table_name|
+    [:users, :posts, :blogs, :articles, :pages].each do |table_name|
       change_table table_name do |t|
         t.integer :draft_comments_count,     default: 0
         t.integer :published_comments_count, default: 0
@@ -78,4 +81,5 @@ class CreateComments < ActiveRecord::Migration
       end
     end
   end
+
 end

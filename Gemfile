@@ -29,8 +29,8 @@ gem 'nested_set'
 
 # gem 'acts-as-taggable-on'
 # gem "the_sortable_tree", "~> 2.3.0"
-gem 'state_machine'     # , git:  'git@github.com:pluginaweek/state_machine.git'
-gem 'haml'              , git:  'git://github.com/haml/haml.git', branch: 'stable'
+gem 'state_machine'     , git:  'git@github.com:pluginaweek/state_machine.git'
+gem 'haml'              , git:  'git@github.com:haml/haml.git', tag: "4.0.1" #, branch: 'stable'
 gem 'the_sortable_tree' , path: '/home/the_teacher/rails/rails4/the_sortable_tree'
 
 # w

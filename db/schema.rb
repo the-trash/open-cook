@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130220171042) do
+ActiveRecord::Schema.define(version: 20130324084429) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -146,19 +146,16 @@ ActiveRecord::Schema.define(version: 20130220171042) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",                    default: 0
+    t.integer  "depth",              default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",               default: 0
-    t.string   "state",                    default: "draft"
-    t.string   "moderation_state",         default: "unmoderated"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",              default: 0
-    t.integer  "files_size",               default: 0
+    t.integer  "files_count",        default: 0
+    t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
-    t.integer  "draft_comments_count",     default: 0
-    t.integer  "published_comments_count", default: 0
-    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "ip_black_lists", force: true do |t|
@@ -186,19 +183,16 @@ ActiveRecord::Schema.define(version: 20130220171042) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",                    default: 0
+    t.integer  "depth",              default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",               default: 0
-    t.string   "state",                    default: "draft"
-    t.string   "moderation_state",         default: "unmoderated"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",              default: 0
-    t.integer  "files_size",               default: 0
+    t.integer  "files_count",        default: 0
+    t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
-    t.integer  "draft_comments_count",     default: 0
-    t.integer  "published_comments_count", default: 0
-    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "pages", force: true do |t|
@@ -288,19 +282,16 @@ ActiveRecord::Schema.define(version: 20130220171042) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",                    default: 0
+    t.integer  "depth",              default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",               default: 0
-    t.string   "state",                    default: "draft"
-    t.string   "moderation_state",         default: "unmoderated"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",              default: 0
-    t.integer  "files_size",               default: 0
+    t.integer  "files_count",        default: 0
+    t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
-    t.integer  "draft_comments_count",     default: 0
-    t.integer  "published_comments_count", default: 0
-    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "roles", force: true do |t|
@@ -346,6 +337,7 @@ ActiveRecord::Schema.define(version: 20130220171042) do
     t.integer  "total_files_size",                default: 0
     t.integer  "files_count",                     default: 0
     t.integer  "files_size",                      default: 0
+    t.integer  "my_comments_count",               default: 0
     t.integer  "draft_comcoms_count",             default: 0
     t.integer  "published_comcoms_count",         default: 0
     t.integer  "deleted_comcoms_count",           default: 0
