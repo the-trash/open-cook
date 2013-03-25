@@ -31,17 +31,17 @@ gem 'nested_set'
 # gem "the_sortable_tree", "~> 2.3.0"
 gem 'state_machine'     , git:  'git@github.com:pluginaweek/state_machine.git'
 gem 'haml'              , git:  'git@github.com:haml/haml.git', tag: "4.0.1" #, branch: 'stable'
-gem 'the_sortable_tree' , path: '/home/the_teacher/rails/rails4/the_sortable_tree'
+gem 'the_sortable_tree' #, path: '/home/the_teacher/rails/rails4/the_sortable_tree'
 
 # w
-# gem 'the_role'     , path: '/home/zykin/work/projects/old_code/myg/the_role'
-# gem 'the_audit'    , path: '/home/zykin/work/projects/old_code/myg/the_audit'
-# gem 'the_comments' , path: '/home/zykin/work/projects/old_code/myg/the_comments'
+gem 'the_role'     , path: '/home/zykin/work/projects/old_code/myg/the_role'
+gem 'the_audit'    , path: '/home/zykin/work/projects/old_code/myg/the_audit'
+gem 'the_comments' , path: '/home/zykin/work/projects/old_code/myg/the_comments'
 
 # h
-gem 'the_role'            , path: '/home/the_teacher/rails/rails4/the_role'
-gem 'the_audit'           , path: '/home/the_teacher/rails/rails4/the_audit'
-gem 'the_comments'        , path: '/home/the_teacher/rails/rails4/the_comments'
+# gem 'the_role'            , path: '/home/the_teacher/rails/rails4/the_role'
+# gem 'the_audit'           , path: '/home/the_teacher/rails/rails4/the_audit'
+# gem 'the_comments'        , path: '/home/the_teacher/rails/rails4/the_comments'
 
 # gem 'the_uploaded_files'  , path: '/home/the_teacher/rails/rails4/the_uploaded_files'
 

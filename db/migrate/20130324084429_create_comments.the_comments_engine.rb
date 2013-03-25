@@ -73,7 +73,7 @@ class CreateComments < ActiveRecord::Migration
 
     # Uncomment this. Add fields Commentable Models
     #
-    [:users, :posts, :blogs, :articles, :pages].each do |table_name|
+    [:pages, :posts, :articles, :recipes, :blogs, :notes, :hubs].each do |table_name|
       change_table table_name do |t|
         t.integer :draft_comments_count,     default: 0
         t.integer :published_comments_count, default: 0
