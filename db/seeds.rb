@@ -154,10 +154,12 @@ def create_comment post, parent_comment = nil
       parent_id:   parent_comment.try(:id)
     )
 
-    p 'ADMINS comment' if comment.user.id == 1 && comment.holder.id == 1
-
     puts "Comment created #{parent_comment.try(:id)}"
-    comment.send("to_#{[:draft, :published].sample}")
+    
+    unless comment.state.to_sym == TheComments.config.default_state
+      comment.send("to_#{[:draft, :published].sample}")
+    end
+
     comment
 end
 
