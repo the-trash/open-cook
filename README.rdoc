@@ -1,5 +1,5 @@
 > bin/rake db:drop && bin/rake db:create && rake db:schema:load && bin/rake db:seed
-
+> bin/rails s -p 3010 -b zykin.office
 
 == README
 
