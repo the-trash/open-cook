@@ -1,3 +1,6 @@
+> bin/rake db:drop && bin/rake db:create && rake db:schema:load && bin/rake db:seed
+
+
 == README
 
 This README would normally document whatever steps are necessary to get the

@@ -1,11 +1,16 @@
 development:
-  adapter: mysql2
+  adapter: sqlite3
   database: the_app_dev
+  dbfile: db/development.db
   host: localhost
   username: zykin
   password: zykin
   encoding: utf8
   timeout: 5000
+
+development:
+  adapter: sqlite3
+  database: db/development.db
 
 test:
   adapter: mysql2
