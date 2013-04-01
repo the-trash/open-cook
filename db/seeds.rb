@@ -155,9 +155,9 @@ def create_comment post, parent_comment = nil
   )
 
   puts "Comment created #{parent_comment.try(:id)}"
-  puts "Comment state => #{comment.state}"
+  puts "Default Comment state => #{comment.state}"
   
-  unless comment.state.to_sym == TheComments.config.default_state
+  if comment.state.to_sym != TheComments.config.default_state
     comment.send("to_#{[:draft, :published].sample}")
   end
 

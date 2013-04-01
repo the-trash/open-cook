@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130324084429) do
+ActiveRecord::Schema.define(version: 20130401105854) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20130324084429) do
     t.string   "referer",           default: "undefined"
     t.string   "user_agent",        default: "undefined"
     t.integer  "tolerance_time"
+    t.boolean  "spam_flag",         default: false
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
@@ -186,19 +187,16 @@ ActiveRecord::Schema.define(version: 20130324084429) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",                    default: 0
+    t.integer  "depth",              default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",               default: 0
-    t.string   "state",                    default: "draft"
-    t.string   "moderation_state",         default: "unmoderated"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",              default: 0
-    t.integer  "files_size",               default: 0
+    t.integer  "files_count",        default: 0
+    t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
-    t.integer  "draft_comments_count",     default: 0
-    t.integer  "published_comments_count", default: 0
-    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "pages", force: true do |t|
@@ -288,19 +286,16 @@ ActiveRecord::Schema.define(version: 20130324084429) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",                    default: 0
+    t.integer  "depth",              default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",               default: 0
-    t.string   "state",                    default: "draft"
-    t.string   "moderation_state",         default: "unmoderated"
+    t.integer  "show_count",         default: 0
+    t.string   "state",              default: "draft"
+    t.string   "moderation_state",   default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",              default: 0
-    t.integer  "files_size",               default: 0
+    t.integer  "files_count",        default: 0
+    t.integer  "files_size",         default: 0
     t.string   "short_id"
     t.string   "friendly_id"
-    t.integer  "draft_comments_count",     default: 0
-    t.integer  "published_comments_count", default: 0
-    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "roles", force: true do |t|
@@ -350,6 +345,10 @@ ActiveRecord::Schema.define(version: 20130324084429) do
     t.integer  "draft_comcoms_count",             default: 0
     t.integer  "published_comcoms_count",         default: 0
     t.integer  "deleted_comcoms_count",           default: 0
+    t.integer  "spam_comcoms_count",              default: 0
+    t.integer  "draft_comments_count",            default: 0
+    t.integer  "published_comments_count",        default: 0
+    t.integer  "deleted_comments_count",          default: 0
   end
 
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"

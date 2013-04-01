@@ -37,6 +37,9 @@ class CreateComments < ActiveRecord::Migration
       t.string  :user_agent,     default: :undefined
       t.integer :tolerance_time
 
+      # unusable: for future versions
+      t.boolean :spam_flag, default: false
+
       # nested set
       t.integer :parent_id
       t.integer :lft
@@ -69,11 +72,14 @@ class CreateComments < ActiveRecord::Migration
       t.integer :draft_comcoms_count,     default: 0
       t.integer :published_comcoms_count, default: 0
       t.integer :deleted_comcoms_count,   default: 0
+
+      # unusable: for future versions
+      t.integer :spam_comcoms_count,      default: 0
     end
 
     # Uncomment this. Add fields Commentable Models
     #
-    [:pages, :posts, :articles, :recipes, :blogs, :notes, :hubs].each do |table_name|
+    [:users, :posts, :blogs, :articles, :pages, :hubs].each do |table_name|
       change_table table_name do |t|
         t.integer :draft_comments_count,     default: 0
         t.integer :published_comments_count, default: 0
