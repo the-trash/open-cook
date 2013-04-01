@@ -119,8 +119,8 @@ end
 ######################################################
 # Create data for authors
 ######################################################
-User.with_role(:admin).each_with_index do |user, u|
-  1.times do |m|
+User.with_role(:user).each_with_index do |user, u|
+  3.times do |m|
     create_hub(:posts, m.next, :posts, user, u.next)
     # create_hub(:blogs, m.next, :blogs, user, u.next)
     # create_hub(:pages, m.next, :pages, user, u.next)
@@ -142,25 +142,26 @@ end
 # end
 
 def create_comment post, parent_comment = nil
-    owner = User.all.sample
-    owner = [owner, owner, owner, nil].sample
+  owner = User.all.sample
+  owner = [owner, owner, owner, nil].sample
 
-    comment = post.comments.create!(
-      user:        owner,
-      commentable: post,
-      title:       Faker::Lorem.sentence,
-      contacts:    Faker::Lorem.sentence,
-      raw_content: Faker::Lorem.paragraphs(4).join,
-      parent_id:   parent_comment.try(:id)
-    )
+  comment = post.comments.create!(
+    user:        owner,
+    commentable: post,
+    title:       Faker::Lorem.sentence,
+    contacts:    Faker::Lorem.sentence,
+    raw_content: Faker::Lorem.paragraphs(4).join,
+    parent_id:   parent_comment.try(:id)
+  )
 
-    puts "Comment created #{parent_comment.try(:id)}"
-    
-    unless comment.state.to_sym == TheComments.config.default_state
-      comment.send("to_#{[:draft, :published].sample}")
-    end
+  puts "Comment created #{parent_comment.try(:id)}"
+  puts "Comment state => #{comment.state}"
+  
+  unless comment.state.to_sym == TheComments.config.default_state
+    comment.send("to_#{[:draft, :published].sample}")
+  end
 
-    comment
+  comment
 end
 
 Post.all.each do |post|
