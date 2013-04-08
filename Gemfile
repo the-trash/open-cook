@@ -28,11 +28,15 @@ gem 'russian'
 gem 'sanitize'
 gem 'nested_set'
 
-# gem 'acts-as-taggable-on'
-# gem "the_sortable_tree", "~> 2.3.0"
-gem 'state_machine'     , git:  'git@github.com:pluginaweek/state_machine.git'
 gem 'haml'              , git:  'git@github.com:haml/haml.git', tag: "4.0.1" #, branch: 'stable'
-gem 'the_sortable_tree' #, path: '/home/the_teacher/rails/rails4/the_sortable_tree'
+
+gem "state_machine", "~> 1.2.0"
+
+# gem 'acts-as-taggable-on'
+# gem 'state_machine' , git:  'git@github.com:pluginaweek/state_machine.git'
+
+# gem "the_sortable_tree", "~> 2.3.0"
+# gem 'the_sortable_tree' #, path: '/home/the_teacher/rails/rails4/the_sortable_tree'
 
 # w
 gem 'the_role'     , path: '/home/zykin/work/projects/old_code/myg/the_role'
