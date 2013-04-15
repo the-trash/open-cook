@@ -31,7 +31,7 @@ gem 'nested_set'
 gem 'haml'              , git:  'git@github.com:haml/haml.git', tag: "4.0.1" #, branch: 'stable'
 
 gem "state_machine", "~> 1.2.0"
-gem 'ruby-graphviz' # state machine visualization
+# gem 'ruby-graphviz' # state machine visualization
 
 # gem 'acts-as-taggable-on'
 # gem 'state_machine' , git:  'git@github.com:pluginaweek/state_machine.git'
@@ -89,8 +89,8 @@ group :test do
   # gem 'factory_girl_rails'
 
   # test helpers
-  gem 'capybara'       # Browser testing
-  gem 'cucumber-rails' #, :require => false # elegant BDD
+  gem 'capybara'        # Browser testing
+  gem 'cucumber-rails', :require => false # elegant BDD
 
   # autotest
   gem 'guard'
