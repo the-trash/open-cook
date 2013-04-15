@@ -19,3 +19,8 @@ Draw
 bin/rake state_machine:draw CLASS=Comment
 ```
 
+TESTS
+
+```
+bundle exec rspec spec/integration/welcome_spec.rb --format documentation
+```

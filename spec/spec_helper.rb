@@ -8,6 +8,23 @@ require 'rspec/autorun'
 require 'capybara/rspec'
 require 'capybara/rails'
 
+# Capybara.configure do |config|
+#   config.match = :one
+#   config.exact_options = true
+#   config.ignore_hidden_elements = true
+#   config.visible_text_only = true
+# end
+
+# If you're migrating from Capybara 1.x, try:
+
+# Capybara.configure do |config|
+#   config.match = :prefer_exact
+#   config.ignore_hidden_elements = false
+# end
+
+# Details here: http://www.elabs.se/blog/60-introducing-capybara-2-1
+
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
@@ -15,6 +32,8 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
+
+# FactoryGirl.find_definitions
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -52,15 +71,15 @@ RSpec.configure do |config|
 
   # DatabaseCleaner config
   #
-  # config.before(:suite) do
-  #   DatabaseCleaner.strategy = :truncation
-  # end
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
 
-  # config.before(:each) do
-  #   DatabaseCleaner.start
-  # end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
 
-  # config.after(:each) do
-  #   DatabaseCleaner.clean
-  # end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
