@@ -1,3 +1,5 @@
+create base data
+
 ```
 bin/rake db:drop
 bin/rake db:create
@@ -5,6 +7,15 @@ bin/rake db:schema:load
 bin/rake db:seed
 ```
 
+web server run
+
 ```
 bin/rails s -p 3010 -b host.name
 ```
+
+Draw
+
+```
+bin/rake state_machine:draw CLASS=Comment
+```
+

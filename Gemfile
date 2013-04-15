@@ -31,6 +31,7 @@ gem 'nested_set'
 gem 'haml'              , git:  'git@github.com:haml/haml.git', tag: "4.0.1" #, branch: 'stable'
 
 gem "state_machine", "~> 1.2.0"
+# gem 'ruby-graphviz' # state machine visualization
 
 # gem 'acts-as-taggable-on'
 # gem 'state_machine' , git:  'git@github.com:pluginaweek/state_machine.git'
@@ -55,11 +56,7 @@ gem 'the_comments'        , path: '/home/the_teacher/rails/rails4/the_comments'
 # gem 'paperclip', '2.3.6'
 # gem 'rmagick'
 
-group :development do
-  # Use unicorn as the app server
-  gem 'unicorn'
-  # gem 'thin'
-end
+group :development do; end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -72,15 +69,43 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.2.2.0'
 end
 
-group :test, :development do
-  gem 'faker'
-  gem 'factory_girl'
+group :development, :test do
+  gem 'thin'
+  # gem 'unicorn'
 
+  # gem 'rspec'
+  # gem 'rspec-rails'
   gem "rspec-rails",        :git => "git://github.com/rspec/rspec-rails.git"
   gem "rspec",              :git => "git://github.com/rspec/rspec.git"
   gem "rspec-core",         :git => "git://github.com/rspec/rspec-core.git"
   gem "rspec-expectations", :git => "git://github.com/rspec/rspec-expectations.git"
   gem "rspec-mocks",        :git => "git://github.com/rspec/rspec-mocks.git"
+
+  gem 'capybara' # Browser testing
+end
+
+group :test do
+  gem 'database_cleaner'
+
+  # Fakes
+  gem 'faker'
+  gem 'factory_girl'
+  # gem 'factory_girl_rails'
+
+  # test helpers
+  gem 'cucumber-rails', :require => false # elegant BDD
+
+  # autotest
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'guard-spork'
+
+  # gem 'email_spec'  # emails specs
+  # gem 'timecop'     # Time delays test
+  # gem 'launchy'     # show broken cucumber tests
+
+  # Pretty printed test output
+  # gem 'turn' , '~> 0.8.3', :require => false
 end
 
 # To use ActiveModel has_secure_password
