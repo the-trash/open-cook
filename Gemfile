@@ -78,6 +78,8 @@ group :development, :test do
   gem "rspec-core",         :git => "git://github.com/rspec/rspec-core.git"
   gem "rspec-expectations", :git => "git://github.com/rspec/rspec-expectations.git"
   gem "rspec-mocks",        :git => "git://github.com/rspec/rspec-mocks.git"
+
+  gem 'capybara' # Browser testing
 end
 
 group :test do
@@ -89,7 +91,6 @@ group :test do
   # gem 'factory_girl_rails'
 
   # test helpers
-  gem 'capybara'        # Browser testing
   gem 'cucumber-rails', :require => false # elegant BDD
 
   # autotest
