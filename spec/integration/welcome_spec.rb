@@ -4,16 +4,10 @@ describe "Welcome" do
 
   it "root" do
     role = FactoryGirl.create(:role)
-    user = User.new({
-      :login => "Ivan",
-      :email => "ivan@ivan,com",
-      :password => "qwerty",
-      :role => role
-    })
+    user = FactoryGirl.build(:ivan)
+    user.role = role
+    user.save
 
-    p user
-    user.save!
-
-    # visit('/')
+    visit('/')
   end
 end

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
+  include TheRole::UserModel
   include DefaultRole
   include DefineOpenPassword
 
@@ -16,6 +17,8 @@ class User < ActiveRecord::Base
   has_many :notes
   has_many :recipes
   has_many :articles
+
+  attr_accessible :login, :email, :password
 
   # validations
   validates :login,    presence: true, uniqueness: true
@@ -40,11 +43,6 @@ class User < ActiveRecord::Base
 
   def commentable_path
     [self.class.to_s.tableize, login].join('/')
-  end
-
-  # replace in TheRole
-  def self.with_role name
-    Role.where(name: name).first.users
   end
 
   private

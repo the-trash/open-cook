@@ -351,7 +351,7 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.integer  "deleted_comments_count",          default: 0
   end
 
-  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token"
+  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 
 end
