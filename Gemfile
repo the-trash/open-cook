@@ -2,8 +2,8 @@ source 'http://rubygems.org'
 # source 'http://gems.github.com'
 # Delete all gems: gem list | cut -d" " -f1 | xargs gem uninstall -aIx
 
-gem 'rails',     github: 'rails/rails'
-gem 'arel',      github: 'rails/arel'
+gem 'rails', github: 'rails/rails'
+gem 'arel',  github: 'rails/arel'
 
 # gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
 
@@ -42,9 +42,9 @@ gem "state_machine", "~> 1.2.0"
 # gem 'the_comments'
 
 # w
-gem 'the_role'     , path: '/home/zykin/work/projects/old_code/myg/the_role'
-gem 'the_audit'    , path: '/home/zykin/work/projects/old_code/myg/the_audit'
-gem 'the_comments' , path: '/home/zykin/work/projects/old_code/myg/the_comments'
+gem 'the_role'     , path: '../the_role'
+gem 'the_audit'    , path: '../the_audit'
+gem 'the_comments' , path: '../the_comments'
 
 # h
 # gem 'the_role'            , path: '/home/the_teacher/rails/rails4/the_role'
