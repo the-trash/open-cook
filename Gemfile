@@ -70,6 +70,8 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'faker'
+
   gem 'thin'
   # gem 'unicorn'
 
@@ -86,9 +88,7 @@ end
 
 group :test do
   gem 'database_cleaner'
-
-  # Fakes
-  gem 'faker'
+  
   gem 'factory_girl'
   # gem 'factory_girl_rails'
 
