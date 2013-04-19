@@ -47,7 +47,7 @@ Create DB and test data
 ```
 bin/rake db:drop
 bin/rake db:create
-bin/rake db:schema:load
+bin/rake db:migrate
 bin/rake db:seed
 ```
 
