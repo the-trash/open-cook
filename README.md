@@ -22,7 +22,19 @@ git clone git@github.com:the-teacher/the_comments.git
 git clone git@github.com:open-cook/the_audit.git
 ```
 
-Create DB file
+Change directory
+
+```
+cd open-cook
+```
+
+Create DB config file
+
+```
+touch config/database.yml
+```
+
+Open config file and puts following config text:
 
 **config/database.yml**
 
