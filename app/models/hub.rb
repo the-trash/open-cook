@@ -23,4 +23,19 @@ class Hub < ActiveRecord::Base
 
   # validations
   validates_presence_of :user, :title, :hub_type
+
+  def publications
+    send hub_type
+  end
+
+  def same_hubs
+    self.class.where(hub_type: hub_type)
+  end
+
+  def recalculate_children_counters!
+    self.draft_children_count     = publications.with_state(:draft).count
+    self.published_children_count = publications.with_state(:published).count
+    self.deleted_children_count   = publications.with_state(:deleted).count
+    save!
+  end
 end

@@ -11,14 +11,17 @@ module BasePostController
     include TheSortableTreeController::Rebuild
 
     def index
+      # TODO: posts from hidden hubs should not be vivible
       user   = User.where(login: params[:user]).first || @root
-      @posts = user.send(controller_name).nested_set.with_states(:published).page(params[:page])
+      @posts = user.send(controller_name).with_states(:published).nested_set.page(params[:page])
+      @hubs  = @posts.first.hub.same_hubs.with_state(:published).nested_set
       render 'posts/index'
     end
 
     def show
-      @comments = @post.comments.with_state(:draft, :published).nested_set
       @post.increment!(:show_count)
+      @hubs     = @post.hub.same_hubs.with_state(:published).nested_set
+      @comments = @post.comments.with_state(:draft, :published).nested_set
       render 'posts/show'
     end
 

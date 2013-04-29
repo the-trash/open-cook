@@ -10,6 +10,7 @@ module BasePublication
     include NestedSetMethods
 
     before_save :prepare_content
+    after_save  :update_hub_counters
 
     paginates_per 25
 
@@ -28,6 +29,10 @@ module BasePublication
     end
 
     private
+
+    def update_hub_counters
+      hub.recalculate_children_counters!
+    end
 
     def prepare_content
       self.intro   = "<i>#{self.raw_intro}</i>"
