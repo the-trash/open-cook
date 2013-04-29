@@ -5,56 +5,36 @@ source 'http://rubygems.org'
 gem 'rails', github: 'rails/rails'
 gem 'arel',  github: 'rails/arel'
 
-# gem 'activerecord-deprecated_finders', github: 'rails/activerecord-deprecated_finders'
-
 gem 'mysql2'
 gem 'sqlite3'
 
 # gem 'rails-i18n'
 # Tags need refactor for Rails MassAttrProtect
 
-# gem 'strong_parameters',    git: 'https://github.com/rails/strong_parameters.git', :tag => "v0.1.6"
-gem 'protected_attributes', git: 'https://github.com/rails/protected_attributes.git'
+gem 'sorcery', git: "git@github.com:NoamB/sorcery.git"
 
-gem 'sorcery'
-
-gem 'jbuilder', '~> 1.0.1'
 gem 'jquery-rails'
+gem 'jbuilder', '~> 1.0.1'
 
 gem 'compass'
 gem 'kaminari'
 
 gem 'russian'
 gem 'sanitize'
-gem 'nested_set'
-
-gem 'haml'              , git:  'git@github.com:haml/haml.git', tag: "4.0.1" #, branch: 'stable'
-
 gem "state_machine", "~> 1.2.0"
-# gem 'ruby-graphviz' # state machine visualization
+gem 'haml'              , git:  'git@github.com:haml/haml.git', tag: "4.0.1"
+gem 'awesome_nested_set', git: "git@github.com:collectiveidea/awesome_nested_set.git", branch: "rails4"
 
 # gem 'acts-as-taggable-on'
-# gem 'state_machine' , git:  'git@github.com:pluginaweek/state_machine.git'
+# gem 'ruby-graphviz' # state machine visualization
 
-# gem "the_sortable_tree", "~> 2.3.0"
-# gem 'the_sortable_tree' #, path: '/home/the_teacher/rails/rails4/the_sortable_tree'
-
-# gem 'the_comments'
-
-# w
 gem 'the_role'     , path: '../the_role'
 gem 'the_audit'    , path: '../the_audit'
 gem 'the_comments' , path: '../the_comments'
 
-# h
-# gem 'the_role'            , path: '/home/the_teacher/rails/rails4/the_role'
-# gem 'the_audit'           , path: '/home/the_teacher/rails/rails4/the_audit'
-# gem 'the_comments'        , path: '/home/the_teacher/rails/rails4/the_comments'
-
-# gem 'the_storages'  , path: '/home/the_teacher/rails/rails4/the_storages'
-
-# gem 'paperclip', '2.3.6'
 # gem 'rmagick'
+# gem 'paperclip', '2.3.6'
+# gem 'the_storages'  , path: '/home/the_teacher/rails/rails4/the_storages'
 
 group :development do; end
 

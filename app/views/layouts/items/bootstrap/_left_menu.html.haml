@@ -1,6 +1,5 @@
-- if @user
-  .well.sidebar-nav
-    %h3 Меню
-    %ul.nav.nav-list
-      - @user.hubs.of_(:recipes).with_states(:published).each do |hub|
-        %li= link_to hub.title, show_url(hub)
+.well.sidebar-nav
+  %h3 Меню
+  %ul.nav.nav-list
+    - @hubs.each do |hub|
+      %li= link_to hub.title, show_url(hub)

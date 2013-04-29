@@ -18,8 +18,6 @@ class User < ActiveRecord::Base
   has_many :recipes
   has_many :articles
 
-  attr_accessible :login, :email, :password
-
   # validations
   validates :login,    presence: true, uniqueness: true
   validates :email,    presence: true, uniqueness: true

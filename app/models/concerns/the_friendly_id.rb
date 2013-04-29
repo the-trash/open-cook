@@ -36,7 +36,6 @@ module TheFriendlyId
 
       # rebuild if find identically short_id
       while self.class.where(short_id: short_id).first
-        puts "IDENTICAL SHORT_ID => rebuild"
         short_id = [prefix, rand(rnd_num)].join
       end
 

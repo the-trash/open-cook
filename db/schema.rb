@@ -144,6 +144,9 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "hub_type"
+    t.integer  "draft_count",              default: 0
+    t.integer  "published_count",          default: 0
+    t.integer  "deleted_count",            default: 0
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"

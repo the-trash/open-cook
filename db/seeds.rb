@@ -163,7 +163,7 @@ def create_comment post, parent_comment = nil
   comment
 end
 
-Post.first do |post|
+Post.all.each do |post|
   3.times do
     parent = create_comment(post)
     3.times do
