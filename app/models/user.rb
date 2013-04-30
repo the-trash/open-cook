@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
   include DefaultRole
   include DefineOpenPassword
 
-  before_validation :prepare_login, on: :create
-
   def to_param; self.login end
 
   # Relations
@@ -19,12 +17,18 @@ class User < ActiveRecord::Base
   has_many :articles
 
   # validations
+  before_validation :prepare_login, on: :create
+
   validates :login,    presence: true, uniqueness: true
   validates :email,    presence: true, uniqueness: true
   validates :password, presence: true, on: :create
 
+  def self.root
+    User.first
+  end
+
   def admin?
-    self == User.first
+    self == User.root
   end
 
   # TheComments

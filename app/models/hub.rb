@@ -32,10 +32,10 @@ class Hub < ActiveRecord::Base
     self.class.where(hub_type: hub_type)
   end
 
-  def recalculate_children_counters!
-    self.draft_children_count     = publications.with_state(:draft).count
-    self.published_children_count = publications.with_state(:published).count
-    self.deleted_children_count   = publications.with_state(:deleted).count
+  def recalculate_publications_counters!
+    self.draft_publications_count     = publications.with_state(:draft).count
+    self.published_publications_count = publications.with_state(:published).count
+    self.deleted_publications_count   = publications.with_state(:deleted).count
     save!
   end
 end

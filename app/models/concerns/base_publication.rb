@@ -19,24 +19,24 @@ module BasePublication
     belongs_to :hub
 
     validates_presence_of :user, :hub, :title
+  end
 
-    def controller_name
-      self.class.to_s.tableize
-    end
+  def controller_name
+    self.class.to_s.tableize
+  end
 
-    def show_path
-      "/#{controller_name}/#{to_param}"
-    end
+  def show_path
+    "/#{controller_name}/#{to_param}"
+  end
 
-    private
+  private
 
-    def update_hub_counters
-      hub.recalculate_children_counters!
-    end
+  def update_hub_counters
+    hub.recalculate_publications_counters! if hub
+  end
 
-    def prepare_content
-      self.intro   = "<i>#{self.raw_intro}</i>"
-      self.content = "<b>#{self.raw_content}</b>"
-    end
+  def prepare_content
+    self.intro   = "<i>#{self.raw_intro}</i>"
+    self.content = "<b>#{self.raw_content}</b>"
   end
 end

@@ -144,25 +144,25 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "hub_type"
-    t.integer  "draft_children_count",     default: 0
-    t.integer  "published_children_count", default: 0
-    t.integer  "deleted_children_count",   default: 0
+    t.integer  "draft_publications_count",     default: 0
+    t.integer  "published_publications_count", default: 0
+    t.integer  "deleted_publications_count",   default: 0
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",                    default: 0
+    t.integer  "depth",                        default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",               default: 0
-    t.string   "state",                    default: "draft"
-    t.string   "moderation_state",         default: "unmoderated"
+    t.integer  "show_count",                   default: 0
+    t.string   "state",                        default: "draft"
+    t.string   "moderation_state",             default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",              default: 0
-    t.integer  "files_size",               default: 0
+    t.integer  "files_count",                  default: 0
+    t.integer  "files_size",                   default: 0
     t.string   "short_id"
     t.string   "friendly_id"
-    t.integer  "draft_comments_count",     default: 0
-    t.integer  "published_comments_count", default: 0
-    t.integer  "deleted_comments_count",   default: 0
+    t.integer  "draft_comments_count",         default: 0
+    t.integer  "published_comments_count",     default: 0
+    t.integer  "deleted_comments_count",       default: 0
   end
 
   create_table "ip_black_lists", force: true do |t|
