@@ -5,8 +5,8 @@ class Blog < ActiveRecord::Base
 
   def define_blog_hub
     self.hub = Hub.where(
-      title: "#{Time.now.year}-#{Time.now.month}",
       user: User.root,
+      title: "#{Time.now.year}-#{Time.now.month}",
       hub_type: self.class.to_s.tableize
     ).first_or_create
   end
