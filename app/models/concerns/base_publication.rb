@@ -6,6 +6,7 @@ module BasePublication
 
     include BaseSorts
     include BaseStates
+    include ActAsStorage
     include TheFriendlyId
     include NestedSetMethods
 

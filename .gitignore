@@ -9,6 +9,7 @@
 /config/database.yml
 db/*.db
 db/*.sqlite3
+public/uploads/*
 
 # local config files
 Gemfile.lock

@@ -9,10 +9,10 @@ class UploadedFiles < ActiveRecord::Migration
       t.string :state, default: :active
 
       # paperclip
-      t.string   :file_file_name
-      t.string   :file_content_type
-      t.integer  :file_file_size, default: 0
-      t.datetime :file_updated_at
+      t.string   :attachment_file_name
+      t.string   :attachment_content_type
+      t.integer  :attachment_file_size, default: 0
+      t.datetime :attachment_updated_at
 
       # nested set
       t.integer :parent_id
