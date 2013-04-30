@@ -16,10 +16,11 @@ git clone git@github.com:open-cook/open-cook.git
 Clone gems repos
 
 ```
-git clone git@github.com:the-teacher/the_sortable_tree.git
+git clone git@github.com:open-cook/the_audit.git
 git clone git@github.com:the-teacher/the_role.git
 git clone git@github.com:the-teacher/the_comments.git
-git clone git@github.com:open-cook/the_audit.git
+git clone git@github.com:the-teacher/the_storages.git
+git clone git@github.com:the-teacher/the_sortable_tree.git
 ```
 
 Change directory
