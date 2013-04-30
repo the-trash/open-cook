@@ -116,13 +116,29 @@ def create_hub type, number, posts_type, user, user_index
   end
 end
 
+def create_blogs count
+  users = User.all
+
+  count.times do |index|
+    user = users.sample
+    blog = user.blogs.create!(
+      title: "Blog #{index.next} (u:#{user.id})",
+      raw_intro: Faker::Lorem.paragraphs(3).join,
+      raw_content: Faker::Lorem.paragraphs(3).join
+    )
+    blog.send("to_#{[:draft, :published, :deleted].sample}")
+    puts "Blog created"
+  end
+end
+
 ######################################################
 # Create data for authors
 ######################################################
 User.with_role(:admin).each_with_index do |user, u|
   3.times do |m|
     create_hub(:posts, m.next, :posts, user, u.next)
-    create_hub(:blogs, m.next, :blogs, user, u.next)
+    create_blogs 30
+    # create_hub(:blogs, m.next, :blogs, user, u.next)
     # create_hub(:pages, m.next, :pages, user, u.next)
     # create_hub(:notes, m.next, :notes, user, u.next)
     # create_hub(:articles, m.next, :articles, user, u.next)
