@@ -1,3 +1,2 @@
-= @posts.count
-%ol.sortable_tree{ data: { max_levels: 5, rebuild_url: rebuild_pages_url } }
+%ol.sortable_tree{ data: { max_levels: 5, rebuild_url: url_for([:rebuild, controller_name]) } }
   = sortable_tree @posts

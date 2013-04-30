@@ -1,11 +1,13 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
-  include TheRole::UserModel
-  include DefaultRole
-  include DefineOpenPassword
-
   def to_param; self.login end
+
+  include TheRole::UserModel
+  include DefineOpenPassword
+  
+  include TheCommentsUser
+  include TheCommentsCommentable
 
   # Relations
   has_many :hubs
@@ -24,17 +26,14 @@ class User < ActiveRecord::Base
   validates :password, presence: true, on: :create
 
   def self.root
-    User.first
+    @@root ||= User.first
   end
 
   def admin?
     self == User.root
   end
 
-  # TheComments
-  include TheCommentsUser
-  include TheCommentsCommentable
-
+  # TheComments methods
   def comment_moderator? comment
     admin? || id == comment.holder_id
   end

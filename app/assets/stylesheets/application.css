@@ -15,8 +15,7 @@
  *= require base/headers
 
  *= require bootstrap
- *= require bootstrap_docs
-
+ 
  *= require tree
  *= require sortable_tree
  *= require nested_options
@@ -27,4 +26,6 @@
  *= require layout/top_menu
  *= require layout/left_menu
 
+  *= require bootstrap_styles
+  *= require the_comments
 */

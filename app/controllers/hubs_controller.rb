@@ -1,5 +1,5 @@
 class HubsController < ApplicationController
-  include BasePostController
+  include PublicationController
 
   def show
     @hub = @post
