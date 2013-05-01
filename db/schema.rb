@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20130430210437) do
     t.string   "state",                    default: "draft"
     t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
     t.integer  "draft_comments_count",     default: 0
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(version: 20130430210437) do
     t.string   "state",                    default: "draft"
     t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
     t.integer  "draft_comments_count",     default: 0
@@ -155,6 +157,7 @@ ActiveRecord::Schema.define(version: 20130430210437) do
     t.string   "state",                        default: "draft"
     t.string   "moderation_state",             default: "unmoderated"
     t.text     "moderator_note"
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
     t.integer  "draft_comments_count",         default: 0
@@ -194,6 +197,7 @@ ActiveRecord::Schema.define(version: 20130430210437) do
     t.string   "state",              default: "draft"
     t.string   "moderation_state",   default: "unmoderated"
     t.text     "moderator_note"
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
   end
@@ -224,6 +228,7 @@ ActiveRecord::Schema.define(version: 20130430210437) do
     t.string   "state",                    default: "draft"
     t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
     t.integer  "draft_comments_count",     default: 0
@@ -257,6 +262,7 @@ ActiveRecord::Schema.define(version: 20130430210437) do
     t.string   "state",                    default: "draft"
     t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
     t.integer  "draft_comments_count",     default: 0
@@ -290,6 +296,7 @@ ActiveRecord::Schema.define(version: 20130430210437) do
     t.string   "state",              default: "draft"
     t.string   "moderation_state",   default: "unmoderated"
     t.text     "moderator_note"
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
   end

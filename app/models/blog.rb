@@ -7,7 +7,7 @@ class Blog < ActiveRecord::Base
     self.hub = Hub.where(
       user: User.root,
       title: "#{Time.now.year}-#{Time.now.month}",
-      hub_type: self.class.to_s.tableize
+      hub_type: :blogs
     ).first_or_create
   end
 end

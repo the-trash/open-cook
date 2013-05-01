@@ -15,12 +15,12 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # @user - to show | current_user
+  # to show @root | @user elements
   def define_user
     @user = User.root
 
     if params[:user_id]
-      @user = if params[:user_id].to_i.to_s == params[:user_id]
+      @user = if TheFriendlyId.int? params[:user_id]
         User.where(params[:user_id]).first
       else
         User.where(login: params[:user_id]).first
