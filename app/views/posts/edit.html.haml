@@ -2,7 +2,9 @@
 
 = render 'posts/form'
 
--#
-  = link_to 'Show', @post
-  \|
-  = link_to 'Back', url_for(controller: controller_name)
+= form_for :attached_file, url: attached_files_url, html: { multipart: true, method: :post } do |f|
+  = hidden_field_tag 'storage_type', @post.class
+  = hidden_field_tag 'storage_id',   @post
+  %p
+    = file_field_tag 'files[]', class: :multi
+  = f.submit

@@ -1,7 +1,7 @@
 # This migration comes from the_storages_engine (originally 20130101010101)
-class UploadedFiles < ActiveRecord::Migration
+class AttachedFiles < ActiveRecord::Migration
   def change
-    create_table :uploaded_files do |t|
+    create_table :attached_files do |t|
       t.integer :user_id
       t.references :storage, polymorphic: true
 

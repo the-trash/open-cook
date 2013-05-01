@@ -26,7 +26,7 @@ TheApp::Application.routes.draw do
 
   # users
   resources :users, only: [:index, :show, :create] do
-    %w{ pages posts blogs notes recipes articles }.each do |name|
+    %w{ pages posts blogs notes recipes articles hubs }.each do |name|
       resources name, concerns: :manage
     end
   end

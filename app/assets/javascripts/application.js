@@ -22,6 +22,8 @@
 //= require redactor_ru
 //= require redactor/initialize
 
+//= require jquery.MultiFile
+
 //= require logger
 //= require the_comments
 //= require the_comments_manage

@@ -4,7 +4,8 @@ class SessionsController < ApplicationController
   def create
     user = login(params[:login], params[:password], params[:remember_me])
     if user
-      redirect_back_or_to root_url, :notice => t('sessions.create.notice')
+      flash[:notice] = t('sessions.create.notice')
+      redirect_to cabinet_url
     else
       flash.now.alert = t('sessions.create.alert')
       render :new
