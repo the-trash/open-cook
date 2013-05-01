@@ -1,6 +1,12 @@
 module BasePublication
   extend ActiveSupport::Concern
 
+  module ClassMethods
+    def active_publications
+      includes(:user).with_states(:published).where(hub_state: :published)
+    end
+  end
+
   included do
     include TheCommentsCommentable
 
@@ -10,7 +16,7 @@ module BasePublication
     include TheFriendlyId
     include NestedSetMethods
 
-    before_validation :define_user_via_hub, on: :create
+    before_validation :define_user_via_hub, :define_hub_state, on: :create
     before_save       :prepare_content
     after_save        :update_hub_counters
 
@@ -35,11 +41,15 @@ module BasePublication
   private
 
   def define_user_via_hub
-    self.user = hub.user if user.blank? and !hub.blank?
+    self.user = hub.user if user.blank?
+  end
+
+  def define_hub_state
+    self.hub_state = hub.state if hub
   end
 
   def update_hub_counters
-    hub.recalculate_publications_counters! if hub
+    hub.recalculate_publications_counters!
   end
 
   def prepare_content

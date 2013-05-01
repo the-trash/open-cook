@@ -16,18 +16,18 @@ class CreatePublications < ActiveRecord::Migration
         t.text   :raw_intro
         t.text   :raw_content
 
+        # denormalization
+        t.string :hub_state,  default: :draft
+
         t.text   :intro
         t.text   :content
-
-        # denormalization
-        t.string :hub_state, default: :draft
 
         t.string :legacy_url
 
         # DateTime
         t.datetime :first_published_at
         t.timestamps
-      end      
+      end
     end
   end
 end
