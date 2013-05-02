@@ -2,9 +2,12 @@
 
 = render 'posts/form'
 
-= form_for :attached_file, url: attached_files_url, html: { multipart: true, method: :post } do |f|
+%h3 Attach files
+
+= form_for :attached_file, url: attached_files_url, html: { enctype: "multipart/form-data", method: :post } do |f|
+  = hidden_field_tag 'storage_id',   @post.to_param
   = hidden_field_tag 'storage_type', @post.class
-  = hidden_field_tag 'storage_id',   @post
-  %p
-    = file_field_tag 'files[]', class: :multi
-  = f.submit
+  
+  = file_field_tag 'files[]', class: :test_multi
+  
+  %p= f.submit "Upload"

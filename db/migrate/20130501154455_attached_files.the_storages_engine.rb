@@ -5,9 +5,6 @@ class AttachedFiles < ActiveRecord::Migration
       t.integer :user_id
       t.references :storage, polymorphic: true
 
-      t.string :title, null: false
-      t.string :state, default: :active
-
       # paperclip
       t.string   :attachment_file_name
       t.string   :attachment_content_type

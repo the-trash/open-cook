@@ -35,6 +35,8 @@
           = render 'layouts/items/application/left_menu'
           = render 'layouts/items/application/right_menu'
         .span9
+          = flash[:error]
+          = flash[:notice]
           = yield
 
       %footer
