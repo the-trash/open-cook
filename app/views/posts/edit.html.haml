@@ -2,12 +2,5 @@
 
 = render 'posts/form'
 
-%h3 Attach files
-
-= form_for :attached_file, url: attached_files_url, html: { enctype: "multipart/form-data", method: :post } do |f|
-  = hidden_field_tag 'storage_id',   @post.to_param
-  = hidden_field_tag 'storage_type', @post.class
-  
-  = file_field_tag 'files[]', class: :test_multi
-  
-  %p= f.submit "Upload"
+= render partial: 'the_storages/list', locals: { storage: @post }
+= render partial: 'the_storages/form', locals: { storage: @post }

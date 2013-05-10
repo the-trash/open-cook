@@ -7,7 +7,7 @@ class AttachedFilesController < ApplicationController
 
   def find_storage
     id    = params[:storage_id]
-    klass = params[:storage_type]
-    @storage = klass.constantize.friendly_where(id).first
+    klass = params[:storage_type].constantize
+    @storage = klass.friendly_where(id).first
   end
 end
