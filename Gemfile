@@ -26,7 +26,9 @@ gem 'haml'               , git: 'git@github.com:haml/haml.git', tag: '4.0.1'
 gem 'acts-as-taggable-on', git: 'git@github.com:mbleigh/acts-as-taggable-on.git'
 gem 'awesome_nested_set' , git: 'git@github.com:collectiveidea/awesome_nested_set.git', branch: 'rails4'
 
-gem 'rmagick'
+# gem 'rmagick'
+gem "mini_magick"
+# gem "dimensions", "~> 1.2.0"
 gem 'paperclip',           git: 'git@github.com:thoughtbot/paperclip.git', branch: 'rails-4'
 
 gem 'delayed_job', path: '../delayed_job'

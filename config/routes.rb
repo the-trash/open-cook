@@ -1,6 +1,9 @@
 TheApp::Application.routes.draw do
   root to: 'welcome#index'
 
+  patch '/image_processor/rotate_left/:id',  as: :rotate_left,  to: 'image_processor#rotate_left'
+  patch '/image_processor/rotate_right/:id', as: :rotate_right, to: 'image_processor#rotate_right'
+
   # login system
   get    "login"    => "sessions#new",     as: :login
   delete "logout"   => "sessions#destroy", as: :logout

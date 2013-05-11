@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size",    default: 0
     t.datetime "attachment_updated_at"
+    t.string   "processing",              default: "none"
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
@@ -397,8 +398,8 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.integer  "draft_comments_count",            default: 0
     t.integer  "published_comments_count",        default: 0
     t.integer  "deleted_comments_count",          default: 0
-    t.integer  "storages_files_count",            default: 0
-    t.integer  "storages_files_size",             default: 0
+    t.integer  "all_attached_files_count",        default: 0
+    t.integer  "all_attached_files_size",         default: 0
     t.integer  "storage_files_count",             default: 0
     t.integer  "storage_files_size",              default: 0
   end

@@ -11,6 +11,9 @@ class AttachedFiles < ActiveRecord::Migration
       t.integer  :attachment_file_size, default: 0
       t.datetime :attachment_updated_at
 
+      # images delayed processing status
+      t.string :processing, default: :none
+
       # nested set
       t.integer :parent_id
       t.integer :lft
