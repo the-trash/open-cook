@@ -1,4 +1,3 @@
-
 = form_for @post do |f|
   - if @post.errors.any?
     #error_explanation
@@ -6,6 +5,9 @@
       %ul
         - @post.errors.full_messages.each do |msg|
           %li= msg
+
+  = render partial: 'the_storages/preview_maker', locals: { storage: @post }
+
   .field
     = f.label :title
     = f.text_field :title

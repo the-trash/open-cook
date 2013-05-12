@@ -28,3 +28,5 @@
 //= require logger
 //= require the_comments
 //= require the_comments_manage
+
+//= require crop_image
