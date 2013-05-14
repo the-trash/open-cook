@@ -7,7 +7,6 @@ module PostsHelper
   end
 
   def post_info post
-
     raw "<p>
       <b>owner:</b>
       <img src='http://lorempixel.com/30/30/people/?#{rand}' />

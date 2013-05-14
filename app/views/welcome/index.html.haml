@@ -1,0 +1,22 @@
+- @posts.each do |post|
+  %table.table.table-bordered
+    %tr
+      %th
+        %h4
+          = post.class
+          >
+          = link_to post.title, show_url(post)
+    %tr
+      %td=raw post.intro
+    %tr
+      %td
+        %b= t('publications.author')
+        = post.user.login
+        %b= t('publications.comments')
+        = post.comments_sum
+        %b= t('publications.views')
+        = post.show_count
+    %tr
+      %td= link_to t('publications.read_more'), '#'
+
+= raw infinite_paginate 

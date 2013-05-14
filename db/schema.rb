@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130401105854) do
+ActiveRecord::Schema.define(version: 20130510182558) do
 
   create_table "articles", force: true do |t|
     t.integer  "user_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "title"
     t.text     "raw_intro"
     t.text     "raw_content"
+    t.string   "hub_state",                default: "draft"
     t.text     "intro"
     t.text     "content"
     t.string   "legacy_url"
@@ -38,13 +39,31 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "state",                    default: "draft"
     t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",              default: 0
-    t.integer  "files_size",               default: 0
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
     t.integer  "draft_comments_count",     default: 0
     t.integer  "published_comments_count", default: 0
     t.integer  "deleted_comments_count",   default: 0
+    t.integer  "storage_files_count",      default: 0
+    t.integer  "storage_files_size",       default: 0
+  end
+
+  create_table "attached_files", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "storage_id"
+    t.string   "storage_type"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size",    default: 0
+    t.datetime "attachment_updated_at"
+    t.string   "processing",              default: "none"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth",                   default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "audits", force: true do |t|
@@ -75,6 +94,7 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "title"
     t.text     "raw_intro"
     t.text     "raw_content"
+    t.string   "hub_state",                default: "draft"
     t.text     "intro"
     t.text     "content"
     t.string   "legacy_url"
@@ -90,13 +110,14 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "state",                    default: "draft"
     t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",              default: 0
-    t.integer  "files_size",               default: 0
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
     t.integer  "draft_comments_count",     default: 0
     t.integer  "published_comments_count", default: 0
     t.integer  "deleted_comments_count",   default: 0
+    t.integer  "storage_files_count",      default: 0
+    t.integer  "storage_files_size",       default: 0
   end
 
   create_table "comments", force: true do |t|
@@ -127,6 +148,22 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.datetime "updated_at"
   end
 
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
   create_table "hubs", force: true do |t|
     t.integer  "user_id"
     t.integer  "hub_id"
@@ -137,6 +174,7 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "title"
     t.text     "raw_intro"
     t.text     "raw_content"
+    t.string   "hub_state",                    default: "draft"
     t.text     "intro"
     t.text     "content"
     t.string   "legacy_url"
@@ -156,13 +194,14 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "state",                        default: "draft"
     t.string   "moderation_state",             default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",                  default: 0
-    t.integer  "files_size",                   default: 0
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
     t.integer  "draft_comments_count",         default: 0
     t.integer  "published_comments_count",     default: 0
     t.integer  "deleted_comments_count",       default: 0
+    t.integer  "storage_files_count",          default: 0
+    t.integer  "storage_files_size",           default: 0
   end
 
   create_table "ip_black_lists", force: true do |t|
@@ -181,6 +220,7 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "title"
     t.text     "raw_intro"
     t.text     "raw_content"
+    t.string   "hub_state",           default: "draft"
     t.text     "intro"
     t.text     "content"
     t.string   "legacy_url"
@@ -190,16 +230,17 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",              default: 0
+    t.integer  "depth",               default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
-    t.string   "moderation_state",   default: "unmoderated"
+    t.integer  "show_count",          default: 0
+    t.string   "state",               default: "draft"
+    t.string   "moderation_state",    default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",        default: 0
-    t.integer  "files_size",         default: 0
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "storage_files_count", default: 0
+    t.integer  "storage_files_size",  default: 0
   end
 
   create_table "pages", force: true do |t|
@@ -212,6 +253,7 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "title"
     t.text     "raw_intro"
     t.text     "raw_content"
+    t.string   "hub_state",                default: "draft"
     t.text     "intro"
     t.text     "content"
     t.string   "legacy_url"
@@ -227,13 +269,14 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "state",                    default: "draft"
     t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",              default: 0
-    t.integer  "files_size",               default: 0
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
     t.integer  "draft_comments_count",     default: 0
     t.integer  "published_comments_count", default: 0
     t.integer  "deleted_comments_count",   default: 0
+    t.integer  "storage_files_count",      default: 0
+    t.integer  "storage_files_size",       default: 0
   end
 
   create_table "posts", force: true do |t|
@@ -246,6 +289,7 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "title"
     t.text     "raw_intro"
     t.text     "raw_content"
+    t.string   "hub_state",                default: "draft"
     t.text     "intro"
     t.text     "content"
     t.string   "legacy_url"
@@ -261,13 +305,14 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "state",                    default: "draft"
     t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",              default: 0
-    t.integer  "files_size",               default: 0
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
     t.integer  "draft_comments_count",     default: 0
     t.integer  "published_comments_count", default: 0
     t.integer  "deleted_comments_count",   default: 0
+    t.integer  "storage_files_count",      default: 0
+    t.integer  "storage_files_size",       default: 0
   end
 
   create_table "recipes", force: true do |t|
@@ -280,6 +325,7 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "title"
     t.text     "raw_intro"
     t.text     "raw_content"
+    t.string   "hub_state",                default: "draft"
     t.text     "intro"
     t.text     "content"
     t.string   "legacy_url"
@@ -289,16 +335,20 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",              default: 0
+    t.integer  "depth",                    default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
-    t.string   "moderation_state",   default: "unmoderated"
+    t.integer  "show_count",               default: 0
+    t.string   "state",                    default: "draft"
+    t.string   "moderation_state",         default: "unmoderated"
     t.text     "moderator_note"
-    t.integer  "files_count",        default: 0
-    t.integer  "files_size",         default: 0
+    t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "draft_comments_count",     default: 0
+    t.integer  "published_comments_count", default: 0
+    t.integer  "deleted_comments_count",   default: 0
+    t.integer  "storage_files_count",      default: 0
+    t.integer  "storage_files_size",       default: 0
   end
 
   create_table "roles", force: true do |t|
@@ -340,10 +390,6 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.string   "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
-    t.integer  "total_files_count",               default: 0
-    t.integer  "total_files_size",                default: 0
-    t.integer  "files_count",                     default: 0
-    t.integer  "files_size",                      default: 0
     t.integer  "my_comments_count",               default: 0
     t.integer  "draft_comcoms_count",             default: 0
     t.integer  "published_comcoms_count",         default: 0
@@ -352,6 +398,10 @@ ActiveRecord::Schema.define(version: 20130401105854) do
     t.integer  "draft_comments_count",            default: 0
     t.integer  "published_comments_count",        default: 0
     t.integer  "deleted_comments_count",          default: 0
+    t.integer  "all_attached_files_count",        default: 0
+    t.integer  "all_attached_files_size",         default: 0
+    t.integer  "storage_files_count",             default: 0
+    t.integer  "storage_files_size",              default: 0
   end
 
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"

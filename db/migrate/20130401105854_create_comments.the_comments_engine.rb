@@ -6,10 +6,8 @@ class CreateComments < ActiveRecord::Migration
       # relations
       t.integer :user_id
       t.integer :holder_id
-      
-      # polymorphic, commentable object
-      t.integer :commentable_id
-      t.string  :commentable_type
+
+      t.references :commentable, polymorphic: true
 
       # denormalization
       t.string  :commentable_url
@@ -79,7 +77,7 @@ class CreateComments < ActiveRecord::Migration
 
     # Uncomment this. Add fields Commentable Models
     #
-    [:users, :posts, :blogs, :articles, :pages, :hubs].each do |table_name|
+    [:users, :posts, :blogs, :articles, :pages, :recipes, :hubs].each do |table_name|
       change_table table_name do |t|
         t.integer :draft_comments_count,     default: 0
         t.integer :published_comments_count, default: 0

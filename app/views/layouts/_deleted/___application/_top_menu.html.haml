@@ -1,0 +1,11 @@
+%ul.top_menu
+  %li= link_to 'home', root_url
+
+  %li
+    - if current_user
+      = link_to current_user.login, cabinet_url
+      = link_to t('sessions.logout'), logout_url, method: :delete
+    - else
+      = link_to t('sessions.new'), login_url
+  %li
+    = link_to t('users.index'), users_url

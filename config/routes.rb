@@ -1,11 +1,16 @@
 TheApp::Application.routes.draw do
   root to: 'welcome#index'
 
-  # login system
+  # Login system
   get    "login"    => "sessions#new",     as: :login
   delete "logout"   => "sessions#destroy", as: :logout
+  get    "signup"   => "users#new",        as: :signup
   post   "sessions" => "sessions#create",  as: :sessions
 
+  # Personal
+  get "cabinet" => "users#cabinet", as: :cabinet
+
+  # Concerns
   concern :manage do
     collection do
       get :manage
@@ -19,60 +24,21 @@ TheApp::Application.routes.draw do
     end
   end
 
-  # direct routes
+  # Direct routes
   %w{ hubs pages posts blogs notes recipes articles }.each do |name|
     resources name, concerns: :sortable_tree
   end
 
-  # users
+  # Users
   resources :users, only: [:index, :show, :create] do
-    %w{ pages posts blogs notes recipes articles }.each do |name|
+    %w{ pages posts blogs notes recipes articles hubs }.each do |name|
       resources name, concerns: :manage
     end
   end
 
-  get  "signup"  => "users#new",     as: :signup
-  get  "cabinet" => "users#cabinet", as: :cabinet
+  # TheStorages
+  patch '/image_processor/rotate_left/:id',  as: :rotate_left,  to: 'image_processor#rotate_left'
+  patch '/image_processor/rotate_right/:id', as: :rotate_right, to: 'image_processor#rotate_right'
+  patch '/image_processor/crop_image',       as: :crop_image,   to: 'image_processor#crop_image'
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

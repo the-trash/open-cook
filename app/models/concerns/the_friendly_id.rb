@@ -7,6 +7,18 @@ module TheFriendlyId
 
   SEPARATOR = "+"
 
+  def self.int? str
+    str.to_i.to_s == str
+  end
+
+  def self.friendly? str
+    Regexp.new("\\#{TheFriendlyId::SEPARATOR}") =~ str
+  end
+
+  def TheFriendlyId.short? str
+    str =~ /^[A-Z]+[0-9]+$/mix
+  end
+
   included do
     def to_param; self.friendly_id end
 
@@ -45,7 +57,7 @@ module TheFriendlyId
 
     def build_slugs
       unless self.title.blank?
-        text_name        = Russian::translit(self.title).parameterize
+        text_name        = Russian::translit(self.title.to_s).gsub('_','-').parameterize
         self.friendly_id = [self.short_id, text_name].join TheFriendlyId::SEPARATOR
       end
     end
@@ -54,10 +66,14 @@ module TheFriendlyId
 
   module ClassMethods
     def friendly_where id
-      if Regexp.new("\\#{TheFriendlyId::SEPARATOR}") =~ id
+      if TheFriendlyId.int?(id)
+        where(id: id)
+      elsif TheFriendlyId.friendly?(id)
         where(friendly_id: id)
+      elsif TheFriendlyId.short?(id)
+        where(short_id: id)
       else
-        id.size == id.to_i.to_s.size ? where(id: id) : where(short_id: id)
+        where(slug: id)
       end
     end
   end

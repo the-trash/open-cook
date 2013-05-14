@@ -4,6 +4,8 @@ class Hub < ActiveRecord::Base
   include TheFriendlyId
   include NestedSetMethods
 
+  before_save :update_publications_hub_state!
+
   def controller_name
     self.class.to_s.tableize
   end
@@ -23,6 +25,7 @@ class Hub < ActiveRecord::Base
 
   # validations
   validates_presence_of :user, :title, :hub_type
+  validates :title, uniqueness: { scope: :user }
 
   def publications
     send hub_type
@@ -37,5 +40,9 @@ class Hub < ActiveRecord::Base
     self.published_publications_count = publications.with_state(:published).count
     self.deleted_publications_count   = publications.with_state(:deleted).count
     save!
+  end
+
+  def update_publications_hub_state!
+    publications.update_all({ hub_state: self.state }) if state_changed?
   end
 end

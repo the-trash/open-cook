@@ -1,5 +1,7 @@
-module BasePostController
+module PublicationController
   extend ActiveSupport::Concern
+  # module ClassMethods; end
+  # module InstanceMethods; end
 
   included do
     before_action :set_klass
@@ -11,7 +13,7 @@ module BasePostController
     include TheSortableTreeController::Rebuild
 
     def index
-      # TODO: posts from hidden hubs should not be vivible
+      # TODO: posts from hidden hubs should not be visible
       user   = User.where(login: params[:user]).first || @root
       @posts = user.send(controller_name).with_states(:published).nested_set.page(params[:page])
       @hubs  = @posts.first.hub.same_hubs.with_state(:published).nested_set
@@ -28,10 +30,10 @@ module BasePostController
     # PROTECTED
     def manage
       @posts = @user.send(controller_name).with_states(:draft, :published).nested_set.page(params[:page])
+      render 'posts/manage'
     end
 
     def edit
-      @post = @post.first
       render 'posts/edit'
     end
 
@@ -46,7 +48,6 @@ module BasePostController
       if @post.save
         redirect_to @post, notice: "#{@klass.to_s} was successfully created."
       else
-        # render action: 'new'
         render 'posts/new'
       end
     end
@@ -56,7 +57,6 @@ module BasePostController
       if @post.update(post_params)
         redirect_to @post, notice: "#{@klass.to_s} was successfully updated."
       else
-        # render action: 'edit'
         render 'posts/edit'
       end
     end
@@ -101,7 +101,4 @@ module BasePostController
         :first_published_at)
     end
   end
-
-  # module InstanceMethods; end
-  # module ClassMethods; end
 end

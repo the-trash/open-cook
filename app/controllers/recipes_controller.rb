@@ -1,3 +1,3 @@
 class RecipesController < ApplicationController
-  include BasePostController
+  include PublicationController
 end

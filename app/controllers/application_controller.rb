@@ -6,12 +6,6 @@ class ApplicationController < ActionController::Base
 
   include TheCommentsController::ViewToken
 
-  layout 'bootstrap_fixed'
-
-  # @user - to show
-  # @root - root user
-  # current_user - logined user
-  before_action :define_root
   before_action :define_user
   after_action  :save_audit
 
@@ -21,14 +15,12 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def define_root
-    @root = User.with_role(:admin).first
-  end
-
+  # to show @root | @user elements
   def define_user
-    @user = @root
+    @user = User.root
+
     if params[:user_id]
-      @user = if params[:user_id].to_i.to_s == params[:user_id]
+      @user = if TheFriendlyId.int? params[:user_id]
         User.where(params[:user_id]).first
       else
         User.where(login: params[:user_id]).first

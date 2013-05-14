@@ -1,3 +1,3 @@
 class PostsController < ApplicationController
-  include BasePostController
+  include PublicationController
 end

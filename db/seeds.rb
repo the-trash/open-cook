@@ -81,43 +81,74 @@ puts "Roles created"
   )
   # with different roles
   role_name = [:user, :user, :author].sample
-  user.update_attributes(role: Role.where(name: role_name).first)
+  user.update_attributes(role: Role.with_name(role_name))
 
   puts "User #{i.next} role:#{role_name} created"
 end
 
 # set Admin
 # update with validations
-User.first.update_attributes(role: Role.where(name: :admin).first)
+User.first.update_attributes(role: Role.with_name(:admin))
 
-######################################################
-# Create Hub
-######################################################
-# create_hub(:menu, 3, :recipes, user, 2)
-def create_hub type, number, posts_type, user, user_index
-  name = type.capitalize
-  hub = user.hubs.create!(
-    title: "#{name} #{number} (u:#{user_index})",
-    hub_type: type
+#####################################
+# PAGES
+#####################################
+def create_system_pages_hub
+  User.root.hubs.create!(
+    title: :system_pages,
+    hub_type: :pages
   )
-  hub.update_attribute(:state, [:draft, :published].sample)
-  puts "#{name} u:#{user_index} h:#{number} created"
+end
 
-  5.times do |r|
-    post_name = posts_type.to_s.singularize.capitalize
-    post = user.send(posts_type).create!(
-      hub: hub,
-      title: "#{post_name} #{r.next} (u:#{user_index})",
-      raw_intro: Faker::Lorem.paragraphs(3).join,
-      raw_content: Faker::Lorem.paragraphs(3).join
-    )
-    post.send("to_#{[:draft, :published, :deleted].sample}")
-    puts "#{post_name} r:#{r.next} h:#{number} u:#{user_index} created"
+def create_system_pages
+  system_hub = Hub.where(title: :system_pages).first
+
+  system_hub.pages.create!(
+    title: "О проекте",
+    slug: :about,
+    raw_content: Faker::Lorem.paragraphs(3).join
+  )
+
+  system_hub.pages.create!(
+    title: "О компании",
+    slug: :company,
+    raw_content: Faker::Lorem.paragraphs(3).join
+  )
+
+  system_hub.pages.create!(
+    title: "Команда",
+    slug: :team,
+    raw_content: Faker::Lorem.paragraphs(3).join
+  )
+
+  system_hub.pages.create!(
+    title: "Пользовательское соглашение",
+    slug: :agreement,
+    raw_content: Faker::Lorem.paragraphs(3).join
+  )
+end
+
+create_system_pages_hub
+create_system_pages
+
+#####################################
+# BLOGS
+#####################################
+def create_blog_hubs
+  %w{ 2012 2013 }.each do |year|
+    (1..12).to_a.each do |month|
+      hub = User.root.hubs.create!(
+        title: "#{year}-#{month}",
+        hub_type: :blogs
+      )
+      hub.send("to_#{[:draft, :published, :deleted].sample}")
+    end
   end
 end
 
 def create_blogs count
   users = User.all
+  blog_hubs = Hub.of_(:blogs).all
 
   count.times do |index|
     user = users.sample
@@ -127,86 +158,185 @@ def create_blogs count
       raw_content: Faker::Lorem.paragraphs(3).join
     )
     blog.send("to_#{[:draft, :published, :deleted].sample}")
-    puts "Blog created"
+    blog.update!(hub: blog_hubs.sample)
+    puts "Blog created #{index}"
   end
 end
+
+create_blog_hubs
+create_blogs 300
+
+#####################################
+# RECIPES
+#####################################
+
+def create_recipes_hubs
+  [
+    "Блины",
+    "Интервью",
+    "Статьи",
+    "Детские рецепты Марии Панковой",
+    "Открытая кухня Ольги Космос",
+    "Заготовки",
+    "Супы",
+    "На второе",
+    "Салаты",
+    "Рыба",
+    "Гарниры",
+    "Овощи",
+    "Вкусняшки к чаю",
+    "Кухня мужика",
+    "Напитки",
+    "Птица с подворья",
+    "К завтраку",
+    "Закуски",
+    "Ликеры и Сиропы",
+    "Выпечка несладкая",
+    "Соусы, дипы",
+    "Десерты",
+    "Кремы"
+  ].each do |title|
+    hub = User.root.hubs.create!(title: title, hub_type: :recipes)
+    hub.to_published
+  end
+end
+
+def create_recipes count
+  users = User.all
+  recipes_hubs = Hub.of_(:recipes).all
+
+  count.times do |index|
+    user = users.sample
+    hub  = recipes_hubs.sample
+
+    recipe = user.recipes.create!(
+      hub: hub,
+      title: Faker::Lorem.sentence,
+      raw_intro: Faker::Lorem.paragraphs(3).join,
+      raw_content: Faker::Lorem.paragraphs(3).join
+    )
+    recipe.send("to_#{[:draft, :published, :deleted].sample}")
+    puts "Recipe created #{index}"
+  end
+end
+
+create_recipes_hubs
+create_recipes 300
+
+#####################################
+# POSTS
+#####################################
+
+def create_posts_hubs count
+  users = User.all
+
+  count.times do |index|
+    hub = users.sample.hubs.create!(
+      title: Faker::Lorem.sentence,
+      hub_type: :posts
+    )
+    hub.send("to_#{[:draft, :published, :deleted].sample}")
+    puts "PostHub created"
+  end
+end
+
+def create_posts count
+  users = User.all
+  recipes_hubs = Hub.of_(:posts).all
+
+  count.times do |index|
+    user = users.sample
+    hub  = user.hubs.of_(:posts).sample
+    post = user.posts.create!(
+      hub: hub,
+      title: Faker::Lorem.sentence,
+      raw_intro: Faker::Lorem.paragraphs(3).join,
+      raw_content: Faker::Lorem.paragraphs(3).join
+    )
+    post.send("to_#{[:draft, :published, :deleted].sample}")
+    puts "Post created"
+  end
+end
+
+create_posts_hubs 50
+create_posts 300
 
 ######################################################
 # Create data for authors
 ######################################################
-User.with_role(:admin).each_with_index do |user, u|
-  3.times do |m|
-    create_hub(:posts, m.next, :posts, user, u.next)
-    create_blogs(30)
-    # create_hub(:blogs, m.next, :blogs, user, u.next)
-    # create_hub(:pages, m.next, :pages, user, u.next)
-    # create_hub(:notes, m.next, :notes, user, u.next)
-    # create_hub(:articles, m.next, :articles, user, u.next)
-    # create_hub(:recipes, m.next, :recipes, user, u.next)
-  end
-end
-
-# User.with_role(:author).each_with_index do |user, u|
+# User.with_role(:admin).each_with_index do |user, u|
 #   3.times do |m|
 #     create_hub(:posts, m.next, :posts, user, u.next)
-#     create_hub(:blogs, m.next, :blogs, user, u.next)
-#     create_hub(:pages, m.next, :pages, user, u.next)
-#     create_hub(:notes, m.next, :notes, user, u.next)
-#     create_hub(:articles, m.next, :articles, user, u.next)
-#     create_hub(:recipes, m.next, :recipes, user, u.next)
+#     create_blogs 30
+#     # create_hub(:blogs, m.next, :blogs, user, u.next)
+#     # create_hub(:pages, m.next, :pages, user, u.next)
+#     # create_hub(:notes, m.next, :notes, user, u.next)
+#     # create_hub(:articles, m.next, :articles, user, u.next)
+#     # create_hub(:recipes, m.next, :recipes, user, u.next)
 #   end
 # end
 
-def create_comment post, parent_comment = nil
-  owner = [User.all.sample, nil].sample
+# # User.with_role(:author).each_with_index do |user, u|
+# #   3.times do |m|
+# #     create_hub(:posts, m.next, :posts, user, u.next)
+# #     create_hub(:blogs, m.next, :blogs, user, u.next)
+# #     create_hub(:pages, m.next, :pages, user, u.next)
+# #     create_hub(:notes, m.next, :notes, user, u.next)
+# #     create_hub(:articles, m.next, :articles, user, u.next)
+# #     create_hub(:recipes, m.next, :recipes, user, u.next)
+# #   end
+# # end
 
-  comment = post.comments.create!(
-    user:        owner,
-    commentable: post,
-    title:       Faker::Lorem.sentence,
-    contacts:    Faker::Lorem.sentence,
-    raw_content: Faker::Lorem.paragraphs(4).join,
-    parent_id:   parent_comment.try(:id)
-  )
+# def create_comment post, parent_comment = nil
+#   owner = [User.all.sample, nil].sample
 
-  puts "Comment created #{parent_comment.try(:id)}"
-  puts "Default Comment state => #{comment.state}"
+#   comment = post.comments.create!(
+#     user:        owner,
+#     commentable: post,
+#     title:       Faker::Lorem.sentence,
+#     contacts:    Faker::Lorem.sentence,
+#     raw_content: Faker::Lorem.paragraphs(4).join,
+#     parent_id:   parent_comment.try(:id)
+#   )
 
-  st = [:draft, :published].sample
-  puts "to => #{st}"
-  comment.send("to_#{st}")
+#   puts "Comment created #{parent_comment.try(:id)}"
+#   puts "Default Comment state => #{comment.state}"
 
-  comment
-end
+#   st = [:draft, :published].sample
+#   puts "to => #{st}"
+#   comment.send("to_#{st}")
 
-Post.all.each do |post|
-  3.times do
-    parent = create_comment(post)
-    3.times do
-      parent = create_comment(post, parent)
-      3.times do
-        create_comment(post, parent)
-      end
-    end
-  end
-end
+#   comment
+# end
 
-Blog.first do |post|
-  3.times do
-    parent = create_comment(post)
-    3.times do
-      parent = create_comment(post, parent)
-      3.times do
-        create_comment(post, parent)
-      end
-    end
-  end
-end
+# Post.all.each do |post|
+#   3.times do
+#     parent = create_comment(post)
+#     3.times do
+#       parent = create_comment(post, parent)
+#       3.times do
+#         create_comment(post, parent)
+#       end
+#     end
+#   end
+# end
 
-Comment.all.shuffle[0..40].each do |comment|
-  comment.to_deleted
-  puts "C: #{comment.id} => to deleted"
-end
+# Blog.first do |post|
+#   3.times do
+#     parent = create_comment(post)
+#     3.times do
+#       parent = create_comment(post, parent)
+#       3.times do
+#         create_comment(post, parent)
+#       end
+#     end
+#   end
+# end
+
+# Comment.all.shuffle[0..40].each do |comment|
+#   comment.to_deleted
+#   puts "C: #{comment.id} => to deleted"
+# end
 
 ######################################################
 # Info fn

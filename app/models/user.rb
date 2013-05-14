@@ -1,9 +1,14 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
-
-  include TheRole::UserModel
-  include DefaultRole
   include DefineOpenPassword
+
+  include TheRoleUserModel
+  
+  include ActAsStorage
+  include HasAttachedFiles
+
+  include TheCommentsUser
+  include TheCommentsCommentable
 
   def to_param; self.login end
 
@@ -24,17 +29,14 @@ class User < ActiveRecord::Base
   validates :password, presence: true, on: :create
 
   def self.root
-    User.first
+    @@root ||= User.first
   end
 
   def admin?
     self == User.root
   end
 
-  # TheComments
-  include TheCommentsUser
-  include TheCommentsCommentable
-
+  # TheComments methods
   def comment_moderator? comment
     admin? || id == comment.holder_id
   end
@@ -50,6 +52,6 @@ class User < ActiveRecord::Base
   private
 
   def prepare_login
-    self.login = Russian::translit(self.login).parameterize
+    self.login = Russian::translit(self.login).gsub('_','-').parameterize
   end
 end

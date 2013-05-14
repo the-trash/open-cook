@@ -2,7 +2,5 @@
 
 = render 'posts/form'
 
--#
-  = link_to 'Show', @post
-  \|
-  = link_to 'Back', url_for(controller: controller_name)
+= render partial: 'the_storages/list', locals: { storage: @post }
+= render partial: 'the_storages/form', locals: { storage: @post }

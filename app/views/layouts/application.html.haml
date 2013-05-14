@@ -1,29 +1,43 @@
-!!!
-%html
+!!! 5
+%html(lang="ru")
   %head
-    %meta{ charset: 'utf-8' }
-    %title TheApp
-    = stylesheet_link_tag    :application, "data-turbolinks-track" => true, media: :all
-    = javascript_include_tag :application, "data-turbolinks-track" => true
+    %meta(charset="utf-8")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title= content_for?(:title) ? yield(:title) : "TheApp"
+    
+    -# %link(href="images/apple-touch-icon-144x144.png" rel="apple-touch-icon-precomposed" sizes="144x144")
+    -# %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
+    -# %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
+    -# %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
+    -# Javascripts
+    -# Placed at the end of the document so the pages load faster
+    = javascript_include_tag :application
     = csrf_meta_tags
 
+    / Le HTML5 shim, for IE6-8 support of HTML elements
+    /[if lt IE 9]
+      =# javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
+    = stylesheet_link_tag :application, media: :all
+
+    %link(href="favicon.ico" rel="shortcut icon")
   %body
-    .body#top
-      = render 'layouts/items/top_menu'
-      .header &nbsp;
-      .content
-        %table.layout
-          %tr
-            %td.left= render 'layouts/items/left_menu'
+    .container    
+      .row
+        .span12
+          = render 'layouts/items/application/top_menu'
+      .row
+        .span12
+          %center
+            %h3 Site of: #{ @user.login }
+      .row
+        .span3
+          = render 'layouts/items/application/left_menu'
+          = render 'layouts/items/application/right_menu'
+        .span9
+          = flash[:error]
+          = flash[:notice]
+          = yield
 
-            %td.center
-              - unless flash.empty?
-                = flash[:notice]
-                = flash[:error]
-                = flash[:alert]
-
-              = yield
-            %td.right
-
-      .footer_guarantor &nbsp;
-    .footer
+      %footer
+        %p &copy; Company 2013

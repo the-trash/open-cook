@@ -1,3 +1,6 @@
-%ul.nav.nav-pills.nav-stacked
-  - @user.hubs.of_(:menu).published.each do |hub|
-    %li= link_to hub.title, menu_path(hub)
+- unless @hubs.blank?
+  .well.sidebar-nav
+    %h3 Меню
+    %ul.nav.nav-list
+      - @hubs.each do |hub|
+        %li= link_to hub.title + " (#{hub.published_publications_count})", show_url(hub)

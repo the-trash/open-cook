@@ -22,21 +22,28 @@ gem 'kaminari'
 gem 'russian'
 gem 'sanitize'
 gem "state_machine", "~> 1.2.0"
-gem 'haml'              , git:  'git@github.com:haml/haml.git', tag: "4.0.1"
-gem 'awesome_nested_set', git: "git@github.com:collectiveidea/awesome_nested_set.git", branch: "rails4"
-
-# gem 'acts-as-taggable-on'
-# gem 'ruby-graphviz' # state machine visualization
-
-gem 'the_role'     , path: '../the_role'
-gem 'the_audit'    , path: '../the_audit'
-gem 'the_comments' , path: '../the_comments'
+gem 'haml'               , git: 'git@github.com:haml/haml.git', tag: '4.0.1'
+gem 'acts-as-taggable-on', git: 'git@github.com:mbleigh/acts-as-taggable-on.git'
+gem 'awesome_nested_set' , git: 'git@github.com:collectiveidea/awesome_nested_set.git', branch: 'rails4'
 
 # gem 'rmagick'
-# gem 'paperclip', '2.3.6'
-# gem 'the_storages'  , path: '/home/the_teacher/rails/rails4/the_storages'
+gem "mini_magick"
+# gem "dimensions", "~> 1.2.0"
+gem 'paperclip',           git: 'git@github.com:thoughtbot/paperclip.git', branch: 'rails-4'
 
-group :development do; end
+gem 'delayed_job', path: '../delayed_job'
+gem 'delayed_job_active_record', path: '../delayed_job_active_record'
+
+gem 'the_role'    , path: '../the_role'
+gem 'the_audit'   , path: '../the_audit'
+gem 'the_storages', path: '../the_storages'
+gem 'the_comments', path: '../the_comments'
+
+group :development do
+  gem 'thin'
+  # gem 'unicorn'
+  # gem 'ruby-graphviz' # state machine visualization
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -51,35 +58,27 @@ end
 
 group :development, :test do
   gem 'faker'
-
-  gem 'thin'
-  # gem 'unicorn'
-
-  # gem 'rspec'
-  # gem 'rspec-rails'
-  gem "rspec-rails",        :git => "git://github.com/rspec/rspec-rails.git"
-  gem "rspec",              :git => "git://github.com/rspec/rspec.git"
-  gem "rspec-core",         :git => "git://github.com/rspec/rspec-core.git"
-  gem "rspec-expectations", :git => "git://github.com/rspec/rspec-expectations.git"
-  gem "rspec-mocks",        :git => "git://github.com/rspec/rspec-mocks.git"
-
-  gem 'capybara' # Browser testing
+  # gem "rspec-rails",        :git => "git://github.com/rspec/rspec-rails.git"
+  # gem "rspec",              :git => "git://github.com/rspec/rspec.git"
+  # gem "rspec-core",         :git => "git://github.com/rspec/rspec-core.git"
+  # gem "rspec-expectations", :git => "git://github.com/rspec/rspec-expectations.git"
+  # gem "rspec-mocks",        :git => "git://github.com/rspec/rspec-mocks.git"
 end
 
 group :test do
-  gem 'database_cleaner'
-  
+  gem 'capybara'
   gem 'factory_girl'
-  # gem 'factory_girl_rails'
-
-  # test helpers
-  gem 'cucumber-rails', :require => false # elegant BDD
+  gem 'database_cleaner'
 
   # autotest
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-spork'
+  # gem 'guard'
+  # gem 'guard-rspec'
+  # gem 'guard-spork'
 
+  # elegant BDD
+  # gem 'cucumber-rails', :require => false
+
+  # Test helpers
   # gem 'email_spec'  # emails specs
   # gem 'timecop'     # Time delays test
   # gem 'launchy'     # show broken cucumber tests

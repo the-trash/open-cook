@@ -16,6 +16,9 @@ class CreatePublications < ActiveRecord::Migration
         t.text   :raw_intro
         t.text   :raw_content
 
+        # denormalization
+        t.string :hub_state,  default: :draft
+
         t.text   :intro
         t.text   :content
 
@@ -24,7 +27,7 @@ class CreatePublications < ActiveRecord::Migration
         # DateTime
         t.datetime :first_published_at
         t.timestamps
-      end      
+      end
     end
   end
 end
