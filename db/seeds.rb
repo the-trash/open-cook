@@ -137,7 +137,7 @@ end
 User.with_role(:admin).each_with_index do |user, u|
   3.times do |m|
     create_hub(:posts, m.next, :posts, user, u.next)
-    create_blogs 30
+    create_blogs(30)
     # create_hub(:blogs, m.next, :blogs, user, u.next)
     # create_hub(:pages, m.next, :pages, user, u.next)
     # create_hub(:notes, m.next, :notes, user, u.next)
