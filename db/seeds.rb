@@ -4,14 +4,7 @@ User.destroy_all
 Role.destroy_all
 
 Hub.destroy_all
-
 Post.destroy_all
-Page.destroy_all
-Blog.destroy_all
-Note.destroy_all
-Article.destroy_all
-
-Recipe.destroy_all
 Comment.destroy_all
 
 #######################################################
@@ -31,7 +24,7 @@ Comment.destroy_all
   # Author
   roles_set = {}
   roles_set[:users] = { cabinet: true }
-  [:pages, :posts, :articles, :recipes, :blogs].each do |name|
+  [:posts].each do |name|
     roles_set[name] = {
       index:   true,
       new:     true,
@@ -268,22 +261,12 @@ create_posts 300
 #   3.times do |m|
 #     create_hub(:posts, m.next, :posts, user, u.next)
 #     create_blogs 30
-#     # create_hub(:blogs, m.next, :blogs, user, u.next)
-#     # create_hub(:pages, m.next, :pages, user, u.next)
-#     # create_hub(:notes, m.next, :notes, user, u.next)
-#     # create_hub(:articles, m.next, :articles, user, u.next)
-#     # create_hub(:recipes, m.next, :recipes, user, u.next)
 #   end
 # end
 
 # # User.with_role(:author).each_with_index do |user, u|
 # #   3.times do |m|
 # #     create_hub(:posts, m.next, :posts, user, u.next)
-# #     create_hub(:blogs, m.next, :blogs, user, u.next)
-# #     create_hub(:pages, m.next, :pages, user, u.next)
-# #     create_hub(:notes, m.next, :notes, user, u.next)
-# #     create_hub(:articles, m.next, :articles, user, u.next)
-# #     create_hub(:recipes, m.next, :recipes, user, u.next)
 # #   end
 # # end
 
@@ -321,17 +304,6 @@ create_posts 300
 #   end
 # end
 
-# Blog.first do |post|
-#   3.times do
-#     parent = create_comment(post)
-#     3.times do
-#       parent = create_comment(post, parent)
-#       3.times do
-#         create_comment(post, parent)
-#       end
-#     end
-#   end
-# end
 
 # Comment.all.shuffle[0..40].each do |comment|
 #   comment.to_deleted
@@ -377,17 +349,5 @@ model_info(Page)
 
 hub_info(:posts)
 model_info(Post)
-
-hub_info(:blogs)
-model_info(Blog)
-
-hub_info(:notes)
-model_info(Note)
-
-hub_info(:articles)
-model_info(Article)
-
-hub_info(:recipes)
-model_info(Recipe)
 
 model_info(Comment)
