@@ -15,14 +15,7 @@ class SorceryCore < ActiveRecord::Migration
 
       # cache_counters => published
       t.integer :hubs_count,  default: 0
-      t.integer :pages_count, default: 0
       t.integer :posts_count, default: 0
-      t.integer :blogs_count, default: 0
-      t.integer :notes_count, default: 0
-      t.integer :pages_count, default: 0
-
-      t.integer :recipes_count,  default: 0
-      t.integer :articles_count, default: 0
 
       t.timestamps
     end

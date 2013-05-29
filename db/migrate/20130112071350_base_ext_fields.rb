@@ -1,6 +1,6 @@
 class BaseExtFields < ActiveRecord::Migration
   def change
-    [:pages, :posts, :articles, :recipes, :blogs, :notes, :hubs].each do |table_name|
+    [:pages, :posts, :hubs].each do |table_name|
       change_table table_name do |t|
         t.string  :main_image_url
 

@@ -1,6 +1,7 @@
 class ChangeHubs < ActiveRecord::Migration
   def change
     change_table :hubs do |t|
+      t.string  :hub_name
       t.string  :hub_type
 
       t.integer :draft_publications_count,     default: 0

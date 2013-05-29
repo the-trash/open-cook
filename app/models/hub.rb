@@ -24,8 +24,9 @@ class Hub < ActiveRecord::Base
   scope :of_, ->(type) { where(hub_type: type) }
 
   # validations
-  validates_presence_of :user, :title, :hub_type
-  validates :title, uniqueness: { scope: :user }
+  validates_presence_of :user, :title, :hub_type, :hub_name
+  validates :title,    uniqueness: { scope: :user }
+  validates :hub_name, uniqueness: { scope: :user }
 
   def publications
     send hub_type
