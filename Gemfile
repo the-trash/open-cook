@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 # source 'http://gems.github.com'
 # Delete all gems: gem list | cut -d" " -f1 | xargs gem uninstall -aIx
 
-gem 'rails', github: 'rails/rails'
+gem 'rails', github: 'rails/rails', branch: 'v4.0.0.rc1'
 gem 'arel',  github: 'rails/arel'
 
 gem 'mysql2'
