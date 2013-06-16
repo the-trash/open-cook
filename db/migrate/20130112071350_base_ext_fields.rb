@@ -6,8 +6,9 @@ class BaseExtFields < ActiveRecord::Migration
 
         t.integer :show_count, default: 0
         
-        t.string  :state,            default: :draft       # draft | published
-        t.string  :moderation_state, default: :unmoderated # unmoderated | moderated | blocked
+        t.string  :state, default: :draft # draft | published | deleted
+        
+        t.string  :moderation_state, default: :raw # raw | accepted | blocked
         t.text    :moderator_note
       end
     end

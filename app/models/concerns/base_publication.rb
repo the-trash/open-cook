@@ -8,13 +8,12 @@ module BasePublication
   end
 
   included do
-    include TheCommentsCommentable
-
     include BaseSorts
     include BaseStates
     include ActAsStorage
     include TheFriendlyId
     include NestedSetMethods
+    include TheCommentsCommentable
 
     before_validation :define_user_via_hub, :define_hub_state, on: :create
     before_save       :prepare_content
@@ -26,17 +25,17 @@ module BasePublication
     belongs_to :user
     belongs_to :hub
 
-    validates_presence_of :user, :hub, :title
+    validates_presence_of   :user, :hub, :title
     validates_uniqueness_of :slug, unless: ->(pub) { pub.slug.blank? }
   end
 
-  def controller_name
-    self.class.to_s.tableize
-  end
+  # def controller_name
+  #   self.class.to_s.tableize
+  # end
 
-  def show_path
-    "/#{controller_name}/#{to_param}"
-  end
+  # def show_path
+  #   "/#{controller_name}/#{to_param}"
+  # end
 
   private
 

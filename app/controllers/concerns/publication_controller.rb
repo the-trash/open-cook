@@ -8,15 +8,15 @@ module PublicationController
     before_action :set_post_and_user,   only: [:show, :edit, :update, :destroy]
     before_action :protect_post_action, only: [:show, :edit, :update, :destroy]
 
-    after_action -> { @audit = Audit.new.init(self, @post) }, only: [:create, :show, :update, :edit, :destroy]
+    # after_action -> { @audit = Audit.new.init(self, @post) }, only: [:create, :show, :update, :edit, :destroy]
 
     include TheSortableTreeController::Rebuild
 
     def index
       # TODO: posts from hidden hubs should not be visible
-      user   = User.where(login: params[:user]).first || @root
+      user   = User.where(login: user_id).first || @root
       @posts = user.send(controller_name).with_states(:published).nested_set.page(params[:page])
-      @hubs  = @posts.first.hub.same_hubs.with_state(:published).nested_set
+      @hubs  = !@posts.blank? ? @posts.first.hub.same_hubs.with_state(:published).nested_set : nil
       render 'posts/index'
     end
 
@@ -55,7 +55,8 @@ module PublicationController
     # PATCH/PUT /posts/1
     def update
       if @post.update(post_params)
-        redirect_to @post, notice: "#{@klass.to_s} was successfully updated."
+        redirect_to url_for([:edit, @post.user, @post]),
+                    notice: "#{@klass.to_s} was successfully updated."
       else
         render 'posts/edit'
       end
@@ -69,8 +70,8 @@ module PublicationController
     private
 
     def set_klass
-      @klass     = controller_name.classify.constantize
-      @klass_sym = controller_name.singularize.to_sym
+      @klass      = controller_name.classify.constantize
+      @klass_name = controller_name.singularize.to_sym
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -87,18 +88,21 @@ module PublicationController
       # return render text: 'secured area'
     end
 
+    def user_id
+      params[:user] || params[:user_id]
+    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(@klass_sym).permit(
+      # TODO: user_id for create
+      # TODO: user_id for update only for moderator|admin
+      params.require(@klass_name).permit(
         :user_id,
         :author, :keywords, :description, :copyright,
         :title,
         :raw_intro,
         :raw_content,
-        :main_image_url,
-        :state,
-        :first_published_at)
+        :state
+      )
     end
   end
 end

@@ -14,13 +14,14 @@
   .field
     %p
       %b Вводная часть
-    = f.text_area :intro, class: :redactor_intro
+    = f.text_area :raw_intro, class: :redactor_intro
   .field
     %p
       %b Основное содержимое
-    = f.text_area :content, class: :redactor_content
+    = f.text_area :raw_content, class: :redactor_content
   .field
-    = f.label :state
-    = f.text_field :state
+    = f.label :state, t('publication.state')
+    - options = options_for_select(publication_states, @post.state)
+    = f.select :state, options
   .actions
     = f.submit 'Save'

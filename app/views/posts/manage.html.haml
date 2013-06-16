@@ -1,2 +1,4 @@
+= link_to "New #{model_name}", url_for([:new, model_name])
+
 %ol.sortable_tree{ data: { max_levels: 5, rebuild_url: url_for([:rebuild, controller_name]) } }
   = sortable_tree @posts

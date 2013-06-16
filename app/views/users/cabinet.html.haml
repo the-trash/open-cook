@@ -1,11 +1,15 @@
 %h3 Cabinet of: #{@user.login}
 
 %ul
+  - [:pages, :posts].each do |controller_name|
+    - items_count = @user.send(controller_name).with_states(:draft, :published).count
+    %li= link_to "#{controller_name} (#{items_count})", [:manage, @user, controller_name]
+  %li= link_to t('hubs.hubs_manage'), [:manage, @user, :hubs]
+
+%hr
+
+%ul
   %li= link_to "My comments #{@user.my_comments_count}", [:my, :comments]
   %li= link_to "Incoming comments #{@user.comcoms_sum}", [:incoming, :comments]
   %li= link_to "New comments #{@user.draft_comcoms_count}", [:new, :comment]
   %li= link_to "Deleted comments #{@user.deleted_comcoms_count}", [:trash, :comments]
-
-  - [:pages, :posts, :blogs, :recipes, :articles].each do |controller_name|
-    %li= link_to "#{controller_name} (#{@user.send(controller_name).with_states(:draft, :published).count})", [:manage, @user, controller_name]
-  %li= link_to t('hubs.hubs_manage'), [current_user, :hubs]

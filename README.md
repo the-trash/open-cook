@@ -64,6 +64,12 @@ bin/rake db:migrate
 bin/rake db:seed
 ```
 
+DJ run
+
+```
+script/delayed_job start
+```
+
 web server run
 
 ```

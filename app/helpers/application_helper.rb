@@ -1,13 +1,9 @@
 module ApplicationHelper
-  def index_url controller_name
-    url_for(controller: controller_name)
+  def model_name
+    controller_name.singularize
   end
 
-  def edit_url obj
-    url_for(controller: obj.controller_name, action: :edit, id: obj)
-  end
-
-  def show_url obj
-    url_for(controller: obj.controller_name, action: :show, id: obj)
+  def publication_states
+    %w[ draft published ].collect{ |state| [ t("publication.#{state}"), state ] }
   end
 end

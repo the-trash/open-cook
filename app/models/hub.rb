@@ -1,14 +1,11 @@
 class Hub < ActiveRecord::Base
   include BaseSorts
   include BaseStates
+  include ActAsStorage
   include TheFriendlyId
   include NestedSetMethods
 
   before_save :update_publications_hub_state!
-
-  def controller_name
-    self.class.to_s.tableize
-  end
     
   # relations
   belongs_to :user
