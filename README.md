@@ -58,10 +58,7 @@ bundle
 Create DB and test data
 
 ```
-bin/rake db:drop
-bin/rake db:create
-bin/rake db:migrate
-bin/rake db:seed
+rake db:drop && rake db:create && rake db:migrate && rake db:seed
 ```
 
 DJ run
@@ -89,3 +86,7 @@ TESTS
 ```
 bundle exec rspec spec/integration/welcome_spec.rb --format documentation
 ```
+
+# included do; end
+# module ClassMethods; end
+# module InstanceMethods; end

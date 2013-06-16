@@ -1,7 +1,5 @@
 module PublicationController
   extend ActiveSupport::Concern
-  # module ClassMethods; end
-  # module InstanceMethods; end
 
   included do
     before_action :set_klass
@@ -29,7 +27,11 @@ module PublicationController
 
     # PROTECTED
     def manage
-      @posts = @user.send(controller_name).with_states(:draft, :published).nested_set.page(params[:page])
+      @posts = @user.send(controller_name)
+                .nested_set
+                .with_pub_type(params[:pub_type])
+                .with_states(:draft, :published)
+                .page(params[:page]).per(params[:per_page])
       render 'posts/manage'
     end
 
@@ -76,6 +78,7 @@ module PublicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_post_and_user
+      # return render text: params
       @post = @klass.friendly_where(params[:id]).with_states(:published, :draft).first
       @user = @post.user
     end

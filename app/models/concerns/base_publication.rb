@@ -2,8 +2,16 @@ module BasePublication
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def active_publications
+    def active_pubs
       includes(:user).with_states(:published).where(hub_state: :published)
+    end
+
+    def with_name name
+      where(title: name).first
+    end
+
+    def with_pub_type type
+      type ? where(pub_type: type) : all
     end
   end
 
@@ -17,7 +25,6 @@ module BasePublication
 
     before_validation :define_user_via_hub, :define_hub_state, on: :create
     before_save       :prepare_content
-    after_save        :update_hub_counters
 
     paginates_per 25
 
@@ -25,17 +32,9 @@ module BasePublication
     belongs_to :user
     belongs_to :hub
 
-    validates_presence_of   :user, :hub, :title
+    validates_presence_of   :user, :hub, :title, :pub_type
     validates_uniqueness_of :slug, unless: ->(pub) { pub.slug.blank? }
   end
-
-  # def controller_name
-  #   self.class.to_s.tableize
-  # end
-
-  # def show_path
-  #   "/#{controller_name}/#{to_param}"
-  # end
 
   private
 
@@ -45,10 +44,6 @@ module BasePublication
 
   def define_hub_state
     self.hub_state = hub.state if hub
-  end
-
-  def update_hub_counters
-    hub.recalculate_publications_counters!
   end
 
   def prepare_content

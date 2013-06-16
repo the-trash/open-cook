@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
   create_table "hubs", force: true do |t|
     t.integer  "user_id"
     t.integer  "hub_id"
+    t.string   "pub_type",                 default: "hubs"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -102,35 +103,33 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.string   "title"
     t.text     "raw_intro"
     t.text     "raw_content"
-    t.string   "hub_state",                    default: "draft"
+    t.string   "hub_state",                default: "draft"
     t.text     "intro"
     t.text     "content"
     t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "hub_name"
-    t.string   "hub_type"
-    t.integer  "draft_publications_count",     default: 0
-    t.integer  "published_publications_count", default: 0
-    t.integer  "deleted_publications_count",   default: 0
+    t.integer  "pubs_count_draft",         default: 0
+    t.integer  "pubs_count_published",     default: 0
+    t.integer  "pubs_count_deleted",       default: 0
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",                        default: 0
+    t.integer  "depth",                    default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",                   default: 0
-    t.string   "state",                        default: "draft"
-    t.string   "moderation_state",             default: "unmoderated"
+    t.integer  "show_count",               default: 0
+    t.string   "state",                    default: "draft"
+    t.string   "moderation_state",         default: "raw"
     t.text     "moderator_note"
     t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
-    t.integer  "draft_comments_count",         default: 0
-    t.integer  "published_comments_count",     default: 0
-    t.integer  "deleted_comments_count",       default: 0
-    t.integer  "storage_files_count",          default: 0
-    t.integer  "storage_files_size",           default: 0
+    t.integer  "draft_comments_count",     default: 0
+    t.integer  "published_comments_count", default: 0
+    t.integer  "deleted_comments_count",   default: 0
+    t.integer  "storage_files_count",      default: 0
+    t.integer  "storage_files_size",       default: 0
   end
 
   create_table "ip_black_lists", force: true do |t|
@@ -142,6 +141,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
   create_table "pages", force: true do |t|
     t.integer  "user_id"
     t.integer  "hub_id"
+    t.string   "pub_type",           default: "pages"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.string   "main_image_url"
     t.integer  "show_count",         default: 0
     t.string   "state",              default: "draft"
-    t.string   "moderation_state",   default: "unmoderated"
+    t.string   "moderation_state",   default: "raw"
     t.text     "moderator_note"
     t.string   "slug"
     t.string   "short_id"
@@ -173,6 +173,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.integer  "hub_id"
+    t.string   "pub_type",                 default: "posts"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -194,7 +195,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.string   "main_image_url"
     t.integer  "show_count",               default: 0
     t.string   "state",                    default: "draft"
-    t.string   "moderation_state",         default: "unmoderated"
+    t.string   "moderation_state",         default: "raw"
     t.text     "moderator_note"
     t.string   "slug"
     t.string   "short_id"

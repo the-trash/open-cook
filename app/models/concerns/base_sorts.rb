@@ -6,9 +6,4 @@ module BaseSorts
     scope :oldest, -> { order('created_at ASC')  }
   end
 
-  # module ClassMethods
-  # end
- 
-  # module InstanceMethods
-  # end
 end

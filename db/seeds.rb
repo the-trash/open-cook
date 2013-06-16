@@ -110,16 +110,19 @@ User.first.update_attributes(role: Role.with_name(:admin))
 puts "Admin set"
 
 #####################################
-# PAGES
+# HUBS
 #####################################
 def create_system_hub name
   User.root.hubs.create!(
-    hub_name: name,
     title:    name,
-    hub_type: :posts
+    pub_type: :system_hubs
   )
 end
 
+
+#####################################
+# System HUBS
+#####################################
 create_system_hub(:articles)
 create_system_hub(:recipes)
 create_system_hub(:videos)
@@ -127,191 +130,96 @@ create_system_hub(:pages)
 create_system_hub(:blogs)
 
 #####################################
-# PAGES
+# Recipes HUBS
 #####################################
-# def create_system_pages_hub
-#   User.root.hubs.create!(
-#     title: :system_pages,
-#     hub_type: :pages
-#   )
-# end
+puts 'Recipe HUBS'
 
-# def create_system_pages
-#   system_hub = Hub.where(title: :system_pages).first
+recipes_hub = Hub.with_name(:recipes)
 
-#   system_hub.pages.create!(
-#     title: "О проекте",
-#     slug: :about,
-#     raw_content: Faker::Lorem.paragraphs(3).join
-#   )
+[
+  "Блины",
+  "Интервью",
+  "Статьи",
+  "Детские рецепты Марии Панковой",
+  "Открытая кухня Ольги Космос",
+  "Заготовки",
+  "Супы",
+  "На второе",
+  "Салаты",
+  "Рыба",
+  "Гарниры",
+  "Овощи",
+  "Вкусняшки к чаю",
+  "Кухня мужика",
+  "Напитки",
+  "Птица с подворья",
+  "К завтраку",
+  "Закуски",
+  "Ликеры и Сиропы",
+  "Выпечка несладкая",
+  "Соусы, дипы",
+  "Десерты",
+  "Кремы"
+].each do |title|
+  hub = User.root.hubs.create!(title: title, pub_type: :recipes)
+  hub.to_published
+  hub.move_to_child_of(recipes_hub)
+  print '.'
+end
 
-#   system_hub.pages.create!(
-#     title: "О компании",
-#     slug: :company,
-#     raw_content: Faker::Lorem.paragraphs(3).join
-#   )
-
-#   system_hub.pages.create!(
-#     title: "Команда",
-#     slug: :team,
-#     raw_content: Faker::Lorem.paragraphs(3).join
-#   )
-
-#   system_hub.pages.create!(
-#     title: "Пользовательское соглашение",
-#     slug: :agreement,
-#     raw_content: Faker::Lorem.paragraphs(3).join
-#   )
-# end
-
-# create_system_pages_hub
-# create_system_pages
-
-#####################################
-# BLOGS
-#####################################
-# def create_blog_hubs
-#   %w{ 2012 2013 }.each do |year|
-#     (1..12).to_a.each do |month|
-#       hub = User.root.hubs.create!(
-#         title: "#{year}-#{month}",
-#         hub_type: :blogs
-#       )
-#       hub.send("to_#{[:draft, :published, :deleted].sample}")
-#     end
-#   end
-# end
-
-# def create_blogs count
-#   users = User.all
-#   blog_hubs = Hub.of_(:blogs).all
-
-#   count.times do |index|
-#     user = users.sample
-#     blog = user.blogs.create!(
-#       title: "Blog #{index.next} (u:#{user.id})",
-#       raw_intro: Faker::Lorem.paragraphs(3).join,
-#       raw_content: Faker::Lorem.paragraphs(3).join
-#     )
-#     blog.send("to_#{[:draft, :published, :deleted].sample}")
-#     blog.update!(hub: blog_hubs.sample)
-#     puts "Blog created #{index}"
-#   end
-# end
-
-# create_blog_hubs
-# create_blogs 300
+puts
 
 #####################################
-# RECIPES
+# Blogs Videos Articles
 #####################################
 
-# def create_recipes_hubs
-#   [
-#     "Блины",
-#     "Интервью",
-#     "Статьи",
-#     "Детские рецепты Марии Панковой",
-#     "Открытая кухня Ольги Космос",
-#     "Заготовки",
-#     "Супы",
-#     "На второе",
-#     "Салаты",
-#     "Рыба",
-#     "Гарниры",
-#     "Овощи",
-#     "Вкусняшки к чаю",
-#     "Кухня мужика",
-#     "Напитки",
-#     "Птица с подворья",
-#     "К завтраку",
-#     "Закуски",
-#     "Ликеры и Сиропы",
-#     "Выпечка несладкая",
-#     "Соусы, дипы",
-#     "Десерты",
-#     "Кремы"
-#   ].each do |title|
-#     hub = User.root.hubs.create!(title: title, hub_type: :recipes)
-#     hub.to_published
-#   end
-# end
+%w[ blogs videos articles ].each do |name|
+  puts " --- #{name}"
 
-# def create_recipes count
-#   users = User.all
-#   recipes_hubs = Hub.of_(:recipes).all
+  15.times do
+    user     = User.all.sample
+    holder_hub = Hub.with_name(name)
 
-#   count.times do |index|
-#     user = users.sample
-#     hub  = recipes_hubs.sample
+    10.times do
+      post = user.posts.create!(
+        hub: holder_hub,
+        pub_type: name,
+        title: "#{name}: " + Faker::Lorem.sentence,
+        raw_intro: Faker::Lorem.paragraphs(2).join,
+        raw_content: Faker::Lorem.paragraphs(3).join
+      )
+      post.send("to_#{ %w[draft published deleted].sample }")
+      print '.'
+    end
+  end
 
-#     recipe = user.recipes.create!(
-#       hub: hub,
-#       title: Faker::Lorem.sentence,
-#       raw_intro: Faker::Lorem.paragraphs(3).join,
-#       raw_content: Faker::Lorem.paragraphs(3).join
-#     )
-#     recipe.send("to_#{[:draft, :published, :deleted].sample}")
-#     puts "Recipe created #{index}"
-#   end
-# end
-
-# create_recipes_hubs
-# create_recipes 300
+  puts
+end
 
 #####################################
-# POSTS
+# Recipes
 #####################################
 
-# def create_posts_hubs count
-#   users = User.all
+puts " --- recipes"
 
-#   count.times do |index|
-#     hub = users.sample.hubs.create!(
-#       title: Faker::Lorem.sentence,
-#       hub_type: :posts
-#     )
-#     hub.send("to_#{[:draft, :published, :deleted].sample}")
-#     puts "PostHub created"
-#   end
-# end
+recipes_hub = Hub.with_name(:recipes)
+recipes_hub.children.each do |menu|
+  5.times do
+    user = User.all.sample
 
-# def create_posts count
-#   users = User.all
-#   recipes_hubs = Hub.of_(:posts).all
-
-#   count.times do |index|
-#     user = users.sample
-#     hub  = user.hubs.of_(:posts).sample
-#     post = user.posts.create!(
-#       hub: hub,
-#       title: Faker::Lorem.sentence,
-#       raw_intro: Faker::Lorem.paragraphs(3).join,
-#       raw_content: Faker::Lorem.paragraphs(3).join
-#     )
-#     post.send("to_#{[:draft, :published, :deleted].sample}")
-#     puts "Post created"
-#   end
-# end
-
-# create_posts_hubs 50
-# create_posts 300
-
-######################################################
-# Create data for authors
-######################################################
-# User.with_role(:admin).each_with_index do |user, u|
-#   3.times do |m|
-#     create_hub(:posts, m.next, :posts, user, u.next)
-#     create_blogs 30
-#   end
-# end
-
-# # User.with_role(:author).each_with_index do |user, u|
-# #   3.times do |m|
-# #     create_hub(:posts, m.next, :posts, user, u.next)
-# #   end
-# # end
+    5.times do
+      post = user.posts.create!(
+        hub: menu,
+        pub_type: :recipes,
+        title: "#{menu.title}: " + Faker::Lorem.sentence,
+        raw_intro: Faker::Lorem.paragraphs(2).join,
+        raw_content: Faker::Lorem.paragraphs(3).join
+      )
+      post.send("to_#{ %w[draft published deleted].sample }")
+      print '.'
+    end
+  end
+end
 
 # def create_comment post, parent_comment = nil
 #   owner = [User.all.sample, nil].sample

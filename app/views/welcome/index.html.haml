@@ -3,8 +3,6 @@
     %tr
       %th
         %h4
-          = post.class
-          >
           = link_to post.title, show_url(post)
     %tr
       %td=raw post.intro
@@ -18,5 +16,3 @@
         = post.show_count
     %tr
       %td= link_to t('publications.read_more'), '#'
-
-=# raw infinite_paginate 

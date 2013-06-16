@@ -1,12 +1,21 @@
 %h3 Cabinet of: #{@user.login}
 
-%ul
-  - [:pages, :posts].each do |controller_name|
-    - items_count = @user.send(controller_name).with_states(:draft, :published).count
-    %li= link_to "#{controller_name} (#{items_count})", [:manage, @user, controller_name]
-  %li= link_to t('hubs.hubs_manage'), [:manage, @user, :hubs]
+%h4 Посты
+
+%p= link_to 'Новый Пост', new_post_url
+%p= link_to 'Моя Лента',  user_posts_url(@user)
+%p= link_to 'Управлять лентой',  manage_user_posts_url(@user)
 
 %hr
+
+%h4 Структура
+
+%p= link_to 'Управлять структурой', manage_hubs_url
+%p= link_to 'Управлять страницми', manage_pages_url
+
+%hr
+
+%h4 Комментарии
 
 %ul
   %li= link_to "My comments #{@user.my_comments_count}", [:my, :comments]

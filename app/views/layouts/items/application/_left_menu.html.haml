@@ -3,4 +3,4 @@
     %h3 Меню
     %ul.nav.nav-list
       - @hubs.each do |hub|
-        %li= link_to hub.title + " (#{hub.published_publications_count})", show_url(hub)
+        %li= link_to hub.title, show_url(hub)

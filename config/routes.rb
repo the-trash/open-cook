@@ -10,13 +10,6 @@ TheApp::Application.routes.draw do
   # Personal
   get "cabinet" => "users#cabinet", as: :cabinet
 
-  # Concerns
-  concern :manage do
-    collection do
-      get :manage
-    end
-  end
-
   concern :sortable_tree do
     collection do
       get  :manage
@@ -25,16 +18,20 @@ TheApp::Application.routes.draw do
   end
 
   # Direct routes
-  %w{ hubs pages posts blogs notes recipes articles }.each do |name|
+  %w{ hubs pages posts }.each do |name|
     resources name, concerns: :sortable_tree
   end
 
   # Users
   resources :users, only: [:index, :show, :create] do
-    %w{ pages posts blogs notes recipes articles hubs }.each do |name|
-      resources name, concerns: :manage
+    %w{ hubs pages posts }.each do |name|
+      resources name, concerns: :sortable_tree
     end
   end
+
+  # /users/:user_id/manage/recipes
+  get "manage/:pub_type" => 'posts#manage', as: :pubs_manage
+  get "users/:user_id/manage/:pub_type" => 'posts#manage', as: :user_pubs_manage
 
   # TheStorages
   patch '/image_processor/rotate_left/:id',  as: :rotate_left,  to: 'image_processor#rotate_left'

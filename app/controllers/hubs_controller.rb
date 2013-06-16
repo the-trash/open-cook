@@ -9,4 +9,9 @@ class HubsController < ApplicationController
     @posts = @hub.publications.with_state(:published).nested_set.page(params[:page])
     render 'posts/index'
   end
+
+  def set_post_and_user
+    @post = Hub.where(title: params[:id]).with_states(:published, :draft).first
+    @user = @post.user
+  end
 end
