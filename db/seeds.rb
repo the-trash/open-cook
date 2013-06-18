@@ -99,14 +99,14 @@ puts "Roles created"
   )
   # with different roles
   role_name = [:user, :user, :author].sample
-  user.update_attributes(role: Role.with_name(role_name))
+  user.update_attributes(role: Role.with_title(role_name))
 
   puts "User #{i.next} role:#{role_name} created"
 end
 
 # set Admin
 # update with validations
-User.first.update_attributes(role: Role.with_name(:admin))
+User.first.update_attributes(role: Role.with_title(:admin))
 puts "Admin set"
 
 #####################################
@@ -134,7 +134,7 @@ create_system_hub(:blogs)
 #####################################
 puts 'Recipe HUBS'
 
-recipes_hub = Hub.with_name(:recipes)
+recipes_hub = Hub.with_title(:recipes)
 
 [
   "Блины",
@@ -178,7 +178,7 @@ puts
 
   15.times do
     user     = User.all.sample
-    holder_hub = Hub.with_name(name)
+    holder_hub = Hub.with_title(name)
 
     10.times do
       post = user.posts.create!(
@@ -202,7 +202,7 @@ end
 
 puts " --- recipes"
 
-recipes_hub = Hub.with_name(:recipes)
+recipes_hub = Hub.with_title(:recipes)
 recipes_hub.children.each do |menu|
   5.times do
     user = User.all.sample

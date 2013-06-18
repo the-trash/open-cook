@@ -1,0 +1,11 @@
+.meta_fields
+  %p
+    = link_to '#' do
+      %b SEO/META
+      %i.icon-arrow-down
+
+  .set.hidden
+    - %w[ author keywords description copyright].each do |name|
+      .field
+        = f.label name
+        = f.text_field name, class: :span5

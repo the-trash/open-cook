@@ -22,6 +22,10 @@ TheApp::Application.routes.draw do
     resources name, concerns: :sortable_tree
   end
 
+  resources :hubs do
+    post :selector, on: :collection
+  end
+
   # Users
   resources :users, only: [:index, :show, :create] do
     %w{ hubs pages posts }.each do |name|

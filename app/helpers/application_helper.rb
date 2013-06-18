@@ -10,4 +10,8 @@ module ApplicationHelper
   def publication_states
     %w[ draft published ].collect{ |state| [ t("publication.#{state}"), state ] }
   end
+
+  def publication_types
+    %w[ posts blogs recipes videos articles ].collect{ |type| [ t("publication.#{type}"), type ] }
+  end
 end

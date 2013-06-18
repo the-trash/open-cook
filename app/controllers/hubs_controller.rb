@@ -14,4 +14,15 @@ class HubsController < ApplicationController
     @post = Hub.where(title: params[:id]).with_states(:published, :draft).first
     @user = @post.user
   end
+
+  def selector
+    root_hub = Hub.with_title(params[:pub_type])
+    return render nothing: true unless root_hub
+
+    @hubs = root_hub.children
+    return render nothing: true if @hubs.blank?
+
+    @selected_hub = params[:klass].constantize.find(params[:id]).try(:hub)
+    render layout: false
+  end
 end

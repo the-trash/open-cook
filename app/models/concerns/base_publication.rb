@@ -6,7 +6,7 @@ module BasePublication
       includes(:user).with_states(:published).where(hub_state: :published)
     end
 
-    def with_name name
+    def with_title name
       where(title: name).first
     end
 
@@ -32,14 +32,14 @@ module BasePublication
     belongs_to :user
     belongs_to :hub
 
-    validates_presence_of   :user, :hub, :title, :pub_type
+    validates_presence_of   :user, :title, :pub_type
     validates_uniqueness_of :slug, unless: ->(pub) { pub.slug.blank? }
   end
 
   private
 
   def define_user_via_hub
-    self.user = hub.user if user.blank?
+    self.user = hub.user if hub && user.blank?
   end
 
   def define_hub_state

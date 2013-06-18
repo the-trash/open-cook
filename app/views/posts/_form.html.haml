@@ -6,11 +6,27 @@
         - @post.errors.full_messages.each do |msg|
           %li= msg
 
-  = render partial: 'the_storages/preview_maker', locals: { storage: @post }
+  
+  =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
+  = hidden_field_tag 'post_id', @post.id
+
+  %p
+    %b Post author:
+    = @post.user.login
 
   .field
     = f.label :title
     = f.text_field :title
+
+  .field.pub_type_select
+    - options = options_for_select(publication_types, @post.pub_type)
+    = f.label  :pub_type, t('publication.type')
+    = f.select :pub_type, options
+
+  .field.hub_select
+
+  = render partial: "meta_fields", locals: { f: f }
+
   .field
     %p
       %b Вводная часть
@@ -20,8 +36,8 @@
       %b Основное содержимое
     = f.text_area :raw_content, class: :redactor_content
   .field
-    = f.label :state, t('publication.state')
     - options = options_for_select(publication_states, @post.state)
+    = f.label  :state, t('publication.state')
     = f.select :state, options
   .actions
     = f.submit 'Save'

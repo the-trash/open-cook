@@ -45,10 +45,11 @@ module PublicationController
     end
 
     def create
-      @post = @klass.new(post_params)
+      @post = current_user.send(controller_name).new(post_params)
 
       if @post.save
-        redirect_to @post, notice: "#{@klass.to_s} was successfully created."
+        redirect_to url_for([:edit, @post.user, @post]),
+                    notice: "#{@klass.to_s} was successfully created."
       else
         render 'posts/new'
       end
@@ -100,6 +101,8 @@ module PublicationController
       # TODO: user_id for update only for moderator|admin
       params.require(@klass_name).permit(
         :user_id,
+        :hub_id,
+        :pub_type,
         :author, :keywords, :description, :copyright,
         :title,
         :raw_intro,

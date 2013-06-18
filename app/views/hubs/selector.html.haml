@@ -1,0 +1,5 @@
+.field
+  = label_tag :hub_id
+  - opts_arr = @hubs.collect{ |hub| [ hub.title, hub.id ] }
+  - options  = options_for_select(opts_arr, @selected_hub.try(:id))
+  = select_tag 'post[hub_id]', options
