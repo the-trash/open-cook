@@ -35,8 +35,11 @@
           = render 'layouts/items/application/left_menu'
           = render 'layouts/items/application/right_menu'
         .span9
-          = flash[:error]
-          = flash[:notice]
+          - [:notice, :error, :alert].each do |level|
+            - unless flash[level].blank?
+              .alert.flash_msgs{ class: flash_class(level) }
+                %a.close ×
+                = content_tag :p, flash[level]       
           = yield
 
       %footer

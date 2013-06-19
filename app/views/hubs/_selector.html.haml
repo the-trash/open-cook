@@ -1,18 +1,21 @@
+-# opts_arr = hubs.collect{ |hub| [ hub.title, hub.id ] }
+-# options  = options_for_select(opts_arr, selected_hub_id)
+-# select_tag 'post[hub_id]', options
+- empty_hub = hidden_field_tag 'post[hub_id]'
+
 :ruby
   pub_type ||= params[:pub_type]
   klass    ||= params[:klass]
   id       ||= params[:id]
 
   root_hub = Hub.with_title(pub_type)
-  return nil unless root_hub
+  return empty_hub unless root_hub
 
   hubs = root_hub.children
-  return nil if hubs.blank?
+  return empty_hub if hubs.blank?
 
-  selected_hub_id = klass.constantize.find(id).try(:hub).try(:id)
+  selected_hub = !id.blank? ? klass.constantize.find(id).try(:hub) : nil
 
 .field
-  = label_tag :hub_id
-  - opts_arr = hubs.collect{ |hub| [ hub.title, hub.id ] }
-  - options  = options_for_select(opts_arr, selected_hub_id)
-  = select_tag 'post[hub_id]', options
+  = label_tag  :hub_id
+  = select_tag 'post[hub_id]', nested_options(hubs, selected: selected_hub), class: :nested_options

@@ -1,27 +1,26 @@
 = form_for @post do |f|
-  - if @post.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@post.errors.count, "error")} prohibited this post from being saved:"
-      %ul
-        - @post.errors.full_messages.each do |msg|
-          %li= msg
+  = error_messages_for @post
 
-  
   =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
   = hidden_field_tag 'post_id', @post.id
 
   - unless @post.new_record?
     %p
-      %b Post author:
+      %b= t('post.author')
       = @post.user.login
 
+    - if @post.hub
+      %p
+        %b= t('post.hub_title')
+        = @post.hub.title
+
   .field
-    = f.label :title
+    = f.label :title, t('post.title')
     = f.text_field :title
 
   .field.pub_type_select
-    - options = options_for_select(publication_types, @post.pub_type)
-    = f.label  :pub_type, t('publication.type')
+    - options = options_for_select(post_types, @post.pub_type)
+    = f.label  :pub_type, t('post.type')
     = f.select :pub_type, options
 
   .field.hub_select
@@ -31,15 +30,15 @@
 
   .field
     %p
-      %b Вводная часть
+      %b= t('post.intro')
     = f.text_area :raw_intro, class: :redactor_intro
   .field
     %p
-      %b Основное содержимое
+      %b= t('post.content')
     = f.text_area :raw_content, class: :redactor_content
   .field
     - options = options_for_select(publication_states, @post.state)
-    = f.label  :state, t('publication.state')
+    = f.label  :state, t('post.state')
     = f.select :state, options
   .actions
-    = f.submit 'Save'
+    = f.submit t('post.save'), class: :btn

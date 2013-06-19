@@ -8,13 +8,15 @@ module PublicationController
 
     # after_action -> { @audit = Audit.new.init(self, @post) }, only: [:create, :show, :update, :edit, :destroy]
 
-    include TheSortableTreeController::Rebuild
+    include TheSortableTreeController::ReversedRebuild
 
     def index
       # TODO: posts from hidden hubs should not be visible
       user   = User.where(login: user_id).first || @root
-      @posts = user.send(controller_name).with_states(:published).nested_set.page(params[:page])
-      @hubs  = !@posts.blank? ? @posts.first.hub.same_hubs.with_state(:published).nested_set : nil
+      @posts = user.send(controller_name)
+                .reversed_nested_set
+                .with_states(:published)
+                .page(params[:page]).per(params[:per_page])
       render 'posts/index'
     end
 
@@ -28,7 +30,7 @@ module PublicationController
     # PROTECTED
     def manage
       @posts = @user.send(controller_name)
-                .nested_set
+                .reversed_nested_set
                 .with_pub_type(params[:pub_type])
                 .with_states(:draft, :published)
                 .page(params[:page]).per(params[:per_page])

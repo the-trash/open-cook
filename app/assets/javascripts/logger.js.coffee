@@ -55,8 +55,12 @@ class @App
           pub_type: $(@).val()
         success: (data, status, response) ->
           $('.hub_select').html data
-  
+
+  @init_flash_messages_close = ->
+    $('.flash_msgs').on 'click', 'a.close', ->
+      $(@).parent().hide()
 $ ->
   App.init_post_edit_meta_fields()
+  App.init_flash_messages_close()
   App.init_pub_type_select()
   MultiInput.init()

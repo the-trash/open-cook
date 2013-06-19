@@ -1,0 +1,36 @@
+ru:
+  post:
+    author: 'Автор поста:'
+    hub_title: 'Имя раздела:'
+    title: 'Заголовок:'
+    type: 'Тип поста:'
+    intro: 'Вводная часть:'
+    content: 'Основное содержимое:'
+    state: 'Состояние:'
+    save: Сохранить
+  publication:
+    draft: Черновик
+    published: Опубликовано
+    posts: Пост
+    blogs: Блог
+    recipes: Рецепт
+    videos: Видео
+    articles: Статья
+  views:
+    pagination:
+      first: "&laquo; Первая"
+      last: "Последняя &raquo;"
+      previous: "&lsaquo; Туда"
+      next: "Сюда &rsaquo;"
+      truncate: "..."
+  sessions:
+    new: Login
+    login: Login
+    logout: Logout
+    create:
+      alert: "Login or Password was invalid"
+      notice: "Logged in!"
+    destroy:
+      noticce: "Logged out!"
+  users:
+    index: Users list

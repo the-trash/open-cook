@@ -1,5 +1,6 @@
 class HubsController < ApplicationController
   include PublicationController
+  include TheSortableTreeController::Rebuild
 
   def show
     @hub = @post
@@ -17,5 +18,14 @@ class HubsController < ApplicationController
 
   def selector
     render layout: false, template: 'hubs/_selector'
+  end
+
+  def manage
+    @posts = @user.send(controller_name)
+              .nested_set
+              .with_pub_type(params[:pub_type])
+              .with_states(:draft, :published)
+              .page(params[:page]).per(params[:per_page])
+    render 'posts/manage'
   end
 end
