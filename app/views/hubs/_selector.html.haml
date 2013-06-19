@@ -1,0 +1,18 @@
+:ruby
+  pub_type ||= params[:pub_type]
+  klass    ||= params[:klass]
+  id       ||= params[:id]
+
+  root_hub = Hub.with_title(pub_type)
+  return nil unless root_hub
+
+  hubs = root_hub.children
+  return nil if hubs.blank?
+
+  selected_hub_id = klass.constantize.find(id).try(:hub).try(:id)
+
+.field
+  = label_tag :hub_id
+  - opts_arr = hubs.collect{ |hub| [ hub.title, hub.id ] }
+  - options  = options_for_select(opts_arr, selected_hub_id)
+  = select_tag 'post[hub_id]', options

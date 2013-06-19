@@ -10,9 +10,10 @@
   =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
   = hidden_field_tag 'post_id', @post.id
 
-  %p
-    %b Post author:
-    = @post.user.login
+  - unless @post.new_record?
+    %p
+      %b Post author:
+      = @post.user.login
 
   .field
     = f.label :title
@@ -24,6 +25,7 @@
     = f.select :pub_type, options
 
   .field.hub_select
+    = render partial: "hubs/selector", locals: { id: @post.id, klass: @post.class.to_s, pub_type: @post.pub_type }
 
   = render partial: "meta_fields", locals: { f: f }
 

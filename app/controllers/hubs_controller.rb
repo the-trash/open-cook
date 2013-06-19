@@ -16,13 +16,6 @@ class HubsController < ApplicationController
   end
 
   def selector
-    root_hub = Hub.with_title(params[:pub_type])
-    return render nothing: true unless root_hub
-
-    @hubs = root_hub.children
-    return render nothing: true if @hubs.blank?
-
-    @selected_hub = params[:klass].constantize.find(params[:id]).try(:hub)
-    render layout: false
+    render layout: false, template: 'hubs/_selector'
   end
 end

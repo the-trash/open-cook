@@ -99,14 +99,14 @@ puts "Roles created"
   )
   # with different roles
   role_name = [:user, :user, :author].sample
-  user.update_attributes(role: Role.with_title(role_name))
+  user.update_attributes(role: Role.with_name(role_name))
 
   puts "User #{i.next} role:#{role_name} created"
 end
 
 # set Admin
 # update with validations
-User.first.update_attributes(role: Role.with_title(:admin))
+User.first.update_attributes(role: Role.with_name(:admin))
 puts "Admin set"
 
 #####################################
