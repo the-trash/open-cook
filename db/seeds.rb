@@ -118,8 +118,6 @@ def create_system_hub name
     pub_type: :system_hubs
   )
 end
-
-
 #####################################
 # System HUBS
 #####################################
@@ -220,6 +218,70 @@ recipes_hub.children.each do |menu|
     end
   end
 end
+
+#####################################
+# Pages
+#####################################
+
+puts " --- pages"
+
+root      = User.root
+pages_hub = Hub.with_title(:pages)
+
+top_pages = root.hubs.create!(
+  title:    :top_pages,
+  pub_type: :pages
+)
+bottom_pages = root.hubs.create!(
+  title:    :bottom_pages,
+  pub_type: :pages
+)
+
+top_pages.move_to_child_of    pages_hub
+bottom_pages.move_to_child_of pages_hub
+
+#-----------------------------------
+# Top
+#-----------------------------------
+root.pages.create!(
+  hub: top_pages,
+  title: :about,
+  raw_content: Faker::Lorem.paragraphs(2).join,
+  state: :published
+)
+root.pages.create!(
+  hub: top_pages,
+  title: :authors,
+  raw_content: Faker::Lorem.paragraphs(2).join,
+  state: :published
+)
+root.pages.create!(
+  hub: top_pages,
+  title: :rules,
+  raw_content: Faker::Lorem.paragraphs(2).join,
+  state: :published
+)
+#-----------------------------------
+# Bottom
+#-----------------------------------
+root.pages.create!(
+  hub: bottom_pages,
+  title: :advertising,
+  raw_content: Faker::Lorem.paragraphs(2).join,
+  state: :published
+)
+root.pages.create!(
+  hub: bottom_pages,
+  title: :for_authors,
+  raw_content: Faker::Lorem.paragraphs(2).join,
+  state: :published
+)
+root.pages.create!(
+  hub: bottom_pages,
+  title: :contacts,
+  raw_content: Faker::Lorem.paragraphs(2).join,
+  state: :published
+)
 
 # def create_comment post, parent_comment = nil
 #   owner = [User.all.sample, nil].sample

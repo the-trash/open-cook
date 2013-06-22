@@ -32,7 +32,7 @@ module BasePublication
     belongs_to :user
     belongs_to :hub
 
-    validates_presence_of   :user, :title, :pub_type
+    validates_presence_of   :user, :title
     validates_uniqueness_of :slug, unless: ->(pub) { pub.slug.blank? }
   end
 

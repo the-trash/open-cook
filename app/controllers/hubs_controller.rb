@@ -1,6 +1,7 @@
 class HubsController < ApplicationController
   include PublicationController
   include TheSortableTreeController::Rebuild
+  include TheSortableTreeController::ExpandNode
 
   def show
     @hub = @post
@@ -22,10 +23,10 @@ class HubsController < ApplicationController
 
   def manage
     @posts = @user.send(controller_name)
+              .roots
               .nested_set
               .with_pub_type(params[:pub_type])
               .with_states(:draft, :published)
               .page(params[:page]).per(params[:per_page])
-    render 'posts/manage'
   end
 end
