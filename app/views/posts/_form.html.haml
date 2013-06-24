@@ -24,7 +24,7 @@
     = f.select :pub_type, options
 
   .field.hub_select
-    = render partial: "hubs/selector", locals: { id: @post.id, klass: @post.class.to_s, pub_type: @post.pub_type }
+    = render partial: "hubs/selector"
 
   = render partial: "meta_fields", locals: { f: f }
 

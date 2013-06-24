@@ -18,6 +18,7 @@ class HubsController < ApplicationController
   end
 
   def selector
+    initialize_hubs_selector(params[:id], params[:klass], params[:pub_type])
     render layout: false, template: 'hubs/_selector'
   end
 

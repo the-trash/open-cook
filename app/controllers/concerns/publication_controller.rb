@@ -1,4 +1,5 @@
 module PublicationController
+  include HubCells
   extend ActiveSupport::Concern
 
   included do
@@ -38,10 +39,12 @@ module PublicationController
     end
 
     def edit
+      initialize_hubs_selector(@post.id, @post.class.to_s, @post.pub_type)
       render 'posts/edit'
     end
 
     def new
+      initialize_hubs_selector
       @post = @klass.new
       render 'posts/new'
     end

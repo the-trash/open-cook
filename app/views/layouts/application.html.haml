@@ -26,6 +26,9 @@
       .row
         .span12
           = render 'layouts/items/application/top_menu'
+        .span12
+          - Hub.with_title(:top_pages).pages.each do |page|
+            = link_to page.title, page_url(page)
       .row
         .span12
           %center
@@ -44,3 +47,6 @@
 
       %footer
         %p &copy; Company 2013
+        .span12
+          - Hub.with_title(:bottom_pages).pages.each do |page|
+            = link_to page.title, page_url(page)

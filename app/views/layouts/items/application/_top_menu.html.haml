@@ -14,7 +14,6 @@
               = link_to cabinet_url do
                 Cabinet: #{ current_user.login }
           %li= link_to t('users.index'), users_url
-          %li= link_to 'События на сайте', '#'
           %li= link_to 'New comments', comments_url
 
           - if current_user

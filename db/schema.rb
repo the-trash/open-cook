@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "hubs", force: true do |t|
     t.integer  "user_id"
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
   create_table "pages", force: true do |t|
     t.integer  "user_id"
     t.integer  "hub_id"
-    t.string   "pub_type",           default: "pages"
+    t.string   "pub_type",                 default: "pages"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.string   "title"
     t.text     "raw_intro"
     t.text     "raw_content"
-    t.string   "hub_state",          default: "draft"
+    t.string   "hub_state",                default: "draft"
     t.text     "intro"
     t.text     "content"
     t.string   "legacy_url"
@@ -159,15 +159,18 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",              default: 0
+    t.integer  "depth",                    default: 0
     t.string   "main_image_url"
-    t.integer  "show_count",         default: 0
-    t.string   "state",              default: "draft"
-    t.string   "moderation_state",   default: "raw"
+    t.integer  "show_count",               default: 0
+    t.string   "state",                    default: "draft"
+    t.string   "moderation_state",         default: "raw"
     t.text     "moderator_note"
     t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "draft_comments_count",     default: 0
+    t.integer  "published_comments_count", default: 0
+    t.integer  "deleted_comments_count",   default: 0
   end
 
   create_table "posts", force: true do |t|
@@ -255,7 +258,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.integer  "storage_files_size",              default: 0
   end
 
-  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token"
+  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 
 end
