@@ -124,8 +124,12 @@ end
 create_system_hub(:articles)
 create_system_hub(:recipes)
 create_system_hub(:videos)
-create_system_hub(:pages)
 create_system_hub(:blogs)
+
+User.root.hubs.create!(
+  title:    :pages,
+  pub_type: :pages
+)
 
 #####################################
 # Recipes HUBS

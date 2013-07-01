@@ -8,7 +8,8 @@ class Hub < ActiveRecord::Base
   has_many :posts
 
   # scopes
-  scope :of_, ->(type) { where(pub_type: type) }
+  scope :of_,    ->(type) { where(pub_type: type) }
+  scope :system, -> { of_(:system_hubs) }
 
   # validations
   validates_presence_of :user, :title

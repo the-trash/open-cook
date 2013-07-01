@@ -6,14 +6,21 @@ class HubsController < ApplicationController
   def show
     @hub = @post
     @hub.increment!(:show_count)
-    @hubs = @hub.same_hubs.with_state(:published).nested_set
+    
+    @hubs = @hub.same_hubs
+              .nested_set
+              .with_state(:published)
 
-    @posts = @hub.publications.with_state(:published).nested_set.page(params[:page])
+    @posts = @hub.posts
+              .nested_set
+              .with_state(:published)
+              .page(params[:page]).per(params[:per_page])
+
     render 'posts/index'
   end
 
   def set_post_and_user
-    @post = Hub.where(title: params[:id]).with_states(:published, :draft).first
+    @post = Hub.friendly_where(params[:id]).with_states(:published, :draft).first
     @user = @post.user
   end
 
@@ -29,5 +36,17 @@ class HubsController < ApplicationController
               .with_pub_type(params[:pub_type])
               .with_states(:draft, :published)
               .page(params[:page]).per(params[:per_page])
+  end
+
+  def system_section
+    @hub   = Hub.with_title(params[:type])
+    @hubs  = @hub.descendants
+    @posts = Post
+              .nested_set
+              .with_states(:draft, :published)
+              .where(hub_id: @hubs.ids.push(@hub.id))
+              .page(params[:page]).per(params[:per_page])
+
+    render 'posts/index'
   end
 end

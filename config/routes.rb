@@ -43,4 +43,5 @@ TheApp::Application.routes.draw do
   patch '/image_processor/rotate_right/:id', as: :rotate_right, to: 'image_processor#rotate_right'
   patch '/image_processor/crop_image',       as: :crop_image,   to: 'image_processor#crop_image'
 
+  get "/:type" => 'hubs#system_section', as: :system_hub
 end
