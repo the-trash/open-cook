@@ -9,15 +9,22 @@
       %a.brand(href=root_url) Home
       .container.nav-collapse
         %ul.nav
+          - Hub.with_title(:top_pages).pages.each do |page|
+            %li= link_to page.title, page_url(page.slug)
+
+          %li= link_to 'Форумы', '#'
+
+          %li
+            %a
+              \|
+
           - if current_user
             %li
               = link_to cabinet_url do
                 Cabinet: #{ current_user.login }
-          %li= link_to t('users.index'), users_url
-          %li= link_to 'New comments', comments_url
-
-          - if current_user
-            %li= link_to t('sessions.logout'), logout_url, method: :delete
+            %li
+              = link_to t('sessions.logout'), logout_url, method: :delete
           - else
-            %li= link_to t('sessions.new'), login_url
+            %li= link_to  'Вход', login_url
+            %li= link_to  'Регистрация', signup_url
 

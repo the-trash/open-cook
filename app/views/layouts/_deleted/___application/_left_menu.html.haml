@@ -1,3 +1,0 @@
-%ul.nav.nav-pills.nav-stacked
-  - @user.hubs.of_(:menu).published.each do |hub|
-    %li= link_to hub.title, menu_path(hub)

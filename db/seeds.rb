@@ -253,14 +253,9 @@ root.pages.create!(
   raw_content: Faker::Lorem.paragraphs(2).join,
   state: :published
 )
+
 root.pages.create!(
-  hub: top_pages,
-  title: :authors,
-  raw_content: Faker::Lorem.paragraphs(2).join,
-  state: :published
-)
-root.pages.create!(
-  hub: top_pages,
+  hub: bottom_pages,
   title: :rules,
   raw_content: Faker::Lorem.paragraphs(2).join,
   state: :published

@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 # source 'http://gems.github.com'
 # Delete all gems: gem list | cut -d" " -f1 | xargs gem uninstall -aIx
 
-gem 'rails', "4.0.0.rc2"
+gem 'rails', '4.0'
 
 gem 'mysql2'
 gem 'sqlite3'
@@ -24,13 +24,14 @@ gem 'sanitize'
 gem "state_machine", "~> 1.2.0"
 gem 'haml'               , git: 'git@github.com:haml/haml.git', tag: '4.0.1'
 gem 'acts-as-taggable-on', git: 'git@github.com:mbleigh/acts-as-taggable-on.git'
-gem 'awesome_nested_set' , git: 'git@github.com:collectiveidea/awesome_nested_set.git', branch: 'rails4'
+gem 'awesome_nested_set',  git: 'git@github.com:collectiveidea/awesome_nested_set.git', branch: '606646e933d' #branch: 'rails4'
 
 # gem 'rmagick'
 gem 'mini_magick'
 gem 'paperclip', git: 'git@github.com:thoughtbot/paperclip.git', branch: 'rails-4'
 
-gem 'delayed_job', path: '../delayed_job'
+gem 'daemons'
+gem 'delayed_job',               path: '../delayed_job'
 gem 'delayed_job_active_record', path: '../delayed_job_active_record'
 
 gem 'the_role'    , path: '../the_role'

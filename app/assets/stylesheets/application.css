@@ -11,9 +11,11 @@
  
  *= require base/reset
  *= require base/mix
- *= require base/body
  *= require base/headers
 
+ *= require base/layout
+ *= require base/header
+ 
  *= require bootstrap
  
  *= require tree
@@ -23,7 +25,6 @@
 
  *= require redactor
 
- *= require layout/base
  *= require layout/top_menu
  *= require layout/left_menu
 
