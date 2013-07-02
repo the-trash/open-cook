@@ -121,6 +121,7 @@ end
 #####################################
 # System HUBS
 #####################################
+create_system_hub(:interviews)
 create_system_hub(:articles)
 create_system_hub(:recipes)
 create_system_hub(:videos)
@@ -175,7 +176,7 @@ puts
 # Blogs Videos Articles
 #####################################
 
-%w[ blogs videos articles ].each do |name|
+%w[ blogs videos articles interviews].each do |name|
   puts " --- #{name}"
 
   15.times do
@@ -249,72 +250,84 @@ bottom_pages.move_to_child_of pages_hub
 #-----------------------------------
 root.pages.create!(
   hub: top_pages,
-  title: :about,
+  title: 'О сайте',
+  slug:  :about,
   raw_content: Faker::Lorem.paragraphs(2).join,
   state: :published
 )
 
-root.pages.create!(
-  hub: bottom_pages,
-  title: :rules,
-  raw_content: Faker::Lorem.paragraphs(2).join,
-  state: :published
-)
 #-----------------------------------
 # Bottom
 #-----------------------------------
 root.pages.create!(
   hub: bottom_pages,
-  title: :advertising,
+  title: 'Правила сайта',
+  slug:  :rules,
   raw_content: Faker::Lorem.paragraphs(2).join,
   state: :published
 )
 root.pages.create!(
   hub: bottom_pages,
-  title: :for_authors,
+  title: 'Помощь',
+  slug:  :help,
   raw_content: Faker::Lorem.paragraphs(2).join,
   state: :published
 )
 root.pages.create!(
   hub: bottom_pages,
-  title: :contacts,
+  title: 'Партнеры и друзья',
+  slug:  :partners,
+  raw_content: Faker::Lorem.paragraphs(2).join,
+  state: :published
+)
+root.pages.create!(
+  hub: bottom_pages,
+  title: 'Авторам',
+  slug:  :authors,
+  raw_content: Faker::Lorem.paragraphs(2).join,
+  state: :published
+)
+root.pages.create!(
+  hub: bottom_pages,
+  title: 'Контакты',
+  slug:  :contacts,
   raw_content: Faker::Lorem.paragraphs(2).join,
   state: :published
 )
 
-# def create_comment post, parent_comment = nil
-#   owner = [User.all.sample, nil].sample
+def create_comment post, parent_comment = nil
+  owner = [User.all.sample, nil].sample
 
-#   comment = post.comments.create!(
-#     user:        owner,
-#     commentable: post,
-#     title:       Faker::Lorem.sentence,
-#     contacts:    Faker::Lorem.sentence,
-#     raw_content: Faker::Lorem.paragraphs(4).join,
-#     parent_id:   parent_comment.try(:id)
-#   )
+  comment = post.comments.create!(
+    user:        owner,
+    commentable: post,
+    title:       Faker::Lorem.sentence,
+    contacts:    Faker::Lorem.sentence,
+    raw_content: Faker::Lorem.paragraphs(4).join,
+    parent_id:   parent_comment.try(:id)
+  )
 
-#   puts "Comment created #{parent_comment.try(:id)}"
-#   puts "Default Comment state => #{comment.state}"
+  puts "Comment created #{parent_comment.try(:id)}"
+  puts "Default Comment state => #{comment.state}"
 
-#   st = [:draft, :published].sample
-#   puts "to => #{st}"
-#   comment.send("to_#{st}")
+  st = [:draft, :published].sample
+  puts "to => #{st}"
+  comment.send("to_#{st}")
 
-#   comment
-# end
+  comment
+end
 
-# Post.all.each do |post|
-#   3.times do
-#     parent = create_comment(post)
-#     3.times do
-#       parent = create_comment(post, parent)
-#       3.times do
-#         create_comment(post, parent)
-#       end
-#     end
-#   end
-# end
+Post.all.each do |post|
+  1.times do
+    parent = create_comment(post)
+    # 3.times do
+    #   parent = create_comment(post, parent)
+    #   3.times do
+    #     create_comment(post, parent)
+    #   end
+    # end
+  end
+end
 
 
 # Comment.all.shuffle[0..40].each do |comment|

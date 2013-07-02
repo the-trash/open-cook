@@ -57,7 +57,8 @@ module TheFriendlyId
 
     def build_slugs
       unless self.title.blank?
-        self.slug        = Russian::translit(self.title.to_s).parameterize('-')
+        _slug            = self.slug.blank? ? self.title : self.slug
+        self.slug        = Russian::translit(_slug.to_s).parameterize('-')
         self.friendly_id = [self.short_id, self.slug].join TheFriendlyId::SEPARATOR
       end
     end

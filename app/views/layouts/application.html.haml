@@ -25,7 +25,7 @@
     .container    
       .row.header
         .span12.main
-          = render 'layouts/items/application/top_menu'
+          = render 'layouts/items/top_menu'
         .span12.hubs
           - Hub.system.each do |hub|
             = link_to hub.title, system_hub_url(hub.title)
@@ -36,8 +36,8 @@
             %h3 Site of: #{ @user.login }
       .row
         .span3
-          = render 'layouts/items/application/left_menu'
-          = render 'layouts/items/application/right_menu'
+          = render 'layouts/items/recent_comments'
+          = render 'layouts/items/left_menu'
         .span6
           - [:notice, :error, :alert].each do |level|
             - unless flash[level].blank?
@@ -46,12 +46,11 @@
                 = content_tag :p, flash[level]       
           = yield
         .span3
+          = render 'layouts/items/right_menu'
 
       %footer
         %p &copy; Company 2013
         .span12
           = link_to t('users.index'), users_url
-          = link_to 'New comments', comments_url
-        .span12
           - Hub.with_title(:bottom_pages).pages.each do |page|
             = link_to page.title, page_url(page.slug)
