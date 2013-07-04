@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 # source 'http://gems.github.com'
 # Delete all gems: gem list | cut -d" " -f1 | xargs gem uninstall -aIx
 
-gem 'rails', '4.0'
+gem "rails", "~> 4.0.0"
 
 gem 'mysql2'
 gem 'sqlite3'
