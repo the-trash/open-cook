@@ -11,5 +11,17 @@
     = javascript_include_tag 'open_cook/application'
     = stylesheet_link_tag    'open_cook/application', media: :all
   %body
-    = yield
-    
+    .body
+      .header
+        = render partial: 'layouts/open_cook/items/header'
+
+      .content.overblock
+        %table.layout
+          %tr
+            %td.left
+            %td.center= yield
+            %td.right
+
+      .footer_guarantor &nbsp;
+    .footer.overblock
+      = render partial: 'layouts/open_cook/items/footer'

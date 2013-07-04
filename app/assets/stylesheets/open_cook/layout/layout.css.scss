@@ -1,0 +1,31 @@
+@import '../../base/mix';
+
+.body{ padding-top: 5px; }
+
+.layout{
+  width: 100%;
+  margin-bottom: 15px;
+
+  .center{
+    .block{
+      width: 580px;
+      margin: 0 10px;
+      @include overblock;
+
+      p{
+        color: #47494B;
+        font-size: 12pt;
+        margin-bottom: 15px;
+      }
+    }
+  }
+
+  .left, .right{
+    width: 200px;
+
+    .block{
+      width: 200px;
+      @include overblock;
+    }
+  }
+}

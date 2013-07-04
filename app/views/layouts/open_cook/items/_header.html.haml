@@ -1,0 +1,14 @@
+= link_to 'Home', '/', class: :home
+
+%ul.login_fu
+  %li= link_to 'Форумы', '#'
+
+  - if current_user
+    %li
+      = link_to cabinet_url do
+        Cabinet: #{ current_user.login }
+    %li
+      = link_to t('sessions.logout'), logout_url, method: :delete
+  - else
+    %li= link_to  'Вход', login_url
+    %li= link_to  'Регистрация', signup_url

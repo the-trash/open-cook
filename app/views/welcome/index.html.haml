@@ -1,18 +1,11 @@
-- @posts.each do |post|
-  %table.table.table-bordered
-    %tr
-      %th
-        %h4
-          = link_to post.title, show_url(post)
-    %tr
-      %td=raw post.intro
-    %tr
-      %td
-        %b= t('publications.author')
-        = post.user.login
-        %b= t('publications.comments')
-        = post.comments_sum
-        %b= t('publications.views')
-        = post.show_count
-    %tr
-      %td= link_to t('publications.read_more'), '#'
+= paginate @posts
+
+%ul.posts_index
+  - @posts.each do |post|
+    %li
+      %h2= link_to post.title, show_url(post)
+      %p=raw post.intro
+      %p.pub_info= post_info(post)
+      %p.read_more= link_to t('publications.read_more'), '#'
+
+= paginate @posts

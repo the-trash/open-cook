@@ -1,11 +1,15 @@
 /* 
  *= require base/reset
  *= require base/mix
+ *= require base/layout
  *= require base/headers
 
- *= require base/layout
- *= require base/header
+ *= require open_cook/layout/header
+ *= require open_cook/layout/layout
+ *= require open_cook/layout/footer
  
+ *= require open_cook/posts/index
+
  *= require tree
  *= require sortable_tree
  *= require nested_options
