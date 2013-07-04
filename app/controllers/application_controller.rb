@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   before_action :define_user
   after_action  :save_audit
 
+  layout('open_cook/application')
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception

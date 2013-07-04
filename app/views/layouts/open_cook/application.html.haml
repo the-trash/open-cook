@@ -1,0 +1,15 @@
+!!! 5
+%html(lang="ru")
+  %head
+    %meta(charset="utf-8")
+    %link(href="favicon.ico" rel="shortcut icon")
+    %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    %title= content_for?(:title) ? yield(:title) : "open-cook.ru"
+
+    = csrf_meta_tags
+    = javascript_include_tag 'open_cook/application'
+    = stylesheet_link_tag    'open_cook/application', media: :all
+  %body
+    = yield
+    
