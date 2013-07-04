@@ -1,4 +1,4 @@
-### HOW TO INSTALL
+### HOW TO INSTALL 
 
 Create project dir
 
@@ -58,7 +58,7 @@ bundle
 Create DB and test data
 
 ```
-rake db:drop && rake db:create && rake db:migrate && rake db:seed
+rake db:bootstrap_and_seed
 ```
 
 DJ run
