@@ -1,6 +1,4 @@
-= link_to "New #{pub_type}", url_for([:new, model_name])
-
-= paginate @posts
+%p= link_to "New #{pub_type}", url_for([:new, model_name])
 
 %ol.sortable_tree{ data: { max_levels: 5, rebuild_url: url_for([:rebuild, controller_name]), expand_node_url: expand_node_hubs_url, klass: @posts.first.class.to_s.downcase } }
   = expandable_tree @posts

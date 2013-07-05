@@ -2,5 +2,5 @@
   = hidden_field_tag 'post[hub_id]'
 - else
   .field
-    = label_tag  :hub_id
+    = label_tag :hub_id, 'Раздел: '
     = select_tag 'post[hub_id]', nested_options(@selector_hubs, selected: @selected_hub), class: :nested_options

@@ -5,7 +5,7 @@
   *= require base/headers
 
   *= require open_cook/base/form
-  *= require open_cook/base/colors
+  *= require open_cook/base/common
   *= require open_cook/base/pagination
 
   *= require open_cook/layout/header

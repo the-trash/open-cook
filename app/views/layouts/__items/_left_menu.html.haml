@@ -1,6 +1,0 @@
-- unless @hubs.blank?
-  .well.sidebar-nav
-    %h3 Меню
-    %ul.nav.nav-list
-      - @hubs.each do |hub|
-        %li= link_to hub.title, show_url(hub)
