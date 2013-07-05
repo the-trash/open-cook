@@ -2,11 +2,3 @@
 %h4
   login: #{ @user.login } (#{ @user.role.name })
 %hr
-
-%h4 Опубликовано:
-
-- [:posts, :pages, :notes, :blogs, :recipes, :articles].each do |name|
-  = link_to [@user, name] do
-    #{ name.capitalize}:
-    = link_to = @user.send("#{name}_count")
-  \|

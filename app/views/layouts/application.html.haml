@@ -39,11 +39,6 @@
           = render 'layouts/items/recent_comments'
           = render 'layouts/items/left_menu'
         .span6
-          - [:notice, :error, :alert].each do |level|
-            - unless flash[level].blank?
-              .alert.flash_msgs{ class: flash_class(level) }
-                %a.close ×
-                = content_tag :p, flash[level]       
           = yield
         .span3
           = render 'layouts/items/right_menu'

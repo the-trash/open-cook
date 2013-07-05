@@ -107,6 +107,7 @@ module PublicationController
       params.require(@klass_name).permit(
         :user_id,
         :hub_id,
+        :slug,
         :pub_type,
         :author, :keywords, :description, :copyright,
         :title,

@@ -112,23 +112,25 @@ puts "Admin set"
 #####################################
 # HUBS
 #####################################
-def create_system_hub name
+def create_system_hub slug, title
   User.root.hubs.create!(
-    title:    name,
+    slug:  slug,
+    title: title,
     pub_type: :system_hubs
   )
 end
 #####################################
 # System HUBS
 #####################################
-create_system_hub(:interviews)
-create_system_hub(:articles)
-create_system_hub(:recipes)
-create_system_hub(:videos)
-create_system_hub(:blogs)
+create_system_hub(:interviews, 'Интервью')
+create_system_hub(:articles, 'Статьи')
+create_system_hub(:recipes, 'Рецепты')
+create_system_hub(:videos, 'Видео')
+create_system_hub(:blogs, 'Блоги')
 
 User.root.hubs.create!(
-  title:    :pages,
+  slug:     :pages,
+  title:    'Страницы',
   pub_type: :pages
 )
 
@@ -137,7 +139,7 @@ User.root.hubs.create!(
 #####################################
 puts 'Recipe HUBS'
 
-recipes_hub = Hub.with_title(:recipes)
+recipes_hub = Hub.friendly_where(:recipes).first
 
 [
   "Блины",
@@ -179,11 +181,11 @@ puts
 %w[ blogs videos articles interviews].each do |name|
   puts " --- #{name}"
 
-  15.times do
+  2.times do
     user     = User.all.sample
-    holder_hub = Hub.with_title(name)
+    holder_hub = Hub.friendly_where(name).first
 
-    10.times do
+    2.times do
       post = user.posts.create!(
         hub: holder_hub,
         pub_type: name,
@@ -205,12 +207,12 @@ end
 
 puts " --- recipes"
 
-recipes_hub = Hub.with_title(:recipes)
+recipes_hub = Hub.friendly_where(:recipes).first
 recipes_hub.children.each do |menu|
-  5.times do
+  2.times do
     user = User.all.sample
 
-    5.times do
+    2.times do
       post = user.posts.create!(
         hub: menu,
         pub_type: :recipes,
@@ -231,7 +233,7 @@ end
 puts " --- pages"
 
 root      = User.root
-pages_hub = Hub.with_title(:pages)
+pages_hub = Hub.friendly_where(:pages).first
 
 top_pages = root.hubs.create!(
   title:    :top_pages,
@@ -319,7 +321,7 @@ end
 
 Post.all.each do |post|
   1.times do
-    parent = create_comment(post)
+    # parent = create_comment(post)
     # 3.times do
     #   parent = create_comment(post, parent)
     #   3.times do

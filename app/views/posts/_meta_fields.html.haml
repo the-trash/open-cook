@@ -5,7 +5,7 @@
       %i.icon-arrow-down
 
   .set.hidden
-    - %w[ author keywords description copyright].each do |name|
+    - %w[ slug author keywords description copyright].each do |name|
       .field
         = f.label name
         = f.text_field name

@@ -9,11 +9,6 @@
       %b= t('post.author')
       = @post.user.login
 
-    - if @post.hub
-      %p
-        %b= t('post.hub_title')
-        = @post.hub.title
-
   .field
     = f.label :title, t('post.title')
     = f.text_field :title
@@ -26,7 +21,7 @@
   .field.hub_select
     = render partial: "hubs/selector"
 
-  = render partial: "meta_fields", locals: { f: f }
+  = render partial: "posts/meta_fields", locals: { f: f }
 
   .field
     %p

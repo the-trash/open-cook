@@ -32,7 +32,7 @@ module BasePublication
     belongs_to :user
     belongs_to :hub
 
-    validates_presence_of   :user, :title, :slug
+    validates_presence_of   :user, :slug
     validates_uniqueness_of :slug
   end
 

@@ -12,7 +12,7 @@ module ApplicationHelper
   end
 
   def post_types
-    %w[ posts blogs recipes videos articles ].collect{ |type| [ t("publication.#{type}"), type ] }
+    %w[ posts blogs recipes videos articles pages ].collect{ |type| [ t("publication.#{type}"), type ] }
   end
 
   # Error mesages

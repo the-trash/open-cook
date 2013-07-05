@@ -39,7 +39,7 @@ class HubsController < ApplicationController
   end
 
   def system_section
-    @hub   = Hub.with_title(params[:type])
+    @hub   = Hub.friendly_first(params[:type])
     @hubs  = @hub.descendants
     @posts = Post
               .nested_set

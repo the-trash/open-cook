@@ -12,8 +12,8 @@ class Hub < ActiveRecord::Base
   scope :system, -> { of_(:system_hubs) }
 
   # validations
-  validates_presence_of :user, :title
-  validates :title,    uniqueness: { scope: :user }
+  validates_presence_of :user, :title, :slug
+  validates :slug, uniqueness: true
 
   def same_hubs
     Hub.where(pub_type: pub_type)

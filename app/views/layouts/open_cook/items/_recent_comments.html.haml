@@ -2,7 +2,7 @@
 
 - unless @comments.blank?
   .recent_comments
-    %h3 Последние комментарии
+    %h3 Новые комментарии
     - @comments.each do |comment|
       .comment
         %p= comment.content

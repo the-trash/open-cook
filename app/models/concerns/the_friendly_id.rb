@@ -8,7 +8,7 @@ module TheFriendlyId
   SEPARATOR = "+"
 
   def self.int? str
-    str.to_i.to_s == str
+    str.to_s.to_i.to_s == str
   end
 
   def self.friendly? str
@@ -76,6 +76,10 @@ module TheFriendlyId
       else
         where(slug: id)
       end
+    end
+
+    def friendly_first id
+      friendly_where(id).first
     end
   end
 end
