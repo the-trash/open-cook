@@ -12,8 +12,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
-    if @new_user.save
+    @user = User.new params.require(:user).permit(:login, :email, :password)
+    if @user.save
       login(@user.login, @user.open_password, false)
       redirect_to root_url, :notice => t('.created')
     else

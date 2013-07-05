@@ -1,0 +1,4 @@
+.sections
+  = link_to 'Home', '/'
+  - Hub.system.each do |hub|
+    = link_to hub.title, system_hub_url(hub.title)

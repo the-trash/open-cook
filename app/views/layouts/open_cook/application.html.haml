@@ -15,12 +15,17 @@
       .header
         = render partial: 'layouts/open_cook/items/header'
 
+      = render partial: 'layouts/open_cook/items/sections'
+
       .content.overblock
         %table.layout
           %tr
             %td.left
-            %td.center= yield
+              = render partial: 'layouts/open_cook/items/left_menu'
+            %td.center
+              = yield
             %td.right
+              = render partial: 'layouts/open_cook/items/right_menu'
 
       .footer_guarantor &nbsp;
     .footer.overblock

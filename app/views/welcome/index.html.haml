@@ -1,11 +1,1 @@
-= paginate @posts
-
-%ul.posts_index
-  - @posts.each do |post|
-    %li
-      %h2= link_to post.title, show_url(post)
-      %p=raw post.intro
-      %p.pub_info= post_info(post)
-      %p.read_more= link_to t('publications.read_more'), '#'
-
-= paginate @posts
+= render template: 'posts/index'

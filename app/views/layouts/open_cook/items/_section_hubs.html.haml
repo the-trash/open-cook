@@ -1,0 +1,6 @@
+- unless @hubs.blank?
+  .section_hubs
+    %h3 Разделы
+    .hub
+      - @hubs.each do |hub|
+        %p= link_to hub.title, show_url(hub)

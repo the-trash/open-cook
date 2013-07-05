@@ -1,10 +1,12 @@
 = paginate @posts
 
-- @posts.each do |post|
-  %h2= link_to post.title, post
-  = image_tag "http://lorempixel.com/460/200/nightlife/?#{rand}"
-  %p= raw post.intro
-  %p= post_info post
-  %hr
+%ul.posts_index
+  - @posts.each do |post|
+    %li
+      %h2= link_to post.title, show_url(post)
+      %p= image_tag "http://lorempixel.com/460/200/nightlife/?#{rand}"
+      %p= raw post.intro
+      %p.pub_info= post_info(post)
+      %p.read_more= link_to t('publications.read_more'), '#'
 
 = paginate @posts

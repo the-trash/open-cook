@@ -1,0 +1,22 @@
+@import '../../base/mix';
+
+.pagination{
+  @include overblock;
+  margin-bottom: 10px;
+  
+  li{
+    float: left;
+    padding: 12px 5px;
+  }
+  a{
+    font-size: 14px;
+    color: #A5260A;
+    margin-right: 12px;
+    padding: 5px;
+    background: lightgray;
+    border-radius: 5px;
+    &.current{
+      border: 1px solid gray;
+    }
+  }
+}
