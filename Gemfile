@@ -10,7 +10,7 @@ gem 'sqlite3'
 # gem 'rails-i18n'
 # Tags need refactor for Rails MassAttrProtect
 
-gem 'sorcery', git: "git@github.com:NoamB/sorcery.git"
+gem 'sorcery'#, :github => "git@github.com:NoamB/sorcery"
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -22,17 +22,17 @@ gem 'kaminari'
 gem 'russian'
 gem 'sanitize'
 gem "state_machine", "~> 1.2.0"
-gem 'haml'               , git: 'git@github.com:haml/haml.git', tag: '4.0.1'
-gem 'acts-as-taggable-on', git: 'git@github.com:mbleigh/acts-as-taggable-on.git'
-gem 'awesome_nested_set',  git: 'git@github.com:collectiveidea/awesome_nested_set.git', branch: '606646e933d' #branch: 'rails4'
+gem 'haml' #              , :github => 'git@github.com:haml/haml', tag: '4.0.1'
+gem 'acts-as-taggable-on'#, :github => 'git@github.com:mbleigh/acts-as-taggable-on.git'
+gem 'awesome_nested_set'#,  :github => 'git@github.com:collectiveidea/awesome_nested_set', branch: '606646e933d' #branch: 'rails4'
 
 # gem 'rmagick'
 gem 'mini_magick'
-gem 'paperclip', git: 'git@github.com:thoughtbot/paperclip.git', branch: 'rails-4'
+gem 'paperclip'#, :github => 'git@github.com:thoughtbot/paperclip', branch: 'rails-4'
 
 gem 'daemons'
-gem 'delayed_job',               path: '../delayed_job'
-gem 'delayed_job_active_record', path: '../delayed_job_active_record'
+gem 'delayed_job'#,               path: '../delayed_job'
+gem 'delayed_job_active_record' , path: '../delayed_job_active_record'
 
 gem 'the_role'    , path: '../the_role'
 gem 'the_audit'   , path: '../the_audit'
@@ -49,9 +49,9 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do  
-  gem 'sprockets-rails', github: 'rails/sprockets-rails'
-  gem 'coffee-rails',    github: 'rails/coffee-rails'
-  gem 'sass-rails',      github: 'rails/sass-rails'
+  gem 'sprockets-rails'#, github: 'rails/sprockets-rails'
+  gem 'coffee-rails'#,    github: 'rails/coffee-rails'
+  gem 'sass-rails'#,      github: 'rails/sass-rails'
   gem 'uglifier', '>= 1.0.3'
 
   gem 'bootstrap-sass', '~> 2.2.2.0'
