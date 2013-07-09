@@ -101,3 +101,7 @@ TESTS
 ```
 bundle exec rspec spec/integration/welcome_spec.rb --format documentation
 ```
+
+#has_attached_file :avatar,
+#  :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
+#  :url => "/system/:attachment/:id/:style/:filename"

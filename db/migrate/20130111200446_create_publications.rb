@@ -4,9 +4,6 @@ class CreatePublications < ActiveRecord::Migration
       create_table table_name do |t|
         t.integer :user_id
         t.integer :hub_id
-        
-        # publication type
-        t.string :pub_type, default: table_name
 
         # Meta
         t.string :author

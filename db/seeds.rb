@@ -116,7 +116,7 @@ def create_system_hub slug, title
   User.root.hubs.create!(
     slug:  slug,
     title: title,
-    pub_type: :system_hubs
+    state: :published
   )
 end
 #####################################
@@ -129,9 +129,9 @@ create_system_hub(:videos, 'Видео')
 create_system_hub(:blogs, 'Блоги')
 
 User.root.hubs.create!(
-  slug:     :pages,
-  title:    'Страницы',
-  pub_type: :pages
+  slug:      :pages,
+  title:     'Страницы',
+  pubs_type: :pages
 )
 
 #####################################
@@ -166,7 +166,7 @@ recipes_hub = Hub.friendly_where(:recipes).first
   "Десерты",
   "Кремы"
 ].each do |title|
-  hub = User.root.hubs.create!(title: title, pub_type: :recipes)
+  hub = User.root.hubs.create!(title: title)
   hub.to_published
   hub.move_to_child_of(recipes_hub)
   print '.'
@@ -188,7 +188,6 @@ puts
     2.times do
       post = user.posts.create!(
         hub: holder_hub,
-        pub_type: name,
         title: "#{name}: " + Faker::Lorem.sentence,
         raw_intro: Faker::Lorem.paragraphs(2).join,
         raw_content: Faker::Lorem.paragraphs(3).join
@@ -215,7 +214,6 @@ recipes_hub.children.each do |menu|
     2.times do
       post = user.posts.create!(
         hub: menu,
-        pub_type: :recipes,
         title: "#{menu.title}: " + Faker::Lorem.sentence,
         raw_intro: Faker::Lorem.paragraphs(2).join,
         raw_content: Faker::Lorem.paragraphs(3).join
@@ -236,12 +234,12 @@ root      = User.root
 pages_hub = Hub.friendly_where(:pages).first
 
 top_pages = root.hubs.create!(
-  title:    :top_pages,
-  pub_type: :pages
+  title: :top_pages,
+  pubs_type: :pages
 )
 bottom_pages = root.hubs.create!(
-  title:    :bottom_pages,
-  pub_type: :pages
+  title: :bottom_pages,
+  pubs_type: :pages
 )
 
 top_pages.move_to_child_of    pages_hub

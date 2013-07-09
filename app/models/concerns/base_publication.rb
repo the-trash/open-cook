@@ -10,8 +10,12 @@ module BasePublication
       where(title: name).first
     end
 
-    def with_pub_type type
-      type ? where(pub_type: type) : all
+    def published_set
+      with_state(:published).nested_set
+    end
+
+    def pagination params
+      page(params[:page]).per(params[:per_page])
     end
   end
 

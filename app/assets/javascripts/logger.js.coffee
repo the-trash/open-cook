@@ -45,14 +45,14 @@ class @App
       false
 
   @init_pub_type_select = ->
-    $('.pub_type_select select').change ->
+    $('.hub_select select').change ->
       $.ajax
         type: 'POST'
         url: '/hubs/selector'
         data:
-          id: $('#post_id').val()
-          klass: 'Post'
-          pub_type: $(@).val()
+          id:     $('#post_id').val()
+          klass:  $('#post_klass').val()
+          hub_id: $(@).val()
         success: (data, status, response) ->
           $('.hub_select').html data
 

@@ -90,12 +90,11 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "hubs", force: true do |t|
     t.integer  "user_id"
     t.integer  "hub_id"
-    t.string   "pub_type",                 default: "hubs"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -110,6 +109,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.datetime "first_published_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "pubs_type",                default: "posts"
     t.integer  "pubs_count_draft",         default: 0
     t.integer  "pubs_count_published",     default: 0
     t.integer  "pubs_count_deleted",       default: 0
@@ -141,7 +141,6 @@ ActiveRecord::Schema.define(version: 20130510182558) do
   create_table "pages", force: true do |t|
     t.integer  "user_id"
     t.integer  "hub_id"
-    t.string   "pub_type",                 default: "pages"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -176,7 +175,6 @@ ActiveRecord::Schema.define(version: 20130510182558) do
   create_table "posts", force: true do |t|
     t.integer  "user_id"
     t.integer  "hub_id"
-    t.string   "pub_type",                 default: "posts"
     t.string   "author"
     t.string   "keywords"
     t.string   "description"
@@ -258,7 +256,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.integer  "storage_files_size",              default: 0
   end
 
-  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token"
+  add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", using: :btree
 
 end

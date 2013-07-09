@@ -23,7 +23,8 @@ module PublicationController
 
     def show
       @post.increment!(:show_count)
-      @hubs     = @post.hub.same_hubs.with_state(:published).nested_set
+      @hub      = @post.hub
+      @hubs     = @hub.siblings.with_state(:published).nested_set
       @comments = @post.comments.with_state(:draft, :published).nested_set
       render 'posts/show'
     end
@@ -39,7 +40,7 @@ module PublicationController
     end
 
     def edit
-      initialize_hubs_selector(@post.id, @post.class.to_s, @post.pub_type)
+      initialize_hubs_selector(@post)
       render 'posts/edit'
     end
 

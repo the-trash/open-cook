@@ -2,7 +2,8 @@
   = error_messages_for @post
 
   =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
-  = hidden_field_tag 'post_id', @post.id
+  = hidden_field_tag 'post_id',    @post.id
+  = hidden_field_tag 'post_klass', @post.class
 
   - unless @post.new_record?
     %p
@@ -12,11 +13,6 @@
   .field
     = f.label :title, t('post.title')
     = f.text_field :title
-
-  .field.pub_type_select
-    - options = options_for_select(post_types, @post.pub_type)
-    = f.label  :pub_type, t('post.type')
-    = f.select :pub_type, options
 
   .field.hub_select
     = render partial: "hubs/selector"

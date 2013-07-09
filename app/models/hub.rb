@@ -7,16 +7,21 @@ class Hub < ActiveRecord::Base
   has_many :pages
   has_many :posts
 
-  # scopes
-  scope :of_,    ->(type) { where(pub_type: type) }
-  scope :system, -> { of_(:system_hubs) }
-
   # validations
   validates_presence_of :user, :title, :slug
   validates :slug, uniqueness: true
 
-  def same_hubs
-    Hub.where(pub_type: pub_type)
+  scope :of_, ->(type) { where(pubs_type: type) }
+  
+  def self.sections
+    roots.of_(:posts).with_state(:published)
   end
 
+  def pubs
+    send(pubs_type)
+  end
+
+  # def self.same_hubs
+  #   Hub.where(pubs_type: pub_type)
+  # end
 end

@@ -7,14 +7,8 @@ class HubsController < ApplicationController
     @hub = @post
     @hub.increment!(:show_count)
     
-    @hubs = @hub.same_hubs
-              .nested_set
-              .with_state(:published)
-
-    @posts = @hub.posts
-              .nested_set
-              .with_state(:published)
-              .page(params[:page]).per(params[:per_page])
+    @hubs = @hub.siblings.published_set
+    @posts = @hub.posts.published_set.pagination(params)
 
     render 'posts/index'
   end
@@ -25,7 +19,7 @@ class HubsController < ApplicationController
   end
 
   def selector
-    initialize_hubs_selector(params[:id], params[:klass], params[:pub_type])
+    initialize_hubs_selector #(params[:id], params[:klass], params[:hub_id])
     render layout: false, template: 'hubs/_selector'
   end
 
@@ -35,7 +29,7 @@ class HubsController < ApplicationController
               .nested_set
               .with_pub_type(params[:pub_type])
               .with_states(:draft, :published)
-              .page(params[:page]).per(params[:per_page])
+              .pagination(params)
   end
 
   def system_section
