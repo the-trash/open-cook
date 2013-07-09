@@ -7,15 +7,11 @@ gem "rails", "~> 4.0.0"
 gem 'mysql2'
 gem 'sqlite3'
 
-# gem 'rails-i18n'
-# Tags need refactor for Rails MassAttrProtect
-
 gem 'sorcery'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 1.0.1'
-
 
 gem 'compass'
 gem 'kaminari'
@@ -32,19 +28,19 @@ gem 'mini_magick'
 gem 'paperclip'
 
 gem 'daemons'
-gem 'delayed_job', path: '../delayed_job'
+
+gem 'delayed_job',                path: '../delayed_job'
 gem 'delayed_job_active_record' , path: '../delayed_job_active_record'
 
 gem 'the_role'    , path: '../the_role'
 gem 'the_audit'   , path: '../the_audit'
 gem 'the_storages', path: '../the_storages'
 gem 'the_comments', path: '../the_comments'
-gem 'the_sortable_tree', path: '../the_sortable_tree'
+
+gem 'the_sortable_tree'
 
 group :development do
   gem 'thin'
-  # gem 'unicorn'
-  # gem 'ruby-graphviz' # state machine visualization
 end
 
 # Gems used only for assets and not required
@@ -88,12 +84,3 @@ group :test do
   # Pretty printed test output
   # gem 'turn' , '~> 0.8.3', :require => false
 end
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Deploy with Capistrano
-# gem 'capistrano', group: :development
-
-# To use debugger
-# gem 'debugger'

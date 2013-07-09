@@ -21,11 +21,13 @@ git clone git@github.com:the-teacher/the_role.git
 git clone git@github.com:the-teacher/the_comments.git
 git clone git@github.com:the-teacher/the_storages.git
 git clone git@github.com:the-teacher/the_sortable_tree.git
-git clone https://github.com/collectiveidea/delayed_job_active_record.git
+
 git clome https://github.com/collectiveidea/delayed_job.git
+git clone https://github.com/collectiveidea/delayed_job_active_record.git
 ```
 
 rails 4 required
+
 ```
 gem update rails
 ```
@@ -77,7 +79,13 @@ script/delayed_job start
 web server run
 
 ```
-bin/rails s -p 3010 -b host.name
+bin/rails s
+```
+
+or
+
+```
+bin/rails s -p 3000 -b host.name
 ```
 
 ### Others
@@ -93,7 +101,3 @@ TESTS
 ```
 bundle exec rspec spec/integration/welcome_spec.rb --format documentation
 ```
-
-# included do; end
-# module ClassMethods; end
-# module InstanceMethods; end
