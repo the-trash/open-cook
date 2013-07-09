@@ -31,8 +31,8 @@ gem 'mini_magick'
 gem 'paperclip'
 
 gem 'daemons'
-gem 'delayed_job'
-gem 'delayed_job_active_record' , path: '../delayed_job_active_record'
+gem 'delayed_job', '~> 3.0.0'
+gem 'delayed_job_active_record'
 
 gem 'the_role'    , path: '../the_role'
 gem 'the_audit'   , path: '../the_audit'
