@@ -22,6 +22,7 @@ git clone git@github.com:the-teacher/the_comments.git
 git clone git@github.com:the-teacher/the_storages.git
 git clone git@github.com:the-teacher/the_sortable_tree.git
 git clone https://github.com/collectiveidea/delayed_job_active_record.git
+git clome https://github.com/collectiveidea/delayed_job.git
 ```
 
 rails 4 required

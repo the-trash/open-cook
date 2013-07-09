@@ -32,7 +32,7 @@ gem 'mini_magick'
 gem 'paperclip'
 
 gem 'daemons'
-gem 'delayed_job'
+gem 'delayed_job', path: '../delayed_job'
 gem 'delayed_job_active_record' , path: '../delayed_job_active_record'
 
 gem 'the_role'    , path: '../the_role'
