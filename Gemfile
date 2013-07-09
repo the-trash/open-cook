@@ -10,7 +10,7 @@ gem 'sqlite3'
 # gem 'rails-i18n'
 # Tags need refactor for Rails MassAttrProtect
 
-gem 'sorcery'#, :github => "git@github.com:NoamB/sorcery"
+gem 'sorcery'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -22,16 +22,16 @@ gem 'kaminari'
 gem 'russian'
 gem 'sanitize'
 gem "state_machine", "~> 1.2.0"
-gem 'haml' #              , :github => 'git@github.com:haml/haml', tag: '4.0.1'
-gem 'acts-as-taggable-on'#, :github => 'git@github.com:mbleigh/acts-as-taggable-on.git'
-gem 'awesome_nested_set'#,  :github => 'git@github.com:collectiveidea/awesome_nested_set', branch: '606646e933d' #branch: 'rails4'
+gem 'haml' 
+gem 'acts-as-taggable-on'
+gem 'awesome_nested_set'
 
 # gem 'rmagick'
 gem 'mini_magick'
-gem 'paperclip'#, :github => 'git@github.com:thoughtbot/paperclip', branch: 'rails-4'
+gem 'paperclip'
 
 gem 'daemons'
-gem 'delayed_job'#,               path: '../delayed_job'
+gem 'delayed_job'
 gem 'delayed_job_active_record' , path: '../delayed_job_active_record'
 
 gem 'the_role'    , path: '../the_role'
@@ -59,11 +59,11 @@ end
 
 group :development, :test do
   gem 'faker'
-  # gem "rspec-rails",        :git => "git://github.com/rspec/rspec-rails.git"
-  # gem "rspec",              :git => "git://github.com/rspec/rspec.git"
-  # gem "rspec-core",         :git => "git://github.com/rspec/rspec-core.git"
-  # gem "rspec-expectations", :git => "git://github.com/rspec/rspec-expectations.git"
-  # gem "rspec-mocks",        :git => "git://github.com/rspec/rspec-mocks.git"
+  # gem "rspec-rails"
+  # gem "rspec"
+  # gem "rspec-core"
+  # gem "rspec-expectations"
+  # gem "rspec-mocks"      
 end
 
 group :test do
