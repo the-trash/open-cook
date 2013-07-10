@@ -40,12 +40,10 @@ module PublicationController
     end
 
     def edit
-      initialize_hubs_selector(@post)
       render 'posts/edit'
     end
 
     def new
-      initialize_hubs_selector
       @post = @klass.new
       render 'posts/new'
     end

@@ -19,7 +19,7 @@ class HubsController < ApplicationController
   end
 
   def selector
-    initialize_hubs_selector #(params[:id], params[:klass], params[:hub_id])
+    @hub = Hub.find(params[:hub_id])
     render layout: false, template: 'hubs/_selector'
   end
 
@@ -39,7 +39,7 @@ class HubsController < ApplicationController
               .nested_set
               .with_states(:draft, :published)
               .where(hub_id: @hubs.ids.push(@hub.id))
-              .page(params[:page]).per(params[:per_page])
+              .pagination(params)
 
     render 'posts/index'
   end

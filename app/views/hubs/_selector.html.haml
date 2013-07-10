@@ -1,3 +1,9 @@
+-# It's good to be bad!
+
+-# Logick
+- @selector_hubs = @hub ? @hub.children : Hub.sections
+
+-# View
 - if @selector_hubs.blank?
   = hidden_field_tag 'post[hub_id]'
 - else
