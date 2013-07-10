@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 # Delete all gems: gem list | cut -d' ' -f1 | xargs gem uninstall -aIx
 
 gem 'rails', '~> 4.0.0'
+gem 'rails-i18n', '~> 4.0.0.pre'
 
 gem 'mysql2'
 gem 'sqlite3'
@@ -16,7 +17,6 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'compass'
 gem 'kaminari'
 
-gem 'russian'
 gem 'sanitize'
 gem 'state_machine', '~> 1.2.0'
 gem 'haml' 

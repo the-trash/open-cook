@@ -1,1 +1,7 @@
-= render template: 'posts/index'
+= "Hello world".parameterize('-')
+%br
+= I18n::transliterate('Привет Мир!')
+%br
+= "A Привет Мир! B".parameterize('-')
+
+=# render template: 'posts/index'

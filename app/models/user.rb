@@ -52,6 +52,6 @@ class User < ActiveRecord::Base
   private
 
   def prepare_login
-    self.login = Russian::translit(self.login).gsub('_','-').parameterize
+    self.login = self.login.to_s.to_slug_param
   end
 end
