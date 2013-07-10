@@ -1,5 +1,5 @@
 class String
   def to_slug_param
-    I18n::transliterate(self).gsub('_','-').parameterize('-')
+    I18n::transliterate(self).gsub('_','-').parameterize('-').downcase
   end
 end
