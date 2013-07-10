@@ -1,4 +1,5 @@
-//= require jquery
+//= require jquery-2.0.3
+
 //= require jquery_ujs
 //= require jquery.ui.core
 //= require jquery.ui.sortable
@@ -21,3 +22,9 @@
 //= require the_comments_manage
 
 //= require crop_image
+
+//= require open_cook/app
+//= require open_cook/multi_input
+//= require open_cook/hub_selector
+
+//= require open_cook/initializer
