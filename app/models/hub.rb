@@ -13,15 +13,11 @@ class Hub < ActiveRecord::Base
 
   scope :of_, ->(type) { where(pubs_type: type) }
   
-  def self.sections
-    roots.of_(:posts).with_state(:published)
+  def self.sections(pub_type)
+    roots.of_(pub_type).published_set
   end
 
   def pubs
     send(pubs_type)
   end
-
-  # def self.same_hubs
-  #   Hub.where(pubs_type: pub_type)
-  # end
 end

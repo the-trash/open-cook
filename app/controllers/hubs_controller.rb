@@ -14,7 +14,7 @@ class HubsController < ApplicationController
   end
 
   def set_post_and_user
-    @post = Hub.friendly_where(params[:id]).with_states(:published, :draft).first
+    @post = Hub.published_with_user.friendly_first(params[:id])
     @user = @post.user
   end
 
@@ -27,7 +27,6 @@ class HubsController < ApplicationController
     @posts = @user.send(controller_name)
               .roots
               .nested_set
-              .with_pub_type(params[:pub_type])
               .with_states(:draft, :published)
               .pagination(params)
   end

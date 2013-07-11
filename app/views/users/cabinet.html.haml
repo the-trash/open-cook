@@ -1,16 +1,25 @@
 .users_cabinet
   %h3 Cabinet of: #{@user.login}
 
-  %h4 Посты
+  %h4 Создать:
 
-  %p= link_to 'Новый Пост', new_post_url
-  %p= link_to 'Моя Лента',  user_posts_url(@user)
-  %p= link_to 'Управлять лентой',  manage_user_posts_url(@user)
+  %ul.numered_list
+    %li= link_to 'Новый Пост',     new_post_url
+    %li= link_to 'Новую страницу', new_page_url
 
-  %h4 Структура
+  %h4 Управление публикациями:
 
-  %p= link_to 'Управлять структурой', manage_hubs_url
-  %p= link_to 'Управлять страницми', manage_pages_url
+  %ul.numered_list
+    %li= link_to 'Мои посты',    manage_user_posts_url(@user)
+    %li= link_to 'Мои страницы', manage_user_posts_url(@user)
+
+  %h4 Просмотр:
+
+  %p= link_to 'Моя лента постов',  user_posts_url(@user)
+  
+  %h4 Упрвление cтруктурой:
+
+  %p= link_to 'Разделы сайта', manage_hubs_url
 
   %h4 Комментарии
 

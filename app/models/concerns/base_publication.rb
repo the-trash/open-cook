@@ -1,30 +1,13 @@
 module BasePublication
   extend ActiveSupport::Concern
 
-  module ClassMethods
-    def active_pubs
-      includes(:user).with_states(:published).where(hub_state: :published)
-    end
-
-    def with_title name
-      where(title: name).first
-    end
-
-    def published_set
-      with_state(:published).nested_set
-    end
-
-    def pagination params
-      page(params[:page]).per(params[:per_page])
-    end
-  end
-
   included do
     include BaseSorts
     include BaseStates
     include ActAsStorage
     include TheFriendlyId
     include NestedSetMethods
+    include CommonClassMethods
     include TheCommentsCommentable
 
     before_validation :define_user_via_hub, :define_hub_state, on: :create

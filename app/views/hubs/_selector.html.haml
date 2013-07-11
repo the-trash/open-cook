@@ -1,7 +1,7 @@
 -# It's good to be bad!
 
 -# Logick
-- @selector_hubs = @hub ? @hub.children : Hub.sections
+- @selector_hubs = @hub ? @hub.children.published_set : Hub.sections(@post.controller_name)
 
 -# View
 - unless @selector_hubs.blank?

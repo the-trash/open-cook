@@ -131,7 +131,8 @@ create_system_hub(:blogs, 'Блоги')
 User.root.hubs.create!(
   slug:      :pages,
   title:     'Страницы',
-  pubs_type: :pages
+  pubs_type: :pages,
+  state: :published
 )
 
 #####################################
@@ -234,12 +235,16 @@ root      = User.root
 pages_hub = Hub.friendly_where(:pages).first
 
 top_pages = root.hubs.create!(
-  title: :top_pages,
-  pubs_type: :pages
+  title: 'Верхние страницы',
+  slug:  :top_pages,
+  pubs_type: :pages,
+  state: :published
 )
 bottom_pages = root.hubs.create!(
-  title: :bottom_pages,
-  pubs_type: :pages
+  title: 'Нижние страницы',
+  slug: :bottom_pages,
+  pubs_type: :pages,
+  state: :published
 )
 
 top_pages.move_to_child_of    pages_hub

@@ -15,27 +15,28 @@ module PublicationController
       # TODO: posts from hidden hubs should not be visible
       user   = User.where(login: user_id).first || @root
       @posts = user.send(controller_name)
+                .visible_pubs
                 .reversed_nested_set
-                .with_states(:published)
-                .page(params[:page]).per(params[:per_page])
+                .pagination(params)
+
       render 'posts/index'
     end
 
     def show
       @post.increment!(:show_count)
       @hub      = @post.hub
-      @hubs     = @hub.siblings.with_state(:published).nested_set
-      @comments = @post.comments.with_state(:draft, :published).nested_set
+      @hubs     = @hub.siblings.published_set
+      @comments = @post.comments.for_manage_set
+
       render 'posts/show'
     end
 
     # PROTECTED
     def manage
       @posts = @user.send(controller_name)
-                .reversed_nested_set
-                .with_pub_type(params[:pub_type])
-                .with_states(:draft, :published)
-                .page(params[:page]).per(params[:per_page])
+                .for_manage_rset
+                .pagination(params)
+
       render 'posts/manage'
     end
 
@@ -83,8 +84,7 @@ module PublicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_post_and_user
-      # return render text: params
-      @post = @klass.friendly_where(params[:id]).with_states(:published, :draft).first
+      @post = @klass.published_with_user.friendly_first(params[:id])
       @user = @post.user
     end
 
