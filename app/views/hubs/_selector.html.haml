@@ -4,9 +4,7 @@
 - @selector_hubs = @hub ? @hub.children : Hub.sections
 
 -# View
-- if @selector_hubs.blank?
-  = hidden_field_tag 'post[hub_id]'
-- else
+- unless @selector_hubs.blank?
   .field
     = label_tag :hub_id, 'Раздел: '
     = select_tag 'post[hub_id]', nested_options(@selector_hubs, selected: @selected_hub), class: :nested_options

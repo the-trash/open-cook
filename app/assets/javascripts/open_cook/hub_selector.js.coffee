@@ -1,6 +1,9 @@
 class @HubSelector
   @init = ->
-    $('.hub_selector').on 'change', 'select', ->
+    selector_holder = $('.hub_selector')
+    selector_holder.on 'change', 'select', ->
+      field = $(@).parent()
+
       $.ajax
         type: 'POST'
         url: '/hubs/selector'
@@ -9,4 +12,7 @@ class @HubSelector
           klass:  $('#post_klass').val()
           hub_id: $(@).val()
         success: (data, status, response) ->
-          $('.hub_selector').append data
+          if data.length is 0
+            field.nextAll().remove()
+          else
+            selector_holder.append data
