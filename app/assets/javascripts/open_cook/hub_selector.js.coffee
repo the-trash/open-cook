@@ -1,5 +1,10 @@
 class @HubSelector
   @init = ->
+
+    $('a.other_hub').click ->
+      $('a.other_hub, .hub_full_name').hide()
+      $('.hub_selector').show()
+
     selector_holder = $('.hub_selector')
     selector_holder.on 'change', 'select', ->
       field = $(@).parent()

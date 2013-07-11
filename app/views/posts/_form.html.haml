@@ -2,6 +2,7 @@
   = error_messages_for @post
 
   =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
+  
   = hidden_field_tag 'post_id',    @post.id
   = hidden_field_tag 'post_klass', @post.class
 
@@ -14,14 +15,7 @@
     = f.label :title, t('post.title')
     = f.text_field :title
 
-  .field
-    %h3
-      = @post.hub.self_and_ancestors.map{|hub| hub.title }.join(' => ')
-
-
-  .field.hub_selector
-    = render partial: "hubs/selector"
-
+  = render partial: 'hub_select'
   = render partial: "posts/meta_fields", locals: { f: f }
 
   .field
