@@ -12,7 +12,11 @@ class AttachedFiles < ActiveRecord::Migration
       t.datetime :attachment_updated_at
 
       # images delayed processing status
-      t.string :processing, default: :none
+      t.string  :processing, default: :none
+      
+      # watermark
+      t.boolean :watermark,      default: false
+      t.string  :watermark_text, default: ''
 
       # nested set
       t.integer :parent_id
