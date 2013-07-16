@@ -84,7 +84,7 @@ module PublicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_post_and_user
-      @post = @klass.published_with_user.friendly_first(params[:id])
+      @post = @klass.for_manage.with_users.friendly_first(params[:id])
       @user = @post.user
     end
 
