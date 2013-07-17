@@ -1,5 +1,6 @@
-class AttachedFilesController < ApplicationController  
+class AttachedFilesController < ApplicationController
   include AttachedFilesActions
+  include TheSortableTreeController::Rebuild
 
   before_action :find_storage, only: [:create]
 

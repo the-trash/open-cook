@@ -25,6 +25,7 @@
   *= require sortable_tree
   *= require nested_options
   *= require expandable_tree
+  *= require the_storages
 
   *= require redactor
 
