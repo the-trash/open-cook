@@ -11,6 +11,9 @@ db/*.db
 db/*.sqlite3
 public/uploads/*
 
+public/system
+public/system/*
+
 # local config files
 Gemfile.lock
 .rvmrc

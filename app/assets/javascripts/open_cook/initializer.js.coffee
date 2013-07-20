@@ -3,3 +3,5 @@ $ ->
   App.init_flash_messages_close()
   HubSelector.init()
   MultiInput.init()
+  ImageCrop.init()
+  WaterMarkSwitcher.init()
