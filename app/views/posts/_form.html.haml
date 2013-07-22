@@ -1,5 +1,7 @@
-= form_for @post do |f|
+= form_for @post, html: { enctype: "multipart/form-data" } do |f|
   = error_messages_for @post
+
+  = f.file_field :main_image
 
   =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
   

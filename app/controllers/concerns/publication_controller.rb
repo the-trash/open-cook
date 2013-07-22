@@ -23,10 +23,10 @@ module PublicationController
     end
 
     def show
-      @post.increment!(:show_count)
       @hub      = @post.hub
       @hubs     = @hub.siblings.published_set
       @comments = @post.comments.for_manage_set
+      @post.increment!(:show_count) if @post.published?
 
       render 'posts/show'
     end
@@ -107,6 +107,7 @@ module PublicationController
         :user_id,
         :hub_id,
         :slug,
+        :main_image,
         :pub_type,
         :author, :keywords, :description, :copyright,
         :title,
