@@ -2,6 +2,7 @@
   = error_messages_for @post
 
   = f.file_field :main_image
+  = image_tag @post.main_image.url(:base)
 
   =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
   
