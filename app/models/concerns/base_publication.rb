@@ -23,12 +23,18 @@ module BasePublication
     validates_uniqueness_of :slug
 
     # MAIN IMAGE
-    before_validation :generate_main_image_file_name
+    def attachment_exists? name
+      !send(name).blank?
+    end
+
+    before_validation :generate_main_image_file_name,
+      if: ->{ attachment_exists?(:main_image) }
 
     def generate_main_image_file_name
-      mi    = self.main_image
-      fname = mi.instance_read(:file_name).to_slug_param
-      mi.instance_write :file_name, fname
+      attachment = self.main_image
+      file_name  = attachment.instance_read(:file_name)
+      file_name  = TheStorages.slugged_file_name(file_name)
+      attachment.instance_write :file_name, file_name
     end
 
     has_attached_file :main_image,
@@ -38,7 +44,8 @@ module BasePublication
 
     validates_attachment_size :main_image,
       in: 10.bytes..5.megabytes,
-      message: I18n.translate('the_storages.validation.main_image_file_size')
+      message: "File size", #I18n.translate('the_storages.validation.main_image_file_size')
+      if: ->{ attachment_exists?(:main_image) }
   end
 
   private
