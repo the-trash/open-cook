@@ -3,7 +3,6 @@ source 'http://rubygems.org'
 # Delete all gems: gem list | cut -d' ' -f1 | xargs gem uninstall -aIx
 
 gem 'rails', '~> 4.0.0'
-gem 'rails-i18n', '~> 4.0.0.pre'
 
 gem 'mysql2'
 gem 'sqlite3'
@@ -37,6 +36,8 @@ gem 'delayed_job_active_record',
   git: 'https://github.com/collectiveidea/delayed_job_active_record.git',
   tag: 'v4.0.0.beta3'
 
+# Open Cook components
+gem 'the_string_to_slug', '~> 0.0.5'
 gem 'the_role'    , path: '../the_role'
 gem 'the_audit'   , path: '../the_audit'
 gem 'the_storages', path: '../the_storages'
