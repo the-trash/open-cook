@@ -3,10 +3,10 @@ module MainImageUploading
   include StorageImageProcessing
 
   included do
-    attr_accessor  :need_to_process_main_image
-    before_save    :need_to_process_main_image?
-    after_commit   :build_main_image_variants
-    before_save    :generate_main_image_file_name, if: ->{ main_image? }
+    attr_accessor :need_to_process_main_image
+    before_save   :need_to_process_main_image?
+    before_save   :generate_main_image_file_name, if: ->{ main_image? }
+    after_commit  :build_main_image_variants
 
     has_attached_file :main_image,
                       default_url: "/default_images/main_image/:style/missing.jpg",
@@ -43,7 +43,10 @@ module MainImageUploading
       base    = main_image.path :base
       preview = main_image.path :preview
 
-      # remove_images
+      # src     = main_image.path
+      # base    = main_image.path :base
+      # preview = main_image.path :preview
+      # FileUtils.rm([src, base, preview], force: true)
 
       prepare_image(src, src, 1024)
       prepare_image(src, base, 300)

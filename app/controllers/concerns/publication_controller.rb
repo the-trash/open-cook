@@ -66,6 +66,15 @@ module PublicationController
         redirect_to url_for([:edit, @post.user, @post]),
                     notice: "#{@klass.to_s} was successfully updated."
       else
+        _post = @post.dup
+        _post.reload
+        @post.
+        t.string   :main_image_file_name
+        t.string   :main_image_content_type
+        t.integer  :main_image_file_size, default: 0
+        t.datetime :main_image_updated_at
+
+        @post.update_attachment(:main_image)
         render 'posts/edit'
       end
     end
