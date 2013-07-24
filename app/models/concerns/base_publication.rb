@@ -20,8 +20,19 @@ module BasePublication
     belongs_to :user
     belongs_to :hub
 
-    validates_presence_of   :user, :slug
+    validates_presence_of   :user, :slug, :title
     validates_uniqueness_of :slug
+  end
+
+  def update_attachment_fields att_name
+    _self = self.class.find(self.id)
+
+    %w[file_name content_type file_size updated_at].each do |field|
+      field_name = "#{att_name}_#{field}"
+      self.send "#{field_name}=", _self[field_name]
+    end
+
+    self
   end
 
   private

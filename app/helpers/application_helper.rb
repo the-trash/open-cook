@@ -18,16 +18,19 @@ module ApplicationHelper
   # Error mesages
   def error_messages_for obj
     if @post.errors.any?
-      lis = @post.errors.full_messages.map do |msg|
-        "<li>#{msg}</li>"
-      end.join
+      lis = ''
+      # .each do |msg, name|
+      #   lis << "<li>#{msg} #{name}</li>"
+      # end
 
-      raw "<div id='error_explanation'> 
-        <h2>#{pluralize(obj.errors.count, "error")} prohibited this post from being saved:</h2>
-        <ul>
-          #{lis}
-        </ul>
-      </div>"
+      @post.errors.messages
+
+      # raw "<div id='error_explanation'> 
+      #   <h2>#{pluralize(obj.errors.count, "error")} prohibited this post from being saved:</h2>
+      #   <ul>
+      #     #{lis}
+      #   </ul>
+      # </div>"
     end
   end
 

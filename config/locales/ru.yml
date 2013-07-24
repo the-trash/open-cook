@@ -8,6 +8,9 @@ ru:
     content: 'Основное содержимое:'
     state: 'Состояние:'
     save: Сохранить
+    validation:
+      main_image_file_size: 'Размер загружаемого файла должен быть от 10Кб до 5Мб'
+      main_image_file_type: 'Необходимо загружать только изображения (gif,jpg,png,bmp)'
   publication:
     draft: Черновик
     published: Опубликовано

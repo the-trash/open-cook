@@ -1,11 +1,12 @@
 source 'http://rubygems.org'
 # source 'http://gems.github.com'
 # Delete all gems: gem list | cut -d' ' -f1 | xargs gem uninstall -aIx
+# for i in `gem list --no-versions`; do gem uninstall -aIx $i; done
 
 gem 'rails', '~> 4.0.0'
 
 gem 'mysql2'
-gem 'sqlite3'
+# gem 'sqlite3'
 
 gem 'sorcery'
 
