@@ -1,14 +1,15 @@
 = form_for @post, html: { enctype: "multipart/form-data" } do |f|
   = error_messages_for @post
 
-  = f.file_field :main_image
-  = image_tag @post.main_image.url(:base)
-
-  =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
-  
   = hidden_field_tag 'post_id',    @post.id
   = hidden_field_tag 'post_klass', @post.class
 
+  %p
+    = image_tag @post.main_image.url(:preview)
+  %p
+    = f.file_field :main_image
+    =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
+  
   - unless @post.new_record?
     %p
       %b= t('post.author')

@@ -22,11 +22,6 @@ module BasePublication
 
     validates_presence_of   :user, :slug
     validates_uniqueness_of :slug
-
-    # MAIN IMAGE
-    def attachment_exists? name
-      !send(name).blank?
-    end
   end
 
   private

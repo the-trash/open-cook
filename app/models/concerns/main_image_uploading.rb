@@ -1,26 +1,33 @@
 module MainImageUploading
   extend ActiveSupport::Concern
-
-  # attr_accessor :main_image_processing_flag
-  # after_commit  :main_image_processing
+  include StorageImageProcessing
 
   included do
-    before_validation :generate_main_image_file_name,
-      if: ->{ attachment_exists?(:main_image) }
+    attr_accessor  :need_to_process_main_image
+    before_save    :need_to_process_main_image?
+    after_commit   :build_main_image_variants
+    before_save    :generate_main_image_file_name, if: ->{ main_image? }
 
     has_attached_file :main_image,
-                      default_url: ":rails_root/public/system/default/main_image/:style/missing.jpg",
+                      default_url: "/default_images/main_image/:style/missing.jpg",
                       path:        ":rails_root/public/system/storages/:klass/:id/main_image/:style/:filename",
                       url:         "/system/storages/:klass/:id/main_image/:style/:filename"
 
     validates_attachment_size :main_image,
       in: 10.bytes..5.megabytes,
-      message: "File size", #I18n.translate('the_storages.validation.main_image_file_size')
-      if: ->{ attachment_exists?(:main_image) }
+      message: "File size",
+      if: ->{ main_image? }
+      #I18n.translate('the_storages.validation.main_image_file_size')
+
+    validates_attachment_content_type :main_image,
+      content_type: AttachedFile::IMAGE_CONTENT_TYPES,
+      message: 'file type is not allowed (only jpeg/png/gif images)'
   end
 
-  def main_image_processing
-
+  def need_to_process_main_image?
+    if main_image_updated_at_changed?
+      self.need_to_process_main_image = true
+    end
   end
 
   def generate_main_image_file_name
@@ -28,5 +35,19 @@ module MainImageUploading
     file_name  = attachment.instance_read(:file_name)
     file_name  = TheStorages.slugged_file_name(file_name)
     attachment.instance_write :file_name, file_name
+  end
+
+  def build_main_image_variants
+    if need_to_process_main_image
+      src     = main_image.path
+      base    = main_image.path :base
+      preview = main_image.path :preview
+
+      # remove_images
+
+      prepare_image(src, src, 1024)
+      prepare_image(src, base, 300)
+      build_square_image(src, preview, 100)
+    end
   end
 end
