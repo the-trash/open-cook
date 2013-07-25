@@ -4,17 +4,31 @@
   = hidden_field_tag 'post_id',    @post.id
   = hidden_field_tag 'post_klass', @post.class
 
-  %p
-    = image_tag @post.main_image.url(:preview)
-  %p
-    = f.file_field :main_image
+  .image_toolbar
+    %p
+      %b Главное изображение поста:
 
-    - if @post.main_image?
-      = link_to 'delete image', |
-      delete_main_image_url(@post.class.to_s, @post.id), |
-      method: :delete, data: { confirm: "Are you sure?" }
+    - if @post.main_image?  
+      .rotate
+        = link_to '', '#', method: :patch, class: :left
+        = link_to '', '#', method: :patch, class: :right
+    .image_preview
+      = link_to @post.main_image.url(:base) do
+        = image_tag @post.main_image.url(:preview)
 
-    =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
+    .tools_block
+      - if @post.main_image?
+        = link_to '', |
+        delete_main_image_url(@post.class.to_s, @post.id), |
+        method: :delete, data: { confirm: "Вы уверены?" }, class: :img_clear
+
+      %p
+        %label Укажите изображение:
+        = f.file_field :main_image
+      %p
+        = link_to 'Выбрать область изображения', '#', method: :patch, class: :jcrop_run
+
+      =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
   
   - unless @post.new_record?
     %p

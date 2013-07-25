@@ -22,6 +22,8 @@
   *= require open_cook/posts/index
   *= require open_cook/posts/show
 
+  *= require open_cook/image_toolbar/base
+
   *= require tree
   *= require sortable_tree
   *= require nested_options

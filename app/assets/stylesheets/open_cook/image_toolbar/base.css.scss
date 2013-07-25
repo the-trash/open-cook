@@ -1,0 +1,47 @@
+.image_toolbar{
+  padding: 10px;
+  background: white;
+  border-radius: 5px;
+  overflow: hidden; zoom: 1;
+  position: relative;
+  
+  .img_clear{
+    position: absolute;
+    top: 5px; right: 5px;
+    height: 20px; width: 20px;
+    background: image-url("/assets/iconza/icons/delete.png") no-repeat scroll center center transparent;
+    &:hover{ background-image: image-url("/assets/iconza/icons/red_delete.png"); }
+  }
+
+  .rotate{
+    float: left;
+    width: 16px;
+    margin-right: 5px;
+
+    a{
+      margin: 0;      
+      display: inline-block;
+      height: 16px; width: 16px;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-position: center center;
+
+      &.left{
+        background-image: image-url("rotate_left.png");
+      }
+      &.right{
+        background-image: image-url("rotate_right.png");
+      }
+    }
+  }
+
+  .image_preview{
+    float: left;
+    margin-right: 15px;
+    width: 100px; height: 100px;
+    overflow: hidden; zoom: 1;
+  }
+
+  .tools_block{ float: left; }
+  label, p{ font-size: 1em; }
+}
