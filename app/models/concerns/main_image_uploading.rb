@@ -3,10 +3,10 @@ module MainImageUploading
   include StorageImageProcessing
 
   included do
-    # attr_accessor :need_to_process_main_image
-    # before_save   :need_to_process_main_image?
-    # before_save   :generate_main_image_file_name, if: ->{ main_image? }
-    # after_commit  :build_main_image_variants
+    attr_accessor :need_to_process_main_image
+    before_save   :need_to_process_main_image?
+    before_save   :generate_main_image_file_name, if: ->{ main_image? }
+    after_commit  :build_main_image_variants
 
     has_attached_file :main_image,
                       default_url: "/default_images/main_image/:style/missing.jpg",
@@ -14,24 +14,15 @@ module MainImageUploading
                       url:         "/system/storages/:klass/:id/main_image/:style/:filename"
 
     validates_attachment :main_image,
-      :content_type => {
+      content_type: {
         content_type: AttachedFile::IMAGE_CONTENT_TYPES,
-        message: "It's should be image"
+        message: I18n.translate('post.validation.main_image_file_type')
+      },
+      size: {
+        in: 10.kilobytes..5.megabytes,
+        message: I18n.translate('post.validation.main_image_file_size'),
+        if: ->{ main_image? }
       }
-
-    # validates_with AttachmentContentTypeValidator :main_image,
-    #   in: 2.megabytes..5.megabytes,
-    #   message: I18n.translate('post.validation.main_image_file_size'),
-    #   if: ->{ main_image? }
-
-    # validates_attachment_size :main_image,
-    #   in: 2.megabytes..5.megabytes,
-    #   message: I18n.translate('post.validation.main_image_file_size'),
-    #   if: ->{ main_image? }
-
-    # validates_attachment_content_type :main_image,
-    #   content_type: AttachedFile::IMAGE_CONTENT_TYPES,
-    #   message: '11111' #I18n.translate('post.validation.main_image_file_type')
   end
 
   def need_to_process_main_image?
@@ -54,6 +45,9 @@ module MainImageUploading
       prepare_image(src, src, 1024)
       prepare_image(src, base, 300)
       build_square_image(src, preview, 100)
+
+      self.need_to_process_main_image = false
+      # I needn't, but you can recalculate src size & save
     end
   end
 

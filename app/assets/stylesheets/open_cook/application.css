@@ -7,6 +7,7 @@
   *= require open_cook/base/form
   *= require open_cook/base/common
   *= require open_cook/base/pagination
+  *= require open_cook/base/validation_errors
 
   *= require open_cook/layout/header
   *= require open_cook/layout/sections

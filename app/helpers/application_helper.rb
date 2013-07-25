@@ -16,21 +16,23 @@ module ApplicationHelper
   end
 
   # Error mesages
+  # Post.model_name.human              => activerecord.models.post
+  # Post.human_attribute_name('title') => activerecord.attributes.post.title
   def error_messages_for obj
-    if @post.errors.any?
-      lis = ''
-      # .each do |msg, name|
-      #   lis << "<li>#{msg} #{name}</li>"
-      # end
+    if obj.errors.any?
+      lis = obj.errors.map do |name, msgs|
+        name = obj.class.human_attribute_name(name)
+        if msgs.is_a?(Array)
+          msgs.map{|msg| "<li><b>#{name}:</b> #{msg}</li>"}.join()
+        else
+          "<li><b>#{name}:</b> #{msgs}</li>"
+        end
+      end.join()
 
-      @post.errors.messages
-
-      # raw "<div id='error_explanation'> 
-      #   <h2>#{pluralize(obj.errors.count, "error")} prohibited this post from being saved:</h2>
-      #   <ul>
-      #     #{lis}
-      #   </ul>
-      # </div>"
+      raw "<div id='error_explanation' class='error_explanation'>
+        <h2>При сохранении возникли следующие ошибки:</h2>
+        <ul>#{lis}</ul>
+      </div>"
     end
   end
 

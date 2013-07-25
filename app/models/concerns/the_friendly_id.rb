@@ -57,8 +57,9 @@ module TheFriendlyId
 
     def build_slugs
       unless self.title.blank?
-        _slug  = slug.blank? ? title : slug
+        _slug = slug.blank? ? title : slug
         _slug = title if title_changed?
+        _slug = slug  if slug_changed?
 
         self.slug        = _slug.to_s.to_slug_param
         self.friendly_id = [self.short_id, self.slug].join TheFriendlyId::SEPARATOR

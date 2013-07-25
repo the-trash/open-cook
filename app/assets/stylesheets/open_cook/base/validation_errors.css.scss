@@ -1,0 +1,17 @@
+.error_explanation{
+  background: white;
+  border-radius: 5px;
+  border: 1px solid red;
+  
+  padding: 10px 10px 0px 10px;
+  margin-bottom: 15px;
+
+  h2{
+    font-size: 1.8em;
+  }
+  li{
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    line-height: 130%;
+  }
+}
