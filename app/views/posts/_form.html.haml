@@ -10,8 +10,8 @@
 
     - if @post.main_image?  
       .rotate
-        = link_to '', '#', method: :patch, class: :left
-        = link_to '', '#', method: :patch, class: :right
+        = link_to '', main_image_to_left_url(@post.class.to_s, @post.id),  method: :patch, class: :left
+        = link_to '', main_image_to_right_url(@post.class.to_s, @post.id), method: :patch, class: :right
     .image_preview
       = link_to @post.main_image.url(:base) do
         = image_tag @post.main_image.url(:preview)

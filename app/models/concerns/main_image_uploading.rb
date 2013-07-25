@@ -51,11 +51,32 @@ module MainImageUploading
     end
   end
 
+  def main_image_to_left!
+    main_image_rotate "-90"
+  end
+
+  def main_image_to_right!
+    main_image_rotate "90"
+  end
+
   def destroy_main_image!
     base    = main_image.path(:base).to_s
     preview = main_image.path(:preview).to_s
     FileUtils.rm([base, preview], force: true)
     main_image.destroy
     save!
+  end
+
+  private
+
+  def main_image_rotate angle
+    return false unless main_image?
+    src     = main_image.path
+    base    = main_image.path(:base)
+    preview = main_image.path(:preview)
+
+    rotate_image(src,     src,     angle)
+    rotate_image(base,    base,    angle)
+    rotate_image(preview, preview, angle)
   end
 end
