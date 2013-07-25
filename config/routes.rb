@@ -44,4 +44,5 @@ TheApp::Application.routes.draw do
   patch '/image_processor/crop_image',       as: :crop_image,   to: 'image_processor#crop_image'
 
   get "/:type" => 'hubs#system_section', as: :system_hub
+  delete 'delete_main_image/:storage_type/:storage_id' => "attached_files#delete_main_image", as: :delete_main_image
 end

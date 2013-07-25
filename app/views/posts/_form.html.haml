@@ -8,6 +8,12 @@
     = image_tag @post.main_image.url(:preview)
   %p
     = f.file_field :main_image
+
+    - if @post.main_image?
+      = link_to 'delete image', |
+      delete_main_image_url(@post.class.to_s, @post.id), |
+      method: :delete, data: { confirm: "Are you sure?" }
+
     =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
   
   - unless @post.new_record?
