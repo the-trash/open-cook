@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
   end
 
   def save_audit
-    # (@audit || Audit.new.init(self)).save
+    (@audit || Audit.new.init(self)).save
   end
-
 end

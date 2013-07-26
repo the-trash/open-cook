@@ -4,10 +4,9 @@ module PublicationController
 
   included do
     before_action :set_klass
-    before_action :set_post_and_user,   only: [:show, :edit, :update, :destroy]
-    before_action :protect_post_action, only: [:show, :edit, :update, :destroy]
-
-    # after_action -> { @audit = Audit.new.init(self, @post) }, only: [:create, :show, :update, :edit, :destroy]
+    before_action :set_post_and_user,   only: %w[show edit update destroy]
+    before_action :protect_post_action, only: %w[show edit update destroy]
+    before_action :set_audit,           only: %w[create show update edit destroy]
 
     include TheSortableTreeController::ReversedRebuild
 
@@ -69,6 +68,10 @@ module PublicationController
         @post.update_attachment_fields(:main_image)
         render 'posts/edit'
       end
+    end
+
+    def set_audit
+      @audit = Audit.new.init(self, @post)
     end
 
     def destroy

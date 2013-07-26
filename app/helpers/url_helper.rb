@@ -4,10 +4,10 @@ module UrlHelper
   end
 
   def edit_url obj
-    url_for(controller: obj.controller_name, action: :edit, id: obj)
+    url_for(controller: obj.ctrl_name, action: :edit, id: obj)
   end
 
   def show_url obj
-    url_for(controller: obj.controller_name, action: :show, id: obj)
+    url_for(controller: obj.ctrl_name, action: :show, id: obj)
   end
 end
