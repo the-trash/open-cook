@@ -2,13 +2,17 @@ class AttachedFilesController < ApplicationController
   include AttachedFilesActions
   include TheSortableTreeController::Rebuild
 
-  before_action :find_storage, only: [:create, :delete_main_image, :main_image_to_left, :main_image_to_right]
+  before_action :find_storage, only: %w[create delete_main_image main_image_to_left main_image_to_right crop_image_for_preview]
   # before_action :check_access
   
-  def delete_main_image
-    @storage.destroy_main_image!
+  def crop_image_for_preview
+    @storage.crop_for_preview!(
+      params[:x], params[:y],
+      params[:w], params[:h],
+      params[:img_w])
+
     redirect_to request.referer,
-                notice: "Main image was successfully destroyed"
+                notice: "Preview was rebuilded"
   end
 
   def main_image_to_left
@@ -21,6 +25,12 @@ class AttachedFilesController < ApplicationController
     @storage.main_image_to_right!
     redirect_to request.referer,
                 notice: "Main image rotate on right"
+  end
+
+  def delete_main_image
+    @storage.destroy_main_image!
+    redirect_to request.referer,
+                notice: "Main image was successfully destroyed"
   end
 
   private

@@ -1,40 +1,21 @@
+= form_tag crop_image_for_preview_url, id: :main_image_cropping, class: :hidden do
+  = text_field_tag :storage_type, @post.class.to_s
+  = text_field_tag :storage_id,   @post.id
+
+  = text_field_tag :x
+  = text_field_tag :y
+  = text_field_tag :w
+  = text_field_tag :h
+  = text_field_tag :img_w
+
 = form_for @post, html: { enctype: "multipart/form-data" } do |f|
   = error_messages_for @post
 
   = hidden_field_tag 'post_id',    @post.id
   = hidden_field_tag 'post_klass', @post.class
 
-  .image_toolbar
-    %p
-      %b Главное изображение поста:
-
-    - if @post.main_image?  
-      .rotate
-        = link_to '', main_image_to_left_url(@post.class.to_s, @post.id),  method: :patch, class: :left
-        = link_to '', main_image_to_right_url(@post.class.to_s, @post.id), method: :patch, class: :right
-    .image_preview
-      = link_to @post.main_image.url(:base) do
-        = image_tag @post.main_image.url(:preview)
-
-    .tools_block
-      - if @post.main_image?
-        = link_to '', |
-        delete_main_image_url(@post.class.to_s, @post.id), |
-        method: :delete, data: { confirm: "Вы уверены?" }, class: :img_clear
-
-      %p
-        %label Укажите изображение:
-        = f.file_field :main_image
-      %p
-        = link_to 'Выбрать область изображения', '#', method: :patch, class: :jcrop_run
-
-      =# render partial: 'the_storages/preview_maker', locals: { storage: @post }
+  = render partial: 'posts/main_image_toolbar', locals: { f: f }
   
-  - unless @post.new_record?
-    %p
-      %b= t('post.author')
-      = @post.user.login
-
   .field
     = f.label :title, t('post.title')
     = f.text_field :title
@@ -54,5 +35,11 @@
     - options = options_for_select(publication_states, @post.state)
     = f.label  :state, t('post.state')
     = f.select :state, options
+  
+  - unless @post.new_record?
+    .field
+      %p
+        %b= t('post.author')
+        = @post.user.login
   .actions
     = f.submit t('post.save')

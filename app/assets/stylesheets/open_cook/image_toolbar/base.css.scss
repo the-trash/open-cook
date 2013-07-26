@@ -1,10 +1,30 @@
 .image_toolbar{
-  padding: 10px;
   background: white;
   border-radius: 5px;
   overflow: hidden; zoom: 1;
   position: relative;
-  
+  margin-bottom: 15px;
+
+  .base_view, .crop_view{
+    overflow: hidden; zoom: 1;
+    margin: 10px;
+  }
+
+  .crop_view{
+    display: none;
+    position: relative;
+  }
+  .cropped_preview_holder{
+    position: absolute;
+    right:0; top:25px;
+  }
+  .cropped_preview{
+    display: none;
+    width: 200px;
+    height: 150px;
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
   .img_clear{
     position: absolute;
     top: 5px; right: 5px;
@@ -12,7 +32,6 @@
     background: image-url("/assets/iconza/icons/delete.png") no-repeat scroll center center transparent;
     &:hover{ background-image: image-url("/assets/iconza/icons/red_delete.png"); }
   }
-
   .rotate{
     float: left;
     width: 16px;
@@ -38,7 +57,7 @@
   .image_preview{
     float: left;
     margin-right: 15px;
-    width: 100px; height: 100px;
+    /*width: 100px; height: 100px;*/
     overflow: hidden; zoom: 1;
   }
 

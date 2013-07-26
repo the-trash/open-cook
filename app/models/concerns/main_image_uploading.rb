@@ -59,6 +59,19 @@ module MainImageUploading
     main_image_rotate "90"
   end
 
+  def crop_for_preview!(x, y, w, h, img_w = 100)
+    return false if Array.new([x, y, w, h]).any?{ |v| v.blank? }
+    src     = main_image.path
+    preview = main_image.path :preview
+
+    # crop and scale
+    _src  = MiniMagick::Image.open(src)
+    scale = _src[:width].to_f/img_w.to_f
+
+    crop_image(src, preview, x, y, w, h, scale)
+    resize_to_larger_side!(preview, img_w)
+  end
+
   def destroy_main_image!
     base    = main_image.path(:base).to_s
     preview = main_image.path(:preview).to_s

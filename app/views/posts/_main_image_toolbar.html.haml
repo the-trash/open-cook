@@ -1,0 +1,45 @@
+.image_toolbar
+  .base_view
+    %p
+      %b Главное изображение поста:
+
+    - if @post.main_image?  
+      .rotate
+        = link_to '', main_image_to_left_url(@post.class.to_s, @post.id),  method: :patch, class: :left
+        = link_to '', main_image_to_right_url(@post.class.to_s, @post.id), method: :patch, class: :right
+    .image_preview
+      = link_to @post.main_image.url(:base) do
+        = image_tag @post.main_image.url(:preview)
+
+    .tools_block
+      - if @post.main_image?
+        = link_to '', |
+        delete_main_image_url(@post.class.to_s, @post.id), |
+        method: :delete, data: { confirm: "Вы уверены?" }, class: :img_clear
+
+      %p
+        %label Укажите изображение:
+        = f.file_field :main_image
+
+      - if @post.main_image?
+        %p
+          = link_to 'Выбрать область изображения', '#', method: :patch, class: :jcrop_run
+
+  - if @post.main_image?
+    .crop_view
+      %p
+        %b Укажите область изображения и сохраните результат:
+
+      %p
+        = image_tag @post.main_image.url(:base), id: :main_image_jcrop
+
+        .cropped_preview_holder
+          .cropped_preview
+            = image_tag @post.main_image.url, id: :cropped_main_image_preview
+
+          = submit_tag "Сохранить", id: :main_image_cropping_save, class: :hidden
+
+      %p
+        = link_to 'Закрыть и не сохранять', '#', method: :patch, class: :jcrop_stop
+
+=# render partial: 'the_storages/preview_maker', locals: { storage: @post }

@@ -46,7 +46,8 @@ TheApp::Application.routes.draw do
   get "/:type" => 'hubs#system_section', as: :system_hub
 
   # Main image
-  delete 'delete_main_image/:storage_type/:storage_id'   => "attached_files#delete_main_image",   as: :delete_main_image
-  patch  'main_image_to_left/:storage_type/:storage_id'  => "attached_files#main_image_to_left",  as: :main_image_to_left
-  patch  'main_image_to_right/:storage_type/:storage_id' => "attached_files#main_image_to_right", as: :main_image_to_right
+  delete 'delete_main_image/:storage_type/:storage_id'   => "attached_files#delete_main_image",      as: :delete_main_image
+  patch  'main_image_to_left/:storage_type/:storage_id'  => "attached_files#main_image_to_left",     as: :main_image_to_left
+  patch  'main_image_to_right/:storage_type/:storage_id' => "attached_files#main_image_to_right",    as: :main_image_to_right
+  post   'crop_image_for_preview'                        => "attached_files#crop_image_for_preview", as: :crop_image_for_preview
 end
