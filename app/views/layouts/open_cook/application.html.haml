@@ -21,12 +21,15 @@
         %table.layout
           %tr
             %td.left
-              = render partial: 'layouts/open_cook/items/left_menu'
+              = yield :left_column
             %td.center
               = render partial: 'layouts/open_cook/items/notice_block'
               = yield
             %td.right
-              = render partial: 'layouts/open_cook/items/right_menu'
+              = yield :right_column
+
+              =# render partial: 'layouts/open_cook/items/left_menu'
+              =# render partial: 'layouts/open_cook/items/right_menu'
 
       .fguard &nbsp;
     .footer.overblock

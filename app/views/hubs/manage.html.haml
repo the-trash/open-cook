@@ -1,6 +1,12 @@
-%p= link_to "New #{pub_type}", url_for([:new, model_name])
+= content_for :left_column do
+  .fragment_block
+    %h3 Навигация
+    .block
+      %p= link_to 'Мой Кабинет', cabinet_url
 
-%ol.sortable_tree{ data: { max_levels: 5, rebuild_url: url_for([:rebuild, controller_name]), expand_node_url: expand_node_hubs_url, cookie_scope: @posts.first.class } }
-  = expandable_tree @posts
+%p= link_to "Новый Хаб", url_for([:new, model_name])
 
-= paginate @posts
+%ol.sortable_tree{ data: { max_levels: 5, rebuild_url: url_for([:rebuild, :hubs]), expand_node_url: expand_node_hubs_url, cookie_scope: :Hubs } }
+  = expandable_tree @hubs
+
+= paginate @hubs

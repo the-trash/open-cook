@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :user_require,  only: [:cabinet]
+  before_action :role_required, only: [:cabinet]
+
   def index
     @users = User.includes(:role).order("role_id ASC").page(params[:page])
   end
@@ -23,5 +26,4 @@ class UsersController < ApplicationController
 
   # secured
   def cabinet; end
-
 end

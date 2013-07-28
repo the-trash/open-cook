@@ -1,12 +1,12 @@
 @import '../../base/colors';
 
-/*.section_hubs{
+.fragment_block{
   border-radius: 5px;
   margin: 0 10px 15px 0;
   border:  1px solid $header;
   background: lighten($header, 15%);
 
-  .hubs{
+  .block{
     padding-bottom: 10px; 
   }
   h3{
@@ -24,4 +24,4 @@
     font-size: 1.6em;
     margin-left: 20px;
   }
-}*/
+}

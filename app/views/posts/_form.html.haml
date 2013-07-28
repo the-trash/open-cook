@@ -1,12 +1,4 @@
-= form_tag crop_image_for_preview_url, id: :main_image_cropping, class: :hidden do
-  = text_field_tag :storage_type, @post.class.to_s
-  = text_field_tag :storage_id,   @post.id
-
-  = text_field_tag :x
-  = text_field_tag :y
-  = text_field_tag :w
-  = text_field_tag :h
-  = text_field_tag :img_w
+= render partial: 'shared/crop_image_form', locals: { object: @post }
 
 = form_for @post, html: { enctype: "multipart/form-data" } do |f|
   = error_messages_for @post
@@ -14,14 +6,14 @@
   = hidden_field_tag 'post_id',    @post.id
   = hidden_field_tag 'post_klass', @post.class
 
-  = render partial: 'posts/main_image_toolbar', locals: { f: f }
+  = render partial: 'shared/main_image_toolbar', locals: { f: f, object: @post }
   
   .field
     = f.label :title, t('post.title')
     = f.text_field :title
 
   = render partial: 'posts/hub_select'
-  = render partial: "posts/meta_fields", locals: { f: f }
+  = render partial: "shared/meta_fields", locals: { f: f }
 
   .field
     %p

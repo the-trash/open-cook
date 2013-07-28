@@ -11,6 +11,7 @@
 
   *= require open_cook/layout/header
   *= require open_cook/layout/sections
+  *= require open_cook/layout/fragment_block
   
   *= require open_cook/layout/section_hubs
   *= require open_cook/layout/notice_block
@@ -18,6 +19,8 @@
 
   *= require open_cook/layout/layout
   *= require open_cook/layout/footer
+
+  *= require open_cook/users/cabinet
 
   *= require open_cook/posts/index
   *= require open_cook/posts/show

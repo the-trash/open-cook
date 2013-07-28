@@ -1,29 +1,37 @@
 .users_cabinet
-  %h3 Cabinet of: #{@user.login}
+  %h3 Кабинет пользователя #{@user.login}
 
-  %h4 Создать:
+  .fn_block
+    %h4 Создать:
 
-  %ul.numered_list
-    %li= link_to 'Новый Пост',     new_post_url
-    %li= link_to 'Новую страницу', new_page_url
+    %ul.marked_list
+      %li= link_to 'Новый Пост',     new_post_url
+      %li= link_to 'Новую страницу', new_page_url
 
-  %h4 Управление публикациями:
+  .fn_block
+    %h4 Управление публикациями:
 
-  %ul.numered_list
-    %li= link_to 'Мои посты',    manage_user_posts_url(@user)
-    %li= link_to 'Мои страницы', manage_user_posts_url(@user)
+    %ul.marked_list
+      %li= link_to 'Мои посты',    manage_user_posts_url(@user)
+      %li= link_to 'Мои страницы', manage_user_posts_url(@user)
 
-  %h4 Просмотр:
+  .fn_block
+    %h4 Просмотр:
 
-  %p= link_to 'Моя лента постов',  user_posts_url(@user)
+    %ul.marked_list
+      %li= link_to 'Моя лента постов',  user_posts_url(@user)
   
-  %h4 Упрвление cтруктурой:
+  .fn_block
+    %h4 Упрвление cтруктурой:
 
-  %p= link_to 'Разделы сайта', manage_hubs_url
+    %ul.marked_list
+      %li= link_to 'Разделы сайта', manage_hubs_url
 
-  %h4 Комментарии
-
-  %p= link_to "My comments #{@user.my_comments_count}", [:my, :comments]
-  %p= link_to "Incoming comments #{@user.comcoms_sum}", [:incoming, :comments]
-  %p= link_to "New comments #{@user.draft_comcoms_count}", [:new, :comment]
-  %p= link_to "Deleted comments #{@user.deleted_comcoms_count}", [:trash, :comments]
+  .fn_block
+    %h4 Комментарии
+    
+    %ul.marked_list
+      %li= link_to "My comments #{@user.my_comments_count}", [:my, :comments]
+      %li= link_to "Incoming comments #{@user.comcoms_sum}", [:incoming, :comments]
+      %li= link_to "New comments #{@user.draft_comcoms_count}", [:new, :comment]
+      %li= link_to "Deleted comments #{@user.deleted_comcoms_count}", [:trash, :comments]

@@ -1,0 +1,37 @@
+= render partial: 'shared/crop_image_form', locals: { object: @hub }
+
+= form_for @hub, html: { enctype: "multipart/form-data" } do |f|
+  = error_messages_for @hub
+
+  = hidden_field_tag 'hub_id',    @hub.id
+  = hidden_field_tag 'hub_klass', @hub.class
+
+  = render partial: 'shared/main_image_toolbar', locals: { f: f, object: @hub }
+  
+  .field
+    = f.label :title, t('hub.title')
+    = f.text_field :title
+
+  =# render partial: 'hubs/hub_select'
+  = render partial: "shared/meta_fields", locals: { f: f }
+
+  .field
+    %p
+      %b= t('hub.intro')
+    = f.text_area :raw_intro, class: :redactor_intro
+  .field
+    %p
+      %b= t('hub.content')
+    = f.text_area :raw_content, class: :redactor_content
+  .field
+    - options = options_for_select(publication_states, @hub.state)
+    = f.label  :state, t('hub.state')
+    = f.select :state, options
+  
+  - unless @hub.new_record?
+    .field
+      %p
+        %b= t('hub.author')
+        = @hub.user.login
+  .actions
+    = f.submit t('hub.save')

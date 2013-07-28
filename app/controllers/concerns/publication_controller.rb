@@ -13,10 +13,7 @@ module PublicationController
     def index
       # TODO: posts from hidden hubs should not be visible
       user   = User.where(login: user_id).first || @root
-      @posts = user.send(controller_name)
-                .visible_pubs
-                .reversed_nested_set
-                .pagination(params)
+      @posts = user.send(controller_name).for_manage_rset.pagination(params)
 
       render 'posts/index'
     end
@@ -32,9 +29,7 @@ module PublicationController
 
     # PROTECTED
     def manage
-      @posts = @user.send(controller_name)
-                .for_manage_rset
-                .pagination(params)
+      @posts = @user.send(controller_name).for_manage_rset.pagination(params)
 
       render 'posts/manage'
     end
