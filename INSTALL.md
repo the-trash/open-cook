@@ -1,4 +1,17 @@
-### HOW TO INSTALL 
+#### Install from scratch
+
+check your soft:
+
+```
+gem -v
+node -v
+rails -v
+searchd --help
+mysql   --version
+convert --version
+mogrify --version
+sqlite3 --version
+```
 
 Create project dir
 
@@ -21,12 +34,6 @@ git clone git@github.com:the-teacher/the_role.git
 git clone git@github.com:the-teacher/the_comments.git
 git clone git@github.com:the-teacher/the_storages.git
 git clone git@github.com:the-teacher/the_sortable_tree.git
-```
-
-rails 4 required
-
-```
-gem update rails
 ```
 
 Change directory
@@ -61,26 +68,42 @@ Bundle!
 bundle
 ```
 
-Create DB and test data
+Create DB and Migrate
 
 ```
-rake db:bootstrap_and_seed
+rake db:bootstrap
 ```
 
-DJ run
+Create Admin Role
 
 ```
-script/delayed_job start
+rake db:roles:admin
 ```
 
-web server run
+Create Admin User
 
 ```
-bin/rails s
+rails c
 ```
 
-or
+```
+User.create!(
+  login: :admin,
+  email: "admin@site.com",
+  password: "PassWord"
+)
+
+User.count #=> 1
+```
+
+Run web server
 
 ```
-bin/rails s -p 3000 -b host.name
+rails s
+```
+
+Browser
+
+```
+http://localhost:3000/
 ```

@@ -14,7 +14,7 @@ class HubsController < ApplicationController
   end
 
   def set_post_and_user
-    @post = Hub.published_with_user.friendly_first(params[:id])
+    @post = Hub.for_manage.friendly_first(params[:id])
     @user = @post.user
   end
 

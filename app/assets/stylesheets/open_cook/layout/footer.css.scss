@@ -1,4 +1,8 @@
+@import '../../base/colors';
+
 .footer{
+  background: $footer;
+
   ul.pages{
     padding-top: 20px;
     padding-left: 20px;
@@ -6,6 +10,9 @@
     li{
       float: left;
       margin-right: 20px;
+    }
+    a{
+      color: $header;
     }
   }
 }

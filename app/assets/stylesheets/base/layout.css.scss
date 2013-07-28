@@ -18,20 +18,11 @@ body{
   height: 100%;
 }
 
-.footer {
+.footer{
   margin:auto;
   margin-top: -100px;
-  background:#666;
 }
 
-.footer, .footer_guarantor {
-   height: 100px;
-}
+.footer, .fguard{ height: 100px; }
 
-.body, .footer{
-  width: 1000px;
-}
-
-.footer_guarantor {
-  border: 0px dashed #666;
-}
+.body, .footer{ width: 1000px; }

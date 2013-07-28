@@ -17,16 +17,17 @@ gem 'jbuilder', '~> 1.0.1'
 gem 'compass'
 gem 'kaminari'
 
+gem 'haml'
 gem 'sanitize'
-gem 'state_machine', '~> 1.2.0'
-gem 'haml' 
-gem 'acts-as-taggable-on'
 gem 'awesome_nested_set'
+gem 'state_machine', '~> 1.2.0'
+gem 'acts-as-taggable-on', '~> 2.4.1'
 
 # gem 'rmagick'
 gem 'mini_magick'
 gem 'paperclip'
 
+# DJ
 gem 'daemons'
 
 gem 'delayed_job',
@@ -58,7 +59,7 @@ group :assets do
   gem 'sass-rails'
   gem 'uglifier', '>= 1.0.3'
 
-  gem 'bootstrap-sass', '~> 2.2.2.0'
+  gem 'bootstrap-sass', '~> 2.3'
 end
 
 group :development, :test do

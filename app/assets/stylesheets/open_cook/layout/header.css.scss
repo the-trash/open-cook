@@ -1,5 +1,8 @@
+@import '../../base/colors';
+
 .header{
-  background: gray;
+  background: $header;
+
   height: 100px;
   margin-bottom: 10px;
   position: relative;

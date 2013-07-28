@@ -1,6 +1,8 @@
-a { color: black; }
-a:visited { color: #444; }
-a:hover, a:visited:hover { color: #22a; }
+@import '../../base/colors';
+
+a { color: $link; }
+a:visited { color: $link_visited; }
+a:hover, a:visited:hover { color: $link; }
 
 p{
   margin-bottom: 10px;
