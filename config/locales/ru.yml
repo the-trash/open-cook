@@ -4,12 +4,23 @@ ru:
       post: Публикация
     attributes:
       post:
+        friendly_id: "URL Адрес"
+        slug: "Короткий URL адрес"
         main_image_content_type: "Тип главного изображения"
         main_image_file_size:    "Размер главного изображения"
         main_image: "Главное изображение"
         title: "Загловок"
 
+  posts:
+    new: Новая публикация
+    edit: Редактирование публикации
+    feed: Моя Лента
+
+  hubs:
+    new: Новый хаб
+
   post:
+    new: 
     author: 'Автор поста:'
     hub_title: 'Имя раздела:'
     title: 'Заголовок:'
