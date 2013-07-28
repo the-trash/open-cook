@@ -1,7 +1,11 @@
+@import '../../base/colors';
+
 .sections{
+  background: $header;
   margin-bottom: 10px;
-  text-align: left;
-  padding: 5px;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
 
   a{
     margin-right: 30px;

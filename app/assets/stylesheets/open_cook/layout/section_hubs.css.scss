@@ -1,15 +1,27 @@
-.section_hubs{
-  padding-right: 10px;
-  margin-bottom: 15px;
+@import '../../base/colors';
 
+.section_hubs{
+  border-radius: 5px;
+  margin: 0 10px 15px 0;
+  border:  1px solid $header;
+  background: lighten($header, 15%);
+
+  .hubs{
+    padding-bottom: 10px; 
+  }
   h3{
-    background: lightBlue;
+    background: $header;
+    border-radius: 5px;
     text-align: center;
     font-size: 1.6em;
     padding: 5px;
   }
   p{
-    font-size: 1.1em;
+    font-size: 1em;
     margin-bottom: 10px;
+  }
+  a{
+    font-size: 1.8em;
+    margin-left: 20px;
   }
 }

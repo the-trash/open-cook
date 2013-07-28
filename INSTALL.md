@@ -77,23 +77,7 @@ rake db:bootstrap
 Create Admin Role
 
 ```
-rake db:roles:admin
-```
-
-Create Admin User
-
-```
-rails c
-```
-
-```
-User.create!(
-  login: :admin,
-  email: "admin@site.com",
-  password: "PassWord"
-)
-
-User.count #=> 1
+rake db:first:launch
 ```
 
 Run web server
