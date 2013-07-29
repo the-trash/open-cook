@@ -4,6 +4,10 @@ class HubsController < ApplicationController
   
   before_action :set_hub_and_user, only: %w[show edit update destroy]
 
+  before_action :user_require,   only: %w[new create edit update destroy]
+  before_action :role_required,  only: %w[new create edit update destroy]
+  before_action :owner_required, only: %w[edit update destroy]
+
   # PROTECTED
   def manage
     @hubs = @user.hubs.for_manage_rset.pagination(params)
@@ -36,7 +40,9 @@ class HubsController < ApplicationController
   end
   
   def selector
-    @hub = Hub.find(params[:hub_id])
+    klass   = params[:klass].constantize
+    @object = klass.find(params[:id])
+
     render layout: false, template: 'hubs/_selector'
   end
 
@@ -45,6 +51,9 @@ class HubsController < ApplicationController
   def set_hub_and_user
     @hub  = Hub.for_manage.friendly_first(params[:id])
     @user = @hub.user
+
+    # TheRole
+    @owner_check_object = @hub
   end
 
   def hub_params
@@ -63,36 +72,4 @@ class HubsController < ApplicationController
       :state
     )
   end
-
-  # include PublicationController
-
-  # def show
-  #   @hub = @hub
-  #   @hub.increment!(:show_count)
-    
-  #   @hubs = @hub.siblings.published_set
-  #   @hubs = @hub.hubs.published_set.pagination(params)
-
-  #   render 'hubs/index'
-  # end
-
-  # def manage
-  #   @hubs = @user.send(controller_name)
-  #             .roots
-  #             .nested_set
-  #             .with_states(:draft, :published)
-  #             .pagination(params)
-  # end
-
-  # def system_section
-  #   @hub   = Hub.friendly_first(params[:type])
-  #   @hubs  = @hub.descendants
-  #   @hubs = hub
-  #             .nested_set
-  #             .with_states(:draft, :published)
-  #             .where(hub_id: @hubs.ids.push(@hub.id))
-  #             .pagination(params)
-
-  #   render 'hubs/index'
-  # end
 end

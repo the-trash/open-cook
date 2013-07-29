@@ -20,12 +20,13 @@
 
     %ul.marked_list
       %li= link_to 'Моя лента постов',  user_posts_url(@user)
-  
-  .fn_block
-    %h4 Упрвление cтруктурой:
 
-    %ul.marked_list
-      %li= link_to 'Разделы сайта', manage_hubs_url
+  - if current_user.has_role?(:hubs, :manage)
+    .fn_block
+      %h4 Упрвление cтруктурой:
+
+      %ul.marked_list
+        %li= link_to 'Разделы сайта', manage_hubs_url
 
   .fn_block
     %h4 Комментарии

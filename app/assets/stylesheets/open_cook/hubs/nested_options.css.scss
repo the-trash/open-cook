@@ -1,0 +1,16 @@
+.hub_selector{
+  .nested_options{
+    cursor: pointer;
+
+    padding: 3px;
+    .l_1{
+      font-size: 0.8em;
+      font-weight: bold;
+      font-style: italic;
+    }
+    option{
+      margin: 5px;
+      cursor: pointer;
+    }
+  }
+}

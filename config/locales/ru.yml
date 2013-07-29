@@ -75,13 +75,17 @@ ru:
       next: "Сюда &rsaquo;"
       truncate: "..."
   sessions:
-    new: Login
-    login: Login
-    logout: Logout
+    new: Вход
+    login: Вход
+    logout: Выход
     create:
-      alert: "Login or Password was invalid"
-      notice: "Logged in!"
+      alert: "Логин или Пароль оказались ошибочными"
+      notice: "Вход"
     destroy:
-      noticce: "Logged out!"
+      notice: "До скорой встречи!"
   users:
-    index: Users list
+    have_not_role: "У вас не достаточно прав"
+    not_authenticated: "Вы должны войти в систему прежде чем увидить данную страницу"
+    index: Список пользователей
+    create:
+      created: Пользователь успешно создан

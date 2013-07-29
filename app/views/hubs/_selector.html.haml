@@ -1,10 +1,11 @@
 -# It's good to be bad!
 
 -# Logick
--# selector_hubs = @hub ? @hub.children.published_set : Hub.sections(@post.ctrl_name)
-- klass_name    = object.ctrl_name.singularize
-- selector_hubs = Hub.of_(object.ctrl_name)
-- selected_hub  = object.try(:hub)
+- object       ||= @object
+- klass_name     = object.ctrl_name.singularize
+- user_pub_scope = current_user.admin? ? :for_manage : :published_set
+- selector_hubs  = Hub.of_(object.ctrl_name).send(user_pub_scope)
+- selected_hub   = object.try(:hub)
 
 -# View
 - unless selector_hubs.blank?

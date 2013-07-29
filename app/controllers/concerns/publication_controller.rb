@@ -1,12 +1,14 @@
 module PublicationController
-  include HubCells
   extend ActiveSupport::Concern
 
   included do
     before_action :set_klass
     before_action :set_post_and_user,   only: %w[show edit update destroy]
-    before_action :protect_post_action, only: %w[show edit update destroy]
     before_action :set_audit,           only: %w[create show update edit destroy]
+
+    before_action :user_require,   only: %w[new create edit update destroy]
+    before_action :role_required,  only: %w[new create edit update destroy]
+    before_action :owner_required, only: %w[edit update destroy]
 
     include TheSortableTreeController::ReversedRebuild
 
@@ -85,14 +87,9 @@ module PublicationController
     def set_post_and_user
       @post = @klass.for_manage.with_users.friendly_first(params[:id])
       @user = @post.user
-    end
 
-    def protect_post_action
-      true
-      # TODO; THE ROLE!
-      # return true if current_user.owner? @post
-      # return true if controller_action.to_sym == :show and @post.published?
-      # return render text: 'secured area'
+      # TheRole
+      @owner_check_object = @post
     end
 
     def user_id

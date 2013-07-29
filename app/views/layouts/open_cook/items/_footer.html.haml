@@ -1,4 +1,4 @@
 %ul.pages
   %li= link_to 'Пользователи', users_url
-  - Hub.friendly_first('bottom-pages').try(:pubs).try(:each) do |page|
+  - Hub.friendly_first('bottom-pages').try(:pubs).try(:published_set).try(:each) do |page|
     %li= link_to page.title, page_url(page.slug)

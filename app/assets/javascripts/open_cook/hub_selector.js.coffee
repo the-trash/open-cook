@@ -1,20 +1,23 @@
 class @HubSelector
   @download_hub_children = (item) ->
-    field = item.parent()
+    field  = item.parent()
+    pub_id = $('#post_id').val()
+    new_record = pub_id.length is 0
     selector_holder = item.parents('.hub_selector')
 
-    $.ajax
-      type: 'POST'
-      url: '/hubs/selector'
-      data:
-        id:     $('#post_id').val()
-        klass:  $('#post_klass').val()
-        hub_id: $(item).val()
-      success: (data, status, response) ->
-        if data.length is 0
-          field.nextAll().remove()
-        else
-          selector_holder.append data
+    unless new_record
+      $.ajax
+        type: 'POST'
+        url: '/hubs/selector'
+        data:
+          id:     pub_id
+          klass:  $('#post_klass').val()
+          hub_id: $(item).val()
+        success: (data, status, response) ->
+          if data.length is 0
+            field.nextAll().remove()
+          else
+            selector_holder.append data
 
   @init = ->
     selector_holder = $('.hub_selector')

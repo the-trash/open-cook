@@ -22,6 +22,7 @@
 
   *= require open_cook/users/cabinet
 
+  *= require open_cook/hubs/nested_options
   *= require open_cook/posts/index
   *= require open_cook/posts/show
 
