@@ -28,4 +28,7 @@
 //= require open_cook/multi_input
 // require open_cook/hub_selector
 
+//= require bootstrap-alert
+//= require bootstrap-dropdown
+
 //= require open_cook/initializer

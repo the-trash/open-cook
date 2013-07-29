@@ -22,9 +22,11 @@
           %tr
             %td.left
               = yield :left_column
+              = yield :role_sidebar
             %td.center
               = render partial: 'layouts/open_cook/items/notice_block'
               = yield
+              = yield :role_main
             %td.right
               = yield :right_column
 

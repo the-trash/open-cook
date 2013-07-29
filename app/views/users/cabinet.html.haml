@@ -36,3 +36,9 @@
       %li= link_to "Incoming comments #{@user.comcoms_sum}", [:incoming, :comments]
       %li= link_to "New comments #{@user.draft_comcoms_count}", [:new, :comment]
       %li= link_to "Deleted comments #{@user.deleted_comcoms_count}", [:trash, :comments]
+
+  .fn_block
+    %h4 Управление ролями:
+
+    %ul.marked_list
+      %li= link_to 'Роли', admin_roles_url
