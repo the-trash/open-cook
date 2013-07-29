@@ -84,3 +84,12 @@ or
 ```
 bin/rails s -p 3000 -b host.name
 ```
+
+#### tests
+
+```
+rake db:bootstrap RAILS_ENV=test
+rspec
+
+rspec spec/requests --format documentation
+```

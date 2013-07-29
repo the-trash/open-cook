@@ -34,9 +34,6 @@
   *= require expandable_tree
   *= require the_storages
 
-  *= require the_role/bootstrap_sass
-  *= require the_role
-
   *= require redactor
 
   *= require the_comments

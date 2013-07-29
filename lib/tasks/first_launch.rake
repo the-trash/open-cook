@@ -3,11 +3,14 @@ namespace :db do
     # rake db:first:user
     desc "create first user"
     task user: :environment do
-      User.create!(
+      user = User.create!(
         login: :admin,
         email: "admin@site.com",
         password: "qwerty"
       )
+
+      user.update( role: Role.with_name(:admin) )
+
       puts "First User (admin) created"
       puts "Login: [admin], Password: [qwerty]"
       puts '~'*40

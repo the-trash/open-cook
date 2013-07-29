@@ -5,6 +5,11 @@ FactoryGirl.define do
     name "admin"
     title "bla"
     description "bla"
-    the_role "{}"
+  end
+
+  factory :admin_role, class: Role do
+    name        :admin
+    title       "Role for admin"
+    description "This user can do anything"
   end
 end

@@ -46,6 +46,12 @@ class HubsController < ApplicationController
     render layout: false, template: 'hubs/_selector'
   end
 
+  def system_section
+    @hub   = Hub.friendly_first(params[:type])
+    @posts = @hub.pubs.published_set.pagination(params)
+    render template: 'posts/index'
+  end
+
   private
 
   def set_hub_and_user

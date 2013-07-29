@@ -19,7 +19,7 @@ gem 'kaminari'
 
 gem 'haml'
 gem 'sanitize'
-gem 'awesome_nested_set'
+gem 'awesome_nested_set', branch: 'rails4'
 gem 'state_machine', '~> 1.2.0'
 gem 'acts-as-taggable-on', '~> 2.4.1'
 
