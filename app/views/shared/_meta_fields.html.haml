@@ -7,5 +7,5 @@
   .set.hidden
     - %w[ slug author keywords description copyright].each do |name|
       .field
-        = f.label name
+        = f.label t(".#{name}")
         = f.text_field name

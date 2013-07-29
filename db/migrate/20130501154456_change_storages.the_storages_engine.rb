@@ -6,7 +6,7 @@ class ChangeStorages < ActiveRecord::Migration
       t.integer :all_attached_files_size,  default: 0
     end
 
-    [:users, :posts, :hubs].each do |table_name|
+    [:users, :posts, :pages, :hubs].each do |table_name|
       change_table table_name do |t|
         t.integer :storage_files_count, default: 0
         t.integer :storage_files_size,  default: 0

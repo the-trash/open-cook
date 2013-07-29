@@ -1,4 +1,21 @@
 ru:
+  file_size_helper:
+    mb: Мб
+
+  shared:
+    meta_fields:
+      slug: "Короткий URL адрес:"
+      author: "Автор:"
+      keywords: "Ключевые слова:"
+      description: "Описание:"
+      copyright: "Авторское право:"
+    pub_stats:
+      author: 'Автор:'
+      show_count: 'Просмотров:'
+      pubs_count: 'Публикаций:'
+      files_count: 'Всего файлов:'
+      files_size: 'Размер файлов:'
+
   activerecord:
     models:
       post: Публикация
@@ -18,6 +35,15 @@ ru:
 
   hubs:
     new: Новый хаб
+    pubs_types:
+      posts: Публикации
+      pages: Страницы
+    form:
+      pubs_type: 'Тип прикрепленных элементов:'
+      title: 'Название хаба:'
+      state: 'Состояние:'
+      intro: 'Описание хаба:'
+      save: Сохранить хаб
 
   post:
     new: 

@@ -42,6 +42,12 @@ Change directory
 cd open-cook
 ```
 
+RVM config
+
+```
+cp .rvmrc.example .rvmrc
+```
+
 Create DB config file
 
 ```
@@ -74,7 +80,7 @@ Create DB and Migrate
 rake db:bootstrap
 ```
 
-Create Admin Role
+Create Basic Data for launch
 
 ```
 rake db:first:launch

@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     [self.class.to_s.tableize, login].join('/')
   end
 
+  def recalculate_all_attached_files!
+    # Recalculate all user counters here
+  end
+
   private
 
   def prepare_login

@@ -11,8 +11,8 @@ module ApplicationHelper
     %w[ draft published ].collect{ |state| [ t("publication.#{state}"), state ] }
   end
 
-  def post_types
-    %w[ posts blogs recipes videos articles pages ].collect{ |type| [ t("publication.#{type}"), type ] }
+  def hub_pubs_types
+    %w[ posts pages ].collect{ |type| [ t("hubs.pubs_types.#{type}"), type ] }
   end
 
   # Error mesages

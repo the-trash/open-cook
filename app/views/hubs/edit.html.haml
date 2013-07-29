@@ -8,5 +8,5 @@
 %h1 Редактирование Хаба
 
 = render 'hubs/form'
-= render partial: 'the_storages/list', locals: { storage: @hub }
 = render partial: 'the_storages/form', locals: { storage: @hub }
+= render partial: 'the_storages/list', locals: { storage: @hub }

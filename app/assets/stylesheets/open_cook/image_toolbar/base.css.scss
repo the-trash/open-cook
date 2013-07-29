@@ -9,7 +9,6 @@
     overflow: hidden; zoom: 1;
     margin: 10px;
   }
-
   .crop_view{
     display: none;
     position: relative;
@@ -56,8 +55,8 @@
 
   .image_preview{
     float: left;
+    width: 100px;
     margin-right: 15px;
-    /*width: 100px; height: 100px;*/
     overflow: hidden; zoom: 1;
   }
 

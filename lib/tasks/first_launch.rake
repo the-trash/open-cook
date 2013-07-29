@@ -8,6 +8,9 @@ namespace :db do
         email: "admin@site.com",
         password: "qwerty"
       )
+      puts "First User (admin) created"
+      puts "Login: [admin], Password: [qwerty]"
+      puts '~'*40
     end
 
     # rake db:first:launch
@@ -26,6 +29,7 @@ namespace :db do
       create_system_hub(:blogs,    'Blogs')
 
       puts "Basic Hubs created"
+      puts '~'*40
     end
 
     # rake db:first:launch

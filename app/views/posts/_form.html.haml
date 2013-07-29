@@ -12,7 +12,7 @@
     = f.label :title, t('post.title')
     = f.text_field :title
 
-  = render partial: 'posts/hub_select'
+  = render partial: 'hubs/hub_select', locals: { object: @post }
   = render partial: "shared/meta_fields", locals: { f: f }
 
   .field
@@ -28,10 +28,7 @@
     = f.label  :state, t('post.state')
     = f.select :state, options
   
-  - unless @post.new_record?
-    .field
-      %p
-        %b= t('post.author')
-        = @post.user.login
   .actions
     = f.submit t('post.save')
+
+  = render partial: 'shared/pub_stats', locals: { object: @post }

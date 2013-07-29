@@ -34,6 +34,11 @@ class HubsController < ApplicationController
       render template: :new
     end
   end
+  
+  def selector
+    @hub = Hub.find(params[:hub_id])
+    render layout: false, template: 'hubs/_selector'
+  end
 
   private
 
@@ -50,7 +55,7 @@ class HubsController < ApplicationController
       :hub_id,
       :slug,
       :main_image,
-      :pub_type,
+      :pubs_type,
       :author, :keywords, :description, :copyright,
       :title,
       :raw_intro,
@@ -69,13 +74,6 @@ class HubsController < ApplicationController
   #   @hubs = @hub.hubs.published_set.pagination(params)
 
   #   render 'hubs/index'
-  # end
-
-
-
-  # def selector
-  #   @hub = Hub.find(params[:hub_id])
-  #   render layout: false, template: 'hubs/_selector'
   # end
 
   # def manage

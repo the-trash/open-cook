@@ -9,29 +9,26 @@
   = render partial: 'shared/main_image_toolbar', locals: { f: f, object: @hub }
   
   .field
-    = f.label :title, t('hub.title')
+    = f.label :title, t('.title')
     = f.text_field :title
 
-  =# render partial: 'hubs/hub_select'
+  = render partial: 'hubs/hub_select', locals: { object: @hub } 
   = render partial: "shared/meta_fields", locals: { f: f }
 
   .field
     %p
-      %b= t('hub.intro')
+      %b= t('.intro')
     = f.text_area :raw_intro, class: :redactor_intro
   .field
-    %p
-      %b= t('hub.content')
-    = f.text_area :raw_content, class: :redactor_content
+    - options = options_for_select(hub_pubs_types, @hub.pubs_type)
+    = f.label  :pubs_type, t('.pubs_type')
+    = f.select :pubs_type, options
   .field
     - options = options_for_select(publication_states, @hub.state)
-    = f.label  :state, t('hub.state')
+    = f.label  :state, t('.state')
     = f.select :state, options
-  
-  - unless @hub.new_record?
-    .field
-      %p
-        %b= t('hub.author')
-        = @hub.user.login
+
   .actions
-    = f.submit t('hub.save')
+    = f.submit t('.save')
+
+  = render partial: 'shared/pub_stats', locals: { object: @hub }

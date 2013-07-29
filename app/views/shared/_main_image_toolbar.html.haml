@@ -8,8 +8,8 @@
         = link_to '', main_image_to_left_url(object.class.to_s, object.id),  method: :patch, class: :left
         = link_to '', main_image_to_right_url(object.class.to_s, object.id), method: :patch, class: :right
     .image_preview
-      = link_to object.main_image.url(:base) do
-        = image_tag object.main_image.url(:preview)
+      = link_to object.main_image.url(:preview) do
+        = image_tag object.main_image.url(:preview), width: '100%'
 
     .tools_block
       - if object.main_image?

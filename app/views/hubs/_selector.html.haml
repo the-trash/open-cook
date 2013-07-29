@@ -1,10 +1,13 @@
 -# It's good to be bad!
 
 -# Logick
-- @selector_hubs = @hub ? @hub.children.published_set : Hub.sections(@post.ctrl_name)
+-# selector_hubs = @hub ? @hub.children.published_set : Hub.sections(@post.ctrl_name)
+- klass_name    = object.ctrl_name.singularize
+- selector_hubs = Hub.of_(object.ctrl_name)
+- selected_hub  = object.try(:hub)
 
 -# View
-- unless @selector_hubs.blank?
+- unless selector_hubs.blank?
   .field
     = label_tag :hub_id, 'Раздел: '
-    = select_tag 'post[hub_id]', nested_options(@selector_hubs, selected: @selected_hub), class: :nested_options
+    = select_tag "#{klass_name}[hub_id]", nested_options(selector_hubs, selected: selected_hub), class: :nested_options
