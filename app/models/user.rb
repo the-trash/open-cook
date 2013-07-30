@@ -61,13 +61,14 @@ class User < ActiveRecord::Base
   # with section "available_hubs"
   def available_hubs ctrl_name = nil
     scope = ctrl_name.blank? ? :all : [:of_, ctrl_name]
+
     return Hub.send(*scope).for_manage if admin?
     
     section = role.to_hash.try(:[], 'available_hubs')
     return Hub.none unless section
 
     keys = section.select{|k, v| v == true }.keys
-    Hub.friendly_where(keys)
+    Hub.friendly_where(keys).published_set.send(*scope)
   end
 
   private
