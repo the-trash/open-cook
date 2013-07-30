@@ -7,6 +7,13 @@ describe "App Base urls" do
     before(:each) do
       UsersMacros.create_admin
       HubsMacros.create_basic_hubs
+      PostsMacros.create_basic_articles
+    end
+
+    it "should be Hubs" do
+      User.count.should eq 1
+      Hub.count.should  eq 3
+      Post.count.should eq 12
     end
 
     %w[ \  users login signup articles videos blogs].each do |path|

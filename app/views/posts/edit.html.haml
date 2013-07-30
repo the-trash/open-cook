@@ -1,5 +1,10 @@
 = content_for :left_column do
   .fragment_block
+    %h3 Действия
+    .block
+      %p= link_to "Просмотр статьи", @post, target: :_blank
+
+  .fragment_block
     %h3 Навигация
     .block
       %p= link_to 'Мой Кабинет', cabinet_url
