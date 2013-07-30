@@ -12,4 +12,10 @@ FactoryGirl.define do
     title       "Role for admin"
     description "This user can do anything"
   end
+
+  factory :blogger_role, class: Role do
+    name        :blogger
+    title       "Role for Bloggers"
+    description "User can work with his Blogs"
+  end
 end

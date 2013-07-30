@@ -7,8 +7,26 @@ module RolesMacros
       role
     end
 
-    def create_user_role
-      #
+    def create_blogger_role
+      role = FactoryGirl.create(:blogger_role)
+      blogger_role_hash = {
+        users:  {
+          cabinet: true
+        },
+        posts: {
+          new:     true,
+          create:  true,
+          edit:    true,
+          update:  true,
+          destroy: true
+        },
+        available_hubs: {
+          videos: true,
+          articles: true
+        }
+      }
+      role.update_role(blogger_role_hash)
+      role
     end
   end
 end

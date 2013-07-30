@@ -72,6 +72,8 @@ module TheFriendlyId
     def friendly_where id
       if TheFriendlyId.int?(id)
         where(id: id)
+      elsif id.is_a? Array
+        where(slug: id)
       elsif TheFriendlyId.friendly?(id)
         where(friendly_id: id)
       elsif TheFriendlyId.short?(id)
