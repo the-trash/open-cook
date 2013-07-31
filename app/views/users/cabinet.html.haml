@@ -1,32 +1,36 @@
 .users_cabinet
   %h3 Кабинет пользователя #{@user.login}
 
-  .fn_block
-    %h4 Создать:
+  - if current_user.has_role?(:posts, :new) || current_user.has_role?(:pages, :manage)
+    .fn_block
+      %h4 Создать:
 
-    %ul.marked_list
-      - if current_user.has_role?(:posts, :new)
-        %li= link_to 'Новый Пост', new_post_url
+      %ul.marked_list
+        - if current_user.has_role?(:posts, :new)
+          %li= link_to 'Новый Пост', new_post_url
 
-      - if current_user.has_role?(:pages, :manage)
-        %li= link_to 'Новую страницу', new_page_url
+        - if current_user.has_role?(:pages, :manage)
+          %li= link_to 'Новую страницу', new_page_url
 
-  .fn_block
-    %h4 Управление публикациями:
+  -# current_user.any_role?({ posts: :manage, pages: :manage })
+  - if current_user.has_role?(:posts, :manage) || current_user.has_role?(:pages, :manage)
+    .fn_block
+      %h4 Управление публикациями:
 
-    %ul.marked_list
-      - if current_user.has_role?(:posts, :manage)
-        %li= link_to 'Мои посты', manage_user_posts_url(@user)
+      %ul.marked_list
+        - if current_user.has_role?(:posts, :manage)
+          %li= link_to 'Мои посты', manage_user_posts_url(@user)
 
-      - if current_user.has_role?(:pages, :manage)
-        %li= link_to 'Мои страницы', manage_user_pages_url(@user)
+        - if current_user.has_role?(:pages, :manage)
+          %li= link_to 'Мои страницы', manage_user_pages_url(@user)
 
-  .fn_block
-    %h4 Просмотр:
+  - if current_user.has_role?(:posts, :my)
+    .fn_block
+      %h4 Просмотр:
 
-    %ul.marked_list
-      - if current_user.has_role?(:posts, :my)
-        %li= link_to 'Моя лента постов',  user_posts_url(@user)
+      %ul.marked_list
+        - if current_user.has_role?(:posts, :my)
+          %li= link_to 'Моя лента постов',  user_posts_url(@user)
 
   - if @user.has_role?(:hubs, :manage)
     .fn_block
@@ -44,7 +48,6 @@
       %li= link_to "Новые комментарии #{@user.draft_comcoms_count}", [:new, :comment]
       %li= link_to "Удаленные комментарии #{@user.deleted_comcoms_count}", [:trash, :comments]
 
-  = @user.login
   - if @user.has_role?(:roles, :manage)
     .fn_block
       %h4 Роли и Пользователи:
