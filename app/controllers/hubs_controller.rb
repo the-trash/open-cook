@@ -10,7 +10,7 @@ class HubsController < ApplicationController
 
   # PROTECTED
   def manage
-    @hubs = @user.hubs.for_manage_rset.pagination(params)
+    @hubs = @user.hubs.roots.for_manage_rset.pagination(params)
   end
 
   def new
@@ -37,13 +37,6 @@ class HubsController < ApplicationController
     else
       render template: :new
     end
-  end
-  
-  def selector
-    klass   = params[:klass].constantize
-    @object = klass.find(params[:id])
-
-    render layout: false, template: 'hubs/_selector'
   end
 
   def system_section
@@ -78,4 +71,11 @@ class HubsController < ApplicationController
       :state
     )
   end
+
+  # def selector
+  #   klass   = params[:klass].constantize
+  #   @object = klass.find(params[:id])
+
+  #   render layout: false, template: 'hubs/_selector'
+  # end
 end

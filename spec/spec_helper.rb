@@ -5,8 +5,8 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
-require 'capybara/rspec'
-require 'capybara/rails'
+# require 'capybara/rspec'
+# require 'capybara/rails'
 
 # Capybara.configure do |config|
 #   config.match = :one
@@ -48,6 +48,7 @@ RSpec.configure do |config|
 
   # Capybara
   config.include Capybara::DSL
+  include Sorcery::TestHelpers::Rails
 
   # Capybara.javascript_driver = :webkit
 

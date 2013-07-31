@@ -68,6 +68,7 @@ class User < ActiveRecord::Base
     return Hub.none unless section
 
     keys = section.select{|k, v| v == true }.keys
+    keys.map!{|item| item.to_slug_param }
     Hub.friendly_where(keys).published_set.send(*scope)
   end
 

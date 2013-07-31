@@ -26,7 +26,17 @@ describe "User" do
       end
 
       it "Check for Available Hubs" do
-        User.last.available_hubs.count.should eq 2
+        User.last.available_hubs.count.should eq 1
+      end
+
+      it "Check for Available Hubs with scope" do
+        Hub.friendly_first(:blogs)
+        User.last.available_hubs(:pages).count.should eq 0
+      end
+
+      it "Only published Hubs are available" do
+        Hub.friendly_first(:blogs).to_draft
+        User.last.available_hubs.count.should eq 0
       end
     end
   end

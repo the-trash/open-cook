@@ -14,6 +14,7 @@ module RolesMacros
           cabinet: true
         },
         posts: {
+          my:      true,
           new:     true,
           create:  true,
           edit:    true,
@@ -21,8 +22,8 @@ module RolesMacros
           destroy: true
         },
         available_hubs: {
-          videos: true,
-          articles: true
+          blogs: true,
+          articles: false
         }
       }
       role.update_role(blogger_role_hash)

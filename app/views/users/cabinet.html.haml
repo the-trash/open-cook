@@ -5,23 +5,30 @@
     %h4 Создать:
 
     %ul.marked_list
-      %li= link_to 'Новый Пост',     new_post_url
-      %li= link_to 'Новую страницу', new_page_url
+      - if current_user.has_role?(:posts, :new)
+        %li= link_to 'Новый Пост', new_post_url
+
+      - if current_user.has_role?(:pages, :manage)
+        %li= link_to 'Новую страницу', new_page_url
 
   .fn_block
     %h4 Управление публикациями:
 
     %ul.marked_list
-      %li= link_to 'Мои посты',    manage_user_posts_url(@user)
-      %li= link_to 'Мои страницы', manage_user_pages_url(@user)
+      - if current_user.has_role?(:posts, :manage)
+        %li= link_to 'Мои посты', manage_user_posts_url(@user)
+
+      - if current_user.has_role?(:pages, :manage)
+        %li= link_to 'Мои страницы', manage_user_pages_url(@user)
 
   .fn_block
     %h4 Просмотр:
 
     %ul.marked_list
-      %li= link_to 'Моя лента постов',  user_posts_url(@user)
+      - if current_user.has_role?(:posts, :my)
+        %li= link_to 'Моя лента постов',  user_posts_url(@user)
 
-  - if current_user.has_role?(:hubs, :manage)
+  - if @user.has_role?(:hubs, :manage)
     .fn_block
       %h4 Упрвление cтруктурой:
 
@@ -32,13 +39,15 @@
     %h4 Комментарии
     
     %ul.marked_list
-      %li= link_to "My comments #{@user.my_comments_count}", [:my, :comments]
-      %li= link_to "Incoming comments #{@user.comcoms_sum}", [:incoming, :comments]
-      %li= link_to "New comments #{@user.draft_comcoms_count}", [:new, :comment]
-      %li= link_to "Deleted comments #{@user.deleted_comcoms_count}", [:trash, :comments]
+      %li= link_to "Мои комментарии #{@user.my_comments_count}", [:my, :comments]
+      %li= link_to "Входящие комментарии #{@user.comcoms_sum}", [:incoming, :comments]
+      %li= link_to "Новые комментарии #{@user.draft_comcoms_count}", [:new, :comment]
+      %li= link_to "Удаленные комментарии #{@user.deleted_comcoms_count}", [:trash, :comments]
 
-  .fn_block
-    %h4 Управление ролями:
+  - if @user.has_role?(:roles, :manage)
+    .fn_block
+      %h4 Роли и Пользователи:
 
-    %ul.marked_list
-      %li= link_to 'Роли', admin_roles_url
+      %ul.marked_list
+        %li= link_to 'Роли', admin_roles_url
+        %li= link_to 'Пользователи', admin_roles_url

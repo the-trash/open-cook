@@ -23,8 +23,8 @@ TheApp::Application.routes.draw do
   end
 
   resources :hubs do
-    post :selector,    on: :collection
     post :expand_node, on: :collection
+    # post :selector,    on: :collection
   end
 
   # Users
