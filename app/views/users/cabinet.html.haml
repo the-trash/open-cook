@@ -44,6 +44,7 @@
       %li= link_to "Новые комментарии #{@user.draft_comcoms_count}", [:new, :comment]
       %li= link_to "Удаленные комментарии #{@user.deleted_comcoms_count}", [:trash, :comments]
 
+  = @user.login
   - if @user.has_role?(:roles, :manage)
     .fn_block
       %h4 Роли и Пользователи:

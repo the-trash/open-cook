@@ -23,15 +23,16 @@ class ApplicationController < ActionController::Base
 
   private
 
-  # to show @root | @user elements
   def define_user
-    @user = User.root
+    @root   = User.root
+    @user   = current_user
+    user_id = params[:user_id]
 
-    if params[:user_id]
-      @user = if TheFriendlyId.int? params[:user_id]
-        User.where(params[:user_id]).first
+    if user_id
+      @user = if TheFriendlyId.int? user_id
+        User.find(user_id)
       else
-        User.where(login: params[:user_id]).first
+        User.where(login: user_id).first
       end
     end
   end
