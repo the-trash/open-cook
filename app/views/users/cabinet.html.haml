@@ -12,8 +12,7 @@
         - if current_user.has_role?(:pages, :manage)
           %li= link_to 'Новую страницу', new_page_url
 
-  -# current_user.any_role?({ posts: :manage, pages: :manage })
-  - if current_user.has_role?(:posts, :manage) || current_user.has_role?(:pages, :manage)
+  - if current_user.any_role?(posts: :manage, pages: :manage)
     .fn_block
       %h4 Управление публикациями:
 
