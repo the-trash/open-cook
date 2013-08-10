@@ -53,4 +53,6 @@ after 'development:pages_hubs' do
     raw_content: Faker::Lorem.paragraphs(2).join,
     state: :published
   )
+
+  puts "Base Pages Created"
 end
