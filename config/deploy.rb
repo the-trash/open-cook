@@ -12,9 +12,10 @@ set :deploy_via, :remote_cache
 set :repository, "git@github.com:open-cook/open-cook.git"
 
 set :keep_releases, 10
-
-set :user, "open_cook_web"
 default_run_options[:pty] = true
+
+set :use_sudo, false
+set :user,     :open_cook_web
 set :ssh_options, { forward_agent: true }
 
 set :deploy_to,   "~/www/#{application}"
