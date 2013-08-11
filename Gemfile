@@ -7,7 +7,9 @@ gem 'rails', '~> 4.0.0'
 
 gem 'mysql2'
 gem 'sqlite3'
+gem 'capistrano'
 
+# App level
 gem 'sorcery'
 
 gem 'jquery-rails'
@@ -45,7 +47,6 @@ gem 'the_role'    , path: '../the_role'
 gem 'the_audit'   , path: '../the_audit'
 gem 'the_storages', path: '../the_storages'
 gem 'the_comments', path: '../the_comments'
-
 gem 'the_sortable_tree'
 
 group :development do
