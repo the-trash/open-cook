@@ -1,8 +1,10 @@
 set :application, "open-cook.ru"
 
-role :web, application
-role :app, application
-role :db,  application, primary: true
+server "zykin-ilya.ru", :app, :web, :db, :primary => true
+
+# role :web, application
+# role :app, application
+# role :db,  application, primary: true
 
 set :scm,        :git
 set :branch,     :master
