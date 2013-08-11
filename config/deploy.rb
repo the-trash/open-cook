@@ -11,14 +11,13 @@ set :branch,     :master
 set :deploy_via, :remote_cache
 set :repository, "git@github.com:open-cook/open-cook.git"
 
-set :keep_releases, 10
-default_run_options[:pty] = true
+set :user,     :open_cook_web
+set :home_dir, "/var/www/open_cook_web/data"
 
 set :use_sudo, false
-set :user,     :open_cook_web
+set :keep_releases, 10
+default_run_options[:pty] = true
 set :ssh_options, { forward_agent: true }
-
-set :home_dir "/var/www/open_cook_web/data"
 
 set :deploy_to,   "#{home_dir}/www/#{application}"
 set :current_dir, "#{deploy_to}/current/"
