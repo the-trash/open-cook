@@ -11,6 +11,7 @@ set :repository, "git@github.com:open-cook/open-cook.git"
 
 set :keep_releases, 10
 
+set :user, "open_cook_web"
 default_run_options[:pty] = true
 set :ssh_options, { forward_agent: true }
 
