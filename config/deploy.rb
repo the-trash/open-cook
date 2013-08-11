@@ -14,7 +14,7 @@ set :repository, "git@github.com:open-cook/open-cook.git"
 set :user,     :open_cook_web
 set :home_dir, "/var/www/open_cook_web/data"
 
-set :use_sudo, true
+set :use_sudo, false
 set :keep_releases, 10
 default_run_options[:pty] = true
 set :ssh_options, { forward_agent: true }
