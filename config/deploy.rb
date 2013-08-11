@@ -19,8 +19,8 @@ set :keep_releases, 10
 default_run_options[:pty] = true
 set :ssh_options, { forward_agent: true }
 
-set :deploy_to,   "/var/www/open_cook_web/data/www/open-cook.ru"
-set :current_dir, "web_app"
+set :deploy_to,   "#{users_home}/www/#{application}"
+# set :current_dir, "web_app"
 
 set :ruby,   "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
 set :rake,   "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
