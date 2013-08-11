@@ -18,12 +18,14 @@ set :use_sudo, false
 set :user,     :open_cook_web
 set :ssh_options, { forward_agent: true }
 
-set :deploy_to,   "~/www/#{application}"
+set :home_dir "/var/www/open_cook_web/data"
+
+set :deploy_to,   "#{home_dir}/www/#{application}"
 set :current_dir, "#{deploy_to}/current/"
 
-set :ruby,   "~/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
-set :rake,   "~/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
-set :bundle, "~/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
+set :ruby,   "#{home_dir}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
+set :rake,   "#{home_dir}/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
+set :bundle, "#{home_dir}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
 # clean up old releases on each deploy
 after "deploy:restart", "deploy:cleanup"
