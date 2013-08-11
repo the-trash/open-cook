@@ -11,20 +11,20 @@ set :branch,     :master
 set :deploy_via, :remote_cache
 set :repository, "git@github.com:open-cook/open-cook.git"
 
-set :user,     :open_cook_web
-set :home_dir, "/var/www/open_cook_web/data"
+set :user,       :open_cook_web
+set :users_home, "/var/www/open_cook_web/data"
 
 set :use_sudo, false
 set :keep_releases, 10
 default_run_options[:pty] = true
 set :ssh_options, { forward_agent: true }
 
-set :deploy_to,   "#{home_dir}/www/#{application}"
+set :deploy_to,   "#{users_home}/www/#{application}"
 set :current_dir, "#{deploy_to}/current/"
 
-set :ruby,   "#{home_dir}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
-set :rake,   "#{home_dir}/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
-set :bundle, "#{home_dir}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
+set :ruby,   "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
+set :rake,   "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
+set :bundle, "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
 # clean up old releases on each deploy
 after "deploy:restart", "deploy:cleanup"
