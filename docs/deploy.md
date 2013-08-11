@@ -66,5 +66,8 @@ List of capistrano tasks
 
 ```
 cap -T
+
+cap deploy:setup
+cap deploy
 ```
 
