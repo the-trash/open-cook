@@ -24,7 +24,7 @@ set :unicorn, "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
 # clean up old releases on each deploy
 after  "deploy:restart", "deploy:cleanup"
-before :deploy,          "deploy:reload_rvm"
+# before :deploy,          "deploy:reload_rvm"
 
 namespace :deploy do
   task :reload_rvm do
@@ -35,6 +35,7 @@ namespace :deploy do
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
     p "RESTART SERVER"
+    run "rvm reload"
     run "rvm gemset name"
   end
 end
