@@ -20,13 +20,29 @@ set :ssh_options, { forward_agent: true }
 
 set :deploy_to,   "#{users_home}/www/#{application}"
 
+set :gem,     "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/gem"
 set :ruby,    "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
 set :rake,    "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
 set :bundle,  "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
-set :unicorn, "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
+# set :unicorn, "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
+
+set :default_environment, {
+  'PATH'         => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin:$PATH",
+  'RUBY_VERSION' => 'ruby 2.0.0p247',
+  'GEM_HOME'     => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/",
+  'GEM_PATH'     => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/",
+  'BUNDLE_PATH'  => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/"
+}
+
+namespace :rvm do
+  task :trust_rvmrc do
+    run "rvm rvmrc trust #{release_path}"
+  end
+end
 
 # clean up old releases on each deploy
-after  "deploy:restart", "deploy:cleanup"
+after "deploy", "rvm:trust_rvmrc"
+after "deploy:restart", "deploy:cleanup"
 # before :deploy,          "deploy:reload_rvm"
 
 namespace :deploy do
