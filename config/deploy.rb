@@ -27,7 +27,9 @@ after  "deploy:restart", "deploy:cleanup"
 before :deploy,          "deploy:reload_rvm"
 
 namespace :deploy do
-  task :reload_rvm { run("rvm reload") }
+  task :reload_rvm do
+    run("rvm reload")
+  end
 
   task :start do ; end
   task :stop  do ; end
