@@ -28,7 +28,7 @@ after "deploy:restart", "deploy:cleanup"
 namespace :deploy do
   task :start do ; end
   task :stop  do ; end
-  task :restart, roles: :app, except: { :no_release: true } do
+  task :restart, roles: :app, except: { no_release: true } do
     p "RESTART SERVER"
     run "rvm gemset name"
   end
