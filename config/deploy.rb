@@ -36,7 +36,7 @@ namespace :deploy do
   task :restart, roles: :app, except: { no_release: true } do
     p "RESTART SERVER"
     run "#{rvm_init} && rvm gemset name"
-    run "#{rvm_init} && rvm gemset use open-cook"
+    run "rvm gemset use open-cook"
     run "#{rvm_init} && rvm gemset name"
   end
 end
