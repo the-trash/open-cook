@@ -28,8 +28,13 @@ set :bundle,  "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
 # clean up old releases on each deploy
 after "deploy:restart", "deploy:cleanup"
+on    :start,  "deploy:helloworld"
 
 namespace :deploy do
+  task :helloworld do
+    p "START! RUN"
+  end
+
   task :start do ; end
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
