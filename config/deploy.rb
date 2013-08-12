@@ -15,12 +15,12 @@ set :keep_releases, 10
 
 default_run_options[:pty]   = true
 default_run_options[:shell] = "/bin/bash --login"
-default_run_options[:data]  = "rvm gemset use open-cook"
+
+set :rvm_init, 'source "$HOME/.rvm/scripts/rvm"'
+default_run_options[:data]  = "#{rvm_init} && rvm gemset use open-cook"
 
 set :ssh_options, { forward_agent: true }
 set :deploy_to,   "#{users_home}/www/#{application}"
-
-set :rvm_init, '' #'source "$HOME/.rvm/scripts/rvm" &&'
 
 # set :gem,      "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/gem"
 # set :ruby,     "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
