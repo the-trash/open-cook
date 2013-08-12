@@ -13,8 +13,8 @@ set :users_home, "/var/www/open_cook_web/data"
 set :use_sudo, false
 set :keep_releases, 10
 
-default_run_options[:pty] = true
-# default_run_options[:shell] = false
+default_run_options[:pty]   = true
+default_run_options[:shell] = :bash
 
 set :ssh_options, { forward_agent: true }
 
@@ -34,7 +34,7 @@ namespace :deploy do
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
     p "RESTART SERVER!"
-    run ". ~/.rvm/scripts/rvm"
+    run "source ~/.rvm/scripts/rvm"
     run "rvm gemset name"
     run "rvm gemset use open-cook"
   end
