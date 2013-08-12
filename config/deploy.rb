@@ -15,6 +15,7 @@ set :keep_releases, 10
 
 default_run_options[:pty]   = true
 default_run_options[:shell] = "/bin/bash --login"
+default_run_options[:data] = "echo 'HELLO WORLD!'"
 
 set :ssh_options, { forward_agent: true }
 set :deploy_to,   "#{users_home}/www/#{application}"
