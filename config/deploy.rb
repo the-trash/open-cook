@@ -12,7 +12,10 @@ set :users_home, "/var/www/open_cook_web/data"
 
 set :use_sudo, false
 set :keep_releases, 10
+
 default_run_options[:pty] = true
+default_run_options[:shell] = false
+
 set :ssh_options, { forward_agent: true }
 
 set :deploy_to,   "#{users_home}/www/#{application}"
