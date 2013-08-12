@@ -14,10 +14,7 @@ set :use_sudo, false
 set :keep_releases, 10
 
 default_run_options[:pty]   = true
-default_run_options[:shell] = "/bin/bash --login"
-
-set :rvm_init, 'source "$HOME/.rvm/scripts/rvm"'
-default_run_options[:data]  = "#{rvm_init} && rvm gemset use open-cook"
+default_run_options[:shell] = "/bin/bash --login && rvm gemset use open-cook"
 
 set :ssh_options, { forward_agent: true }
 set :deploy_to,   "#{users_home}/www/#{application}"
