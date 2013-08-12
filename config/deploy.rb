@@ -27,11 +27,11 @@ set :bundle,  "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 # set :unicorn, "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
 set :default_environment, {
-  # 'PATH'         => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin:$PATH",
-  'RUBY_VERSION' => 'ruby-2.0.0p247'
-  # 'GEM_HOME'     => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin",
-  # 'GEM_PATH'     => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin",
-  # 'BUNDLE_PATH'  => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin"
+  'PATH'         => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin:$PATH",
+  'RUBY_VERSION' => 'ruby 2.0.0p247'
+  'GEM_HOME'     => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin",
+  'GEM_PATH'     => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin",
+  'BUNDLE_PATH'  => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin"
 }
 
 namespace :rvm do
@@ -54,7 +54,6 @@ namespace :deploy do
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
     p "RESTART SERVER!"
-    run "source ~/.rvm/scripts/rvm"
     run "rvm gemset use open-cook"
     run "rvm gemset name"
   end
