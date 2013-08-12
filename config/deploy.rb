@@ -15,7 +15,7 @@ set :keep_releases, 10
 
 default_run_options[:pty]   = true
 default_run_options[:shell] = "/bin/bash --login"
-default_run_options[:data] = "echo 'HELLO WORLD!'"
+default_run_options[:data]  = "rvm gemset use open-cook"
 
 set :ssh_options, { forward_agent: true }
 set :deploy_to,   "#{users_home}/www/#{application}"
@@ -36,9 +36,9 @@ namespace :deploy do
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
     p "RESTART SERVER"
-    run "#{rvm_init} rvm gemset name"
-    run "#{rvm_init} rvm gemset use open-cook"
-    run "#{rvm_init} rvm gemset name"
+    run "rvm gemset name"
+    run "rvm gemset use open-cook"
+    run "rvm gemset name"
   end
 end
 
