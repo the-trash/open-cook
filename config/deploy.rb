@@ -28,7 +28,7 @@ set :bundle,  "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
 set :default_environment, {
   'PATH'         => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin:$PATH",
-  'RUBY_VERSION' => 'ruby 2.0.0p247',
+  # 'RUBY_VERSION' => 'ruby 2.0.0p247',
   'GEM_HOME'     => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin",
   'GEM_PATH'     => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin",
   'BUNDLE_PATH'  => "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin"
