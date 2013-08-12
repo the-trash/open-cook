@@ -24,23 +24,20 @@ set :gem,     "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/gem"
 set :ruby,    "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
 set :rake,    "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
 set :bundle,  "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
+set :rvm_init 'source "$HOME/.rvm/scripts/rvm"'
 # set :unicorn, "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
 # clean up old releases on each deploy
 after "deploy:restart", "deploy:cleanup"
-on    :start,  "deploy:helloworld"
 
 namespace :deploy do
-  task :helloworld do
-    p "START! RUN"
-  end
-
   task :start do ; end
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
     p "RESTART SERVER"
-    run 'source "$HOME/.rvm/scripts/rvm" && rvm gemset name'
-    run 'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook'
+    run "#{rvm_init} && rvm gemset name"
+    run "#{rvm_init} && rvm gemset use open-cook"
+    run "#{rvm_init} && rvm gemset name"
   end
 end
 
