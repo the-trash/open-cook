@@ -20,10 +20,10 @@ set :ssh_options, { forward_agent: true }
 
 set :deploy_to,   "#{users_home}/www/#{application}"
 
-set :gem,      "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/gem"
-set :ruby,     "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
-set :rake,     "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
-set :bundle,   "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
+# set :gem,      "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/gem"
+# set :ruby,     "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
+# set :rake,     "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
+# set :bundle,   "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 set :rvm_init, 'source "$HOME/.rvm/scripts/rvm"'
 # set :unicorn, "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
