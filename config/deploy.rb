@@ -57,7 +57,6 @@ namespace :db do
 end
 
 # CODE UPDATE
-
 after "files:linking", "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
@@ -65,6 +64,7 @@ namespace :deploy do
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
     bundle.install
+    run _join [to_app, gemset, rails_env + "rake db:migrate"]
     run _join [to_app, gemset, rails_env + "rake assets:precompile"]
     
     # p "RESTART SERVER"
