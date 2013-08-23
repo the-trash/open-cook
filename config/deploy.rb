@@ -39,8 +39,8 @@ namespace :deploy do
   task :start do ; end
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
+    run "cd " + current_path
     run "pwd"
-    run "ls -la"
     run _join gemset, rails_env, "rake assets:precompile"
 
     # p "RESTART SERVER"
