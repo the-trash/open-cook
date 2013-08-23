@@ -36,6 +36,8 @@ set :to_app,    "cd " + current_path
 namespace :files do
   desc "files:linking"
   task :linking do
+    run "mkdir -p #{release_path}/public/system"
+
     run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
@@ -49,7 +51,7 @@ namespace :bundle do
 end
 
 namespace :db do
-  desc "cap deploy db:create"
+  desc "cap db:create"
   task :create do
     files.linking
     run _join [to_app, gemset, rails_env + "rake db:create"]
