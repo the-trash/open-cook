@@ -33,9 +33,8 @@ set :to_app,    "cd " + current_path
 # =========================================================
 # Tasks
 # =========================================================
-namespace :files do
-  desc "files:linking"
-  task :linking do
+namespace :deploy do
+  task :create_symlink do
     run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
@@ -63,7 +62,7 @@ namespace :deploy do
   task :start do ; end
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
-    # bundle.install
+    bundle.install
     run _join [to_app, gemset, rails_env + "rake db:migrate"]
     run _join [to_app, gemset, rails_env + "rake assets:precompile"]
     
