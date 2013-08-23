@@ -39,7 +39,9 @@ namespace :deploy do
   task :start do ; end
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
-    run _join gemset_init, rails_env, "rake assets:precompile"
+    run "pwd"
+    run "ls -la"
+    run _join gemset, rails_env, "rake assets:precompile"
 
     # p "RESTART SERVER"
     # run gemset_init + "rvm gemset name"
