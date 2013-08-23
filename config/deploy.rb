@@ -27,19 +27,29 @@ set :gemset,    'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook'
 set :rails_env, 'RAILS_ENV=production'
 set :to_app,    "cd " + current_path
 
+
+# release_path # shared_path
 # set :gem,      "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/gem"
 # set :ruby,     "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
 # set :rake,     "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
 # set :bundle,   "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 # set :unicorn,  "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
-# clean up old releases on each deploy
-after "deploy:restart", "deploy:cleanup"
+after "files:linking", "deploy:restart", "deploy:cleanup"
+
+namespace :files do
+  desc "files:linking"
+  task :linking do
+    run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
+end
 
 namespace :deploy do
   task :start do ; end
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
+    run _join [to_app, gemset, "bundle"]
     run _join [to_app, gemset, rails_env, "rake assets:precompile"]
 
     # p "RESTART SERVER"
