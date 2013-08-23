@@ -56,7 +56,7 @@ namespace :deploy do
   task :start do ; end
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
-    run _join [to_app, gemset, "bundle install --without test development"]
+    bundle.install
     run _join [to_app, gemset, rails_env + "rake assets:precompile"]
     # p "RESTART SERVER"
     # run gemset_init + "rvm gemset name"
