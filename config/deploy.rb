@@ -50,7 +50,7 @@ namespace :bundle do
   end
 end
 
-after "bundle:install", "files:linking", "deploy:restart", "deploy:cleanup"
+after "files:linking", "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
   task :start do ; end
