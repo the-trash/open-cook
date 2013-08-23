@@ -56,7 +56,7 @@ namespace :db do
 end
 
 # CODE UPDATE
-after "files:linking", "deploy:restart", "deploy:cleanup"
+after "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
   task :start do ; end
