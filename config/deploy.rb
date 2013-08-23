@@ -24,7 +24,7 @@ set :ssh_options, { forward_agent: true }
 set :deploy_to,   "#{users_home}/www/#{application}"
 
 set :gemset,    'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook'
-set :rails_env, 'RAILS_ENV=production'
+set :rails_env, 'RAILS_ENV=production '
 set :to_app,    "cd " + current_path
 
 
@@ -45,13 +45,18 @@ namespace :files do
   end
 end
 
+namespace :bundle do
+  desc "cap deploy bundle:install"
+  task :install do
+    run _join [to_app, gemset, "bundle install --without test development "]
+  end
+end
+
 namespace :deploy do
   task :start do ; end
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
-    run _join [to_app, gemset, "bundle"]
-    run _join [to_app, gemset, rails_env, "rake assets:precompile"]
-
+    run _join [to_app, gemset, rails_env + "rake assets:precompile"]
     # p "RESTART SERVER"
     # run gemset_init + "rvm gemset name"
     # run gemset_init + "rvm gemset use open-cook"
