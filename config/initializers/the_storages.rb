@@ -1,4 +1,4 @@
-TheStorages.config.param_name => value
+# TheStorages.config.param_name => value
 
 TheStorages.configure do |config|
   config.watermark_text = 'Open-Cook.ru'
