@@ -28,7 +28,7 @@ set :deploy_to,   "#{users_home}/www/#{application}"
 
 set :gemset,    'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook'
 set :rails_env, 'RAILS_ENV=production '
-set :to_app,    "cd " + current_path
+set :to_app,    "cd " + release_path
 
 # =========================================================
 # Tasks
