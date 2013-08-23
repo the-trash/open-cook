@@ -14,7 +14,9 @@ set :use_sudo, false
 set :keep_releases, 10
 
 default_run_options[:pty]   = true
-default_run_options[:shell] = "/bin/bash --login && rvm gemset use open-cook"
+default_run_options[:shell] = "/bin/bash --login"
+
+set :gemset_init, 'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook && '
 
 set :ssh_options, { forward_agent: true }
 set :deploy_to,   "#{users_home}/www/#{application}"
@@ -23,7 +25,7 @@ set :deploy_to,   "#{users_home}/www/#{application}"
 # set :ruby,     "#{users_home}/.rvm/rubies/ruby-2.0.0-p247/bin/ruby"
 # set :rake,     "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/rake"
 # set :bundle,   "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
-# set :unicorn, "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
+# set :unicorn,  "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
 # clean up old releases on each deploy
 after "deploy:restart", "deploy:cleanup"
@@ -33,9 +35,9 @@ namespace :deploy do
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
     p "RESTART SERVER"
-    run "rvm gemset name"
-    run "rvm gemset use open-cook"
-    run "rvm gemset name"
+    run gemset_init + "rvm gemset name"
+    run gemset_init + "rvm gemset use open-cook"
+    run gemset_init + "rvm gemset name"
   end
 end
 
