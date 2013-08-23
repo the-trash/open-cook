@@ -23,7 +23,6 @@ gem 'haml'
 gem 'sanitize'
 gem 'state_machine', '~> 1.2.0'
 gem 'acts-as-taggable-on', '~> 2.4.1'
-gem 'seedbank', github: 'james2m/seedbank'
 gem 'awesome_nested_set', branch: 'rails4'
 
 # gem 'rmagick'
@@ -49,10 +48,6 @@ gem 'the_storages' #, path: '../the_storages'
 gem 'the_comments' #, path: '../the_comments'
 gem 'the_sortable_tree'
 
-group :development do
-  gem 'thin'
-end
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do  
@@ -65,7 +60,9 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'thin'
   gem 'faker'
+  gem 'seedbank', github: 'james2m/seedbank'
 
   gem 'rspec'
   gem 'rspec-core'
@@ -90,7 +87,6 @@ group :test do
   # Test helpers
   # gem 'email_spec'  # emails specs
   # gem 'timecop'     # Time delays test
-  # gem 'launchy'     # show broken cucumber tests
 
   # Pretty printed test output
   # gem 'turn' , '~> 0.8.3', :require => false

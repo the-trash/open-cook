@@ -35,8 +35,6 @@ set :to_app,    "cd " + current_path
 # set :bundle,   "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 # set :unicorn,  "#{users_home}/.rvm/gems/ruby-2.0.0-p247@global/bin/bundle"
 
-after "files:linking", "deploy:restart", "deploy:cleanup"
-
 namespace :files do
   desc "files:linking"
   task :linking do
@@ -51,6 +49,8 @@ namespace :bundle do
     run _join [to_app, gemset, "bundle install --without test development "]
   end
 end
+
+after "bundle:install", "files:linking", "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
   task :start do ; end
