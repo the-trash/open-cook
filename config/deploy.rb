@@ -48,15 +48,15 @@ namespace :web_server do
   desc "cap web_server:start"
 
   task :start do
-    run _join [to_app, gemset]
+    run _join [gemset, "#{current_path}/bin/unicorn start"]
   end
 
   task :stop do
-    run _join [to_app, gemset, "#{current_path}/bin/unicorn stop"]
+    run _join [gemset, "#{current_path}/bin/unicorn stop"]
   end
 
   task :restart do
-    run _join [to_app, gemset, "#{current_path}/bin/unicorn restart"]
+    run _join [gemset, "#{current_path}/bin/unicorn restart"]
   end
 
   desc "cap web_server:configs"
