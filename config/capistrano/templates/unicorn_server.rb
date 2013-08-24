@@ -12,7 +12,6 @@
 ### vars
 # current_path
 # unicorn_pid
-# bundle_cmd
 # unicorn_config
 # unicorn_user
 

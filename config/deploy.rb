@@ -45,6 +45,11 @@ set :to_app,    "cd " + release_path
 # Tasks
 # =========================================================
 namespace :web_server do
+  desc "cap web_server:start"
+  task :start   { run _join [to_app, gemset, "#{current_path}/bin/unicorn start"]   }
+  task :stop    { run _join [to_app, gemset, "#{current_path}/bin/unicorn stop"]    }
+  task :restart { run _join [to_app, gemset, "#{current_path}/bin/unicorn restart"] }
+
   desc "cap web_server:configs"
   task :configs do
     dir_conf = "#{shared_path}/config"
@@ -108,8 +113,6 @@ namespace :deploy do
     run _join [to_app, gemset, app_env + "rake db:migrate"]
   end
 
-  task :start do ; end
-  task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
     bundle.install
     run _join [to_app, gemset, app_env + "rake db:migrate"]
