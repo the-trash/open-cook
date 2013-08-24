@@ -21,7 +21,7 @@ set -e
 TIMEOUT=${TIMEOUT-60}
 APP_ROOT=<%= current_path %>
 PID=<%= unicorn_pid %>
-CMD="<%= current_path %>/bin/unicorn_server -D -c <%= unicorn_config %> -E production"
+CMD="unicorn_rails -D -c <%= unicorn_config %> -E production"
 AS_USER=<%= unicorn_user %>
 
 set -u
