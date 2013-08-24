@@ -55,7 +55,7 @@ namespace :web_server do
     run _join [gemset, "#{current_path}/bin/unicorn stop"]
   end
 
-  task :restart, do
+  task :restart do
     run _join [gemset, "#{current_path}/bin/unicorn restart"]
   end
 
