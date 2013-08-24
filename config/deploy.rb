@@ -2,12 +2,18 @@ def _join *params
   params.join ' && '
 end
 
+def template(from, to)
+  erb = File.read(File.expand_path("./capistrano/templates/#{from}", __FILE__))
+  put ERB.new(erb).result(binding), to
+end
+
 # =========================================================
 # Params
 # =========================================================
 set :application, "open-cook.ru"
 
-server "zykin-ilya.ru", :app, :web, :db, :primary => true
+set    :site_name, "zykin-ilya.ru"
+server site_name,  :app, :web, :db, :primary => true
 
 set :scm,        :git
 set :branch,     :master
@@ -33,10 +39,17 @@ set :to_app,    "cd " + release_path
 # =========================================================
 # Tasks
 # =========================================================
+namespace :web_server do
+  desc "cap deploy web_server:configs"
+  task :configs do
+    template("nginx_conf.rb", "#{shared_path}/config/nginx.conf")
+  end
+end
+
 namespace :deploy do
   task :create_symlink do
     run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"  
   end
 end
 
@@ -44,14 +57,6 @@ namespace :bundle do
   desc "cap deploy bundle:install"
   task :install do
     run _join [to_app, gemset, "bundle install --without test development "]
-  end
-end
-
-namespace :db do
-  desc "cap db:create"
-  task :create do
-    run "ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
-    run _join [to_app, gemset, rails_env + "rake db:create"]
   end
 end
 
@@ -87,6 +92,14 @@ end
 #   task :stop do ; end
 #   task :restart, :roles => :app, :except => { :no_release => true } do
 #     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+#   end
+# end
+
+# namespace :db do
+#   desc "cap db:create"
+#   task :create do
+#     run "ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
+#     run _join [to_app, gemset, rails_env + "rake db:create"]
 #   end
 # end
 
