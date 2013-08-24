@@ -52,6 +52,7 @@ namespace :web_server do
   desc "cap web_server:configs"
   task :configs do
     dir_conf = "#{shared_path}/config"
+    dir_pids = "#{shared_path}/pids"
     dir_bin  = "#{shared_path}/bin"
     
     run "mkdir -p #{dir_conf}"
@@ -59,10 +60,12 @@ namespace :web_server do
 
     set_default(:unicorn_workers, 4)
     set_default(:unicorn_user)   { user }
-    set_default(:unicorn_pid)    { "#{current_path}/tmp/pids/unicorn.pid" }
-    set_default(:gemset_use)     { _join ["cd #{current_path}", gemset] }
-    set_default(:unicorn_log)    { "#{shared_path}/log/unicorn.log" }
+    set_default(:unicorn_pid)    { "#{dir_pids}/unicorn.pid" }
+    set_default(:unicorn_sock)   { "#{dir_pids}/unicorn.sock" }
     set_default(:unicorn_config) { "#{dir_conf}/unicorn_config.rb" }
+    set_default(:unicorn_log)    { "#{shared_path}/log/unicorn.log" }
+    set_default(:unicorn_err)    { "#{shared_path}/log/unicorn.err" }
+    set_default(:gemset_use)     { _join ["cd #{current_path}", gemset] }
 
     template("database.production.yml", "#{dir_conf}/database.yml")
 
