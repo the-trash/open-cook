@@ -77,12 +77,12 @@ end
 #   end
 # end
 
-# namespace :bundle do
-#   desc "cap deploy bundle:install"
-#   task :install do
-#     run _join [to_app, gemset, "bundle install --without test development "]
-#   end
-# end
+namespace :bundle do
+  desc "cap deploy bundle:install"
+  task :install do
+    run _join [to_app, gemset, "bundle install --without test development "]
+  end
+end
 
 # CODE UPDATE
 after "deploy:restart", "deploy:cleanup"
