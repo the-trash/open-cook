@@ -52,10 +52,10 @@ namespace :web_server do
 
     set_default(:unicorn_user)   { user }
     set_default(:unicorn_pid)    { "#{current_path}/tmp/pids/unicorn.pid" }
+    set_default(:gemset_use)     { _join ["cd #{current_path}", gemset] }
     set_default(:unicorn_config) { "#{shared_path}/config/unicorn.rb" }
     set_default(:unicorn_log)    { "#{shared_path}/log/unicorn.log" }
-    set_default(:gemset_use)     { _join [to_app, gemset] }
-
+  
     template("nginx_conf.rb",     "#{shared_path}/config/nginx.conf")
     template("unicorn_server.rb", "#{shared_path}/bin/unicorn_server")
   end
