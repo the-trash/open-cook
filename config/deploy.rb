@@ -43,37 +43,37 @@ set :to_app,    "cd " + release_path
 # =========================================================
 # Tasks
 # =========================================================
-namespace :web_server do
-  desc "cap web_server:configs"
-  task :configs do
-    set_default(:unicorn_workers, 4)
-    set_default(:unicorn_user)   { user }
-    set_default(:unicorn_pid)    { "#{current_path}/tmp/pids/unicorn.pid" }
-    set_default(:gemset_use)     { _join ["cd #{current_path}", gemset] }
-    set_default(:unicorn_config) { "#{shared_path}/config/unicorn_config.rb" }
-    set_default(:unicorn_log)    { "#{shared_path}/log/unicorn.log" }
+# namespace :web_server do
+#   desc "cap web_server:configs"
+#   task :configs do
+#     set_default(:unicorn_workers, 4)
+#     set_default(:unicorn_user)   { user }
+#     set_default(:unicorn_pid)    { "#{current_path}/tmp/pids/unicorn.pid" }
+#     set_default(:gemset_use)     { _join ["cd #{current_path}", gemset] }
+#     set_default(:unicorn_config) { "#{shared_path}/config/unicorn_config.rb" }
+#     set_default(:unicorn_log)    { "#{shared_path}/log/unicorn.log" }
 
-    template("nginx_conf.rb",     "#{shared_path}/config/nginx.conf")
-    template("unicorn_config.rb", "#{shared_path}/config/unicorn_config.rb")
-    template("unicorn_server.rb", "#{shared_path}/bin/unicorn_server")
+#     template("nginx_conf.rb",     "#{shared_path}/config/nginx.conf")
+#     template("unicorn_config.rb", "#{shared_path}/config/unicorn_config.rb")
+#     template("unicorn_server.rb", "#{shared_path}/bin/unicorn_server")
 
-    run "chmod 744 #{shared_path}/bin/unicorn_server"
-  end
-end
+#     run "chmod 744 #{shared_path}/bin/unicorn_server"
+#   end
+# end
 
-namespace :deploy do
-  task :create_symlink do
-    run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"  
-  end
-end
+# namespace :deploy do
+#   task :create_symlink do
+#     run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
+#     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"  
+#   end
+# end
 
-namespace :bundle do
-  desc "cap deploy bundle:install"
-  task :install do
-    run _join [to_app, gemset, "bundle install --without test development "]
-  end
-end
+# namespace :bundle do
+#   desc "cap deploy bundle:install"
+#   task :install do
+#     run _join [to_app, gemset, "bundle install --without test development "]
+#   end
+# end
 
 # CODE UPDATE
 after "deploy:restart", "deploy:cleanup"
