@@ -46,9 +46,9 @@ set :to_app,    "cd " + release_path
 # =========================================================
 namespace :web_server do
   desc "cap web_server:start"
-  task :start   { run _join [to_app, gemset, "#{current_path}/bin/unicorn start"]   }
-  task :stop    { run _join [to_app, gemset, "#{current_path}/bin/unicorn stop"]    }
-  task :restart { run _join [to_app, gemset, "#{current_path}/bin/unicorn restart"] }
+  task :start,   { run _join [to_app, gemset, "#{current_path}/bin/unicorn start"]   }
+  task :stop,    { run _join [to_app, gemset, "#{current_path}/bin/unicorn stop"]    }
+  task :restart, { run _join [to_app, gemset, "#{current_path}/bin/unicorn restart"] }
 
   desc "cap web_server:configs"
   task :configs do
