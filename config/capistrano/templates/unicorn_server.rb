@@ -19,12 +19,13 @@
 set -e
 
 # Feel free to change any of the following variables for your app:
-# /var/www/open_cook_web/data/.rvm/gems/ruby-2.0.0-p247@open-cook/bin/unicorn_rails -c /var/www/open_cook_web/data/www/open-cook.ru/shared/config/unicorn_config.rb -E production
+# /var/www/open_cook_web/data/.rvm/gems/ruby-2.0.0-p247@open-cook/bin/unicorn_rails -D -c /var/www/open_cook_web/data/www/open-cook.ru/shared/config/unicorn_config.rb -E production
+# "<%= gemset_use %> ; unicorn -D -c <%= unicorn_config %> -E production"
 
 TIMEOUT=${TIMEOUT-60}
 APP_ROOT=<%= current_path %>
 PID=<%= unicorn_pid %>
-CMD="<%= gemset_use %> ; unicorn -D -c <%= unicorn_config %> -E production"
+CMD="/var/www/open_cook_web/data/.rvm/gems/ruby-2.0.0-p247@open-cook/bin/unicorn_rails -D -c /var/www/open_cook_web/data/www/open-cook.ru/shared/config/unicorn_config.rb -E production"
 AS_USER=<%= unicorn_user %>
 
 set -u
