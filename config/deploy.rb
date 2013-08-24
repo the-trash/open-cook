@@ -70,12 +70,12 @@ namespace :web_server do
   end
 end
 
-# namespace :deploy do
-#   task :create_symlink do
-#     run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
-#     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"  
-#   end
-# end
+namespace :deploy do
+  task :app_symlinks do
+    run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"  
+  end
+end
 
 namespace :bundle do
   desc "cap deploy bundle:install"
@@ -90,6 +90,7 @@ after "deploy:restart", "deploy:cleanup"
 namespace :deploy do
   task :migrate do
     bundle.install
+    deploy.app_symlinks
     run _join [to_app, gemset, app_env + "rake db:migrate"]
   end
 
