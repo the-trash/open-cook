@@ -116,11 +116,10 @@ namespace :deploy do
   end
 
   task :restart, roles: :app, except: { no_release: true } do
+    app.symlinks
     bundle.install
-
     run _join [to_app, gemset, app_env + "rake db:migrate"]
     run _join [to_app, gemset, app_env + "rake assets:precompile"]
-
     web_server.restart
   end
 end
