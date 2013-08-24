@@ -53,19 +53,24 @@ after "deploy:cold", "web_server:configs"
 namespace :web_server do
   desc "cap web_server:configs"
   task :configs do
+    dir_conf = "#{shared_path}/config"
+    dir_bin  = "#{shared_path}/bin"
+    
+    run "mkdir -p #{dir_conf}"
+    run "mkdir -p #{dir_bin}"
 
     set_default(:unicorn_workers, 4)
     set_default(:unicorn_user)   { user }
     set_default(:unicorn_pid)    { "#{current_path}/tmp/pids/unicorn.pid" }
     set_default(:gemset_use)     { _join ["cd #{current_path}", gemset] }
-    set_default(:unicorn_config) { "#{shared_path}/config/unicorn_config.rb" }
     set_default(:unicorn_log)    { "#{shared_path}/log/unicorn.log" }
+    set_default(:unicorn_config) { "#{dir_conf}/unicorn_config.rb" }
 
-    template("database.production.yml", "#{shared_path}/config/database.yml")
+    template("database.production.yml", "#{dir_conf}/database.yml")
 
-    template("nginx_conf.rb",     "#{shared_path}/config/nginx.conf")
-    template("unicorn_config.rb", "#{shared_path}/config/unicorn_config.rb")
-    template("unicorn_server.rb", "#{shared_path}/bin/unicorn_server")
+    template("nginx_conf.rb",     "#{dir_conf}/nginx.conf")
+    template("unicorn_config.rb", "#{dir_conf}/unicorn_config.rb")
+    template("unicorn_server.rb", "#{dir_bin}/unicorn_server")
 
     run "chmod 744 #{shared_path}/bin/unicorn_server"
   end
@@ -82,6 +87,14 @@ namespace :bundle do
   desc "cap deploy bundle:install"
   task :install do
     run _join [to_app, gemset, "bundle install --without test development "]
+  end
+end
+
+# cap first:launch
+namespace :first do
+  task :launch do
+    deploy.setup
+    deploy.cold
   end
 end
 
