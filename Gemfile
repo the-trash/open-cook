@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 # for i in `gem list --no-versions`; do gem uninstall -aIx $i; done
 
 gem 'rails', '~> 4.0.0'
+gem 'unicorn'
 
 gem 'mysql2'
 gem 'sqlite3'

@@ -48,8 +48,6 @@ set :to_app,    "cd " + release_path
 # =========================================================
 # Tasks
 # =========================================================
-after "deploy:cold", "web_server:configs"
-
 namespace :web_server do
   desc "cap web_server:configs"
   task :configs do
