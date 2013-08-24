@@ -45,18 +45,11 @@ set :to_app,    "cd " + release_path
 # Tasks
 # =========================================================
 namespace :web_server do
-  desc "cap web_server:start"
-
-  task :start do
-    run _join [gemset, "#{current_path}/bin/unicorn start"]
-  end
-
-  task :stop do
-    run _join [gemset, "#{current_path}/bin/unicorn stop"]
-  end
-
-  task :restart do
-    run _join [gemset, "#{current_path}/bin/unicorn restart"]
+  %w[start restart stop force force-stop].each do |action|
+    desc "cap web_server:#{action}"
+    task action do
+      run _join [gemset, "#{current_path}/bin/unicorn #{action}"]
+    end
   end
 
   desc "cap web_server:configs"
