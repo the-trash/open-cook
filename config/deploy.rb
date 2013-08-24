@@ -12,9 +12,6 @@ def set_default(name, *args, &block)
   set(name, *args, &block) unless exists?(name)
 end
 
-# cap deploy:setup
-# cap deploy:cold
-
 # =========================================================
 # Params
 # =========================================================
@@ -43,7 +40,6 @@ set :deploy_to,   "#{users_home}/www/#{application}"
 set :gemset,    'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook'
 set :app_env,   'RAILS_ENV=production '
 set :to_app,    "cd " + release_path
-
 
 # =========================================================
 # Tasks
@@ -81,6 +77,7 @@ namespace :app do
   task :symlinks do
     run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/bin/unicorn_server  #{release_path}/bin/unicorn"
   end
 end
 
