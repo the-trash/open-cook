@@ -41,7 +41,7 @@ set :ssh_options, { forward_agent: true }
 set :deploy_to,   "#{users_home}/www/#{application}"
 
 set :gemset,    'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook'
-set :rails_env, 'RAILS_ENV=production '
+set :app_env, 'app_env=production '
 set :to_app,    "cd " + release_path
 
 
@@ -88,13 +88,17 @@ end
 after "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
+  task :migrate do
+    bundle.install
+    run _join [to_app, gemset, app_env + "rake db:migrate"]
+  end
+
   task :start do ; end
   task :stop  do ; end
   task :restart, roles: :app, except: { no_release: true } do
     bundle.install
-    run _join [to_app, gemset, rails_env + "rake db:migrate"]
-    run _join [to_app, gemset, rails_env + "rake assets:precompile"]
-    
+    run _join [to_app, gemset, app_env + "rake db:migrate"]
+    run _join [to_app, gemset, app_env + "rake assets:precompile"]
     # p "RESTART SERVER"
     # run gemset_init + "rvm gemset name"
     # run gemset_init + "rvm gemset use open-cook"
@@ -123,7 +127,7 @@ end
 #   desc "cap db:create"
 #   task :create do
 #     run "ln -nfs #{shared_path}/config/database.yml #{current_path}/config/database.yml"
-#     run _join [to_app, gemset, rails_env + "rake db:create"]
+#     run _join [to_app, gemset, app_env + "rake db:create"]
 #   end
 # end
 
