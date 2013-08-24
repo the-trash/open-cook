@@ -53,7 +53,6 @@ after "deploy:cold", "web_server:configs"
 namespace :web_server do
   desc "cap web_server:configs"
   task :configs do
-    puts "*!"*40
 
     set_default(:unicorn_workers, 4)
     set_default(:unicorn_user)   { user }
@@ -61,6 +60,8 @@ namespace :web_server do
     set_default(:gemset_use)     { _join ["cd #{current_path}", gemset] }
     set_default(:unicorn_config) { "#{shared_path}/config/unicorn_config.rb" }
     set_default(:unicorn_log)    { "#{shared_path}/log/unicorn.log" }
+
+    template("database.production.yml", "#{shared_path}/config/database.yml")
 
     template("nginx_conf.rb",     "#{shared_path}/config/nginx.conf")
     template("unicorn_config.rb", "#{shared_path}/config/unicorn_config.rb")
@@ -73,7 +74,7 @@ end
 namespace :deploy do
   task :app_symlinks do
     run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"  
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
 end
 

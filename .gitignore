@@ -22,3 +22,5 @@ Gemfile.lock
 .DS_Store
 .DS_Store?
 Thumbs.db
+
+config/capistrano/templates/database.production.yml
