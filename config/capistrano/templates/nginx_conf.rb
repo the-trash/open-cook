@@ -1,5 +1,5 @@
 upstream open_cook_server {
-  server unix:<%= current_path %>/tmp/sockets/unicorn.sock fail_timeout=0;
+  server unix:<%= dir_pids %>/unicorn.sock fail_timeout=0;
 }
 
 server{
