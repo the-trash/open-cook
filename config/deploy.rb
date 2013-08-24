@@ -56,6 +56,8 @@ namespace :web_server do
     template("nginx_conf.rb",     "#{shared_path}/config/nginx.conf")
     template("unicorn_config.rb", "#{shared_path}/config/unicorn_config.rb")
     template("unicorn_server.rb", "#{shared_path}/bin/unicorn_server")
+
+    run "chmod 744 #{shared_path}/bin/unicorn_server"
   end
 end
 
