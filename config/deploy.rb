@@ -43,7 +43,8 @@ set :to_app,    "cd " + release_path
 namespace :web_server do
   desc "cap web_server:configs"
   task :configs do
-    template("nginx_conf.rb", "#{shared_path}/config/nginx.conf")
+    template("nginx_conf.rb",     "#{shared_path}/config/nginx.conf")
+    template("unicorn_server.rb", "#{shared_path}/bin/unicorn_server")
   end
 end
 
