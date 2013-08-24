@@ -46,12 +46,15 @@ set :to_app,    "cd " + release_path
 namespace :web_server do
   desc "cap web_server:configs"
   task :configs do
-
-    set_default(:unicorn_user) { user }
-    set_default(:unicorn_pid) { "#{current_path}/tmp/pids/unicorn.pid" }
-    set_default(:unicorn_config) { "#{shared_path}/config/unicorn.rb" }
-    set_default(:unicorn_log) { "#{shared_path}/log/unicorn.log" }
     set_default(:unicorn_workers, 2)
+    puts '%'*10
+    puts user
+
+    set_default(:unicorn_user)   { user }
+    set_default(:unicorn_pid)    { "#{current_path}/tmp/pids/unicorn.pid" }
+    set_default(:unicorn_config) { "#{shared_path}/config/unicorn.rb" }
+    set_default(:unicorn_log)    { "#{shared_path}/log/unicorn.log" }
+    set_default(:gemset_use,     { _join [to_app, gemset] } )
 
     template("nginx_conf.rb",     "#{shared_path}/config/nginx.conf")
     template("unicorn_server.rb", "#{shared_path}/bin/unicorn_server")
