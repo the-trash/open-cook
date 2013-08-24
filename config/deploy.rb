@@ -3,7 +3,8 @@ def _join *params
 end
 
 def template(from, to)
-  erb = File.read(File.expand_path("./capistrano/templates/#{from}", __FILE__))
+  script_root = File.dirname File.absolute_path __FILE__
+  erb         = File.read script_root + "/capistrano/templates/#{from}"
   put ERB.new(erb).result(binding), to
 end
 
@@ -40,7 +41,7 @@ set :to_app,    "cd " + release_path
 # Tasks
 # =========================================================
 namespace :web_server do
-  desc "cap deploy web_server:configs"
+  desc "cap web_server:configs"
   task :configs do
     template("nginx_conf.rb", "#{shared_path}/config/nginx.conf")
   end
