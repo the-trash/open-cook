@@ -40,26 +40,28 @@ set :gemset,    'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook'
 set :rails_env, 'RAILS_ENV=production '
 set :to_app,    "cd " + release_path
 
+after "deploy:cold", "web_server:configs"
+
 # =========================================================
 # Tasks
 # =========================================================
-# namespace :web_server do
-#   desc "cap web_server:configs"
-#   task :configs do
-#     set_default(:unicorn_workers, 4)
-#     set_default(:unicorn_user)   { user }
-#     set_default(:unicorn_pid)    { "#{current_path}/tmp/pids/unicorn.pid" }
-#     set_default(:gemset_use)     { _join ["cd #{current_path}", gemset] }
-#     set_default(:unicorn_config) { "#{shared_path}/config/unicorn_config.rb" }
-#     set_default(:unicorn_log)    { "#{shared_path}/log/unicorn.log" }
+namespace :web_server do
+  desc "cap web_server:configs"
+  task :configs do
+    set_default(:unicorn_workers, 4)
+    set_default(:unicorn_user)   { user }
+    set_default(:unicorn_pid)    { "#{current_path}/tmp/pids/unicorn.pid" }
+    set_default(:gemset_use)     { _join ["cd #{current_path}", gemset] }
+    set_default(:unicorn_config) { "#{shared_path}/config/unicorn_config.rb" }
+    set_default(:unicorn_log)    { "#{shared_path}/log/unicorn.log" }
 
-#     template("nginx_conf.rb",     "#{shared_path}/config/nginx.conf")
-#     template("unicorn_config.rb", "#{shared_path}/config/unicorn_config.rb")
-#     template("unicorn_server.rb", "#{shared_path}/bin/unicorn_server")
+    template("nginx_conf.rb",     "#{shared_path}/config/nginx.conf")
+    template("unicorn_config.rb", "#{shared_path}/config/unicorn_config.rb")
+    template("unicorn_server.rb", "#{shared_path}/bin/unicorn_server")
 
-#     run "chmod 744 #{shared_path}/bin/unicorn_server"
-#   end
-# end
+    run "chmod 744 #{shared_path}/bin/unicorn_server"
+  end
+end
 
 # namespace :deploy do
 #   task :create_symlink do
