@@ -56,10 +56,4 @@ namespace :deploy do
     app.symlinks
     web_server.restart
   end
-
-  task :full_restart, roles: :app, except: { no_release: true } do
-    app.symlinks
-    app.db_migrate
-    web_server.restart
-  end
 end
