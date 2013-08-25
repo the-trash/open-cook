@@ -44,6 +44,7 @@ namespace :app do
   # cap app:assets_build
   desc "cap app:assets_build"
   task :assets_build do
+    app.symlinks
     app.bundle
     run _join [to_app, gemset, app_env + "rake assets:precompile"]
   end
