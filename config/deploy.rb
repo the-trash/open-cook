@@ -16,9 +16,12 @@ set :repository,  "git@github.com:open-cook/open-cook.git"
 default_run_options[:shell] = "/bin/bash --login"
 
 # helper vars
-set :gemset,    'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook '
-set :app_env,   "RAILS_ENV=production "
-set :to_app,    "cd #{release_path} "
+set :gemset_name,   :zykin_ilya
+set :rvm_src,       'source "$HOME/.rvm/scripts/rvm"'
+set :create_gemset, _join([rvm_src, "rvm gemset create #{gemset_name} "])
+set :gemset,        _join([rvm_src, "rvm gemset use    #{gemset_name} "])
+set :app_env,       "RAILS_ENV=production "
+set :to_app,        "cd #{release_path} "
 
 # deploy params
 set :scm,         :git
