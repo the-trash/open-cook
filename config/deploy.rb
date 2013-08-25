@@ -43,7 +43,7 @@ namespace :deploy do
     app.configs
     app.bundle
     app.symlinks
-    run _join [to_app, gemset, app_env + "rake db:migrate", app_env + "rake db:create"]
+    run _join [to_app, gemset, app_env + "rake db:create", app_env + "rake db:migrate"]
   end
 
   task :restart, roles: :app, except: { no_release: true } do
