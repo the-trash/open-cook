@@ -56,4 +56,12 @@ namespace :deploy do
     app.symlinks
     web_server.restart
   end
+
+  task :db_update do
+    deploy.update_code
+    deploy.finalize_update
+    app.symlinks
+    app.bundle
+    app.db_migrate
+  end
 end

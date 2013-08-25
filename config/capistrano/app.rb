@@ -74,7 +74,6 @@ namespace :app do
   desc "cap app:symlinks"
   task :symlinks do
     app.file_structue
-
     run "rm -f #{release_path}/Gemfile.lock"
     
     # files
