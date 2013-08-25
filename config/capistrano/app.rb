@@ -44,8 +44,7 @@ namespace :app do
   # cap app:assets_build
   desc "cap app:assets_build"
   task :assets_build do
-    puts "RAILS 3, without ASSETS"
-    # run _join [to_app, gemset, app_env + "rake assets:precompile"]
+    run _join [to_app, gemset, app_env + "rake assets:precompile"]
   end
 
   # cap app:hard_destroy
