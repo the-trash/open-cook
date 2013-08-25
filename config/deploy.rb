@@ -46,14 +46,15 @@ namespace :web_server do
 
   desc "cap web_server:configs"
   task :configs do
-    dir_conf = "#{shared_path}/config"
-    dir_pids = "#{shared_path}/pids"
-    dir_bin  = "#{shared_path}/bin"
+    set_default(:dir_conf, "#{shared_path}/config")
+    set_default(:dir_pids, "#{shared_path}/pids")
+    set_default(:dir_bin,  "#{shared_path}/bin")
     
     run "mkdir -p #{dir_conf}"
     run "mkdir -p #{dir_bin}"
 
     set_default(:unicorn_workers, 4)
+
     set_default(:unicorn_user)   { user }
     set_default(:unicorn_pid)    { "#{dir_pids}/unicorn.pid" }
     set_default(:unicorn_sock)   { "#{dir_pids}/unicorn.sock" }
