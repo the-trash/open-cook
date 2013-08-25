@@ -1,45 +1,37 @@
-def _join *params
-  params.join ' && '
-end
-
-def template(from, to)
-  script_root = File.dirname File.absolute_path __FILE__
-  erb         = File.read script_root + "/capistrano/templates/#{from}"
-  put ERB.new(erb).result(binding), to
-end
-
-def set_default(name, *args, &block)
-  set(name, *args, &block) unless exists?(name)
-end
+load "config/capistrano/helpers"
 
 # =========================================================
 # Params
 # =========================================================
-set :application, "open-cook.ru"
+set :site_name,   "zykin-ilya.ru"
 
-set    :site_name, "zykin-ilya.ru"
-server site_name,  :app, :web, :db, :primary => true
-
-set :scm,        :git
-set :branch,     :master
-set :deploy_via, :remote_cache
-set :repository, "git@github.com:open-cook/open-cook.git"
-
-set :user,       :open_cook_web
-set :users_home, "/var/www/open_cook_web/data"
-
-set :use_sudo, false
-set :keep_releases, 10
-
-default_run_options[:pty]   = true
+# base vars
+set :application, site_name
+set :user,        "open_cook_web"
+set :users_home,  "/var/www/open_cook_web/data"
+set :deploy_to,   "#{users_home}/www/#{application}"
+set :repository,  "git@github.com:open-cook/open-cook.git"
 default_run_options[:shell] = "/bin/bash --login"
 
-set :ssh_options, { forward_agent: true }
-set :deploy_to,   "#{users_home}/www/#{application}"
-
+# helper vars
 set :gemset,    'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook '
 set :app_env,   "RAILS_ENV=production "
 set :to_app,    "cd #{release_path} "
+
+# deploy params
+set :scm,         :git
+set :branch,      :master
+set :deploy_via,  :remote_cache
+server site_name, :app, :web, :db, primary: true
+
+# connection params
+set :use_sudo, false
+default_run_options[:pty] = true
+set :ssh_options, { forward_agent: true }
+
+# releases cleanup
+set :keep_releases, 5
+after "deploy:restart", "deploy:cleanup"
 
 # =========================================================
 # Tasks
@@ -102,9 +94,6 @@ namespace :first do
     deploy.cold
   end
 end
-
-# CODE UPDATE
-after "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
   task :migrate do
