@@ -37,9 +37,9 @@ default_run_options[:shell] = "/bin/bash --login"
 set :ssh_options, { forward_agent: true }
 set :deploy_to,   "#{users_home}/www/#{application}"
 
-set :gemset,    'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook'
-set :app_env,   'RAILS_ENV=production '
-set :to_app,    "cd " + release_path
+set :gemset,    'source "$HOME/.rvm/scripts/rvm" && rvm gemset use open-cook '
+set :app_env,   "RAILS_ENV=production "
+set :to_app,    "cd #{release_path} "
 
 # =========================================================
 # Tasks

@@ -3,10 +3,20 @@ upstream open_cook_server {
 }
 
 server{
-  server_name <%= site_name %> www.<%= site_name %>
-  listen 185.4.75.90;
-
+  listen 80;
+  server_name <%= site_name %> www.<%= site_name %>;
+  root <%= current_path %>/public;
+  
   location / {
+    proxy_redirect off;
+    proxy_set_header Host $http_host;
     proxy_pass http://open_cook_server;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
+  }
+
+  location ^~ /assets/ {
+    expires max;
+    gzip_static on;
+    add_header Cache-Control public;
   }
 }
