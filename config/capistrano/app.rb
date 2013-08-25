@@ -76,10 +76,12 @@ namespace :app do
     app.file_structue
 
     run "rm -f #{release_path}/Gemfile.lock"
+    
     # files
     run "ln -nfs #{shared_path}/bin/unicorn_server  #{release_path}/bin/unicorn"
     run "ln -nfs #{shared_path}/config/Gemfile.lock #{release_path}/Gemfile.lock"
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    
     # folders
     run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
     run "ln -nfs #{shared_path}/upload              #{release_path}/public/upload"
