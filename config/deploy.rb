@@ -74,6 +74,17 @@ namespace :web_server do
 end
 
 namespace :app do
+  task :first_launch do
+    deploy.setup
+    deploy.cold
+    web_server.start
+  end
+
+  task :hard_destroy
+    web_server.stop
+    run "rm -rf #{deploy_to}"
+  end
+
   task :symlinks do
     run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
@@ -88,21 +99,12 @@ namespace :bundle do
   end
 end
 
-# cap first:launch
-namespace :first do
-  task :launch do
-    deploy.setup
-    deploy.cold
-  end
-end
-
 namespace :deploy do
   task :migrate do
     web_server.configs
     bundle.install
     app.symlinks
-
-    run _join [to_app, gemset, app_env + "rake db:migrate"]
+    run _join [to_app, gemset, app_env + "rake db:migrate", app_env + "rake db:create"]
   end
 
   task :restart, roles: :app, except: { no_release: true } do
