@@ -19,7 +19,6 @@ namespace :app do
     app.gemset_create
     deploy.setup
     deploy.cold
-    app.assets_build
     web_server.start
   end
   

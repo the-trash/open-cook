@@ -48,9 +48,6 @@ before "deploy:create_symlink", "app:assets_build"
 
 namespace :deploy do
   task :migrate do
-    # app.configs
-    # app.bundle
-    # app.symlinks
     app.db_create
     app.db_migrate
   end
