@@ -2,7 +2,7 @@ namespace :app do
   # cap app:db_create
   desc "cap app:gemset_create"
   task :gemset_create do
-    run _join([rvm_src, "rvm gemset create #{gemset_name} "])
+    run _join [rvm_src, "rvm gemset create #{gemset_name}"]
   end
 
   # cap app:db_create
@@ -26,6 +26,7 @@ namespace :app do
   # cap app:first_launch
   desc "cap app:first_launch"
   task :first_launch do
+    app.gemset_create
     deploy.setup
     deploy.cold
     app.assets_build
