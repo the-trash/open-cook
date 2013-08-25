@@ -44,7 +44,7 @@ namespace :app do
   # cap app:assets_build
   desc "cap app:assets_build"
   task :assets_build do
-    app.symlinks
+    app.file_structue
     app.bundle
     run _join [to_app, gemset, app_env + "rake assets:precompile"]
   end
@@ -60,12 +60,21 @@ namespace :app do
   task :soft_destroy do
     web_server.stop
     run "rm -rf #{deploy_to}"
-  end  
+  end
+
+  # cap app:file_structue
+  desc "cap app:file_structue"
+  task :file_structue do
+    run "mkdir -p #{release_path}/bin"
+    run "mkdir -p #{dir_conf}"
+    run "mkdir -p #{dir_bin}"
+  end
 
   # cap app:symlinks
   desc "cap app:symlinks"
   task :symlinks do
-    run "mkdir -p #{release_path}/bin"
+    app.file_structue
+
     run "rm -f #{release_path}/Gemfile.lock"
     # files
     run "ln -nfs #{shared_path}/bin/unicorn_server  #{release_path}/bin/unicorn"
@@ -79,9 +88,7 @@ namespace :app do
   # cap app:configs
   desc "cap app:configs"
   task :configs do
-    run "mkdir -p #{release_path}/bin"
-    run "mkdir -p #{dir_conf}"
-    run "mkdir -p #{dir_bin}"
+    app.file_structue
 
     template("nginx_conf.rb",     "#{dir_conf}/nginx.conf")
     template("unicorn_config.rb", "#{dir_conf}/unicorn_config.rb")
