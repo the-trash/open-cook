@@ -1,4 +1,4 @@
-upstream open_cook_server {
+upstream <%= socket_name %> {
   server unix:<%= dir_pids %>/unicorn.sock fail_timeout=0;
 }
 
@@ -10,7 +10,7 @@ server{
   location / {
     proxy_redirect off;
     proxy_set_header Host $http_host;
-    proxy_pass http://open_cook_server;
+    proxy_pass http://<%= socket_name %>;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; 
   }
 
