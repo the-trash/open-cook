@@ -24,7 +24,7 @@ set :to_app,  "cd #{release_path} "
 
 # deploy params
 set :scm,         :git
-set :branch,      :new_server
+set :branch,      :master
 set :deploy_via,  :remote_cache
 server server_addr, :app, :web, :db, primary: true
 
