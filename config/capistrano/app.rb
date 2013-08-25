@@ -1,5 +1,11 @@
 namespace :app do
   # cap app:db_create
+  desc "cap app:gemset_create"
+  task :gemset_create do
+    run _join([rvm_src, "rvm gemset create #{gemset_name} "])
+  end
+
+  # cap app:db_create
   desc "cap app:db_create"
   task :db_create do
     run _join [to_app, gemset, app_env + "rake db:create"]

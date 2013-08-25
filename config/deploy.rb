@@ -18,8 +18,7 @@ default_run_options[:shell] = "/bin/bash --login"
 # helper vars
 set :gemset_name,   :zykin_ilya
 set :rvm_src,       'source "$HOME/.rvm/scripts/rvm"'
-set :create_gemset, _join([rvm_src, "rvm gemset create #{gemset_name} "])
-set :gemset,        _join([rvm_src, "rvm gemset use    #{gemset_name} "])
+set :gemset,        _join([rvm_src, "rvm gemset use #{gemset_name} "])
 set :app_env,       "RAILS_ENV=production "
 set :to_app,        "cd #{release_path} "
 
