@@ -1,4 +1,14 @@
 namespace :app do
+  # cap app:first_launch
+  desc "cap app:first_launch"
+  task :first_launch do
+    app.gemset_create
+    deploy.setup
+    deploy.cold
+    app.assets_build
+    web_server.start
+  end
+  
   # cap app:db_create
   desc "cap app:gemset_create"
   task :gemset_create do
@@ -21,16 +31,6 @@ namespace :app do
   desc "cap app:assets_build"
   task :assets_build do
     run _join [to_app, gemset, app_env + "rake assets:precompile"]
-  end
-
-  # cap app:first_launch
-  desc "cap app:first_launch"
-  task :first_launch do
-    app.gemset_create
-    deploy.setup
-    deploy.cold
-    app.assets_build
-    web_server.start
   end
 
   # cap app:hard_destroy
