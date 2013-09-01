@@ -83,7 +83,7 @@ namespace :app do
     
     # folders
     run "ln -nfs #{shared_path}/system              #{release_path}/public/system"
-    run "ln -nfs #{shared_path}/upload              #{release_path}/public/upload"
+    run "ln -nfs #{shared_path}/uploads             #{release_path}/public/uploads"
   end
 
   # cap app:configs

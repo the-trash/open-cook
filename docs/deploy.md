@@ -21,7 +21,14 @@ scp ~/.ssh/zykin_ilya.pub open_cook_web@185.4.85.70:~/zykin_ilya.pub
 ```ruby
 ssh open_cook_web@185.4.85.70
 mkdir -p ~/.ssh && cat ~/zykin_ilya.pub >> ~/.ssh/authorized_keys && rm ~/zykin_ilya.pub
-chmod 711 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
+chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
+```
+
+```
+mysql -u USER -pPASSWORD DB_NAME < ../dump_file.sql
+
+# if need to fix DB dump file at line +757
+vim ./dump_file.sql +757
 ```
 
 ### Capistrano

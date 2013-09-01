@@ -20,4 +20,8 @@ class Hub < ActiveRecord::Base
   def pubs
     send(pubs_type)
   end
+
+  def pubs_klass
+    pubs_type.classify.constantize
+  end
 end
