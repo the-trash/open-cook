@@ -1,10 +1,10 @@
 after 'development:recipes' do
-  %w[ blogs videos articles interviews].each do |name|
+  %w[blogs videos articles interviews].each do |name|
     puts " --- #{name}"
 
     3.times do
       user     = User.all.sample
-      holder_hub = Hub.friendly_where(name).first
+      holder_hub = Hub.friendly_first(name)
 
       3.times do
         post = user.posts.create!(

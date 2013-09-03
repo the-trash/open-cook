@@ -28,8 +28,18 @@ class User < ActiveRecord::Base
   validates :email,    presence: true, uniqueness: true
   validates :password, presence: true, on: :create
 
-  def self.root
-    @@root ||= User.first
+  class << self
+    def root
+      @@root ||= User.first
+    end
+
+    def create_admin!
+      create!(
+        login: :admin,
+        email: "admin@site.com",
+        password: "qwerty"
+      )
+    end
   end
 
   def admin?

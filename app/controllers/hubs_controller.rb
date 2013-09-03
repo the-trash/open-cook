@@ -8,11 +8,6 @@ class HubsController < ApplicationController
   before_action :role_required,  only: %w[new create edit update destroy]
   before_action :owner_required, only: %w[edit update destroy]
 
-  # PROTECTED
-  def manage
-    @hubs = @user.hubs.roots.for_manage_rset.pagination(params)
-  end
-
   def new
     @hub = Hub.new
   end
@@ -42,15 +37,28 @@ class HubsController < ApplicationController
   def show
     @hub = Hub.friendly_first(params[:id])
     @sub_hubs = @hub.children
-    @posts    = @hub.pubs.published_set.pagination(params)
+
+    @posts = @hub.pubs
+                 .published_set
+                 .pagination(params)
+
     render template: 'posts/index'
   end
 
   def system_section
     @hub      = Hub.friendly_first(params[:id])
     @sub_hubs = @hub.children
-    @posts    = @hub.pubs_klass.where(hub_id: @sub_hubs.pluck(:id)).published_set.pagination(params)
+
+    @posts = @hub.self_and_children_pubs(@sub_hubs)
+                .published_set
+                .pagination(params)
+
     render template: 'posts/index'
+  end
+  
+  # Admin area
+  def manage
+    @hubs = @user.hubs.roots.for_manage_rset.pagination(params)
   end
 
   private
@@ -79,11 +87,4 @@ class HubsController < ApplicationController
       :state
     )
   end
-
-  # def selector
-  #   klass   = params[:klass].constantize
-  #   @object = klass.find(params[:id])
-
-  #   render layout: false, template: 'hubs/_selector'
-  # end
 end

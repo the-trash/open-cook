@@ -13,7 +13,7 @@ class Hub < ActiveRecord::Base
 
   scope :of_, ->(type) { where(pubs_type: type) }
   
-  def self.sections(pub_type)
+  def self.sections pub_type
     roots.of_(pub_type).published_set
   end
 
@@ -23,5 +23,10 @@ class Hub < ActiveRecord::Base
 
   def pubs_klass
     pubs_type.classify.constantize
+  end
+
+  def self_and_children_pubs sub_hubs
+    ids = sub_hubs.pluck(:id) | [id]
+    pubs_klass.where(hub_id: ids)
   end
 end
