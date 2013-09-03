@@ -1,0 +1,12 @@
+- content_for :left_column do
+  - if @hub
+    .section_hubs
+      %h3 Раздел
+      .hubs
+        %p= link_to @hub.title, hub_url(@hub.slug)
+
+  - if @sub_hubs
+    %ul
+      - @sub_hubs.each do |hub|
+        %li
+          %p= link_to hub.title, hub_url(hub.slug)

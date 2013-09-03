@@ -39,8 +39,15 @@ class HubsController < ApplicationController
     end
   end
 
+  def show
+    @hub = Hub.friendly_first(params[:id])
+    @sub_hubs = @hub.children
+    @posts    = @hub.pubs.published_set.pagination(params)
+    render template: 'posts/index'
+  end
+
   def system_section
-    @hub      = Hub.friendly_first(params[:type])
+    @hub      = Hub.friendly_first(params[:id])
     @sub_hubs = @hub.children
     @posts    = @hub.pubs_klass.where(hub_id: @sub_hubs.pluck(:id)).published_set.pagination(params)
     render template: 'posts/index'

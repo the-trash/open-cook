@@ -1,0 +1,10 @@
+- content_for :left_column do
+  - @comments = Comment.with_state(:published).where(commentable_state: :published).limit(5)
+
+  - unless @comments.blank?
+    .recent_comments
+      %h3 Новые комментарии
+      - @comments.each do |comment|
+        .comment
+          %p= comment.content
+          %p= link_to comment.commentable_title, comment.commentable_url
