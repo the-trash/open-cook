@@ -22,8 +22,10 @@ module PublicationController
 
     def show
       @hub      = @post.hub
-      @hubs     = @hub.siblings.published_set
+      @section  = @post.root_section
+      @sub_hubs = @hub.current_level_hubs
       @comments = @post.comments.for_manage_set
+      
       @post.increment!(:show_count) if @post.published?
 
       render 'posts/show'

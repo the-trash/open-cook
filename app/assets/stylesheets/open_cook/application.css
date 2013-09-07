@@ -13,7 +13,7 @@
   *= require open_cook/layout/sections
   *= require open_cook/layout/fragment_block
   
-  *= require open_cook/layout/section_hubs
+  *= require open_cook/layout/left_column_hubs
   *= require open_cook/layout/notice_block
   *= require open_cook/layout/recent_comments
 

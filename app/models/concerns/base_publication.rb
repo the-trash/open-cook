@@ -24,6 +24,10 @@ module BasePublication
     validates_uniqueness_of :slug
   end
 
+  def root_section
+    hub.root_section
+  end
+
   def update_attachment_fields att_name
     _self = self.class.find(self.id)
 

@@ -29,4 +29,12 @@ class Hub < ActiveRecord::Base
     ids = sub_hubs.pluck(:id) | [id]
     pubs_klass.where(hub_id: ids)
   end
+
+  def root_section
+    self_and_ancestors.published_set.first
+  end
+
+  def current_level_hubs
+    root? ? Hub.none : self_and_siblings.published_set
+  end
 end
