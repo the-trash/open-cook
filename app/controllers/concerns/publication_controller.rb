@@ -22,7 +22,7 @@ module PublicationController
 
     def show
       @hub      = @post.hub
-      @section  = @post.root_section
+      @root_hub = @post.root_hub
       @sub_hubs = @hub.current_level_hubs
       @comments = @post.comments.for_manage_set
       

@@ -24,8 +24,8 @@ module BasePublication
     validates_uniqueness_of :slug
   end
 
-  def root_section
-    hub.root_section
+  def root_hub
+    hub.root_hub
   end
 
   def update_attachment_fields att_name

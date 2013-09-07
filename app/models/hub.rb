@@ -1,13 +1,11 @@
 class Hub < ActiveRecord::Base
   include BasePublication 
   
-  # relations
   belongs_to :user
 
   has_many :pages
   has_many :posts
 
-  # validations
   validates_presence_of :user, :title, :slug
   validates :slug, uniqueness: true
 
@@ -30,7 +28,7 @@ class Hub < ActiveRecord::Base
     pubs_klass.where(hub_id: ids)
   end
 
-  def root_section
+  def root_hub
     self_and_ancestors.published_set.first
   end
 

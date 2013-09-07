@@ -37,7 +37,7 @@ class HubsController < ApplicationController
   def show
     @hub      = Hub.friendly_first(params[:id])
 
-    @section  = @hub.root_section
+    @root_hub = @hub.root_hub
     @sub_hubs = @hub.current_level_hubs
     @posts    = @hub.pubs.published_set.pagination(params)
 
@@ -46,7 +46,7 @@ class HubsController < ApplicationController
 
   def system_section
     @hub      = Hub.friendly_first(params[:id])
-    @section  = @hub
+    @root_hub = @hub
     @sub_hubs = @hub.children
 
     @posts = @hub.self_and_children_pubs(@sub_hubs)
