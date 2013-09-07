@@ -31,6 +31,12 @@ module PublicationController
       render 'posts/show'
     end
 
+    def tag
+      @tag   = params[:tag]
+      @posts = Post.tagged_with(@tag).fresh.pagination(params)
+      render 'posts/index'
+    end
+
     # PROTECTED
     def manage
       @posts = @user.send(controller_name).for_manage_rset.pagination(params)

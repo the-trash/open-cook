@@ -12,6 +12,7 @@ gem 'capistrano'
 
 # App level
 gem 'sorcery'
+gem 'RedCloth', require: 'redcloth'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

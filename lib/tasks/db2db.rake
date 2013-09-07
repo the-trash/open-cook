@@ -30,6 +30,18 @@ class OldMenu < ActiveRecord::Base
   self.table_name = :menus
 end
 
+class OldTagRelation < ActiveRecord::Base
+  establish_connection CONNECTION_PARAMS
+  self.table_name = :taggings
+end
+
+class OldTag < ActiveRecord::Base
+  establish_connection CONNECTION_PARAMS
+  self.table_name = :tags
+end
+
+# ActsAsTaggableOn::Tagging.where(taggable_id: 39, taggable_type: :Post).count
+
 # Helpers
 def create_system_hub slug, title, type
   User.root.hubs.where(title: title).first_or_create!(
@@ -51,14 +63,27 @@ def create_hub_for_recipes menu, parent_hub
   hub
 end
 
+def set_tags_on item, type = :Post
+  contexts = OldTagRelation.pluck(:context).uniq
+  
+  contexts.each do |context|
+    rels     = OldTagRelation.where(taggable_id: item.id, taggable_type: type, context: context)
+    tag_ids  = rels.pluck(:tag_id)
+    tag_list = OldTag.where(id: tag_ids).pluck(:name).join(', ')
+
+    item.set_tag_list_on(context, tag_list)
+    item.save!
+  end
+end
+
 namespace :db do
   namespace :to do
 
     # rake db:to:db
     task db: :environment do
-      # Rake::Task["rake db:bootstrap"].invoke
+      Rake::Task["db:bootstrap"].invoke
       Rake::Task["db:first:user"].invoke
-      
+
       root        = User.root
       recipes_hub = create_system_hub(:recipes, 'Рецепты', :posts)
 
@@ -69,13 +94,16 @@ namespace :db do
 
         recipe_hub = create_hub_for_recipes(menu, recipes_hub)
 
-        recipe_hub.pubs.where(title: recipe.title).first_or_create!(
+        recipe = recipe_hub.pubs.where(title: recipe.title).first_or_create!(
           user:            root,
           title:           recipe.title,
           raw_intro:       recipe.textile_annotation,
           raw_content:     recipe.textile_content,
           state:           recipe.state
         )
+
+        set_tags_on(recipe, :Recipe)
+
         print '.'
 
         # 
@@ -98,10 +126,10 @@ namespace :db do
         # p '#'*20
       end
 
-      p "Hub count"
-      p Hub.count
-      p "Post count"
-      p Post.count
+      # p "Hub count"
+      # p Hub.count
+      # p "Post count"
+      # p Post.count
 
       # recipe   = OldRecipe.first
       # comments = OldComments.where(object_id: recipe.id, object_type: :Recipe)

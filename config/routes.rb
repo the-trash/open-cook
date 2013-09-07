@@ -34,6 +34,9 @@ TheApp::Application.routes.draw do
     end
   end
 
+  # tags
+  get "tag/:tag" => "posts#tag", as: :tag
+
   # /users/:user_id/manage/recipes
   get "manage/:pub_type" => 'posts#manage', as: :pubs_manage
   get "users/:user_id/manage/:pub_type" => 'posts#manage', as: :user_pubs_manage
