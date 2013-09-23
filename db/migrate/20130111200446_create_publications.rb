@@ -21,6 +21,7 @@ class CreatePublications < ActiveRecord::Migration
 
         t.text   :intro
         t.text   :content
+        t.string :inline_tags
 
         t.string :legacy_url
 

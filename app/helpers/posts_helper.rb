@@ -15,4 +15,12 @@ module PostsHelper
       #{ comments_info(post) }
     </p>"
   end
+
+  def tags_links tags
+    str = tags.split(', ').map do |tag|
+      link_to tag, tag_url(tag)
+    end.join(', ')
+
+    raw str
+  end
 end

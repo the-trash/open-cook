@@ -8,6 +8,7 @@
       %h2= link_to post.title, show_url(post)
       %p= image_tag "http://lorempixel.com/460/200/nightlife/?#{rand}"
       %p= raw post.intro
+      %p= tags_links(post.inline_tags)
       %p.pub_info= post_info(post)
       %p.read_more= link_to t('publications.read_more'), '#'
 

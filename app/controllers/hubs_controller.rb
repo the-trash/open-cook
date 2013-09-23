@@ -35,18 +35,18 @@ class HubsController < ApplicationController
   end
 
   def show
-    @hub = Hub.friendly_first(params[:id])
-    @sub_hubs = @hub.children
+    @hub      = Hub.friendly_first(params[:id])
 
-    @posts = @hub.pubs
-                 .published_set
-                 .pagination(params)
+    @root_hub = @hub.root_hub
+    @sub_hubs = @hub.current_level_hubs
+    @posts    = @hub.pubs.published_set.pagination(params)
 
     render template: 'posts/index'
   end
 
   def system_section
     @hub      = Hub.friendly_first(params[:id])
+    @root_hub = @hub
     @sub_hubs = @hub.children
 
     @posts = @hub.self_and_children_pubs(@sub_hubs)

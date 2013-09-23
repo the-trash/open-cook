@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 CONNECTION_PARAMS = {
   :adapter  => "mysql2",
   :host     => "localhost",
@@ -7,6 +9,7 @@ CONNECTION_PARAMS = {
   :encoding => "utf8"
 }
 
+# OLD DataBase
 class OldFiles < ActiveRecord::Base
   establish_connection CONNECTION_PARAMS
   self.table_name = :uploaded_files
@@ -20,7 +23,57 @@ end
 class OldRecipe < ActiveRecord::Base
   establish_connection CONNECTION_PARAMS
   self.table_name = :recipes
-  has_many :comments
+end
+
+class OldMenu < ActiveRecord::Base
+  establish_connection CONNECTION_PARAMS
+  self.table_name = :menus
+end
+
+class OldTagRelation < ActiveRecord::Base
+  establish_connection CONNECTION_PARAMS
+  self.table_name = :taggings
+end
+
+class OldTag < ActiveRecord::Base
+  establish_connection CONNECTION_PARAMS
+  self.table_name = :tags
+end
+
+# ActsAsTaggableOn::Tagging.where(taggable_id: 39, taggable_type: :Post).count
+
+# Helpers
+def create_system_hub slug, title, type
+  User.root.hubs.where(title: title).first_or_create!(
+    slug:  slug,
+    title: title,
+    pubs_type: type,
+    state: :published
+  )
+end
+
+def create_hub_for_recipes menu, parent_hub
+  hub = Hub.where(title: menu.title).first_or_create!(
+    user: User.root,
+    title: menu.title,
+    pubs_type: :posts,
+    state: menu.state
+  )
+  hub.move_to_child_of(parent_hub) if parent_hub
+  hub
+end
+
+def set_tags_on item, type = :Post
+  contexts = OldTagRelation.pluck(:context).uniq
+  
+  contexts.each do |context|
+    rels     = OldTagRelation.where(taggable_id: item.id, taggable_type: type, context: context)
+    tag_ids  = rels.pluck(:tag_id)
+    tag_list = OldTag.where(id: tag_ids).pluck(:name).join(', ')
+
+    item.set_tag_list_on(context, tag_list)
+    item.save!
+  end
 end
 
 namespace :db do
@@ -28,16 +81,59 @@ namespace :db do
 
     # rake db:to:db
     task db: :environment do
-      # Rake::Task["rake db:bootstrap"].invoke
-      # Rake::Task["db:first:user"].invoke
-      
-      root     = User.root
+      Rake::Task["db:bootstrap"].invoke
+      Rake::Task["db:first:user"].invoke
 
-      recipe   = OldRecipe.first
-      comments = OldComments.where(object_id: recipe.id, object_type: :Recipe)
-      files    = OldFiles.where(storage_id: recipe.id, storage_type: :Recipe)
+      root        = User.root
+      recipes_hub = create_system_hub(:recipes, 'Рецепты', :posts)
 
-      comment = comments.first
+      OldRecipe.all.each do |recipe|
+        menu     = OldMenu.find(recipe.menu_id)
+        comments = OldComments.where(object_id: recipe.id, object_type: :Recipe)
+        files    = OldFiles.where(storage_id: recipe.id, storage_type: :Recipe)
+
+        recipe_hub = create_hub_for_recipes(menu, recipes_hub)
+
+        recipe = recipe_hub.pubs.where(title: recipe.title).first_or_create!(
+          user:            root,
+          title:           recipe.title,
+          raw_intro:       recipe.textile_annotation,
+          raw_content:     recipe.textile_content,
+          state:           recipe.state
+        )
+
+        set_tags_on(recipe, :Recipe)
+
+        print '.'
+
+        # 
+
+        # p recipe.friendly_url
+        # p recipe.title
+        # p recipe.textile_content
+        # p recipe.html_content
+        # p recipe.state
+        # p recipe.show_count
+        # p recipe.tags_inline
+
+        # Recipe.new(
+        # )
+
+        # p recipe.title
+        # p recipe.tags_inline
+        # p files.count
+        # p comments.count
+        # p '#'*20
+      end
+
+      # p "Hub count"
+      # p Hub.count
+      # p "Post count"
+      # p Post.count
+
+      # recipe   = OldRecipe.first
+      # comments = OldComments.where(object_id: recipe.id, object_type: :Recipe)
+      # files    = OldFiles.where(storage_id: recipe.id, storage_type: :Recipe)
 
       # p comment.object_title
       # p comment.object_friendly_url

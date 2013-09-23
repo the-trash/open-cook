@@ -1,4 +1,5 @@
 .sections
   = link_to 'Home', '/'
   - Hub.sections(:posts).each do |hub|
-    = link_to hub.title, system_hub_url(hub.slug)
+    - current = (@root_hub == hub) ? :current : nil
+    = link_to hub.title, system_hub_url(hub.slug), class: current

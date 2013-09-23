@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130510182558) do
+ActiveRecord::Schema.define(version: 20130907115151) do
 
   create_table "attached_files", force: true do |t|
     t.integer  "user_id"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.string   "hub_state",                default: "draft"
     t.text     "intro"
     t.text     "content"
+    t.string   "inline_tags"
     t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
@@ -156,6 +157,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.string   "hub_state",                default: "draft"
     t.text     "intro"
     t.text     "content"
+    t.string   "inline_tags"
     t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
@@ -195,6 +197,7 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.string   "hub_state",                default: "draft"
     t.text     "intro"
     t.text     "content"
+    t.string   "inline_tags"
     t.string   "legacy_url"
     t.datetime "first_published_at"
     t.datetime "created_at"
@@ -228,6 +231,23 @@ ActiveRecord::Schema.define(version: 20130510182558) do
     t.text     "the_role",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string "name"
   end
 
   create_table "user_agent_black_lists", force: true do |t|

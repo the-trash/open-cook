@@ -22,11 +22,19 @@ module PublicationController
 
     def show
       @hub      = @post.hub
-      @hubs     = @hub.siblings.published_set
+      @root_hub = @post.root_hub
+      @sub_hubs = @hub.current_level_hubs
       @comments = @post.comments.for_manage_set
+      
       @post.increment!(:show_count) if @post.published?
 
       render 'posts/show'
+    end
+
+    def tag
+      @tag   = params[:tag]
+      @posts = Post.tagged_with(@tag).fresh.pagination(params)
+      render 'posts/index'
     end
 
     # PROTECTED

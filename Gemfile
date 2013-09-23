@@ -12,6 +12,7 @@ gem 'capistrano'
 
 # App level
 gem 'sorcery'
+gem 'RedCloth', require: 'redcloth'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -42,7 +43,7 @@ gem 'delayed_job_active_record',
   tag: 'v4.0.0.beta3'
 
 # Open Cook components
-gem 'the_string_to_slug', '~> 0.0.6'
+gem 'the_string_to_slug', path: '../the_string_to_slug' #, '~> 0.0.6'
 gem 'the_role'     , path: '../the_role'
 gem 'the_audit'    #, path: '../the_audit'
 gem 'the_storages' #, path: '../the_storages'

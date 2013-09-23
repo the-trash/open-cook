@@ -1,13 +1,11 @@
 class Hub < ActiveRecord::Base
   include BasePublication 
   
-  # relations
   belongs_to :user
 
   has_many :pages
   has_many :posts
 
-  # validations
   validates_presence_of :user, :title, :slug
   validates :slug, uniqueness: true
 
@@ -28,5 +26,13 @@ class Hub < ActiveRecord::Base
   def self_and_children_pubs sub_hubs
     ids = sub_hubs.pluck(:id) | [id]
     pubs_klass.where(hub_id: ids)
+  end
+
+  def root_hub
+    self_and_ancestors.published_set.first
+  end
+
+  def current_level_hubs
+    root? ? Hub.none : self_and_siblings.published_set
   end
 end

@@ -1,4 +1,8 @@
+= render partial: 'layouts/open_cook/items/left_column'
+
 .posts_show
+  %p= @post.tag_list_on(:tags)
+
   %h2= @post.title
   %p= image_tag "http://lorempixel.com/460/200/nightlife/?#{rand}"
   %p= raw @post.intro
