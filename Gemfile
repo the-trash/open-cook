@@ -43,10 +43,10 @@ gem 'delayed_job_active_record',
 
 # Open Cook components
 gem 'the_string_to_slug', '~> 0.0.6'
-gem 'the_role'     #, path: '../the_role'
+gem 'the_role'     , path: '../the_role'
 gem 'the_audit'    #, path: '../the_audit'
 gem 'the_storages' #, path: '../the_storages'
-gem 'the_comments' #, path: '../the_comments'
+gem 'the_comments' , path: '../the_comments'
 gem 'the_sortable_tree'
 
 # Gems used only for assets and not required
