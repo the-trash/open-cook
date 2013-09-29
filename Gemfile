@@ -24,8 +24,9 @@ gem 'kaminari'
 gem 'haml'
 gem 'sanitize'
 gem 'state_machine', '~> 1.2.0'
-gem 'acts-as-taggable-on', '~> 2.4.1'
-gem 'awesome_nested_set', branch: 'rails4'
+
+gem 'acts-as-taggable-on', github: "mbleigh/acts-as-taggable-on",       branch: "master"
+gem 'awesome_nested_set',  github: "collectiveidea/awesome_nested_set", branch: "master"
 
 # gem 'rmagick'
 gem 'mini_magick'

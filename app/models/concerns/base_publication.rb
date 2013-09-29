@@ -2,6 +2,8 @@ module BasePublication
   extend ActiveSupport::Concern
 
   included do
+    acts_as_taggable
+
     include BaseSorts
     include BaseStates
     include ActAsStorage
@@ -11,11 +13,8 @@ module BasePublication
     include MainImageUploading
     include TheCommentsCommentable
 
-    acts_as_taggable
-
     before_validation :define_user_via_hub, :define_hub_state, on: :create
-    before_save       :prepare_content
-
+    before_save       :prepare_tags, :prepare_content
     paginates_per 25
 
     # relations
@@ -55,21 +54,14 @@ module BasePublication
     RedCloth.new(txt.to_s).to_html
   end
 
-  def tags_preparator tags_str
-    tags_str.to_s
+  def prepare_tags
+    # Rm dots, because it can brokes url_helpers (dot can be interpreted as format param) 
+    self.tag_list    = self.tag_list.to_s.mb_chars.downcase.gsub('.', ',')
+    self.inline_tags = self.tag_list.to_s
   end
 
   def prepare_content
     self.intro   = to_textile(raw_intro)
     self.content = to_textile(raw_content)
-
-    # tags processing
-    _tags = tags_preparator self.tag_list
-    self.inline_tags = _tags
-
-    if root_hub
-      context = root_hub.slug
-      self.set_tag_list_on(context, _tags)
-    end
   end
 end

@@ -71,8 +71,11 @@ def set_tags_on item, type = :Post
     tag_ids  = rels.pluck(:tag_id)
     tag_list = OldTag.where(id: tag_ids).pluck(:name).join(', ')
 
-    item.set_tag_list_on(context, tag_list)
-    item.save!
+    unless tag_list.blank?
+      p "==> #{tag_list}"
+      item.set_tag_list_on(:pubs, tag_list)
+      item.save!
+    end
   end
 end
 
