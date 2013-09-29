@@ -1,12 +1,11 @@
 = render partial: 'layouts/open_cook/items/left_column'
 
 .posts_show
-  %p= @post.tag_list_on(:tags)
-
   %h2= @post.title
   %p= image_tag "http://lorempixel.com/460/200/nightlife/?#{rand}"
   %p= raw @post.intro
   %p= raw @post.content
+  %p= @post.inline_tags
   %p= post_info @post
 
 = render partial: "the_comments/tree", locals: { comments_tree: @comments, commentable: @post }

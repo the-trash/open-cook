@@ -64,19 +64,33 @@ def create_hub_for_recipes menu, parent_hub
 end
 
 def set_tags_on item, type = :Post
-  contexts = OldTagRelation.pluck(:context).uniq
-  
-  contexts.each do |context|
-    rels     = OldTagRelation.where(taggable_id: item.id, taggable_type: type, context: context)
-    tag_ids  = rels.pluck(:tag_id)
-    tag_list = OldTag.where(id: tag_ids).pluck(:name).join(', ')
+  rels     = OldTagRelation.where(taggable_id: item.id, taggable_type: type, context: :tags)
+  tag_ids  = rels.pluck(:tag_id)
+  tag_list = OldTag.where(id: tag_ids).pluck(:name).join(', ')
 
-    unless tag_list.blank?
-      p "==> #{tag_list}"
-      item.set_tag_list_on(:pubs, tag_list)
-      item.save!
-    end
+  if !tag_list.blank?
+    p "==> #{tag_list}"
+    item.tag_list = tag_list
+    item.save!
   end
+
+  # contexts = OldTagRelation.pluck(:context).uniq
+  # contexts.each do |context|; end
+end
+
+def set_comments_for item, type = :Post
+  comments = OldComments.where(object_id: item.id, object_type: type)
+
+  comments.each do |comment|
+    item.comments.create!(
+      title: comment.title,
+      contacts: comment.contacts,
+      raw_content: comment.textile_content,
+      state: :published
+    )
+    print 'c'
+  end
+  puts
 end
 
 namespace :db do
@@ -106,66 +120,10 @@ namespace :db do
         )
 
         set_tags_on(recipe, :Recipe)
+        set_comments_for(recipe, :Recipe)
 
         print '.'
-
-        # 
-
-        # p recipe.friendly_url
-        # p recipe.title
-        # p recipe.textile_content
-        # p recipe.html_content
-        # p recipe.state
-        # p recipe.show_count
-        # p recipe.tags_inline
-
-        # Recipe.new(
-        # )
-
-        # p recipe.title
-        # p recipe.tags_inline
-        # p files.count
-        # p comments.count
-        # p '#'*20
       end
-
-      # p "Hub count"
-      # p Hub.count
-      # p "Post count"
-      # p Post.count
-
-      # recipe   = OldRecipe.first
-      # comments = OldComments.where(object_id: recipe.id, object_type: :Recipe)
-      # files    = OldFiles.where(storage_id: recipe.id, storage_type: :Recipe)
-
-      # p comment.object_title
-      # p comment.object_friendly_url
-      # p comment.user_login
-      # p comment.title
-      # p comment.textile_content
-      # p comment.state
-      # p comment.created_at
-      # p comment.updated_at
-
-      # file = files.first
-      # p file.file_file_name
-      # p file.file_content_type
-      # p file.file_file_size
-      # p file.file_updated_at
-      # p file.created_at
-      # p file.updated_at
-
-      # t.integer :
-      # t.string  :
-
-      # p recipe.friendly_url
-      # p recipe.title
-      # p recipe.textile_content
-      # p recipe.html_content
-      # p recipe.state
-      # p recipe.show_count
-      # p recipe.tags_inline
     end
-
   end
 end
