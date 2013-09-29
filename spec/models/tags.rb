@@ -39,6 +39,15 @@ describe "Tags" do
         @post.inline_tags.should eq "awesome, slick, exe, hefty"
       end
 
+      it "Hack tags" do
+        @post.tag_list = "<b>awesome</b>, <script>slick</script>.exe, hefty"
+        @post.save
+        @post.reload
+
+        @post.tag_list.should    eq ["awesome", "slick", "exe", "hefty"]
+        @post.inline_tags.should eq "awesome, slick, exe, hefty"
+      end
+
       # it "Tags with scope should works" do
       #   ActsAsTaggableOn::Tagging.all.count.should eq 0
       #   ActsAsTaggableOn::Tag.all.count.should     eq 0

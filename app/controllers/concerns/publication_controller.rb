@@ -117,6 +117,7 @@ module PublicationController
         :title,
         :raw_intro,
         :raw_content,
+        :tag_list,
         :state
       )
     end

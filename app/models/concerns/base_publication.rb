@@ -56,7 +56,13 @@ module BasePublication
 
   def prepare_tags
     # Rm dots, because it can brokes url_helpers (dot can be interpreted as format param) 
-    self.tag_list    = self.tag_list.to_s.mb_chars.downcase.gsub('.', ',')
+    syms = %w[' " ` : \. \\ /].join('|')
+    syms = Regexp.new syms
+
+    tags = self.tag_list.to_s.mb_chars.downcase.gsub(syms, ',')
+    tags = Sanitize.clean(tags, :elements => [])
+
+    self.tag_list    = tags
     self.inline_tags = self.tag_list.to_s
   end
 
