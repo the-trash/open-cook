@@ -1,4 +1,5 @@
 # encoding: UTF-8
+DB_MOVING = true
 
 CONNECTION_PARAMS = {
   :adapter  => "mysql2",
@@ -93,6 +94,33 @@ def set_comments_for item, type = :Post
   puts
 end
 
+def set_files_for(item, type = :Post)
+  admin = User.root
+  files = OldFiles.where(storage_id: item.id, storage_type: type).order('id ASC')
+
+  files.each do |file|
+    storage = OldRecipe.find(file.storage_id)
+    fn = "#{Rails.root}/public/old_uploads/root/recipe/#{storage.zip}/files/original/#{file.file_file_name}"
+    if File.exists? fn
+      item.attached_files.create!(
+        user: admin,
+        attachment: File.open(fn)
+      )
+      print 'f'
+    end
+  end
+  
+  if file = files.select{|f| f.file_content_type =~ /image/ }.last
+    storage = OldRecipe.find(file.storage_id)
+    fn      = "#{Rails.root}/public/old_uploads/root/recipe/#{storage.zip}/files/original/#{file.file_file_name}"
+
+    item.update!( main_image: File.open(fn) )
+    print ' Mf'
+  end
+
+  puts
+end
+
 namespace :db do
   namespace :to do
 
@@ -121,6 +149,7 @@ namespace :db do
 
         set_tags_on(recipe, :Recipe)
         set_comments_for(recipe, :Recipe)
+        set_files_for(recipe, :Recipe)
 
         print '.'
       end

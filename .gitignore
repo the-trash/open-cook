@@ -10,6 +10,7 @@
 db/*.db
 db/*.sqlite3
 public/uploads/*
+public/old_uploads/*
 
 public/system
 public/system/*

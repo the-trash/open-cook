@@ -32,7 +32,7 @@ module MainImageUploading
   def generate_main_image_file_name
     attachment = self.main_image
     file_name  = attachment.instance_read(:file_name)
-    file_name  = "main-image." + TheStorages.file_ext(file_name)
+    file_name  = "main-image." + TheStorages.file_ext(file_name) if !defined?(DB_MOVING)
     attachment.instance_write :file_name, file_name
   end
 

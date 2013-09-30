@@ -2,7 +2,14 @@ class AttachedFilesController < ApplicationController
   include AttachedFilesActions
   include TheSortableTreeController::Rebuild
 
-  before_action :find_storage, only: %w[create delete_main_image main_image_to_left main_image_to_right crop_image_for_preview]
+  before_action :find_storage, only: %w[
+    create
+    delete_main_image
+    main_image_to_left
+    main_image_to_right
+    crop_image_for_preview
+  ]
+
   # before_action :check_access
   
   def crop_image_for_preview
