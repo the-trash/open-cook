@@ -2,7 +2,7 @@
 
 .posts_show
   %h2= @post.title
-  %p= image_tag "http://lorempixel.com/460/200/nightlife/?#{rand}"
+  %p= image_tag @post.main_image.url(:preview)
   %p= raw @post.intro
   %p= raw @post.content
   %p= @post.inline_tags

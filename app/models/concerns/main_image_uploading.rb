@@ -5,7 +5,7 @@ module MainImageUploading
   included do
     attr_accessor :need_to_process_main_image
     before_save   :need_to_process_main_image?
-    before_save   :generate_main_image_file_name, if: ->{ main_image? }
+    before_save   :generate_main_image_file_name, if: ->(o) { main_image? && o.main_image_updated_at_changed? }
     after_commit  :build_main_image_variants
 
     has_attached_file :main_image,

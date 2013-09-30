@@ -113,9 +113,11 @@ def set_files_for(item, type = :Post)
   if file = files.select{|f| f.file_content_type =~ /image/ }.last
     storage = OldRecipe.find(file.storage_id)
     fn      = "#{Rails.root}/public/old_uploads/root/recipe/#{storage.zip}/files/original/#{file.file_file_name}"
-
-    item.update!( main_image: File.open(fn) )
-    print ' Mf'
+    
+    if File.exists? fn
+      item.update!( main_image: File.open(fn) )
+      print ' Mf'
+    end
   end
 
   puts

@@ -6,7 +6,7 @@
   - @posts.each do |post|
     %li
       %h2= link_to post.title, show_url(post)
-      %p= image_tag post.main_image.path
+      %p= image_tag post.main_image.url(:preview)
       %p= raw post.intro
       %p= tags_links(post.inline_tags)
       %p.pub_info= post_info(post)
