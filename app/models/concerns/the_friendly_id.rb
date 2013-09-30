@@ -22,7 +22,8 @@ module TheFriendlyId
   included do
     def to_param; self.friendly_id end
 
-    validates_presence_of :short_id, :friendly_id
+    validates_presence_of   :short_id, :friendly_id
+    validates_uniqueness_of :short_id
 
     before_validation :build_short_id
     before_validation :build_slugs
@@ -41,13 +42,15 @@ module TheFriendlyId
       }[klass]
 
       prefix  ||= 'x'
-      rnd_num   = 9999
+      rnd_num   = 3
 
       # build short_id
       short_id = [prefix, rand(rnd_num)].join
+      puts "===> #{short_id} #{self.class.to_s} #{self.class.count} #{Hub.count}"
 
       # rebuild if find identically short_id
       while self.class.where(short_id: short_id).first
+        p "===> Need for rebuild"
         short_id = [prefix, rand(rnd_num)].join
       end
 
