@@ -34,11 +34,14 @@ class User < ActiveRecord::Base
     end
 
     def create_admin!
-      create!(
+      user = new(
         login: :admin,
         email: "admin@site.com",
-        password: "qwerty"
+        password: "qwerty",
+        role: Role.with_name(:admin)
       )
+      user.save!
+      user
     end
   end
 
