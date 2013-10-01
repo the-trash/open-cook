@@ -22,7 +22,6 @@ module BasePublication
     belongs_to :hub
 
     validates_presence_of   :user, :slug, :title
-    validates_uniqueness_of :slug
   end
 
   def root_hub

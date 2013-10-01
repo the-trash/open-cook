@@ -69,16 +69,17 @@ def create_hub_for_recipes menu, parent_hub
   hub
 end
 
-def set_tags_on item, type = :Post
-  rels     = OldTagRelation.where(taggable_id: item.id, taggable_type: type, context: :tags)
+def set_tags_on item, old_item, type = :Post
+  rels     = OldTagRelation.where(taggable_id: old_item.id, taggable_type: type, context: :tags)
   tag_ids  = rels.pluck(:tag_id)
   tag_list = OldTag.where(id: tag_ids).pluck(:name).join(', ')
 
   if !tag_list.blank?
     p "==> #{tag_list}"
     item.tag_list = tag_list
+
     unless item.save
-      puts "Tags set wrong", item.errors.to_s
+      puts "Tags set wrong", item.errors.to_a.to_s.red
     end
   end
 
@@ -86,13 +87,13 @@ def set_tags_on item, type = :Post
   # contexts.each do |context|; end
 end
 
-def set_comments_for item, type = :Post
-  comments = OldComments.where(object_id: item.id, object_type: type)
+def set_comments_for item, old_item, type = :Post
+  comments = OldComments.where(object_id: old_item.id, object_type: type)
 
   comments.each do |comment|
     item.comments.create!(
-      title: comment.title,
-      contacts: comment.contacts,
+      title:       comment.title,
+      contacts:    comment.contacts,
       raw_content: comment.textile_content,
       state: :published
     )
@@ -101,15 +102,21 @@ def set_comments_for item, type = :Post
   puts
 end
 
-def set_files_for(item, type = :Post)
+def set_files_for(item, old_item, type = :Post)
   missing_files = []
 
   admin   = User.root
-  files   = OldFiles.where(storage_id: item.id, storage_type: type).order('id ASC')
+  files   = OldFiles.where(storage_id: old_item.id, storage_type: type).order('id ASC')
+
+  if files.empty?
+    puts "Has no files #{old_item.title}".red
+    return false
+  end
+
   storage = OldRecipe.where(id: files.first.storage_id).first
 
   unless storage
-    puts "Has no storage id #{files.first.storage_id}"
+    puts "Has no storage id #{files.first.storage_id}".red
     return false
   end
 
@@ -121,8 +128,7 @@ def set_files_for(item, type = :Post)
         attachment: File.open(fn)
       )
       else
-        puts 'ERROR'
-        puts _file.errors.to_s
+        puts _file.errors.to_a.to_s.red
       end
 
       print 'f'
@@ -136,15 +142,16 @@ def set_files_for(item, type = :Post)
     
     if File.exists? fn
       unless item.update( main_image: File.open(fn) )
-        puts "Cant to set Main Image", item.errors.to_s
+        puts "Cant to set Main Image", item.errors.to_a.to_s.red
       end
       print ' Mf'
     end
   end
 
   if !missing_files.empty?
+    puts
     puts "missing_files"
-    puts  missing_files
+    missing_files.each{ |miss| puts miss.to_s.yellow }
   end
 
   puts
@@ -163,31 +170,38 @@ namespace :db do
       root        = User.root
       recipes_hub = create_system_hub(:recipes, 'Рецепты', :posts)
 
-      recipes = OldRecipe.all[100..200]
+      recipes = OldRecipe.order('id ASC').all
       rcount  = recipes.count
 
       recipes.each_with_index do |old_recipe, index|
         menu     = OldMenu.find(old_recipe.menu_id)
-        comments = OldComments.where(object_id: old_recipe.id, object_type: :Recipe)
-        files    = OldFiles.where(storage_id: old_recipe.id, storage_type: :Recipe)
+
+        comments = OldComments.where(object_id:  old_recipe.id, object_type:  :Recipe)
+        files    = OldFiles.where(   storage_id: old_recipe.id, storage_type: :Recipe)
 
         recipe_hub = create_hub_for_recipes(menu, recipes_hub)
+        recipe     = recipe_hub.pubs.where(title: old_recipe.title).first
 
-        recipe = recipe_hub.pubs.where(title: old_recipe.title).first_or_create!(
-          user:            root,
-          title:           old_recipe.title,
-          raw_intro:       old_recipe.textile_annotation,
-          raw_content:     old_recipe.textile_content,
-          show_count:      old_recipe.show_count,
+        unless recipe
+          recipe = recipe_hub.pubs.new(
+            user:            root,
+            title:           old_recipe.title,
+            raw_intro:       old_recipe.textile_annotation,
+            raw_content:     old_recipe.textile_content,
+            show_count:      old_recipe.show_count,
 
-          state:           old_recipe.state,
-          legacy_url:      old_recipe.friendly_url # /recipes/rc56797---lavandovyy-limonad | /recipes/rc56797
-        )
+            state:           old_recipe.state,
+            legacy_url:      old_recipe.friendly_url # /recipes/rc56797---lavandovyy-limonad | /recipes/rc56797
+          )
+          unless recipe.save
+            puts recipe.errors.to_a.to_s.red
+          end
+        end
 
-        puts "(!) #{recipe.title} => #{index}/#{rcount}"
-        set_tags_on(recipe, :Recipe)
-        set_comments_for(recipe, :Recipe)
-        set_files_for(recipe, :Recipe)
+        puts "(#{index}) #{recipe.title} => #{index}/#{rcount}"
+        set_tags_on      recipe, old_recipe, :Recipe
+        set_comments_for recipe, old_recipe, :Recipe
+        set_files_for    recipe, old_recipe, :Recipe
 
         puts '-'*10
         puts

@@ -8,4 +8,4 @@
   %p= @post.inline_tags
   %p= post_info @post
 
-= render partial: "the_comments/tree", locals: { comments_tree: @comments, commentable: @post }
+= render partial: "the_comments/tree", locals: { commentable: @post, comments_tree: @comments }

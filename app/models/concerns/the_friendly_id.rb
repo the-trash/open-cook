@@ -41,17 +41,17 @@ module TheFriendlyId
         article: :a
       }[klass]
 
+      # build short id
       prefix  ||= 'x'
-      rnd_num   = 3
-
-      # build short_id
-      short_id = [prefix, rand(rnd_num)].join
-      puts "===> #{short_id} #{self.class.to_s} #{self.class.count} #{Hub.count}"
+      rnd_num   = 9999
+      short_id  = [prefix, rand(rnd_num)].join
 
       # rebuild if find identically short_id
+      try_counter = 0
       while self.class.where(short_id: short_id).first
-        p "===> Need for rebuild"
         short_id = [prefix, rand(rnd_num)].join
+        try_counter = try_counter + 1
+        break if try_counter > (rnd_num/10)
       end
 
       # set short_id 

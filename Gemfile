@@ -63,6 +63,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'colored'
   gem 'thin'
   gem 'faker'
   gem 'seedbank', github: 'james2m/seedbank'
