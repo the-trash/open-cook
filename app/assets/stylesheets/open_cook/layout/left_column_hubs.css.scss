@@ -12,7 +12,7 @@
     padding: 10px;
   }
   a{
-    color: #76463C;
+    color: $link_hover;
     display: block;
     font-size: 12pt;
     line-height: 150%;
@@ -20,7 +20,7 @@
     text-decoration: none;
   }
   p.current{
-    border-color: #B61A1E;
-    a { color: #B61A1E; }
+    border-color: $link_hover;
+    a { color: $link_hover; }
   }
 }

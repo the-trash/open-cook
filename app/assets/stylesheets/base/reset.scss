@@ -28,7 +28,7 @@ ol, p, pre, table, ul {
   line-height: 100%;
   background: transparent;
   vertical-align: baseline;
-  @include arial;
+  @include corp_font;
 }
 
 html {
