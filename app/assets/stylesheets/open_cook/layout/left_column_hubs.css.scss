@@ -1,32 +1,26 @@
 @import '../../base/colors';
+@import "compass/css3/box-shadow";
 
 .left_column_hubs{
-  .current{
-    color: darkblue;
-  }
-}
-/*.section_hubs{
-  border-radius: 5px;
-  margin: 0 10px 15px 0;
-  border:  1px solid $header;
-  background: lighten($header, 15%);
-
-  .hubs{
-    padding-bottom: 10px; 
-  }
-  h3{
-    background: $header;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 1.6em;
-    padding: 5px;
-  }
   p{
-    font-size: 1em;
-    margin-bottom: 10px;
+    @include box-shadow(#666 0px 2px 3px);
+    background: none repeat scroll 0 0 white;
+    border: 3px solid #76463C;
+    margin: 0 12px 15px 0;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
   }
   a{
-    font-size: 1.6em;
-    margin-left: 20px;
+    color: #76463C;
+    display: block;
+    font-size: 12pt;
+    line-height: 150%;
+    text-align: center;
+    text-decoration: none;
   }
-}*/
+  p.current{
+    border-color: #B61A1E;
+    a { color: #B61A1E; }
+  }
+}

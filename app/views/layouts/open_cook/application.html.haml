@@ -12,9 +12,9 @@
     = stylesheet_link_tag    'open_cook/application', media: :all
   %body
     .body
-      .header
-        = render partial: 'layouts/open_cook/items/header'
-
+      = render partial: 'layouts/open_cook/items/top_menu'
+      %p.about <strong>Открытая кухня Анны Нечаевой</strong> &mdash; сайт содержит рецепты простых и доступных блюд, которые может приготовить каждый из самых обычных продуктов
+      .logo_banner
       = render partial: 'layouts/open_cook/items/sections'
 
       .content.overblock

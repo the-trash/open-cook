@@ -1,16 +1,45 @@
 .recent_comments{
   padding-right: 10px;
 
+  .wrp{
+    padding-top: 5px;
+    border: 1px solid LightGray;
+  }
+
   h3{
-    background: lightBlue;
+    margin: 0;
+    padding: 5px 0;
+    font-size: 1.5em;
     text-align: center;
-    font-size: 1.6em;
-    padding: 5px;
+    background: none repeat scroll 0 0 LightGray;
   }
+  p{ margin-bottom: 10px; }
+
   .comment{
-    margin-bottom: 15px;
+    width: 188px;
+    overflow: hidden;
+    margin: 0 5px 10px 5px;
   }
-  p{
-    margin-bottom: 10px
+  .title{
+    margin: 0;
+    padding: 0 0 5px 0;
+  }
+  .content{
+    margin-bottom: 5px;
+  }
+  .info{
+    color: gray;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+
+  .comments{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    p{
+      margin: 0px;
+      background: lightgray;
+    }
   }
 }

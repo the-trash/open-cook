@@ -1,7 +1,8 @@
 - content_for :left_column do
   - if @sub_hubs
-    %ul.left_column_hubs
+    .left_column_hubs
       - @sub_hubs.each do |hub|
-        %li
-          - current = (@hub == hub) ? :current : nil
-          %p= link_to hub.title, hub_url(hub.slug), class: current
+        - current = (@hub == hub) ? :current : nil
+        %p{ class: current }
+          = link_to hub.title, hub_url(hub.slug)
+          %i= hub.pubs_count_published

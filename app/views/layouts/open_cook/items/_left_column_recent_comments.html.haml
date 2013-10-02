@@ -4,7 +4,12 @@
   - unless comments.blank?
     .recent_comments
       %h3 Новые комментарии
-      - comments.each do |comment|
-        .comment
-          %p= comment.content
-          %p= link_to comment.commentable_title, comment.commentable_url
+      .wrp
+        - comments.each do |comment|
+          .comment
+            %p.title= link_to comment.commentable_title, comment.commentable_url
+            %p.content= comment.content
+            %p.info= comment.created_at.to_s(:db)
+        .comments
+          %p= link_to "Все комментарии", '#'
+            
