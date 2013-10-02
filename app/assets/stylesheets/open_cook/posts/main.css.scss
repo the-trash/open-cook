@@ -1,0 +1,25 @@
+@import '../../base/mix';
+
+.posts_index, .posts_show{
+  p{
+    color: #444;
+    font-size: 12pt;
+    margin-bottom: 15px;
+  }
+}
+
+.posts_index {
+  li{
+    margin-bottom: 20px;
+
+    h2{ font-style: italic; }
+    a:visited{ color: #76463C; }
+  }
+}
+
+.posts_show{
+  h2{
+    color: #76463C;
+    font-style: italic;
+  }
+}

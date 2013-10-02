@@ -13,9 +13,9 @@
   *= require open_cook/layout/sections
   *= require open_cook/layout/fragment_block
   
-  *= require open_cook/layout/left_column_hubs
   *= require open_cook/layout/notice_block
-  *= require open_cook/layout/recent_comments
+  *= require open_cook/layout/menu_hubs
+  *= require open_cook/layout/menu_recent_comments
 
   *= require open_cook/layout/layout
   *= require open_cook/layout/footer
@@ -23,8 +23,7 @@
   *= require open_cook/users/cabinet
 
   *= require open_cook/hubs/nested_options
-  *= require open_cook/posts/index
-  *= require open_cook/posts/show
+  *= require open_cook/posts/main
 
   *= require open_cook/image_toolbar/base
 

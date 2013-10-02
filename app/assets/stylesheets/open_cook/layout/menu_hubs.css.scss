@@ -1,0 +1,28 @@
+@import '../../base/colors';
+@import "compass/css3/box-shadow";
+@import "compass/css3/border-radius";
+
+.menu.hubs{
+  a{
+    @include box-shadow(#666 0px 2px 3px);
+    @include border-radius(10px);
+    color: #76463C;
+
+    border: 3px solid #76463C;
+    margin: 0 12px 15px 0;
+    background: white;
+    display: block;
+    padding: 10px;
+
+    font-size: 1.5em;
+    line-height: 150%;
+    text-align: center;
+    text-decoration: none;
+   
+    &.current, &:hover{
+      color: $link_hover;
+      border-color: $link_hover;
+    }
+  }
+  b{ color: #aaa; font-size: 0.7em; }
+}

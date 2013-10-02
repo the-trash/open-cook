@@ -23,6 +23,11 @@
   height: 180px;
 }
 
+p.about{
+  font-size: 1.1em;
+  text-align: center;
+}
+
 .path {
   @include arial;
   color: #B61A1E;
