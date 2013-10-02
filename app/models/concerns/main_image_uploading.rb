@@ -44,7 +44,7 @@ module MainImageUploading
 
       prepare_image(src, src, 1024)
       prepare_image(src, base, 300)
-      build_square_image(src, preview, 100)
+      build_square_image(src, preview, 220)
 
       self.need_to_process_main_image = false
       # I needn't, but you can recalculate src size & save

@@ -25,7 +25,7 @@ module BasePublication
   end
 
   def root_hub
-    hub.root_hub
+    hub.root_hub if hub
   end
 
   def update_attachment_fields att_name
