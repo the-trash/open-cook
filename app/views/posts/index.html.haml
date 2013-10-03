@@ -1,4 +1,11 @@
-= render partial: 'layouts/open_cook/items/left_column'
+- content_for :hubs_widget do
+  = render partial: 'layouts/open_cook/widgets/hubs'
+
+- content_for :recent_comments_widget do
+  = render partial: 'layouts/open_cook/widgets/recent_comments'
+
+- content_for :tag_search_widget do
+  = render partial: 'layouts/open_cook/widgets/tag_search'
 
 = paginate @posts
 

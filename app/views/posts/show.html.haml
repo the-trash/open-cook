@@ -1,11 +1,17 @@
-= render partial: 'layouts/open_cook/items/left_column'
+- content_for :hubs_widget do
+  = render partial: 'layouts/open_cook/widgets/hubs'
 
-.posts_show
+- content_for :recent_comments_widget do
+  = render partial: 'layouts/open_cook/widgets/recent_comments'
+
+- content_for :tags_widget do
+  = render partial: 'layouts/open_cook/widgets/tags', locals: { tags_str: @post.inline_tags }
+
+.posts_show.user_content
   %h2= @post.title
   %p= image_tag @post.main_image.url(:preview)
   %p= raw @post.intro
   %p= raw @post.content
-  %p= @post.inline_tags
   %p= post_info @post
 
 = render partial: "the_comments/tree", locals: { commentable: @post, comments_tree: @comments }

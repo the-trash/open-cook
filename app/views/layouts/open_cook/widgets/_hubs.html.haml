@@ -1,0 +1,9 @@
+- if @sub_hubs
+  .nav.hubs
+    - @sub_hubs.each do |hub|
+      - current = (@hub == hub) ? :current : nil
+
+      = link_to hub_url(hub.slug), class: current do
+        = hub.title
+        %b
+          (#{hub.pubs_count_published})

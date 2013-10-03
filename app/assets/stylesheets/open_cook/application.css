@@ -4,19 +4,14 @@
   *= require base/layout
   *= require base/headers
 
-  *= require open_cook/base/form
-  *= require open_cook/base/common
-  *= require open_cook/base/pagination
-  *= require open_cook/base/validation_errors
+  *= require_directory ./base
+  *= require_directory ./widgets
 
   *= require open_cook/layout/header
   *= require open_cook/layout/sections
   *= require open_cook/layout/fragment_block
   
   *= require open_cook/layout/notice_block
-  *= require open_cook/layout/menu_hubs
-  *= require open_cook/layout/menu_recent_comments
-
   *= require open_cook/layout/layout
   *= require open_cook/layout/footer
 
