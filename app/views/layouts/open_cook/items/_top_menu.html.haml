@@ -1,5 +1,9 @@
 %p.top_menu
   %noindex
+    %b= link_to 'На главную', root_url
+
+    = link_to 'О сайте', page_url(:about)
+
     = link_to 'http://vk.com/opencook', rel: :nofollow do
       = image_tag 'social/vk.png'
       Мы ВКонтакте
@@ -10,13 +14,7 @@
 
     = link_to 'https://twitter.com/opencook_ru', rel: :nofollow do
       = image_tag 'social/tw.png'
-      Мы в Твиттере
-
-  = link_to '/recipes.rss' do
-    = image_tag 'social/rss.png'
-    RSS
-
-  = link_to 'О сайте', page_url(:about)
+      Наш Твиттер
 
   %noindex
     - if current_user
@@ -24,5 +22,5 @@
         Кабинет (#{ current_user.login })
       = link_to t('sessions.logout'), logout_url, method: :delete
     - else
-      = link_to  'Вход', login_url
       = link_to  'Регистрация', signup_url
+      = link_to  'Вход', login_url

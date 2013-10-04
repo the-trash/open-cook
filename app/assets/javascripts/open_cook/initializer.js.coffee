@@ -4,3 +4,4 @@ $ ->
   MultiInput.init()
   ImageCrop.init()
   WaterMarkSwitcher.init()
+  TagSearch.init()

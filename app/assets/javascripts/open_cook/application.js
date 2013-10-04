@@ -26,6 +26,8 @@
 
 //= require open_cook/app
 //= require open_cook/multi_input
+//= require open_cook/tag_search
+
 // require open_cook/hub_selector
 
 // require bootstrap-alert

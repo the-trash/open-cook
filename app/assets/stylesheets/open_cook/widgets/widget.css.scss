@@ -1,14 +1,16 @@
 @import "compass/css3/border-radius";
 
 .widget{
-  width: 190px;
-  overflow: hidden;
-  padding-right: 10px;
-
-  &._right{
-    padding-right: 0px;
-    padding-left:  10px;
+  h3{
+    margin: 0;
+    padding: 5px 0;
+    font-size: 1.4em;
+    text-align: center;
+    background: none repeat scroll 0 0 LightGray;
+    @include border-radius(3px 3px 0 0);
   }
+
+  p{ margin-bottom: 10px; }
 
   .holder{
     padding-top: 5px;
@@ -20,14 +22,4 @@
     margin: 0 5px;
     overflow: hidden;
   }
-
-  h3{
-    margin: 0;
-    padding: 5px 0;
-    font-size: 1.4em;
-    text-align: center;
-    background: none repeat scroll 0 0 LightGray;
-    @include border-radius(3px 3px 0 0);
-  }
-  p{ margin-bottom: 10px; }
 }

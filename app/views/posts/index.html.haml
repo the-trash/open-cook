@@ -13,10 +13,15 @@
   - @posts.each do |post|
     %li
       %h2= link_to post.title, show_url(post)
-      %p= image_tag post.main_image.url(:preview)
-      %p= raw post.intro
-      %p= tags_links(post.inline_tags)
-      %p.pub_info= post_info(post)
-      %p.read_more= link_to t('publications.read_more'), '#'
+      .intro.cf
+        - if post.main_image?
+          = link_to show_url(post) do
+            %p= image_tag post.main_image.url(:preview), class: :preview
+
+        %p= raw post.intro
+        = render partial: "posts/read_more", locals: { post: post }
+
+      %p.tags= tags_links(post.inline_tags)
+      = render partial: "posts/informer", locals: { post: post }
 
 = paginate @posts

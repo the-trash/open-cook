@@ -16,7 +16,28 @@
     color: #444;
     font-size: 12pt;
     margin-bottom: 15px;
+    
+    &.read_more{
+      margin-bottom: 0;
+    }
+
+    &.tags{
+      margin-bottom: 2px;
+
+      a{
+        color: gray;
+        font-size: 0.8em;
+        &:hover{ color: $link_hover; }
+      }
+    }
+    &.informer{
+      font-size: 1.3em;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed lightgray;
+    }
   }
+  .intro{ margin-bottom: 15px; }
+  .preview{ float: left; margin: 0 15px 15px 0; }
 }
 
 .posts_index {

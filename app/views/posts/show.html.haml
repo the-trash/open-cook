@@ -9,9 +9,14 @@
 
 .posts_show.user_content
   %h2= @post.title
-  %p= image_tag @post.main_image.url(:preview)
-  %p= raw @post.intro
+
+  .intro.cf
+    - if @post.main_image?
+      %p= image_tag @post.main_image.url(:preview), class: :preview
+    %p= raw @post.intro
+
   %p= raw @post.content
-  %p= post_info @post
+  %p.tags= tags_links @post.inline_tags
+  = render partial: "posts/informer", locals: { post: @post }
 
 = render partial: "the_comments/tree", locals: { commentable: @post, comments_tree: @comments }
