@@ -29,7 +29,7 @@ module BaseStates
 
       after_transition any => any do |obj|
         if obj.respond_to?(:hub) && obj.try(:hub)
-          obj.hub.recalculate_pubs_counters!  
+          obj.hub.recalculate_pubs_counters! 
         end
       end
 

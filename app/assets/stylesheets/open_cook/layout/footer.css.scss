@@ -1,7 +1,10 @@
 @import '../../base/colors';
+@import "compass/css3/border-radius";
 
 .footer{
-  background: $footer;
+  @include border-radius(5px 5px 0 0);
+  border-top: 5px solid gray;
+  background: #DDDDDD;
 
   ul.pages{
     padding-top: 20px;
@@ -10,9 +13,6 @@
     li{
       float: left;
       margin-right: 20px;
-    }
-    a{
-      color: $header;
     }
   }
 }

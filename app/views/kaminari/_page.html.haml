@@ -7,8 +7,10 @@
 -#    per_page:      number of items to fetch per page
 -#    remote:        data-remote
 -#
-%li{:class => "#{' disabled' if page.current?}"}
-  - if page.current?
-    = link_to page, 'javascript:void(0);', class: :current
-  - else
-    = link_to page, url, {:remote => remote, :rel => page.next? ? 'next' : page.prev? ? 'prev' : nil}
+
+- if page.current?
+  = link_to page, 'javascript:void(0);', class: :current
+- else
+  = link_to page, url, { remote: remote, rel: page.next? ? :next : page.prev? ? :prev : nil }
+
+-#:class => "#{' disabled' if page.current?}"}

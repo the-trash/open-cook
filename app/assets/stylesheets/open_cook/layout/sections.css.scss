@@ -13,8 +13,5 @@
 
     &:hover{ text-decoration: underline; }
   }
-  .current{
-    color: black;
-    text-decoration: underline;
-  }
+  .current{ color: $link_hover; }
 }

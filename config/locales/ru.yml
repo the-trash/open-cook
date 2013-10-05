@@ -77,8 +77,8 @@ ru:
     pagination:
       first: "&laquo; Первая"
       last: "Последняя &raquo;"
-      previous: "&lsaquo; Туда"
-      next: "Сюда &rsaquo;"
+      previous: "&laquo; Туда"
+      next: "Сюда &raquo;"
       truncate: "..."
 
   sessions:

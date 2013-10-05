@@ -9,7 +9,10 @@
           .comment
             %p.title= link_to comment.commentable_title, comment.commentable_url
             %p.content= comment.content
-            %p.info= comment.created_at.to_s(:db)
-      .comments
+            %p.info
+              = comment.title
+              от
+              = comment.created_at.strftime('%d.%m.%Y')
+      .comments.hidden
         %p= link_to "Все комментарии", comments_path
             

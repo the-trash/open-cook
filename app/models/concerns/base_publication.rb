@@ -15,6 +15,7 @@ module BasePublication
 
     before_validation :define_user_via_hub, :define_hub_state, on: :create
     before_save       :prepare_tags, :prepare_content, :set_published_at
+    after_create      :recalculate_hub_counters!
     paginates_per 25
 
     # relations
@@ -51,6 +52,10 @@ module BasePublication
 
   def define_hub_state
     self.hub_state = hub.state if hub
+  end
+
+  def recalculate_hub_counters!
+    hub.recalculate_pubs_counters! if hub
   end
 
   def to_textile txt

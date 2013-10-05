@@ -5,7 +5,7 @@ TheApp::Application.routes.draw do
   # /recipes/rc56797---lavandovyy-limonad
   # /recipes/tags/milk
   get "recipes/:id" => "welcome#legacy_post"
-  get "recipes/tag/:id", to: redirect{ |params, request| URI.encode "#{request.protocol + request.host_with_port}/tag/#{params[:id]}" }
+  get "recipes/tag/:id", to: redirect { |params, request| URI.encode "#{request.protocol + request.host_with_port}/tag/#{params[:id]}" }
 
   # Login system
   get    "login"    => "sessions#new",     as: :login

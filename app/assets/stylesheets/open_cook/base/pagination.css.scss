@@ -1,22 +1,35 @@
 @import '../../base/mix';
 
+@import "compass/css3/inline-block";
+
 .pagination{
   @include overblock;
   margin-bottom: 10px;
-  
-  li{
-    float: left;
-    padding: 12px 5px;
-  }
+
   a{
-    font-size: 14px;
-    color: #A5260A;
+    @include inline-block;
+
+    height: 12px;
+    width: 12px;
+    line-height: 12px;
     margin-right: 12px;
+
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    
     padding: 5px;
-    background: lightgray;
-    border-radius: 5px;
+    border-radius: 20px;
+
+    &.prev, &.next{ width: 60px; }
+    &:hover{
+      color: #231d49;
+      background: #d4d5fb;
+    }
+
     &.current{
-      border: 1px solid gray;
+      color: #231d49;
+      border: 1px solid #938cc1;
     }
   }
 }

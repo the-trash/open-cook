@@ -1,4 +1,12 @@
+@import '../../base/colors';
+
 .recent_comments{
+  a{
+    color: gray;
+    &:hover{ color: $link_hover; }
+  }
+
+
   .comment{
     width: 188px;
     overflow: hidden;
