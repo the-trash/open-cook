@@ -26,7 +26,7 @@ class CreatePublications < ActiveRecord::Migration
         t.string :legacy_url
 
         # DateTime
-        t.datetime :first_published_at
+        t.datetime :published_at
         t.timestamps
       end
     end

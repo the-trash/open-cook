@@ -8,3 +8,6 @@
   - if post.respond_to? :comments
     %b Комментарии:
     = link_to post.comments_sum, show_url(post, :comments)
+
+  %b От:
+  = post.published_at.strftime('%d.%m.%Y')

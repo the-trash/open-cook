@@ -14,7 +14,7 @@ module BasePublication
     include TheCommentsCommentable
 
     before_validation :define_user_via_hub, :define_hub_state, on: :create
-    before_save       :prepare_tags, :prepare_content
+    before_save       :prepare_tags, :prepare_content, :set_published_at
     paginates_per 25
 
     # relations
@@ -40,6 +40,12 @@ module BasePublication
   end
 
   private
+
+  def set_published_at
+    if published? && published_at.blank?
+      self.published_at = Time.now
+    end
+  end
 
   def define_user_via_hub
     self.user = hub.user if hub && user.blank?

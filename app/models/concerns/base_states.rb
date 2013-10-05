@@ -33,13 +33,6 @@ module BaseStates
         end
       end
 
-      # before_transition any => :published do |obj|
-      #   p "transition => published"
-      #   # if obj.respond_to? :published_at
-      #   # obj.published_at = Time.now unless obj.published_at
-      #   # end
-      # end
-
       # after_transition any => :published do |obj|
       #   p "transition => published"
       #   # obj.to_safe_moderation if obj.user.has_role?(:system, :administrator)

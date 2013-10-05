@@ -191,6 +191,7 @@ namespace :db do
             show_count:      old_recipe.show_count,
 
             state:           old_recipe.state,
+            published_at:    old_recipe.published_at,
             legacy_url:      old_recipe.friendly_url # /recipes/rc56797---lavandovyy-limonad | /recipes/rc56797
           )
           unless recipe.save
@@ -199,9 +200,9 @@ namespace :db do
         end
 
         puts "(#{index}) #{recipe.title} => #{index}/#{rcount}"
-        set_tags_on      recipe, old_recipe, :Recipe
-        set_comments_for recipe, old_recipe, :Recipe
-        set_files_for    recipe, old_recipe, :Recipe
+        # set_tags_on      recipe, old_recipe, :Recipe
+        # set_comments_for recipe, old_recipe, :Recipe
+        # set_files_for    recipe, old_recipe, :Recipe
 
         puts '-'*10
         puts
