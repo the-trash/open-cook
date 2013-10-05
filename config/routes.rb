@@ -1,6 +1,12 @@
 TheApp::Application.routes.draw do
   root to: 'welcome#index'
 
+  # Legacy Urls
+  # /recipes/rc56797---lavandovyy-limonad
+  # /recipes/tags/milk
+  get "recipes/:id" => "welcome#legacy_post"
+  get "recipes/tag/:id", to: redirect{ |params, request| URI.encode "#{request.protocol + request.host_with_port}/tag/#{params[:id]}" }
+
   # Login system
   get    "login"    => "sessions#new",     as: :login
   delete "logout"   => "sessions#destroy", as: :logout

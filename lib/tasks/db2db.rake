@@ -170,7 +170,7 @@ namespace :db do
       root        = User.root
       recipes_hub = create_system_hub(:recipes, 'Рецепты', :posts)
 
-      recipes = OldRecipe.order('id ASC').all[5..10]
+      recipes = OldRecipe.order('id ASC').all[0..30]
       rcount  = recipes.count
 
       recipes.each_with_index do |old_recipe, index|
@@ -200,9 +200,9 @@ namespace :db do
         end
 
         puts "(#{index}) #{recipe.title} => #{index}/#{rcount}"
-        # set_tags_on      recipe, old_recipe, :Recipe
-        # set_comments_for recipe, old_recipe, :Recipe
-        # set_files_for    recipe, old_recipe, :Recipe
+        set_tags_on      recipe, old_recipe, :Recipe
+        set_comments_for recipe, old_recipe, :Recipe
+        set_files_for    recipe, old_recipe, :Recipe
 
         puts '-'*10
         puts

@@ -42,9 +42,7 @@ module BasePublication
   private
 
   def set_published_at
-    if published? && published_at.blank?
-      self.published_at = Time.now
-    end
+    self.published_at = Time.now if published? && published_at.blank?
   end
 
   def define_user_via_hub
