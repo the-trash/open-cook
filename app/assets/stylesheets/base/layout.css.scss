@@ -9,20 +9,22 @@ body{
   @include arial;
   font-size: 10pt;
   background: white;
+
+  & > {
+    .body {
+      margin: auto;
+      height: auto !important;
+      min-height: 100%;
+      height: 100%;
+    }
+
+    .footer{
+      margin:auto;
+      margin-top: -100px;
+    }
+
+    .footer{ height: 100px; }
+    .body, .footer{ width: 1000px; }
+  }
+  .fguard{ height: 100px; }
 }
-
-.body{  
-  margin: auto;
-  height: auto !important;
-  min-height: 100%;
-  height: 100%;
-}
-
-.footer{
-  margin:auto;
-  margin-top: -100px;
-}
-
-.footer, .fguard{ height: 100px; }
-
-.body, .footer{ width: 1000px; }
