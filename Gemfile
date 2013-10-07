@@ -45,12 +45,32 @@ gem 'delayed_job_active_record',
   tag: 'v4.0.0.beta3'
 
 # Open Cook components
-gem 'the_string_to_slug', path: '../the_string_to_slug' #, '~> 0.0.6'
-gem 'the_role'     , path: '../the_role'
-gem 'the_audit'    #, path: '../the_audit'
-gem 'the_storages' #, path: '../the_storages'
-gem 'the_comments' , path: '../the_comments'
 gem 'the_sortable_tree'
+
+gem 'the_string_to_slug',
+  #, path: '../the_string_to_slug' #, '~> 0.0.6'
+  github: 'the-teacher/the_string_to_slug',
+  branch: 'master'
+
+gem 'the_role',
+  #, path: '../the_role'
+  github: 'the-teacher/the_role',
+  branch: 'master'
+
+gem 'the_storages',
+  #, path: '../the_storages'
+  github: 'the-teacher/the_storages',
+  branch: 'master'
+
+gem 'the_comments',
+  #, path: '../the_comments'
+  github: 'the-teacher/the_comments',
+  branch: 'master'
+
+gem 'the_audit',
+  #, path: '../the_audit'
+  github: 'open-cook/the_audit',
+  branch: 'master'
 
 # Gems used only for assets and not required
 # in production environments by default.
