@@ -1,0 +1,5 @@
+%p.read_more  
+  - if !post.content.blank?
+    = link_to raw(t 'post.read_more'), show_url(post)
+  - else
+    = link_to raw(t 'post.to_comments'), show_url(post, :comments)

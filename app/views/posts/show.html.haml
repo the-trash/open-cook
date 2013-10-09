@@ -1,12 +1,22 @@
-= render partial: 'layouts/open_cook/items/left_column'
+- content_for :hubs_widget do
+  = render partial: 'layouts/open_cook/widgets/hubs'
 
-.posts_show
-  %p= @post.tag_list_on(:tags)
+- content_for :recent_comments_widget do
+  = render partial: 'layouts/open_cook/widgets/recent_comments'
 
+- content_for :tags_widget do
+  = render partial: 'layouts/open_cook/widgets/tags', locals: { tags_str: @post.inline_tags }
+
+.posts_show.user_content
   %h2= @post.title
-  %p= image_tag "http://lorempixel.com/460/200/nightlife/?#{rand}"
-  %p= raw @post.intro
-  %p= raw @post.content
-  %p= post_info @post
 
-= render partial: "the_comments/tree", locals: { comments_tree: @comments, commentable: @post }
+  .intro.cf
+    - if @post.main_image?
+      %p= image_tag @post.main_image.url(:preview), class: :preview
+    %p= raw @post.intro
+
+  %p= raw @post.content
+  %p.tags= tags_links @post.inline_tags
+  = render partial: "posts/informer", locals: { post: @post }
+
+= render partial: "the_comments/tree", locals: { commentable: @post, comments_tree: @comments }

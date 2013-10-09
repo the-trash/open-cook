@@ -35,4 +35,12 @@ class Hub < ActiveRecord::Base
   def current_level_hubs
     root? ? Hub.none : self_and_siblings.published_set
   end
+
+  def recalculate_pubs_counters!
+    update({
+      pubs_count_published: self.pubs.with_state(:published).count,
+      pubs_count_draft:     self.pubs.with_state(:draft).count,
+      pubs_count_deleted:   self.pubs.with_state(:deleted).count
+    })
+  end  
 end

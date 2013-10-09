@@ -1,0 +1,262 @@
+.comments_tree, .comments_list, .black_list{  
+  font-family: Arial;
+
+  margin:0;
+  padding:0;
+  margin-bottom: 30px;
+
+  *{ margin: 0; padding: 0; font-size: inherit; }
+
+  a{ text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+
+  ol{
+    margin: 0;
+    padding: 0 0 0 20px;
+    list-style: none outside none;
+  }
+  li{
+    margin-bottom: 5px;
+    position: relative;
+    list-style: none outside none;
+  }
+}
+
+.comments, .comments_tree{
+  font-family: Arial;
+  font-size: 13px;
+
+  h3{ font-size: 1.6em; }
+
+  .error_notifier{    
+    background-color: #F2DEDE;
+    border: 1px solid #B94A48;
+    color: #B94A48;
+    
+    border-radius: 4px;
+    margin: 0 0 15px 0;
+    padding: 10px 10px 0 10px;
+    overflow: hidden;
+
+    p{ margin: 0 0 10px 0; }
+  }
+  form{
+    
+    background: #e0e4f5;
+
+    border: 1px solid #c6cff5;
+    border-radius: 5px;
+    padding: 10px;
+    
+    p{ margin: 0 0 10px 0; }
+
+    input[type=text]{
+      border: 1px solid gray;
+      padding: 4px;
+      width: 75%;
+    }
+    label{ font-size: 15px; }
+    textarea{
+      border: 1px solid gray;
+      font-family: Arial;
+      font-size: 13px;
+      height: 150px;
+      padding: 4px;
+      width: 75%;
+    }
+    .trap{
+      margin: 0; padding: 0;
+      filter: alpha(opacity=0.001);
+      height: 0.1px;
+      opacity: 0.001;
+      overflow: hidden;
+    }
+  }
+}
+
+.comments_tree{
+  .nested_set{
+    border-left: 1px dotted lightGray;
+  }
+
+  li{
+    .comment.draft{
+      border: 1px solid gray;
+      background: #eff5f3;
+      padding: 10px;
+    }
+  }
+
+  .form_holder{ margin-left: 40px; }
+  
+  .edit, .delete{
+    margin-bottom: 3px;
+    text-align:center;
+    line-height: 130%;
+    background: #336;
+    color: white;
+    padding: 1px;
+  }
+  .delete{ background: gray; }
+
+  .comment{
+    overflow: hidden; zoom: 1;
+
+    .userpic{
+      overflow: hidden; zoom: 1;
+      float: left;
+      width: 50px;
+
+      img{ margin-bottom: 10px; width: 42px; height: 42px; }
+    }
+    .userbar, .cbody{
+      margin: 0 0 5px 55px;
+      padding: 3px;
+    }
+    .userbar{
+      background: #eff5f3;
+      border-radius: 3px;
+      padding-left: 7px;
+    }
+    &.draft{
+      .userbar{ background: #ffa768; }
+      .to_draft{ display: none; }
+    }
+    &.published{
+      .to_published{ display: none; }
+    }
+    .cbody{
+      font-size: 15px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      line-height: 135%;
+      margin-bottom: 3px;
+      overflow: hidden;
+    }
+    .reply{
+      margin: 0 0 5px 55px;
+      font-size: 12px;
+    }
+  }
+
+  .controls{
+    a{
+      font-size:11px;
+      display:block;
+    }
+  }
+
+  .comment{
+    margin-bottom: 10px;
+
+    &.published, &.draft{
+      margin-bottom: 10px;
+      border-radius: 3px;
+      padding: 5px;
+    }
+    &.highlighted{ border: 1px dashed #ff6633 !important; }
+
+  }
+
+  .form_holder{
+    form{ margin: 10px 0; } 
+  }
+}
+
+.new_comment{
+  .btn{
+    padding: 7px;
+    margin-top: 5px;
+    cursor: pointer;
+  }
+}
+
+.comments_list{
+  li{
+    margin-bottom: 20px;
+
+    .item{
+      border: 1px solid gray;
+      border-radius: 5px;
+      padding: 10px;
+    }
+
+    .draft{
+      border-left: 5px solid orange;
+
+      .controls{
+        a.to_draft{ display: none }   
+      }
+    }
+    .published{
+      border-left: 5px solid green;
+
+      .controls{
+        a.to_published{ display: none; }
+      }
+    }
+
+    .deleted{
+      border-left: 5px solid red;
+
+      .controls{
+        a.to_deleted, a.to_spam{ display: none; }
+      }
+    }
+
+    .comment{
+      div{ margin: 0 0 10px 0; }
+
+      label{
+        width: 75px;
+        font-weight: bold;
+        display: inline-block;
+      }
+      input[type=text]{
+        width: 70%;
+        padding: 4px;
+      }
+      input[type=submit]{
+        padding: 5px;
+        cursor: pointer;
+      }
+      textarea{
+        width: 70%;
+        padding: 4px;
+        height: 150px;
+      }
+      .content{
+        line-height: 130%;
+        background: #ddd;
+        padding: 10px;
+      }
+      .commentable{
+        margin-bottom: 10px;
+      }
+      .controls{
+        background: lightgray;
+        padding: 3px;
+        a{ margin-right: 15px; }
+      }
+    }
+  }
+}
+
+.black_list{
+  li{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    &.warning{
+      border-left: 5px solid orange;
+      .to_warning{ display: none; }
+    }
+    &.banned{
+      border-left: 5px solid black;
+      .to_banned{ display: none; }
+    }
+  }
+  p{
+    margin-bottom: 10px;
+  }
+}

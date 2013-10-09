@@ -5,7 +5,7 @@ module MainImageUploading
   included do
     attr_accessor :need_to_process_main_image
     before_save   :need_to_process_main_image?
-    before_save   :generate_main_image_file_name, if: ->{ main_image? }
+    before_save   :generate_main_image_file_name, if: ->(o) { main_image? && o.main_image_updated_at_changed? }
     after_commit  :build_main_image_variants
 
     has_attached_file :main_image,
@@ -32,7 +32,7 @@ module MainImageUploading
   def generate_main_image_file_name
     attachment = self.main_image
     file_name  = attachment.instance_read(:file_name)
-    file_name  = "main-image." + TheStorages.file_ext(file_name)
+    file_name  = "main-image." + TheStorages.file_ext(file_name) if !defined?(DB_MOVING)
     attachment.instance_write :file_name, file_name
   end
 
@@ -44,7 +44,7 @@ module MainImageUploading
 
       prepare_image(src, src, 1024)
       prepare_image(src, base, 300)
-      build_square_image(src, preview, 100)
+      build_square_image(src, preview, 220)
 
       self.need_to_process_main_image = false
       # I needn't, but you can recalculate src size & save

@@ -1,0 +1,16 @@
+@import "compass/css3/border-radius";
+
+.tag_search{
+  margin-bottom: 15px;
+
+  p { white-space: nowrap; }
+
+  input{
+    @include border-radius(3px);
+    border: 1px solid lightgray;
+    margin-bottom: 10px;
+    font-size: 1.7em;
+    padding: 4px;
+    width: 178px;
+  }
+}

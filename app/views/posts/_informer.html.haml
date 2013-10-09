@@ -1,0 +1,13 @@
+%p.informer
+  %b Aвтор:
+  = link_to post.user.login, user_path(post.user.login)
+
+  %b Просмотры:
+  = post.show_count
+
+  - if post.respond_to? :comments
+    %b Комментарии:
+    = link_to post.comments_sum, show_url(post, :comments)
+
+  %b От:
+  = post.published_at.strftime('%d.%m.%Y')

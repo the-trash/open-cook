@@ -1,18 +1,47 @@
-@import '../../base/colors';
+@import "../../base/mix";
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
 
-.header{
-  background: $header;
+.top_menu{
+  padding: 5px;
+  background: #ddd;
+  margin-bottom: 6px;
+  border-bottom: 3px solid gray;
+  @include border-radius(0 0 5px 5px);
 
-  height: 100px;
-  margin-bottom: 15px;
-  position: relative;
+  a{
+    margin-right: 30px;
+    text-decoration: none;
+  }
 }
-ul.login_fu{
-  position: absolute;
-  top: 15px; right: 0px;
 
-  li{
-    float: left;
-    margin-right: 20px;
+.logo_banner{
+  @include border-radius(10px);
+  @include box-shadow(black 0px 1px 5px);
+
+  background: image_url('open-cook-ru.jpg') no-repeat scroll 0 0 transparent;
+  margin-bottom: 10px;
+  height: 180px;
+}
+
+p.about{
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.path {
+  @include arial;
+  color: #B61A1E;
+  line-height: 180%;
+  margin-bottom: 10px;
+  text-align: center;
+  
+  h1, h3{
+    font-family: Georgia;
+    font-style: italic;
+  }
+  h1{
+    color: #B61A1E;
+    font-size: 2.2em;
   }
 }

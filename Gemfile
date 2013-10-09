@@ -18,14 +18,16 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 1.0.1'
 
-gem 'compass'
+gem 'compass-rails', '~> 2.0.alpha.0'
+
 gem 'kaminari'
 
 gem 'haml'
 gem 'sanitize'
 gem 'state_machine', '~> 1.2.0'
-gem 'acts-as-taggable-on', '~> 2.4.1'
-gem 'awesome_nested_set', branch: 'rails4'
+
+gem 'acts-as-taggable-on', github: "mbleigh/acts-as-taggable-on",       branch: "master"
+gem 'awesome_nested_set',  github: "collectiveidea/awesome_nested_set", branch: "master"
 
 # gem 'rmagick'
 gem 'mini_magick'
@@ -43,12 +45,32 @@ gem 'delayed_job_active_record',
   tag: 'v4.0.0.beta3'
 
 # Open Cook components
-gem 'the_string_to_slug', path: '../the_string_to_slug' #, '~> 0.0.6'
-gem 'the_role'     , path: '../the_role'
-gem 'the_audit'    #, path: '../the_audit'
-gem 'the_storages' #, path: '../the_storages'
-gem 'the_comments' , path: '../the_comments'
 gem 'the_sortable_tree'
+
+gem 'the_string_to_slug',
+  #, path: '../the_string_to_slug' #, '~> 0.0.6'
+  github: 'the-teacher/the_string_to_slug',
+  branch: 'master'
+
+gem 'the_role',
+  #, path: '../the_role'
+  github: 'the-teacher/the_role',
+  branch: 'master'
+
+gem 'the_storages',
+  #, path: '../the_storages'
+  github: 'the-teacher/the_storages',
+  branch: 'master'
+
+gem 'the_comments',
+  #, path: '../the_comments'
+  github: 'the-teacher/the_comments',
+  branch: 'master'
+
+gem 'the_audit',
+  #, path: '../the_audit'
+  github: 'open-cook/the_audit',
+  branch: 'master'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -62,6 +84,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'colored'
   gem 'thin'
   gem 'faker'
   gem 'seedbank', github: 'james2m/seedbank'

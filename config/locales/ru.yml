@@ -1,4 +1,7 @@
 ru:
+  app:
+    name: Открытая кухня Анны Нечаевой
+
   file_size_helper:
     mb: Мб
 
@@ -55,6 +58,8 @@ ru:
     content: 'Основное содержимое:'
     state: 'Состояние:'
     save: Сохранить
+    read_more: "Читать дальше &raquo;"
+    to_comments: "К комментариям &raquo;"
     validation:
       main_image_file_size: 'Размер загружаемого файла должен быть от 10Кб до 5Мб'
       main_image_file_type: 'Необходимо загружать только изображения (gif,jpg,png,bmp)'
@@ -67,13 +72,15 @@ ru:
     recipes: Рецепт
     videos: Видео
     articles: Статья
+
   views:
     pagination:
       first: "&laquo; Первая"
       last: "Последняя &raquo;"
-      previous: "&lsaquo; Туда"
-      next: "Сюда &rsaquo;"
+      previous: "&laquo; Туда"
+      next: "Сюда &raquo;"
       truncate: "..."
+
   sessions:
     new: Вход
     login: Вход

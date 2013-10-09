@@ -7,7 +7,7 @@ module UrlHelper
     url_for(controller: obj.ctrl_name, action: :edit, id: obj)
   end
 
-  def show_url obj
-    url_for(controller: obj.ctrl_name, action: :show, id: obj)
+  def show_url obj, anchor = nil
+    url_for(controller: obj.ctrl_name, action: :show, id: obj, anchor: anchor)
   end
 end

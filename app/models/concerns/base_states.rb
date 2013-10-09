@@ -27,12 +27,11 @@ module BaseStates
         obj.user.decrement!("#{plural}_count")
       end
 
-      # before_transition any => :published do |obj|
-      #   p "transition => published"
-      #   # if obj.respond_to? :published_at
-      #   # obj.published_at = Time.now unless obj.published_at
-      #   # end
-      # end
+      after_transition any => any do |obj|
+        if obj.respond_to?(:hub) && obj.try(:hub)
+          obj.hub.recalculate_pubs_counters! 
+        end
+      end
 
       # after_transition any => :published do |obj|
       #   p "transition => published"

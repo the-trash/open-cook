@@ -5,5 +5,5 @@
 -#    per_page:      number of items to fetch per page
 -#    remote:        data-remote
 -#.page.gap
-%li.disabled
-  = link_to raw(t 'views.pagination.truncate'), 'javascript:void(0);'
+
+= link_to raw(t 'views.pagination.truncate'), 'javascript:void(0);', class: :disabled

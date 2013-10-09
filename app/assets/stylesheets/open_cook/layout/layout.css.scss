@@ -8,22 +8,14 @@
 
   .center{
     .block{
-      width: 580px;
-      margin: 0 10px;
-      @include overblock;
-
-      p{
-        color: #47494B;
-        font-size: 12pt;
-        margin-bottom: 15px;
-      }
+      width: 570px;
+      margin: 0 15px;
     }
   }
 
   .left, .right{
     width: 200px;
-
-    .block{
+    .block{ 
       width: 200px;
       @include overblock;
     }

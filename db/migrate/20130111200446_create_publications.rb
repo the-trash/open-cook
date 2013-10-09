@@ -13,20 +13,20 @@ class CreatePublications < ActiveRecord::Migration
         
         # Base
         t.string :title
+        
         t.text   :raw_intro
+        t.text   :intro
+
         t.text   :raw_content
+        t.text   :content
 
         # denormalization
         t.string :hub_state,  default: :draft
-
-        t.text   :intro
-        t.text   :content
         t.string :inline_tags
-
         t.string :legacy_url
 
         # DateTime
-        t.datetime :first_published_at
+        t.datetime :published_at
         t.timestamps
       end
     end

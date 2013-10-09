@@ -1,7 +1,0 @@
-- content_for :left_column do
-  - if @sub_hubs
-    %ul.left_column_hubs
-      - @sub_hubs.each do |hub|
-        %li
-          - current = (@hub == hub) ? :current : nil
-          %p= link_to hub.title, hub_url(hub.slug), class: current

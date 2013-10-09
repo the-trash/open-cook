@@ -19,10 +19,17 @@
     %p
       %b= t('post.intro')
     = f.text_area :raw_intro, class: :redactor_intro
+  
   .field
     %p
       %b= t('post.content')
     = f.text_area :raw_content, class: :redactor_content
+
+  .field
+    %p
+      %b= t('post.tags')
+    = f.text_field :tag_list
+
   .field
     - options = options_for_select(publication_states, @post.state)
     = f.label  :state, t('post.state')

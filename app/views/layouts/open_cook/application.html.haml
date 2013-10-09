@@ -10,28 +10,34 @@
     = csrf_meta_tags
     = javascript_include_tag 'open_cook/application'
     = stylesheet_link_tag    'open_cook/application', media: :all
+    = render template: 'layouts/open_cook/items/vk_init'
+
   %body
     .body
-      .header
-        = render partial: 'layouts/open_cook/items/header'
-
+      = render partial: 'layouts/open_cook/items/top_menu'
+      %p.about <strong>Открытая кухня Анны Нечаевой</strong> &mdash; сайт содержит рецепты простых и доступных блюд, которые может приготовить каждый из самых обычных продуктов
+      .logo_banner
       = render partial: 'layouts/open_cook/items/sections'
 
       .content.overblock
         %table.layout
           %tr
             %td.left
-              = yield :left_column
-              = yield :role_sidebar
+              .block
+                = yield(:hubs_widget)
+                = yield :recent_comments_widget
+                = yield :role_sidebar
             %td.center
-              = render partial: 'layouts/open_cook/items/notice_block'
-              = yield
-              = yield :role_main
+              .block
+                = render partial: 'layouts/open_cook/items/notice_block'
+                = yield
+                = yield :role_main
             %td.right
-              = yield :right_column
-
-              =# render partial: 'layouts/open_cook/items/left_menu'
-              =# render partial: 'layouts/open_cook/items/right_menu'
+              .block
+                = yield :tags_widget
+                = render template: 'layouts/open_cook/items/vk_group'
+                = render template: 'layouts/open_cook/items/ok_group'
+                = yield :tag_search_widget
 
       .fguard &nbsp;
     .footer.overblock

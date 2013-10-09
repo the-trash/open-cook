@@ -1,0 +1,20 @@
+- tags = Post.tag_counts
+
+- unless tags.blank?
+  .widget._right.tag_search
+    %h3 Поиск тэгов
+    .holder
+      .wrp
+        = text_field_tag :tag_word, '', placeholder: "Что ищем?"
+        .basic
+          - _tags = tags.sample(10)
+          - tag_cloud(_tags, %w(mini small normal big)) do |tag, css_class|
+            %p
+              = link_to tag_path(tag.name), class: css_class do
+                = tag.name + " (#{tag.count})"
+        .collection.hidden
+          - tag_cloud(tags, %w(mini small normal big)) do |tag, css_class|
+            %p{ data: { tag: tag.name, count: tag.count } }
+              = link_to tag_path(tag.name), class: css_class do
+                = tag.name + " (#{tag.count})"
+        .result.hidden
