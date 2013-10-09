@@ -1,3 +1,7 @@
+- content_for :express_nav do
+  %p= link_to 'Мой Кабинет', cabinet_url
+  %p= link_to 'Мои Хабы', url_for([:manage, :hubs])
+
 %h1 Новый Хаб
 
 = render 'form'

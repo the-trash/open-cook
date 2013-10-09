@@ -1,9 +1,6 @@
-= content_for :left_column do
-  .fragment_block
-    %h3 Навигация
-    .block
-      %p= link_to 'Мой Кабинет', cabinet_url
-      %p= link_to 'Мои Хабы', url_for([:manage, :hubs])
+- content_for :express_nav do
+  %p= link_to 'Мой Кабинет', cabinet_url
+  %p= link_to 'Мои Хабы', url_for([:manage, :hubs])
 
 %h1 Редактирование Хаба
 

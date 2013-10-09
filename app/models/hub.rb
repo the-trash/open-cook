@@ -10,9 +10,15 @@ class Hub < ActiveRecord::Base
   validates :slug, uniqueness: true
 
   scope :of_, ->(type) { where(pubs_type: type) }
-  
-  def self.sections pub_type
-    roots.of_(pub_type).published_set
+
+  class << self
+    def with_slug name
+      where(slug: name.to_s.to_slug_param).first
+    end
+
+    def top_sections
+      with_slug(:top_sections).children.where(pubs_type: :posts).published_set
+    end
   end
 
   def pubs

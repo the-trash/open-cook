@@ -24,7 +24,8 @@
           %tr
             %td.left
               .block
-                = yield(:hubs_widget)
+                = render partial: 'layouts/open_cook/widgets/express_nav'
+                = yield :hubs_widget
                 = yield :recent_comments_widget
                 = yield :role_sidebar
             %td.center

@@ -1,6 +1,5 @@
 .sections
   = link_to 'На главную', root_url, rel: :nofollow
-    
-  - Hub.sections(:posts).each do |hub|
+  - Hub.top_sections.each do |hub|
     - current = (@root_hub == hub) ? :current : nil
     = link_to hub.title, system_hub_url(hub.slug), class: current
