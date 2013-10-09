@@ -47,22 +47,22 @@ namespace :db do
         user:  admin,
         title: :StaticPages,
         slug:  :static_pages,
+        pubs_type: :pages,
         state: :published
       )
 
       %w[About Help Policy].each do |name|
-        section = Hub.create!(
+        section = Page.create!(
           user:  admin,
+          hub:   hub,
           title: name,
-          slug:  name.downcase,
           state: :published
         )
-        section.move_to_child_of hub
         print '.'
       end
 
       puts
-      puts "Top sections created"
+      puts "Bottom section and pages created"
     end
 
     # rake db:first:launch
