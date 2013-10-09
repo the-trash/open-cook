@@ -1,7 +1,7 @@
 - content_for :express_nav do
-  %p= link_to 'Мой Кабинет', cabinet_url
-  %p= link_to 'Просмотр хаба', url_for(@hub)
-  %p= link_to 'Мои Хабы', url_for([:manage, :hubs])
+  %p= link_to t('app.cabinet'), cabinet_url
+  %p= link_to t('hubs.show'), url_for(@hub)
+  %p= link_to t('hubs.manage'), url_for([:manage, :hubs])
 
 %h1 Редактирование Хаба
 

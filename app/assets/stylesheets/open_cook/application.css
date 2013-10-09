@@ -24,11 +24,11 @@
 
   *= require tree
   *= require sortable_tree
-  *= require nested_options
   *= require expandable_tree
   *= require the_storages
 
   *= require redactor
+  *= require select2
 
   *= require ../the_comments_css
   *= require jquery.Jcrop

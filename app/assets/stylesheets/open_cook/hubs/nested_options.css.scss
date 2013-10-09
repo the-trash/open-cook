@@ -1,13 +1,27 @@
+.select2-choice{
+  font-size: 16px;
+}
+.select2-result-label{
+  font-size: 16px;
+} 
+.select2-drop{
+  .l_1{
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .l_2{
+    margin-left: 12px;
+  }
+  .l_3{
+    margin-left: 24px;
+  }
+}
+
 .hub_selector{
   .nested_options{
+    width: 300px;
     cursor: pointer;
 
-    padding: 3px;
-    .l_1{
-      font-size: 0.8em;
-      font-weight: bold;
-      font-style: italic;
-    }
     option{
       margin: 5px;
       cursor: pointer;

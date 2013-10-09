@@ -1,13 +1,2 @@
 .field.hub_selector
   = render partial: "hubs/selector", locals: { object: object }
-
--#
-  - if @post.hub
-    - hub_selector_visibility = :hidden
-
-    .field.hub_full_name
-      %h3= @post.hub.self_and_ancestors.map{|hub| hub.title }.join(' => ')
-
-    %p= link_to 'Выбрать другой раздел', '#', class: :other_hub
-
--# { class: hub_selector_visibility }

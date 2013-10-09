@@ -1,10 +1,7 @@
-= content_for :left_column do
-  .fragment_block
-    %h3 Навигация
-    .block
-      %p= link_to 'Мой Кабинет', cabinet_url
-      %p= link_to t("posts.feed"), url_for([:manage, @post.class])
+- content_for :express_nav do
+  %p= link_to t('app.cabinet'), cabinet_url
+  %p= link_to t('posts.manage'), url_for([:manage, @post])
 
-%h1= t("#{@post.ctrl_name}.new")
+%h1= t 'posts.new'
 
 = render 'posts/form'

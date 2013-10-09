@@ -3,13 +3,11 @@
 -# Logick
 - object       ||= @object
 - klass_name     = object.ctrl_name.singularize
--# user_pub_scope = current_user.admin? ? :for_manage : :published_set
--# selector_hubs  = Hub.of_(object.ctrl_name) #.send(user_pub_scope)
-- selector_hubs = current_user.available_hubs(object.ctrl_name)
-- selected_hub  = object.try(:hub)
+- selector_hubs  = current_user.available_hubs(object.ctrl_name)
+- selected_hub   = object.try(:hub)
 
 -# View
 - unless selector_hubs.blank?
   .field
     = label_tag :hub_id, 'Раздел: '
-    = select_tag "#{klass_name}[hub_id]", nested_options(selector_hubs, selected: selected_hub), class: :nested_options
+    = select_tag "#{klass_name}[hub_id]", grouped_nested_options(selector_hubs, selected: selected_hub), class: :nested_options
