@@ -1,3 +1,4 @@
+# Custom view module for TheSortableTree gem
 module GroupedNestedOptionsHelper
   def grouped_nested_options tree, options = {}
     build_server_tree(tree, { render_module: RenderGroupedNestedOptionsHelper }.merge!(options))
@@ -26,7 +27,6 @@ module RenderGroupedNestedOptionsHelper
         node = @options[:node]
         "<optgroup label='#{node.send @options[:title]}'>#{ @options[:children] }</optgroup>"
       end
-
     end
   end
 end

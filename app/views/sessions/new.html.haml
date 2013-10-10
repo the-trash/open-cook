@@ -8,6 +8,6 @@
   .field
     = label_tag :remember_me do
       = check_box_tag :remember_me, true, params[:remember_me], checked: true
-      remember me
+      = t 'sessions.remember_me'
     
   .actions= submit_tag t('sessions.login'), class: :btn

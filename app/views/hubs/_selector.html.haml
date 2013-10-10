@@ -1,4 +1,4 @@
--# It's good to be bad!
+-# It's good to be bad! :D
 
 -# Logick
 - object       ||= @object
@@ -9,5 +9,5 @@
 -# View
 - unless selector_hubs.blank?
   .field
-    = label_tag :hub_id, 'Раздел: '
+    %b= label_tag :hub_id, t('pubs.select_hub')
     = select_tag "#{klass_name}[hub_id]", grouped_nested_options(selector_hubs, selected: selected_hub), class: :nested_options

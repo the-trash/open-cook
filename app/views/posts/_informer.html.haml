@@ -1,13 +1,13 @@
 %p.informer
-  %b Aвтор:
-  = link_to post.user.login, user_path(post.user.login)
+  %b= t 'posts.author'
+  = link_to posts.user.login, user_path(posts.user.login)
 
-  %b Просмотры:
-  = post.show_count
+  %b= t 'posts.published_at'
+  = posts.published_at.strftime('%d.%m.%Y')
+  
+  %b= t 'posts.views'
+  = posts.show_count
 
-  - if post.respond_to? :comments
-    %b Комментарии:
-    = link_to post.comments_sum, show_url(post, :comments)
-
-  %b От:
-  = post.published_at.strftime('%d.%m.%Y')
+  - if posts.respond_to? :comments
+    %b= t 'posts.comments'
+    = link_to posts.comments_sum, show_url(post, :comments)

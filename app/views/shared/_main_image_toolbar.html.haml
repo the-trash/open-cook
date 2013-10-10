@@ -1,7 +1,7 @@
 .image_toolbar
   .base_view
     %p
-      %b Главное изображение:
+      %b= t('main_image.title') 
 
     - if object.main_image?  
       .rotate
@@ -18,28 +18,27 @@
         method: :delete, data: { confirm: "Вы уверены?" }, class: :img_clear
 
       %p
-        %label Укажите изображение:
+        %label= t('main_image.select')
         = f.file_field :main_image
 
       - if object.main_image?
         %p
-          = link_to 'Выбрать область изображения', '#', method: :patch, class: :jcrop_run
+          = link_to t('main_image.selected_area'), '#', method: :patch, class: :jcrop_run
 
   - if object.main_image?
     .crop_view
       %p
-        %b Укажите область изображения и сохраните результат:
+        %b= t('main_image.selecte_area_and_save')
 
-      %p
+      %div
         = image_tag object.main_image.url(:base), id: :main_image_jcrop
 
         .cropped_preview_holder
           .cropped_preview
             = image_tag object.main_image.url, id: :cropped_main_image_preview
 
-          = submit_tag "Сохранить", id: :main_image_cropping_save, class: :hidden
+        = submit_tag t('main_image.save'), id: :main_image_cropping_save, class: :hidden
 
-      %p
-        = link_to 'Закрыть и не сохранять', '#', method: :patch, class: :jcrop_stop
+      %p= link_to t('main_image.just_close'), '#', method: :patch, class: :jcrop_stop
 
 =# render partial: 'the_storages/preview_maker', locals: { storage: object }

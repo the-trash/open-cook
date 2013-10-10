@@ -2,18 +2,23 @@
   .stats
     .info
       %p
-        %b= t('.author')
-        = object.user.login
+        %span.nobr
+          %b= t 'pubs.info.author'
+          = object.user.login
         \|
-        %b= t('.show_count')
-        = object.show_count
+        %span.nobr
+          %b= t 'pubs.info.show_count'
+          = object.show_count
         \|
         - if object.try(:pubs)
-          %b= t('.pubs_count')
-          = object.pubs.count
+          %span.nobr
+            %b= t 'pubs.info.pubs_count'
+            = object.pubs.count
           \|
-        %b= t('.files_count')
-        = object.storage_files_count
+        %span.nobr
+          %b= t 'pubs.info.files_count'
+          = object.storage_files_count
         \|
-        %b= t('.files_size')
-        = raw mb_size(object.storage_files_size)
+        %span.nobr
+          %b= t 'pubs.info.files_size'
+          = raw mb_size(object.storage_files_size)

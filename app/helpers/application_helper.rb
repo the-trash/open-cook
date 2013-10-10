@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def publication_states
-    %w[ draft published ].collect{ |state| [ t("publication.#{state}"), state ] }
+    %w[ draft published ].collect{ |state| [ t("pubs.states.#{state}"), state ] }
   end
 
   def hub_pubs_types

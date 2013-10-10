@@ -6,6 +6,20 @@ ru:
   file_size_helper:
     mb: Мб
 
+  per_page:
+    "5": по 5
+    "10": по 10
+    "20": по 20
+    "50": по 50
+
+  main_image:
+    title: 'Главное изображение:'
+    select: 'Укажите изображение:'
+    selected_area: 'Выбрать область изображения'
+    selecte_area_and_save:  "Укажите область изображения и сохраните результат:"
+    save: "Сохранить"
+    just_close: "Просто закрыть"
+
   shared:
     meta_fields:
       slug: "Короткий URL адрес:"
@@ -13,12 +27,6 @@ ru:
       keywords: "Ключевые слова:"
       description: "Описание:"
       copyright: "Авторское право:"
-    pub_stats:
-      author: 'Автор:'
-      show_count: 'Просмотров:'
-      pubs_count: 'Публикаций:'
-      files_count: 'Всего файлов:'
-      files_size: 'Размер файлов:'
 
   activerecord:
     models:
@@ -32,6 +40,18 @@ ru:
         main_image: "Главное изображение"
         title: "Загловок"
 
+  hubs:
+    new: Новый хаб
+    list: Хабы
+    edit: Редактировать хаб
+    show: Просмотр хаба
+    manage: Управлять хабами
+    pubs_type: 'Тип публикации:'
+
+    pubs_types:
+      posts: Публикации
+      pages: Страницы
+
   posts:
     new: Новый пост
     list: Посты
@@ -40,44 +60,36 @@ ru:
     edit: Редактирование публикации
     feed: Моя Лента
 
-  hubs:
-    new: Новый хаб
-    list: Хабы
-    show: Просмотр хаба
-    manage: Управлять хабами
-    pubs_types:
-      posts: Публикации
-      pages: Страницы
-    form:
-      pubs_type: 'Тип прикрепленных элементов:'
-      title: 'Название хаба:'
-      state: 'Состояние:'
-      intro: 'Описание хаба:'
-      save: Сохранить хаб
-
-  post:
-    author: 'Автор поста:'
-    hub_title: 'Имя раздела:'
-    title: 'Заголовок:'
-    type: 'Тип поста:'
-    intro: 'Вводная часть:'
-    content: 'Основное содержимое:'
-    state: 'Состояние:'
-    save: Сохранить
     read_more: "Читать дальше &raquo;"
     to_comments: "К комментариям &raquo;"
+
     validation:
       main_image_file_size: 'Размер загружаемого файла должен быть от 10Кб до 5Мб'
       main_image_file_type: 'Необходимо загружать только изображения (gif,jpg,png,bmp)'
 
-  publication:
-    draft: Черновик
-    published: Опубликовано
-    posts: Пост
-    blogs: Блог
-    recipes: Рецепт
-    videos: Видео
-    articles: Статья
+  pubs:
+    author: 'Автор поста:'
+    hub_title: 'Имя раздела:'
+    select_hub: 'Укажите раздел:'
+    title: 'Заголовок:'
+    intro: 'Вводная часть:'
+    content: 'Основное содержимое:'
+    tags: 'Теги:'
+    type: 'Тип поста:'
+    state: 'Состояние:'
+    save: Сохранить
+    seo_meta_info: 'SEO, META информация'
+
+    states:
+      draft: Черновик
+      published: Опубликовано
+
+    info:
+      author: 'Автор:'
+      show_count: 'Просмотров:'
+      pubs_count: 'Публикаций:'
+      files_count: 'Всего файлов:'
+      files_size: 'Размер файлов:'
 
   views:
     pagination:
@@ -91,11 +103,15 @@ ru:
     new: Вход
     login: Вход
     logout: Выход
+    remember_me: Запомнить меня
+
     create:
       alert: "Логин или Пароль оказались ошибочными"
       notice: "Вход"
+
     destroy:
       notice: "До скорой встречи!"
+
   users:
     have_not_role: "У вас не достаточно прав"
     not_authenticated: "Вы должны войти в систему прежде чем увидить данную страницу"

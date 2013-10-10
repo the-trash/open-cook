@@ -1,16 +1,9 @@
-= content_for :left_column do
-  .fragment_block
-    %h3 Действия
-    .block
-      %p= link_to "Просмотр статьи", @post, target: :_blank
+- content_for :express_nav do
+  %p= link_to t('app.cabinet'), cabinet_url
+  %p= link_to t('posts.show'), url_for(@post)
+  %p= link_to t('posts.list'), url_for([:manage, :posts])
 
-  .fragment_block
-    %h3 Навигация
-    .block
-      %p= link_to 'Мой Кабинет', cabinet_url
-      %p= link_to t("posts.feed"), url_for([:manage, @post.class])
-
-%h1= t("#{@post.ctrl_name}.edit")
+%h1= t "posts.edit"
 
 = render 'posts/form'
 = render partial: 'the_storages/list', locals: { storage: @post }
