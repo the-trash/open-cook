@@ -3,43 +3,43 @@
 
   - if current_user.has_role?(:posts, :new) || current_user.has_role?(:pages, :manage)
     .fn_block
-      %h4 Создать:
+      %h4= t '.create'
 
       %ul.marked_list
         - if current_user.has_role?(:posts, :new)
-          %li= link_to 'Новый Пост', new_post_url
+          %li= link_to t('.new_post'), new_post_url
 
         - if current_user.has_role?(:pages, :manage)
-          %li= link_to 'Новую страницу', new_page_url
+          %li= link_to t('.new_page'), new_page_url
 
   - if current_user.any_role?(posts: :manage, pages: :manage)
     .fn_block
-      %h4 Управление публикациями:
+      %h4= t '.pubs_manage'
 
       %ul.marked_list
         - if current_user.has_role?(:posts, :manage)
-          %li= link_to 'Мои посты', manage_user_posts_url(@user)
+          %li= link_to t('.my_posts'), manage_user_posts_url(@user)
 
         - if current_user.has_role?(:pages, :manage)
-          %li= link_to 'Мои страницы', manage_user_pages_url(@user)
+          %li= link_to t('.my_pages'), manage_user_pages_url(@user)
 
   - if current_user.has_role?(:posts, :my)
     .fn_block
-      %h4 Просмотр:
+      %h4= t '.show'
 
       %ul.marked_list
         - if current_user.has_role?(:posts, :my)
-          %li= link_to 'Моя лента постов',  user_posts_url(@user)
+          %li= link_to t('.my_post_list'),  user_posts_url(@user)
 
   - if @user.has_role?(:hubs, :manage)
     .fn_block
-      %h4 Упрвление cтруктурой:
+      %h4= t '.hubs_manage'
 
       %ul.marked_list
-        %li= link_to 'Разделы сайта', manage_hubs_url
+        %li= link_to t('.hubs'), manage_hubs_url
 
   .fn_block
-    %h4 Комментарии
+    %h4= '.comments'
     
     %ul.marked_list
       %li= link_to "Новые #{@user.draft_comcoms_count}", [:new, :comment]
@@ -49,8 +49,8 @@
 
   - if @user.has_role?(:roles, :manage)
     .fn_block
-      %h4 Роли и Пользователи:
+      %h4= t '.users_and_roles'
 
       %ul.marked_list
-        %li= link_to 'Роли', admin_roles_url
-        %li= link_to 'Пользователи', admin_roles_url
+        %li= link_to t('.users'), admin_roles_url
+        %li= link_to t('.roles'), admin_roles_url
