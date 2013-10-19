@@ -30,6 +30,10 @@
     %b= f.label :state, t('pubs.state')
     = f.select :state, options
 
+  .field
+    %b= f.label :state, t('hubs.optgroup')
+    = f.check_box :optgroup
+
   .actions
     = f.submit t('pubs.save')
 

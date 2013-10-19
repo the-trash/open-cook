@@ -82,6 +82,7 @@ class HubsController < ApplicationController
       :pubs_type,
       :author, :keywords, :description, :copyright,
       :title,
+      :optgroup,
       :raw_intro,
       :raw_content,
       :state
