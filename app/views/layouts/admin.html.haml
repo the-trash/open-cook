@@ -17,8 +17,12 @@
         .col-md-12
           %h3 Admin Panel
       .row
-        .col-md-3= yield :role_sidebar
-        .col-md-9= yield :role_main
+        .col-md-3
+          = yield :role_sidebar
+          = yield :comments_sidebar
+        .col-md-9
+          = yield :role_main
+          = yield :comments_main
 
     =# stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"
     = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css"
