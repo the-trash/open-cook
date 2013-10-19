@@ -39,7 +39,7 @@
         %li= link_to t('.hubs'), manage_hubs_url
 
   .fn_block
-    %h4= '.comments'
+    %h4= t '.comments'
     
     %ul.marked_list
       %li= link_to "Новые #{@user.draft_comcoms_count}", [:new, :comment]
@@ -52,5 +52,5 @@
       %h4= t '.users_and_roles'
 
       %ul.marked_list
-        %li= link_to t('.users'), admin_roles_url
+        %li= link_to t('.users'), users_url
         %li= link_to t('.roles'), admin_roles_url

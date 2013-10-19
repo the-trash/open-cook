@@ -54,9 +54,9 @@ gem 'the_string_to_slug',
   branch: 'master'
 
 gem 'the_role',
-  #, path: '../the_role'
-  github: 'the-teacher/the_role',
-  branch: 'master'
+  path: '../the_role'
+  # github: 'the-teacher/the_role',
+  # branch: 'master'
 
 gem 'the_storages',
   #, path: '../the_storages'
@@ -64,9 +64,9 @@ gem 'the_storages',
   branch: 'master'
 
 gem 'the_comments',
-  #, path: '../the_comments'
-  github: 'the-teacher/the_comments',
-  branch: 'master'
+  path: '../the_comments'
+  # github: 'the-teacher/the_comments',
+  # branch: 'master'
 
 gem 'the_audit',
   #, path: '../the_audit'
@@ -76,12 +76,11 @@ gem 'the_audit',
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do  
+  gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
+  gem 'uglifier', '>= 1.0.3'
   gem 'sprockets-rails'
   gem 'coffee-rails'
   gem 'sass-rails'
-  gem 'uglifier', '>= 1.0.3'
-
-  gem 'bootstrap-sass', '~> 2.3'
 end
 
 group :development, :test do

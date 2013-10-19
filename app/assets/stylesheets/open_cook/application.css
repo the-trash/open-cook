@@ -29,7 +29,8 @@
 
   *= require redactor
   *= require select2
+  *= require the_role
 
-  *= require ../the_comments_css
+  *= require ../the_comments/base
   *= require jquery.Jcrop
 */

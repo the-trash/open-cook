@@ -1,4 +1,4 @@
-//= require jquery-2.0.3
+//= require jquery
 
 //= require jquery_ujs
 //= require jquery.ui.core
@@ -17,7 +17,7 @@
 //= require jquery.MultiFile
 //= require jquery.Jcrop
 
-//= require logger
+//= require base/logger
 //= require the_comments
 //= require the_comments_manage
 
