@@ -9,8 +9,8 @@
 -#
 
 - if page.current?
-  = link_to page, 'javascript:void(0);', class: :current
+  %li.active= link_to page, 'javascript:void(0);'
 - else
-  = link_to page, url, { remote: remote, rel: page.next? ? :next : page.prev? ? :prev : nil }
+  %li= link_to page, url, { remote: remote, rel: page.next? ? :next : page.prev? ? :prev : nil }
 
 -#:class => "#{' disabled' if page.current?}"}

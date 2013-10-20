@@ -7,4 +7,4 @@
 -#    remote:        data-remote
 -#.next
 
-= link_to_unless current_page.last?, raw(t 'views.pagination.next'), url, rel: :next, remote: remote, class: "nobr next"
+%li.next.nobr= link_to_unless current_page.last?, raw(t 'views.pagination.next'), url, rel: :next, remote: remote
