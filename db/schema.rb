@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20130907115151) do
     t.string   "referer",           default: "undefined"
     t.string   "user_agent",        default: "undefined"
     t.integer  "tolerance_time"
-    t.boolean  "spam_flag",         default: false
+    t.boolean  "spam",              default: false
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"

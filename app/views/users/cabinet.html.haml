@@ -41,7 +41,7 @@
   .fn_block
     %h4= t '.comments'
     
-    %ul.marked_list
+    %ul.marked_list      
       %li= link_to "Новые #{@user.draft_comcoms_count}", [:new, :comment]
       %li= link_to "Все #{@user.comcoms_sum}", [:incoming, :comments]
       %li= link_to "Написанные мной #{@user.my_comments_count}", [:my, :comments]

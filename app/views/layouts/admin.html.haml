@@ -15,7 +15,7 @@
     .container
       .row
         .col-md-12
-          %h3 Admin Panel
+          %h3= content_for?(:title) ? yield(:title) : "Admin Panel"
       .row
         .col-md-3
           = yield :role_sidebar
