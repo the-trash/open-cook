@@ -11,7 +11,7 @@ module BasePublication
     include NestedSetMethods
     include CommonClassMethods
     include MainImageUploading
-    include TheCommentsCommentable
+    include TheComments::Commentable
 
     before_validation :define_user_via_hub, :define_hub_state, on: :create
     before_save       :prepare_tags, :prepare_content, :set_published_at

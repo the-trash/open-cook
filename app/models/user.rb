@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   include ActAsStorage
   include HasAttachedFiles
 
-  include TheCommentsUser
-  include TheCommentsCommentable
+  include TheComments::User
+  include TheComments::Commentable
 
   def to_param; self.login end
 
