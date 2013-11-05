@@ -63,8 +63,8 @@ gem 'the_storages',
   github: 'the-teacher/the_storages',
   branch: 'master'
 
-gem "the_comments", "~> 2.1.0"
-  # path: '../the_comments'
+gem "the_comments", # "~> 2.1.0"
+  path: '../the_comments'
   # github: 'the-teacher/the_comments',
   # branch: 'master'
 

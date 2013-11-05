@@ -50,7 +50,11 @@ class User < ActiveRecord::Base
   end
 
   # TheComments methods
-  def comment_moderator? comment
+  def comments_admin?
+    self == User.root
+  end
+
+  def comments_moderator? comment
     admin? || id == comment.holder_id
   end
 
@@ -61,6 +65,7 @@ class User < ActiveRecord::Base
   def commentable_path
     [self.class.to_s.tableize, login].join('/')
   end
+  # ~ TheComments methods
 
   def role_name
     role.try(:name)
