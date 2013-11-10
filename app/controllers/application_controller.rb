@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include SorceryAddons
   include TheRoleAddons
   include TheRoleController
-  include TheCommentsController::ViewToken
+  include TheComments::ViewToken
 
   layout('open_cook/application')
 

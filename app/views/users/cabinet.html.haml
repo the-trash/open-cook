@@ -1,7 +1,7 @@
 .users_cabinet
   %h3 Кабинет пользователя #{@user.login}
 
-  - if current_user.has_role?(:posts, :new) || current_user.has_role?(:pages, :manage)
+  - if current_user.any_role?(posts: :new, pages: :new)
     .fn_block
       %h4= t '.create'
 
@@ -9,7 +9,7 @@
         - if current_user.has_role?(:posts, :new)
           %li= link_to t('.new_post'), new_post_url
 
-        - if current_user.has_role?(:pages, :manage)
+        - if current_user.has_role?(:pages, :new)
           %li= link_to t('.new_page'), new_page_url
 
   - if current_user.any_role?(posts: :manage, pages: :manage)
@@ -41,9 +41,8 @@
   .fn_block
     %h4= t '.comments'
     
-    %ul.marked_list      
-      %li= link_to "Комментарии", [:manage, :comments]
-      %li= link_to "Новые #{@user.draft_comcoms_count}", [:draft, :comments]
+    %ul.marked_list
+      %li= link_to "Комментарии (+#{@user.draft_comcoms_count})", [:manage, :comments]
 
   - if @user.has_role?(:roles, :manage)
     .fn_block

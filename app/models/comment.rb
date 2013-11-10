@@ -1,4 +1,4 @@
 class Comment < ActiveRecord::Base
-  include TheCommentsBase
+  include TheComments::Comment
   include CommonClassMethods
 end

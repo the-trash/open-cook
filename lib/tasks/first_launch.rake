@@ -1,8 +1,21 @@
+def basic_permissions
+  {
+    new:     true,
+    index:   true,
+    show:    true,
+    create:  true,
+    edit:    true,
+    update:  true,
+    delete:  true,
+    rebuild: true
+  }
+end
+
 namespace :db do
-  namespace :first do
-    # rake db:first:user
-    desc "create first user"
-    task user: :environment do
+  namespace :create do
+    # rake db:create:admin
+    desc "create admin"
+    task admin: :environment do
       TheRole.create_admin_role!
       User.create_admin!
 
@@ -11,6 +24,27 @@ namespace :db do
       puts '~'*40
     end
 
+    # rake db:create:user_role
+    desc "create user role"
+    task user_role: :environment do
+      Role.create!(
+        name:  :user,
+        title: :user,
+        description: "regular user",
+        the_role: {
+          users: {
+            cabinet: true
+          },
+          posts: basic_permissions,
+          available_hubs: {
+            blogs: true
+          }
+        }
+      )
+    end  
+  end
+
+  namespace :first do
     # rake db:first:top_sections
     desc "create top sections"
     task top_sections: :environment do
@@ -69,7 +103,9 @@ namespace :db do
     desc "before first CMS start"
     task launch: :environment do
       Rake::Task["db:bootstrap"].invoke
-      Rake::Task["db:first:user"].invoke
+      Rake::Task["db:create:admin"].invoke
+      Rake::Task["db:create:user_role"].invoke
+
       Rake::Task["db:first:pages"].invoke
       Rake::Task["db:first:top_sections"].invoke
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130907115151) do
+ActiveRecord::Schema.define(version: 20131105080446) do
 
   create_table "attached_files", force: true do |t|
     t.integer  "user_id"
@@ -132,17 +132,11 @@ ActiveRecord::Schema.define(version: 20130907115151) do
     t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "storage_files_count",      default: 0
+    t.integer  "storage_files_size",       default: 0
     t.integer  "draft_comments_count",     default: 0
     t.integer  "published_comments_count", default: 0
     t.integer  "deleted_comments_count",   default: 0
-    t.integer  "storage_files_count",      default: 0
-    t.integer  "storage_files_size",       default: 0
-  end
-
-  create_table "ip_black_lists", force: true do |t|
-    t.string  "ip"
-    t.integer "count", default: 0
-    t.string  "state", default: "warning"
   end
 
   create_table "pages", force: true do |t|
@@ -178,11 +172,11 @@ ActiveRecord::Schema.define(version: 20130907115151) do
     t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "storage_files_count",      default: 0
+    t.integer  "storage_files_size",       default: 0
     t.integer  "draft_comments_count",     default: 0
     t.integer  "published_comments_count", default: 0
     t.integer  "deleted_comments_count",   default: 0
-    t.integer  "storage_files_count",      default: 0
-    t.integer  "storage_files_size",       default: 0
   end
 
   create_table "posts", force: true do |t|
@@ -218,11 +212,11 @@ ActiveRecord::Schema.define(version: 20130907115151) do
     t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
+    t.integer  "storage_files_count",      default: 0
+    t.integer  "storage_files_size",       default: 0
     t.integer  "draft_comments_count",     default: 0
     t.integer  "published_comments_count", default: 0
     t.integer  "deleted_comments_count",   default: 0
-    t.integer  "storage_files_count",      default: 0
-    t.integer  "storage_files_size",       default: 0
   end
 
   create_table "roles", force: true do |t|
@@ -251,12 +245,6 @@ ActiveRecord::Schema.define(version: 20130907115151) do
     t.string "name"
   end
 
-  create_table "user_agent_black_lists", force: true do |t|
-    t.string  "user_agent"
-    t.integer "count",      default: 0
-    t.string  "state",      default: "warning"
-  end
-
   create_table "users", force: true do |t|
     t.string   "login",                                              null: false
     t.string   "username"
@@ -276,6 +264,12 @@ ActiveRecord::Schema.define(version: 20130907115151) do
     t.string   "reset_password_token"
     t.datetime "reset_password_token_expires_at"
     t.datetime "reset_password_email_sent_at"
+    t.integer  "all_attached_files_count",        default: 0
+    t.integer  "all_attached_files_size",         default: 0
+    t.integer  "storage_files_count",             default: 0
+    t.integer  "storage_files_size",              default: 0
+    t.integer  "my_draft_comments_count",         default: 0
+    t.integer  "my_published_comments_count",     default: 0
     t.integer  "my_comments_count",               default: 0
     t.integer  "draft_comcoms_count",             default: 0
     t.integer  "published_comcoms_count",         default: 0
@@ -284,10 +278,6 @@ ActiveRecord::Schema.define(version: 20130907115151) do
     t.integer  "draft_comments_count",            default: 0
     t.integer  "published_comments_count",        default: 0
     t.integer  "deleted_comments_count",          default: 0
-    t.integer  "all_attached_files_count",        default: 0
-    t.integer  "all_attached_files_size",         default: 0
-    t.integer  "storage_files_count",             default: 0
-    t.integer  "storage_files_size",              default: 0
   end
 
   add_index "users", ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree

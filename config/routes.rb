@@ -16,6 +16,10 @@ TheApp::Application.routes.draw do
   # Personal
   get "cabinet" => "users#cabinet", as: :cabinet
 
+  concern   :user_comments,  TheComments::UserRoutes.new
+  concern   :admin_comments, TheComments::AdminRoutes.new
+  resources :comments, concerns:  [:user_comments, :admin_comments]
+
   concern :sortable_tree do
     collection do
       get  :manage

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 # Delete all gems: gem list | cut -d' ' -f1 | xargs gem uninstall -aIx
 # for i in `gem list --no-versions`; do gem uninstall -aIx $i; done
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.0.1'
 gem 'unicorn'
 
 gem 'mysql2'
@@ -63,8 +63,8 @@ gem 'the_storages',
   github: 'the-teacher/the_storages',
   branch: 'master'
 
-gem 'the_comments',
-  path: '../the_comments'
+gem "the_comments", "~> 2.2.0"
+  # path: '../the_comments'
   # github: 'the-teacher/the_comments',
   # branch: 'master'
 
