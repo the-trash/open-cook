@@ -57,7 +57,7 @@ namespace :db do
         state: :published
       )
 
-      %w[Recipes Posts Interviews Videos Blog].each do |name|
+      %w[Recipes Posts Interviews Videos Blogs].each do |name|
         section = Hub.create!(
           user:  admin,
           title: name,

@@ -87,10 +87,11 @@ class User < ActiveRecord::Base
     return Hub.send(*scope).for_manage if admin?
     
     section = role.to_hash.try(:[], 'available_hubs')
-    return Hub.none unless section
+    return Hub.none if section.blank?
 
     keys = section.select{|k, v| v == true }.keys
     keys.map!{|item| item.to_slug_param }
+
     Hub.friendly_where(keys).published_set.send(*scope)
   end
 
