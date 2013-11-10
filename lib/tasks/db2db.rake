@@ -165,7 +165,7 @@ namespace :db do
     # rake db:to:db
     task db: :environment do
       Rake::Task["db:bootstrap"].invoke
-      Rake::Task["db:first:user"].invoke
+      Rake::Task["db:create:admin"].invoke
 
       root        = User.root
       recipes_hub = create_system_hub(:recipes, 'Рецепты', :posts)
