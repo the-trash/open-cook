@@ -30,10 +30,11 @@
       %b= t('pubs.tags')
     = f.text_field :tag_list
 
-  .field
-    - options = options_for_select(publication_states, @post.state)
-    %b= f.label  :state, t('pubs.state')
-    = f.select :state, options
+  - if !@post.new_record?
+    .field
+      - options = options_for_select(publication_states, @post.state)
+      %b= f.label  :state, t('pubs.state')
+      = f.select :state, options
   
   .actions
     = f.submit t('pubs.save')

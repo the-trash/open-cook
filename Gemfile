@@ -13,6 +13,7 @@ gem 'capistrano'
 # App level
 gem 'sorcery'
 gem 'RedCloth', require: 'redcloth'
+gem 'quiet_assets', group: :development
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

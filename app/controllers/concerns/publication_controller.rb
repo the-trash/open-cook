@@ -66,6 +66,8 @@ module PublicationController
     # PATCH/PUT /posts/1
     def update
       if @post.update(post_params)
+        @post.send "to_#{@post_state}" if @post_state
+
         redirect_to url_for([:edit, @post.user, @post]),
                     notice: "#{@klass.to_s} was successfully updated."
       else
@@ -106,6 +108,7 @@ module PublicationController
     def post_params
       # TODO: user_id for create
       # TODO: user_id for update only for moderator|admin
+      @post_state = params[@klass_name].try(:[], :state)
       params.require(@klass_name).permit(
         :user_id,
         :hub_id,
@@ -116,8 +119,7 @@ module PublicationController
         :title,
         :raw_intro,
         :raw_content,
-        :tag_list,
-        :state
+        :tag_list
       )
     end
   end

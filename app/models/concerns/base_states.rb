@@ -4,7 +4,7 @@ module BaseStates
   included do
     state_machine :state, :initial => :draft do
       # events
-      event :to_draft do 
+      event :to_draft do
         transition all => :draft
       end
 

@@ -45,9 +45,9 @@ class Hub < ActiveRecord::Base
 
   def recalculate_pubs_counters!
     update({
-      pubs_count_published: self.pubs.with_state(:published).count,
-      pubs_count_draft:     self.pubs.with_state(:draft).count,
-      pubs_count_deleted:   self.pubs.with_state(:deleted).count
+      pubs_published_count: self.pubs.with_state(:published).count,
+      pubs_draft_count:     self.pubs.with_state(:draft).count,
+      pubs_deleted_count:   self.pubs.with_state(:deleted).count
     })
   end  
 end

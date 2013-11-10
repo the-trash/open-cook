@@ -16,6 +16,7 @@ module BasePublication
     before_validation :define_user_via_hub, :define_hub_state, on: :create
     before_save       :prepare_tags, :prepare_content, :set_published_at
     after_create      :recalculate_hub_counters!
+
     paginates_per 25
 
     # relations
