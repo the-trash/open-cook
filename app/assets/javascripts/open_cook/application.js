@@ -10,9 +10,12 @@
 //= require expandable_tree/restorable
 //= require expandable_tree/initializer
 
-//= require redactor
-//= require redactor_ru
-//= require redactor/initialize
+// require redactor
+// require redactor_ru
+// require redactor/initialize
+
+//= require tinymce/tinymce.min.js
+//= require tinymce/init
 
 //= require jquery.MultiFile
 //= require jquery.Jcrop
