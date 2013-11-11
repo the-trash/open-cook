@@ -49,6 +49,7 @@ module PublicationController
 
     def new
       @post = @klass.new
+      @selector_hubs = current_user.available_hubs(@post)
       render 'posts/new'
     end
 

@@ -55,19 +55,19 @@ gem 'the_string_to_slug',
   branch: 'master'
 
 gem 'the_role',
-  path: '../the_role'
-  # github: 'the-teacher/the_role',
-  # branch: 'master'
+  # path: '../the_role'
+  github: 'the-teacher/the_role',
+  branch: 'kiss_version'
 
 gem 'the_storages',
-  #, path: '../the_storages'
-  github: 'the-teacher/the_storages',
-  branch: 'master'
+  path: '../the_storages'
+  # github: 'the-teacher/the_storages',
+  # branch: 'kiss_version'
 
-gem "the_comments", "~> 2.2.0"
+gem "the_comments",
   # path: '../the_comments'
-  # github: 'the-teacher/the_comments',
-  # branch: 'master'
+  github: 'the-teacher/the_comments',
+  branch: 'kiss_version'
 
 gem 'the_audit',
   #, path: '../the_audit'

@@ -12,8 +12,7 @@
     %b= f.label :title, t('pubs.title')
     = f.text_field :title
 
-  = render partial: 'hubs/hub_select', locals: { object: @hub } 
-  = render partial: "shared/meta_fields", locals: { f: f }
+  = render partial: "shared/top_fields", locals: { f: f, object: @post, selector_hubs: @selector_hubs }
 
   .field
     %p
@@ -22,8 +21,8 @@
 
   .field
     - options = options_for_select(hub_pubs_types, @hub.pubs_type)
-    %b= f.label  :pubs_type, t('hubs.pubs_type')
-    = f.select :pubs_type, options
+    %b= f.label :pubs_type, t('hubs.pubs_type')
+    = f.select  :pubs_type, options
 
   .field
     - options = options_for_select(publication_states, @hub.state)

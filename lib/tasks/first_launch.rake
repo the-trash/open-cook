@@ -41,7 +41,19 @@ namespace :db do
           }
         }
       )
-    end  
+    end
+
+    # rake db:create:first_user
+    desc "create first user"
+    task first_user: :environment do
+      User.create!(
+        login: :ilya_zykin,
+        username: "Ilya N. Zykin",
+        email: "zykin-ilya@ya.ru",
+        password: "qwerty",
+        role: Role.with_name(:user)
+      )
+    end
   end
 
   namespace :first do
@@ -105,6 +117,7 @@ namespace :db do
       Rake::Task["db:bootstrap"].invoke
       Rake::Task["db:create:admin"].invoke
       Rake::Task["db:create:user_role"].invoke
+      Rake::Task["db:create:first_user"].invoke
 
       Rake::Task["db:first:pages"].invoke
       Rake::Task["db:first:top_sections"].invoke

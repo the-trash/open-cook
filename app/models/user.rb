@@ -81,7 +81,10 @@ class User < ActiveRecord::Base
   #
   # Any User has: hubs defined in his TheRole
   # with section "available_hubs"
-  def available_hubs ctrl_name = nil
+  def available_hubs object = nil
+    return Hub.none if object.nil?
+
+    ctrl_name = object.ctrl_name
     scope = ctrl_name.blank? ? :all : [:of_, ctrl_name]
 
     return Hub.send(*scope).for_manage if admin?

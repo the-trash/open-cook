@@ -10,9 +10,12 @@ class HubsController < ApplicationController
 
   def new
     @hub = Hub.new
+    @selector_hubs = current_user.available_hubs(@hub)
   end
 
-  def edit; end
+  def edit
+    @selector_hubs = current_user.available_hubs(@hub)
+  end
 
   def update
     if @hub.update(hub_params)
