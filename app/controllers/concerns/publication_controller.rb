@@ -39,17 +39,17 @@ module PublicationController
     # PROTECTED
     def manage
       @posts = @user.send(controller_name).for_manage_rset.pagination(params)
-
       render 'posts/manage'
     end
 
     def edit
+      set_selector_hubs
       render 'posts/edit'
     end
 
     def new
       @post = @klass.new
-      @selector_hubs = current_user.available_hubs(@post)
+      set_selector_hubs
       render 'posts/new'
     end
 
@@ -60,6 +60,7 @@ module PublicationController
         redirect_to url_for([:edit, @post.user, @post]),
                     notice: "#{@klass.to_s} was successfully created."
       else
+        set_selector_hubs
         render 'posts/new'
       end
     end
@@ -87,6 +88,10 @@ module PublicationController
     end
 
     private
+
+    def set_selector_hubs
+      @selector_hubs = current_user.available_hubs(@post)
+    end
 
     def set_klass
       @klass      = controller_name.classify.constantize

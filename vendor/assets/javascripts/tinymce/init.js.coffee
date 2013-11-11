@@ -7,6 +7,7 @@ $ ->
   tinymce.init
     selector: ".redactor_intro, .redactor_content"
     language_url : '/assets/tinymce/langs/ru.js'
+    content_css : "/assets/tinymce/content_css.css"
     plugins : 'code image link lists anchor table'
     menubar : false
     statusbar : false

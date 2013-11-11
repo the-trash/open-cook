@@ -4,4 +4,7 @@
 
 %h1= t 'posts.new'
 
-= render 'posts/form'
+- if @selector_hubs.blank?
+  = t 'hubs.have_not_available_hubs'
+- else
+  = render 'posts/form'

@@ -10,11 +10,11 @@ class HubsController < ApplicationController
 
   def new
     @hub = Hub.new
-    @selector_hubs = current_user.available_hubs(@hub)
+    set_selector_hubs
   end
 
   def edit
-    @selector_hubs = current_user.available_hubs(@hub)
+    set_selector_hubs
   end
 
   def update
@@ -22,6 +22,7 @@ class HubsController < ApplicationController
       redirect_to url_for([:edit, @hub.user, @hub]),
                   notice: "Hub was successfully updated."
     else
+      set_selector_hubs
       @hub.update_attachment_fields(:main_image)
     end
   end  
@@ -65,6 +66,10 @@ class HubsController < ApplicationController
   end
 
   private
+
+  def set_selector_hubs
+    @selector_hubs = current_user.available_hubs(@hub)
+  end
 
   def set_hub_and_user
     @hub  = Hub.for_manage.friendly_first(params[:id])
