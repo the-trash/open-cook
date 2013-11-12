@@ -2,8 +2,9 @@
   %b= t 'posts.author'
   = link_to post.user.login, user_path(post.user.login)
 
-  %b= t 'posts.published_at'
-  = post.published_at.strftime('%d.%m.%Y')
+  - if post.published_at
+    %b= t 'posts.published_at'
+    = post.published_at.strftime('%d.%m.%Y')
   
   %b= t 'posts.views'
   = post.show_count

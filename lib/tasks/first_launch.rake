@@ -7,6 +7,8 @@ def basic_permissions
     edit:    true,
     update:  true,
     delete:  true,
+
+    manage:  true,
     rebuild: true
   }
 end

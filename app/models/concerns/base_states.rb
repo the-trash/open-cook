@@ -28,6 +28,9 @@ module BaseStates
       end
 
       after_transition any => any do |obj|
+        obj.try :recalculate_comments_counters!
+        obj.try :send, :denormalize_for_comments!
+
         if obj.respond_to?(:hub) && obj.try(:hub)
           obj.hub.recalculate_pubs_counters! 
         end
