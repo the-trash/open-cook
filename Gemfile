@@ -69,6 +69,11 @@ gem "the_comments",
   # github: 'the-teacher/the_comments',
   # branch: 'kiss_version'
 
+gem "the_notification",
+  path: '../the_notification'
+  # github: 'the-teacher/the_notification',
+  # branch: 'master'
+
 gem 'the_audit',
   #, path: '../the_audit'
   github: 'open-cook/the_audit',

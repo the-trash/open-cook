@@ -1,7 +1,7 @@
 = render partial: 'shared/crop_image_form', locals: { object: @post }
 
 = form_for @post, html: { enctype: "multipart/form-data" } do |f|
-  = error_messages_for @post
+  = render partial: 'the_notification/form', locals: { object: @post }
 
   = hidden_field_tag 'post_id',    @post.id
   = hidden_field_tag 'post_klass', @post.class
