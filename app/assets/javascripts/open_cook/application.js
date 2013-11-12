@@ -17,6 +17,8 @@
 //= require jquery.Jcrop
 
 //= require base/logger
+//= require the_notification
+
 //= require the_comments
 //= require the_comments_manage
 

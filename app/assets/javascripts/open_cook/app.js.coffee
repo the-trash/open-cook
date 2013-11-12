@@ -16,7 +16,3 @@ class @App
         set.fadeOut()
 
       false
-
-  @init_flash_messages_close = ->
-    $('.flash_msgs').on 'click', 'a.close', ->
-      $(@).parent().hide()

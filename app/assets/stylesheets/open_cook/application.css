@@ -11,7 +11,7 @@
   *= require open_cook/layout/sections
   *= require open_cook/layout/fragment_block
   
-  *= require open_cook/layout/notice_block
+  *= require the_notification
   *= require open_cook/layout/layout
   *= require open_cook/layout/footer
 
