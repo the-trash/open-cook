@@ -14,6 +14,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to root_url, :notice => t('sessions.destroy.notice')
+    redirect_to root_url, notice: t('sessions.destroy.notice')
   end
 end

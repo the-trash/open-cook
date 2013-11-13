@@ -82,6 +82,9 @@ ru:
     save: Сохранить
     seo_meta_info: 'SEO, META информация'
 
+    updated: "Публикация успешно обновлена"
+    created: "Публикация успешно создана"
+
     states:
       draft: Черновик
       published: Опубликовано
@@ -100,6 +103,12 @@ ru:
       previous: "&laquo; Туда"
       next: "Сюда &raquo;"
       truncate: "..."
+
+  attached_files:
+    preview_rebuilded: "Превью-картинка изменена"
+    image_rotated_on_left: "Изображение повернуто влево"
+    image_rotated_on_right: "Изображение повернуто вправо"
+    main_image_deleted: "Изображение удалено"
 
   sessions:
     new: Вход

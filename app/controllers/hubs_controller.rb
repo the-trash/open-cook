@@ -13,30 +13,29 @@ class HubsController < ApplicationController
     set_selector_hubs
   end
 
+  def create
+    @hub = current_user.hubs.new(hub_params)
+
+    if @hub.save
+      redirect_to url_for([:edit, @hub.user, @hub]), notice: t("hubs.created")
+    else
+      render template: :new
+    end
+  end
+
   def edit
     set_selector_hubs
   end
 
   def update
     if @hub.update(hub_params)
-      redirect_to url_for([:edit, @hub.user, @hub]),
-                  notice: "Hub was successfully updated."
+      @hub.send "to_#{@hub_state}" if @hub_state
+      redirect_to url_for([:edit, @hub.user, @hub]), notice: t("hubs.updated")
     else
       set_selector_hubs
       @hub.update_attachment_fields(:main_image)
     end
   end  
-
-  def create
-    @hub = current_user.hubs.new(hub_params)
-
-    if @hub.save
-      redirect_to url_for([:edit, @hub.user, @hub]),
-                  notice: "Hub was successfully created."
-    else
-      render template: :new
-    end
-  end
 
   def show
     @hub      = Hub.friendly_first(params[:id])
@@ -54,8 +53,8 @@ class HubsController < ApplicationController
     @sub_hubs = @hub.children
 
     @posts = @hub.self_and_children_pubs(@sub_hubs)
-                .published_set
-                .pagination(params)
+                 .published_set
+                 .pagination(params)
 
     render template: 'posts/index'
   end
@@ -82,6 +81,7 @@ class HubsController < ApplicationController
   def hub_params
     # TODO: user_id for create
     # TODO: user_id for update only for moderator|admin
+    @hub_state = params[:hub].try(:[], :state)
     params.require(:hub).permit(
       :user_id,
       :hub_id,
@@ -92,8 +92,7 @@ class HubsController < ApplicationController
       :title,
       :optgroup,
       :raw_intro,
-      :raw_content,
-      :state
+      :raw_content
     )
   end
 end

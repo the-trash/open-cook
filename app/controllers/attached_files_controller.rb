@@ -19,25 +19,25 @@ class AttachedFilesController < ApplicationController
       params[:img_w])
 
     redirect_to request.referer,
-                notice: "Preview was rebuilded"
+                notice: t('attached_files.preview_rebuilded')
   end
 
   def main_image_to_left
     @storage.main_image_to_left!
     redirect_to request.referer,
-                notice: "Main image rotate on left"
+                notice: t('attached_files.image_rotated_on_left')
   end
 
   def main_image_to_right
     @storage.main_image_to_right!
     redirect_to request.referer,
-                notice: "Main image rotate on right"
+                notice: t('attached_files.image_rotated_on_right')
   end
 
   def delete_main_image
     @storage.destroy_main_image!
     redirect_to request.referer,
-                notice: "Main image was successfully destroyed"
+                notice: t('attached_files.main_image_deleted')
   end
 
   private

@@ -42,11 +42,6 @@ module PublicationController
       render 'posts/manage'
     end
 
-    def edit
-      set_selector_hubs
-      render 'posts/edit'
-    end
-
     def new
       @post = @klass.new
       set_selector_hubs
@@ -57,21 +52,22 @@ module PublicationController
       @post = current_user.send(controller_name).new(post_params)
 
       if @post.save
-        redirect_to url_for([:edit, @post.user, @post]),
-                    notice: "#{@klass.to_s} was successfully created."
+        redirect_to url_for([:edit, @post]), notice: t("pubs.created")
       else
         set_selector_hubs
         render 'posts/new'
       end
     end
 
-    # PATCH/PUT /posts/1
+    def edit
+      set_selector_hubs
+      render 'posts/edit'
+    end
+
     def update
       if @post.update(post_params)
         @post.send "to_#{@post_state}" if @post_state
-
-        redirect_to url_for([:edit, @post.user, @post]),
-                    notice: "#{@klass.to_s} was successfully updated."
+        redirect_to url_for([:edit, @post]), notice: t("pubs.updated")
       else
         @post.update_attachment_fields(:main_image)
         render 'posts/edit'
