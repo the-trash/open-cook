@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   include TheRoleController
   include TheComments::ViewToken
 
-  # layout('open_cook/application')
+  layout "application_#{ AppConfig.theme }"
+  prepend_view_path "app/views/#{ AppConfig.theme }"
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
