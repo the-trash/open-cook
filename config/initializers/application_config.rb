@@ -1,5 +1,5 @@
 module AppConfig
   class << self
-    def theme; "app"; end
+    def theme; "open_cook"; end
   end
 end
