@@ -1,0 +1,9 @@
+= form_tag crop_image_for_preview_url, id: :main_image_cropping, class: :hidden do
+  = text_field_tag :storage_type, object.class.to_s
+  = text_field_tag :storage_id,   object.id
+
+  = text_field_tag :x
+  = text_field_tag :y
+  = text_field_tag :w
+  = text_field_tag :h
+  = text_field_tag :img_w

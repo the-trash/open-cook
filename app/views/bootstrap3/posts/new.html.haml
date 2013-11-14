@@ -1,0 +1,10 @@
+- content_for :express_nav do
+  %p= link_to t('app.cabinet'), cabinet_url
+  %p= link_to t('posts.manage'), url_for([:manage, @post])
+
+%h1= t 'posts.new'
+
+- if @selector_hubs.blank?
+  = t 'hubs.have_not_available_hubs'
+- else
+  = render 'posts/form'

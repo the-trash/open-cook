@@ -1,0 +1,9 @@
+- tags = tags_str.split ','
+
+- unless tags.blank?
+  .widget.tags
+    %h3 Тэги
+    .holder
+      .wrp
+        - tags.each do |tag|
+          %p= link_to tag, tag_url(tag)

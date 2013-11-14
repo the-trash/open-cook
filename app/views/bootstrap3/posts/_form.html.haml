@@ -1,0 +1,41 @@
+= render partial: 'shared/crop_image_form', locals: { object: @post }
+
+= form_for @post, html: { enctype: "multipart/form-data" } do |f|
+  = render partial: 'the_notification/form', locals: { object: @post }
+
+  = hidden_field_tag 'post_id',    @post.id
+  = hidden_field_tag 'post_klass', @post.class
+
+  = render partial: 'shared/main_image_toolbar', locals: { f: f, object: @post }
+  
+  .field
+    %b= f.label :title, t('pubs.title')
+    = f.text_field :title
+
+  = render partial: "shared/top_fields", locals: { f: f, object: @post, selector_hubs: @selector_hubs }
+
+  .field
+    %p
+      %b= t('pubs.intro')
+    = f.text_area :raw_intro, class: :redactor_intro
+  
+  .field
+    %p
+      %b= t('pubs.content')
+    = f.text_area :raw_content, class: :redactor_content
+
+  .field
+    %p
+      %b= t('pubs.tags')
+    = f.text_field :tag_list
+
+  - if !@post.new_record?
+    .field
+      - options = options_for_select(publication_states, @post.state)
+      %b= f.label  :state, t('pubs.state')
+      = f.select :state, options
+  
+  .actions
+    = f.submit t('pubs.save')
+
+  = render partial: 'shared/pub_stats', locals: { object: @post }

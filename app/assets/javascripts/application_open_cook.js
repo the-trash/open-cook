@@ -3,5 +3,4 @@
 //= require jquery_ujs
 //= require jquery.ui.core
 //= require jquery.ui.sortable
-
-<%= require_asset "#{AppConfig.theme}/application" %>
+//= require open_cook/application

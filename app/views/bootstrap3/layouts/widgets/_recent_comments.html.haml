@@ -1,0 +1,18 @@
+- comments = Comment.with_state(:published).where(commentable_state: :published).limit(5)
+
+- unless comments.blank?
+  .widget.recent_comments
+    %h3 Новые комментарии
+    .holder
+      .wrp
+        - comments.each do |comment|
+          .comment
+            %p.title= link_to comment.commentable_title, comment.commentable_url
+            %p.content= comment.content
+            %p.info
+              = comment.title
+              от
+              = comment.created_at.strftime('%d.%m.%Y')
+      .comments.hidden
+        %p= link_to "Все комментарии", comments_path
+            

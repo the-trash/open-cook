@@ -1,0 +1,39 @@
+= render partial: 'shared/crop_image_form', locals: { object: @hub }
+
+= form_for @hub, html: { enctype: "multipart/form-data" } do |f|
+  = error_messages_for @hub
+
+  = hidden_field_tag 'hub_id',    @hub.id
+  = hidden_field_tag 'hub_klass', @hub.class
+
+  = render partial: 'shared/main_image_toolbar', locals: { f: f, object: @hub }
+  
+  .field
+    %b= f.label :title, t('pubs.title')
+    = f.text_field :title
+
+  = render partial: "shared/top_fields", locals: { f: f, object: @post, selector_hubs: @selector_hubs }
+
+  .field
+    %p
+      %b= t('pubs.intro')
+    = f.text_area :raw_intro, class: :redactor_intro
+
+  .field
+    - options = options_for_select(hub_pubs_types, @hub.pubs_type)
+    %b= f.label :pubs_type, t('hubs.pubs_type')
+    = f.select  :pubs_type, options
+
+  .field
+    - options = options_for_select(publication_states, @hub.state)
+    %b= f.label :state, t('pubs.state')
+    = f.select :state, options
+
+  .field
+    %b= f.label :state, t('hubs.optgroup')
+    = f.check_box :optgroup
+
+  .actions
+    = f.submit t('pubs.save')
+
+  = render partial: 'shared/pub_stats', locals: { object: @hub }

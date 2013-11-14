@@ -1,0 +1,9 @@
+- content_for :express_nav do
+  %p= link_to t('app.cabinet'), cabinet_url
+
+%p= link_to t('hubs.new'), url_for([:new, model_name])
+
+%ol.sortable_tree{ data: { max_levels: 5, rebuild_url: url_for([:rebuild, :hubs]), expand_node_url: expand_node_hubs_url, cookie_scope: :Hubs } }
+  = expandable_tree @hubs
+
+= paginate @hubs

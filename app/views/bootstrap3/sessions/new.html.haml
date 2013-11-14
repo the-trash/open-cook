@@ -1,0 +1,13 @@
+= form_tag sessions_path do 
+  .field
+    = label_tag :login 
+    = text_field_tag :login, params[:login] 
+  .field
+    = label_tag :password 
+    = password_field_tag :password 
+  .field
+    = label_tag :remember_me do
+      = check_box_tag :remember_me, true, params[:remember_me], checked: true
+      = t 'sessions.remember_me'
+    
+  .actions= submit_tag t('sessions.login'), class: :btn

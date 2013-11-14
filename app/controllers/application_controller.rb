@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   include TheRoleController
   include TheComments::ViewToken
 
-  layout "application_#{ AppConfig.theme }"
   prepend_view_path "app/views/#{ AppConfig.theme }"
 
   # Prevent CSRF attacks by raising an exception.

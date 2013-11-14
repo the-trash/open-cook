@@ -1,0 +1,8 @@
+.field.hub_selector
+  - unless selector_hubs.blank?
+    - selected_hub = object.try(:hub)
+    - klass_name   = object.ctrl_name.singularize
+
+    .field
+      %b= label_tag :hub_id, t('pubs.select_hub')
+      = select_tag "#{klass_name}[hub_id]", grouped_nested_options(selector_hubs, selected: selected_hub), class: :nested_options

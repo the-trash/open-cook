@@ -1,0 +1,10 @@
+- content_for :express_nav do
+  %p= link_to t('app.cabinet'), cabinet_url
+  %p= link_to t('posts.show'), url_for(@post)
+  %p= link_to t('posts.list'), url_for([:manage, :posts])
+
+%h1= t "posts.edit"
+
+= render 'posts/form'
+= render partial: 'the_storages/list', locals: { storage: @post }
+= render partial: 'the_storages/form', locals: { storage: @post }

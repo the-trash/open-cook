@@ -1,0 +1,11 @@
+.meta_fields
+  %p
+    = link_to '#' do
+      %b= t 'pubs.seo_meta_info'
+      %i.icon-arrow-down
+
+  .set.hidden
+    - %w[ slug author keywords description copyright].each do |name|
+      .field
+        = f.label t(".#{name}")
+        = f.text_field name

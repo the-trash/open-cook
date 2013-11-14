@@ -1,0 +1,44 @@
+.image_toolbar
+  .base_view
+    %p
+      %b= t('main_image.title') 
+
+    - if object.main_image?  
+      .rotate
+        = link_to '', main_image_to_left_url(object.class.to_s, object.id),  method: :patch, class: :left
+        = link_to '', main_image_to_right_url(object.class.to_s, object.id), method: :patch, class: :right
+    .image_preview
+      = link_to object.main_image.url(:preview) do
+        = image_tag object.main_image.url(:preview), width: '100%'
+
+    .tools_block
+      - if object.main_image?
+        = link_to '', |
+        delete_main_image_url(object.class.to_s, object.id), |
+        method: :delete, data: { confirm: "Вы уверены?" }, class: :img_clear
+
+      %p
+        %label= t('main_image.select')
+        = f.file_field :main_image
+
+      - if object.main_image?
+        %p
+          = link_to t('main_image.selected_area'), '#', method: :patch, class: :jcrop_run
+
+  - if object.main_image?
+    .crop_view
+      %p
+        %b= t('main_image.selecte_area_and_save')
+
+      %div
+        = image_tag object.main_image.url(:base), id: :main_image_jcrop
+
+        .cropped_preview_holder
+          .cropped_preview
+            = image_tag object.main_image.url, id: :cropped_main_image_preview
+
+        = submit_tag t('main_image.save'), id: :main_image_cropping_save, class: :hidden
+
+      %p= link_to t('main_image.just_close'), '#', method: :patch, class: :jcrop_stop
+
+=# render partial: 'the_storages/preview_maker', locals: { storage: object }

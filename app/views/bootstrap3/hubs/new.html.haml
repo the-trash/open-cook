@@ -1,0 +1,7 @@
+- content_for :express_nav do
+  %p= link_to t('app.cabinet'), cabinet_url
+  %p= link_to t('hubs.list'), url_for([:manage, :hubs])
+
+%h1= t 'hubs.new'
+
+= render 'form'

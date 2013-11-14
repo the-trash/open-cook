@@ -1,0 +1,14 @@
+%p.informer
+  %b= t 'posts.author'
+  = link_to post.user.login, user_path(post.user.login)
+
+  - if post.published_at
+    %b= t 'posts.published_at'
+    = post.published_at.strftime('%d.%m.%Y')
+  
+  %b= t 'posts.views'
+  = post.show_count
+
+  - if post.respond_to? :comments
+    %b= t 'posts.comments'
+    = link_to post.comments_sum, show_url(post, :comments)
