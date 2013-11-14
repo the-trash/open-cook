@@ -9,7 +9,7 @@
 -#
 
 - if page.current?
-  %li.active= link_to page, 'javascript:void(0);'
+  %li.active= link_to page, 'javascript:void(0);', class: :current
 - else
   %li= link_to page, url, { remote: remote, rel: page.next? ? :next : page.prev? ? :prev : nil }
 
