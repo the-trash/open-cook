@@ -1,26 +1,17 @@
-%p.top_menu
+.panel.panel-success
+  .panel-body
   %noindex
-    %b= link_to 'На главную', root_url
+    %ol.breadcrumb
+      %li.active
+        %b= link_to 'На главную', root_url
+      %li
+        = link_to 'О сайте', page_url(:about)
 
-    = link_to 'О сайте', page_url(:about)
-
-    = link_to 'http://vk.com/opencook', rel: :nofollow do
-      = image_tag 'social/vk.png'
-      Мы ВКонтакте
-
-    = link_to  'http://www.odnoklassniki.ru/opencook', rel: :nofollow do
-      = image_tag 'social/ok.png'
-      Мы в Одноклассниках
-
-    = link_to 'https://twitter.com/opencook_ru', rel: :nofollow do
-      = image_tag 'social/tw.png'
-      Наш Твиттер
-
-  %noindex
-    - if current_user
-      = link_to cabinet_url do
-        Кабинет (#{ current_user.login })
-      = link_to t('sessions.logout'), logout_url, method: :delete
-    - else
-      = link_to  'Регистрация', signup_url
-      = link_to  'Вход', login_url
+      - if current_user
+        %li
+          = link_to cabinet_url do
+            Кабинет (#{ current_user.login })
+        %li= link_to t('sessions.logout'), logout_url, method: :delete
+      - else
+        %li= link_to  'Регистрация', signup_url
+        %li= link_to  'Вход', login_url

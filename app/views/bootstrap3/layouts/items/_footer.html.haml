@@ -1,8 +1,6 @@
-%ul.pages
-  %li= link_to 'Пользователи', users_url
-  - Hub.with_slug('static_pages').try(:pubs).try(:published_set).try(:each) do |page|
-    %li= link_to page.title, page_url(page.slug)
-
-= link_to '/recipes.rss' do
-  = image_tag 'social/rss.png'
-  RSS
+.panel.panel-success
+  .panel-body
+    %ul
+      %li= link_to 'Пользователи', users_url
+      - Hub.with_slug('static_pages').try(:pubs).try(:published_set).try(:each) do |page|
+        %li= link_to page.title, page_url(page.slug)

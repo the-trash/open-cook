@@ -1,5 +1,6 @@
-.sections
-  = link_to 'На главную', root_url, rel: :nofollow
-  - Hub.top_sections.each do |hub|
-    - current = (@root_hub == hub) ? :current : nil
-    = link_to hub.title, system_hub_url(hub.slug), class: current
+.panel.panel-success
+  .panel-body
+    = link_to 'На главную', root_url, rel: :nofollow
+    - Hub.top_sections.each do |hub|
+      - current = (@root_hub == hub) ? :current : nil
+      = link_to hub.title, system_hub_url(hub.slug), class: current

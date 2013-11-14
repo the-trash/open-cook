@@ -15,6 +15,7 @@
       .row
         .col-md-12
           = render partial: "layouts/items/sections"
+          = render partial: "layouts/items/top_menu"
       .row
         .col-md-3
           = render partial: "layouts/widgets/express_nav"
@@ -31,6 +32,10 @@
           = yield
           = yield :role_main
           = yield :comments_main
+
+      .row
+        .col-md-12
+          = render partial: "layouts/items/footer"
 
     =# stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"
     = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css"
