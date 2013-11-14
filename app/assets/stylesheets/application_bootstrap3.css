@@ -1,3 +1,10 @@
 /* 
   *= require bootstrap
+
+  *= require tree
+  *= require sortable_tree
+  *= require expandable_tree
+  *= require select2
+
+  *= require ./the_comments/base
 */

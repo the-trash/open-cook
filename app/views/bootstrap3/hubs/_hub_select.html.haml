@@ -1,8 +1,10 @@
-.field.hub_selector
-  - unless selector_hubs.blank?
-    - selected_hub = object.try(:hub)
-    - klass_name   = object.ctrl_name.singularize
+- unless selector_hubs.blank?
+  - selected_hub = object.try(:hub)
+  - klass_name   = object.ctrl_name.singularize
+  - options = options_for_select(publication_states, @post.state)
 
-    .field
-      %b= label_tag :hub_id, t('pubs.select_hub')
-      = select_tag "#{klass_name}[hub_id]", grouped_nested_options(selector_hubs, selected: selected_hub), class: :nested_options
+  .form-group.hub_selector  
+    .row
+      .col-md-12= label_tag :hub_id, t('pubs.select_hub')
+    .row
+      .col-md-8= select_tag "#{klass_name}[hub_id]", grouped_nested_options(selector_hubs, selected: selected_hub), class: :nested_options

@@ -1,41 +1,40 @@
 = render partial: 'shared/crop_image_form', locals: { object: @post }
 
-= form_for @post, html: { enctype: "multipart/form-data" } do |f|
+= form_for @post, html: { enctype: "multipart/form-data", role: :form } do |f|
   = render partial: 'the_notification/form', locals: { object: @post }
 
   = hidden_field_tag 'post_id',    @post.id
   = hidden_field_tag 'post_klass', @post.class
 
-  = render partial: 'shared/main_image_toolbar', locals: { f: f, object: @post }
+  =# render partial: 'shared/main_image_toolbar', locals: { f: f, object: @post }
   
-  .field
-    %b= f.label :title, t('pubs.title')
-    = f.text_field :title
+  .form-group
+    = f.label :title, t('pubs.title')
+    = f.text_field :title, class: 'form-control'
 
   = render partial: "shared/top_fields", locals: { f: f, object: @post, selector_hubs: @selector_hubs }
 
-  .field
-    %p
-      %b= t('pubs.intro')
+  .form-group
+    = f.label :raw_intro, t('pubs.intro')
     = f.text_area :raw_intro, class: :redactor_intro
   
-  .field
-    %p
-      %b= t('pubs.content')
+  .form-group
+    = f.label :raw_content, t('pubs.content')
     = f.text_area :raw_content, class: :redactor_content
 
-  .field
-    %p
-      %b= t('pubs.tags')
-    = f.text_field :tag_list
+  .form-group
+    = f.label :tag_list, t('pubs.tags')
+    = f.text_field :tag_list, class: 'form-control'
 
   - if !@post.new_record?
-    .field
+    .form-group
       - options = options_for_select(publication_states, @post.state)
-      %b= f.label  :state, t('pubs.state')
-      = f.select :state, options
+      .row
+        .col-md-12= f.label  :state, t('pubs.state')
+      .row
+        .col-md-5= f.select :state, options, {}, class: 'form-control input-medium'
   
-  .actions
-    = f.submit t('pubs.save')
+  .form-group
+    = f.submit t('pubs.save'), class: 'btn btn-info'
 
   = render partial: 'shared/pub_stats', locals: { object: @post }
