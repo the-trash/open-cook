@@ -2,44 +2,35 @@
 %html(lang="ru")
   %head
     %meta(charset="utf-8")
-    %link(href="favicon.ico" rel="shortcut icon")
     %meta(http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1")
     %meta(name="viewport" content="width=device-width, initial-scale=1.0")
-    %title= content_for?(:title) ? yield(:title) : "open-cook.ru"
+    %title= content_for?(:title) ? yield(:title) : "Bootstrap3"
+    %link(href="favicon.ico" rel="shortcut icon")
 
-    = csrf_meta_tags
+    = stylesheet_link_tag    [:application, AppConfig.theme].join('_')
     = javascript_include_tag [:application, AppConfig.theme].join('_')
-    = stylesheet_link_tag    [:application, AppConfig.theme].join('_'), media: :all
-    = render template: "layouts/items/vk_init"
-
+    = csrf_meta_tags
   %body
-    .body
-      = render partial: "layouts/items/top_menu"
-      -#%p.about <strong>Открытая кухня Анны Нечаевой</strong> &mdash; сайт содержит рецепты простых и доступных блюд, которые может приготовить каждый из самых обычных продуктов
-      -#.logo_banner
-      = render partial: "layouts/items/sections"
+    .container
+      .row
+        .col-md-12
+          = render partial: "layouts/items/sections"
+      .row
+        .col-md-3
+          = render partial: "layouts/widgets/express_nav"
+          = yield :hubs_widget
 
-      .content.ob
-        %table.layout
-          %tr
-            %td.left
-              .block
-                = render partial: "layouts/widgets/express_nav"
-                = yield :hubs_widget
-                = yield :recent_comments_widget
-                = yield :role_sidebar
-            %td.center
-              .block
-                = render partial: 'the_notification/flash'
-                = yield
-                = yield :role_main
-            %td.right
-              .block
-                = yield :tags_widget
-                = render template: "layouts/items/vk_group"
-                = render template: "layouts/items/ok_group"
-                = yield :tag_search_widget
+          = yield :role_sidebar
+          = yield :comments_sidebar
+          = yield :recent_comments_widget
 
-      .fguard &nbsp;
-    .footer.ob
-      = render partial: "layouts/items/footer"
+          = yield :tags_widget
+          = yield :tag_search_widget
+        .col-md-9
+          = render partial: 'the_notification/flash'
+          = yield
+          = yield :role_main
+          = yield :comments_main
+
+    =# stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"
+    = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css"

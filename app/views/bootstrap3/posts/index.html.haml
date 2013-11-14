@@ -9,19 +9,20 @@
 
 = paginate @posts
 
-%ul.posts_index
-  - @posts.each do |post|
-    %li
-      %h2= link_to post.title, show_url(post)
-      .intro.cf
-        - if post.main_image?
-          = link_to show_url(post) do
-            %p= image_tag post.main_image.url(:preview), class: :preview
+- @posts.each do |post|
+  .panel.panel-success
+    .panel-heading
+      %h3= link_to post.title, show_url(post)
+    .panel-body
+      - if post.main_image?
+        = link_to show_url(post) do
+          %p= image_tag post.main_image.url(:preview), class: :preview
 
-        %p= raw post.intro
-        = render partial: "posts/read_more", locals: { post: post }
+      %p= raw post.intro
+      = render partial: "posts/read_more", locals: { post: post }
 
-      %p.tags= tags_links(post.inline_tags)
+    .panel-footer
+      .tags= tags_links(post.inline_tags)
       = render partial: "posts/informer", locals: { post: post }
 
 = paginate @posts

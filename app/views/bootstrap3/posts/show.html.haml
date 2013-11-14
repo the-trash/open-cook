@@ -7,16 +7,18 @@
 - content_for :tags_widget do
   = render partial: 'layouts/widgets/tags', locals: { tags_str: @post.inline_tags }
 
-.posts_show.user_content
-  %h2= @post.title
-
-  .intro.cf
+.panel.panel-success
+  .panel-heading
+    %h3= @post.title
+  .panel-body
     - if @post.main_image?
       %p= image_tag @post.main_image.url(:preview), class: :preview
     %p= raw @post.intro
 
-  %p= raw @post.content
-  %p.tags= tags_links @post.inline_tags
-  = render partial: "posts/informer", locals: { post: @post }
+    %p= raw @post.content
+  
+  .panel-footer
+    .tags= tags_links @post.inline_tags
+    = render partial: "posts/informer", locals: { post: @post }
 
 = render partial: "the_comments/tree", locals: { commentable: @post, comments_tree: @comments }

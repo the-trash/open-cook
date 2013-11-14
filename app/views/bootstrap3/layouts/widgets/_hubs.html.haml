@@ -1,9 +1,14 @@
 - if @sub_hubs
-  .nav.hubs
-    - @sub_hubs.each do |hub|
-      - current = (@hub == hub) ? :current : nil
+  .panel.panel-success
+    .panel-heading
+      %h3 Хабы
 
-      = link_to hub_url(hub.slug), class: current do
-        = hub.title
-        %b
-          (#{hub.pubs_published_count})
+    .panel-body
+      - @sub_hubs.each do |hub|
+        - current = (@hub == hub) ? :current : nil
+
+        = link_to hub_url(hub.slug), class: current do
+          %p
+            = hub.title
+            %b
+              (#{hub.pubs_published_count})
