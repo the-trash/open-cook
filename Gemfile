@@ -65,9 +65,9 @@ gem 'the_storages',
   # branch: 'kiss_version'
 
 gem "the_comments",
-  path: '../the_comments'
-  # github: 'the-teacher/the_comments',
-  # branch: 'kiss_version'
+  path: '../the_comments',
+  github: 'the-teacher/the_comments',
+  branch: 'kiss_version'
 
 gem "the_notification",
   path: '../the_notification'
