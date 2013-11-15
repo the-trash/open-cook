@@ -55,9 +55,9 @@ gem 'the_string_to_slug',
   branch: 'master'
 
 gem 'the_role',
-  path: '../the_role'
-  # github: 'the-teacher/the_role',
-  # branch: 'kiss_version'
+  # path: '../the_role'
+  github: 'the-teacher/the_role',
+  branch: 'kiss_version'
 
 gem 'the_storages',
   path: '../the_storages'
@@ -65,14 +65,14 @@ gem 'the_storages',
   # branch: 'kiss_version'
 
 gem "the_comments",
-  path: '../the_comments',
+  # path: '../the_comments',
   github: 'the-teacher/the_comments',
   branch: 'kiss_version'
 
 gem "the_notification",
-  path: '../the_notification'
-  # github: 'the-teacher/the_notification',
-  # branch: 'master'
+  # path: '../the_notification'
+  github: 'the-teacher/the_notification',
+  branch: 'master'
 
 gem 'the_audit',
   #, path: '../the_audit'
