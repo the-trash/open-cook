@@ -50,6 +50,9 @@ ru:
     optgroup: 'Раздел для группировки:'
     have_not_available_hubs: 'Нет доступных разделов для публикации'
 
+    updated: "Хаб успешно обновлен"
+    created: "Хаб успешно создан"
+
     pubs_types:
       posts: Публикации
       pages: Страницы

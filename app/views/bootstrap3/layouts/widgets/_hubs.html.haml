@@ -1,4 +1,4 @@
-- if @sub_hubs
+- unless @sub_hubs.blank?
   .panel.panel-success
     .panel-heading
       %h3 Хабы
@@ -6,7 +6,6 @@
     .panel-body
       - @sub_hubs.each do |hub|
         - current = (@hub == hub) ? :current : nil
-
         = link_to hub_url(hub.slug), class: current do
           %p
             = hub.title

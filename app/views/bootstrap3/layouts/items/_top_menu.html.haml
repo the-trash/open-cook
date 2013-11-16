@@ -1,12 +1,15 @@
-.panel.panel-success
-  .panel-body
-  %noindex
-    %ol.breadcrumb
-      %li.active
-        %b= link_to 'На главную', root_url
-      %li
-        = link_to 'О сайте', page_url(:about)
+.navbar.navbar-inverse{ role: :navigation }
+  = link_to 'The!CMS', root_path, class: 'navbar-brand'
 
+  .collapse.navbar-collapse
+    %ul.nav.navbar-nav
+      %li
+        = link_to 'На главную', root_url
+
+        - system_pages.each do |page|
+          %li= link_to page.title, page_url(page.slug)
+
+    %ul.nav.navbar-nav.navbar-right
       - if current_user
         %li
           = link_to cabinet_url do
@@ -15,3 +18,4 @@
       - else
         %li= link_to  'Регистрация', signup_url
         %li= link_to  'Вход', login_url
+

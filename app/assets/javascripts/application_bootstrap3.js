@@ -14,6 +14,9 @@
 //= require expandable_tree/restorable
 //= require expandable_tree/initializer
 
+//= require the_comments
+//= require the_comments_manage
+
 //= require tinymce/tinymce.min.js
 //= require tinymce/init
 

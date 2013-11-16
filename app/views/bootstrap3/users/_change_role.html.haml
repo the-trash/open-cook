@@ -1,0 +1,12 @@
+- if current_user && current_user.has_role?(:roles, :update)
+  .collapse.navbar-collapse.pull-right
+    %ul.nav.navbar-nav
+      %li.dropdown
+        %a.dropdown-toggle{ href: '#',  data: { toggle: :dropdown } }
+          Change Role:
+          %b.caret
+        %ul.dropdown-menu.alert-info
+          %li= link_to :Action, '#'
+          %li= link_to :Action, '#'
+          %li= link_to :Action, '#'
+          %li= link_to :Action, '#'

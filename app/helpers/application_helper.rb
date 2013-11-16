@@ -1,4 +1,13 @@
 module ApplicationHelper
+  def system_pages
+    return hub.pubs.published_set if hub = Hub.with_slug(:system_pages)
+    Page.none
+  end
+
+  def top_sections
+    Hub.top_sections
+  end
+
   def model_name
     controller_name.singularize
   end
@@ -13,5 +22,5 @@ module ApplicationHelper
 
   def hub_pubs_types
     %w[ posts pages ].collect{ |type| [ t("hubs.pubs_types.#{type}"), type ] }
-  end  
+  end
 end
