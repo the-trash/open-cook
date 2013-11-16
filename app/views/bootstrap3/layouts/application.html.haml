@@ -10,8 +10,8 @@
     = stylesheet_link_tag    [:application, AppConfig.theme].join('_')
     = javascript_include_tag [:application, AppConfig.theme].join('_')
     = csrf_meta_tags
-  %body
-    .container
+  %body    
+    .body.container
       .row
         .col-md-12
           = render partial: "layouts/items/sections"
@@ -32,7 +32,8 @@
           = yield
           = yield :role_main
           = yield :comments_main
-
+      .fguard
+    .footer.container
       .row
         .col-md-12
           = render partial: "layouts/items/footer"

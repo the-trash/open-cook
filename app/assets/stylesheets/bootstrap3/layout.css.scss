@@ -1,0 +1,27 @@
+/* Base */
+html, body {
+  width: 100%;
+  height:100%;
+}
+
+.body{
+  height: auto !important;
+  min-height: 100%;
+  height: 100%;
+}
+
+/* Footer */
+$footer_height: 62px;
+
+.fguard{ height: $footer_height; }
+
+.footer{
+  overflow:    hidden;
+  height:      $footer_height;
+  margin-top: -$footer_height;
+}
+
+/* Addons */
+.footer{
+  .panel{ margin-bottom: 0; }
+}

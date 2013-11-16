@@ -7,4 +7,5 @@
   *= require select2
 
   *= require ./the_comments/base
+  *= require ./bootstrap3/layout
 */
