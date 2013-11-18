@@ -1,38 +1,6 @@
 require "#{Rails.root}/lib/tasks/includes/connect_ae_db"
 require "#{Rails.root}/lib/tasks/includes/ae2oc_db"
-
-# helpers
-def create_system_hub slug, title, type
-  User.root.hubs.where(title: title).first_or_create!(
-    slug:  slug,
-    title: title,
-    pubs_type: type,
-    state: :published
-  )
-end
-
-def create_hub_category category
-  user_root = User.root
-
-  hub_category = Hub.nested_set.new(
-    title: category.title,
-    # main_image_file_name: category.big_image_file_name,
-    # main_image_content_type: category.big_image_content_type,
-    # main_image_file_size: category.big_image_file_size,
-    slug: category.slug,
-    keywords: category.meta_keywords,
-    description: category.meta_description.to_s[0..250],
-    state: :published,
-    user: user_root
-  )
-  hub_category
-end
-
-def find_parent_category category
-  ae_category = AE_Category.where('id = ?', category.category_id).first
-  hub_category = Hub.where('slug = ?', ae_category.slug)
-  hub_category
-end
+require "#{Rails.root}/lib/tasks/includes/helpers"
 
 # rake ae:user_start
 namespace :ae do
@@ -156,6 +124,7 @@ namespace :ae do
 
   desc "Создаем основной hub для категорий статей"
   task create_root_category_hub: [:environment, :user_start] do
+    # Hub.delete_all
     puts "Создаем основной hub для категорий статей"
     create_system_hub(:system_article_categories, "КатегорииСтатей", :categories)
   end
@@ -184,15 +153,24 @@ namespace :ae do
 
     puts "Перетягиваем подкатегории"
     ae_subcategories.each_with_index do |ae_subcategory, index|
+      ae_subcategory.slug = make_slug ae_subcategory
       hub_subcategory = create_hub_category ae_subcategory
 
       if hub_subcategory.save
-        hub_subcategory.move_to_child_of find_parent_category(ae_subcategory)
-        puts "#{ae_subcategory.slug} => #{index+1}/#{ae_subcategories_count}"
+        hub_subcategory.move_to_child_of find_parent_category ae_subcategory
+        puts "#{hub_subcategory.slug} => #{index+1}/#{ae_subcategories_count}"
       else
-        puts "#{ae_subcategory.slug} - #{hub_subcategory.errors.to_a.to_s.red} => #{index+1}/#{ae_subcategories_count}"
+        puts "#{hub_subcategory.slug} - #{hub_subcategory.errors.to_a.to_s.red} => #{index+1}/#{ae_subcategories_count}"
       end
     end
+  end
+
+  desc "Перетягиваем загруженные файлы (uploaded_files)"
+  task uploaded_files_start: [:environment] do
+    ae_uploaded_files = AE_UploadedFile.all
+    ae_uploaded_files_count = ae_uploaded_files.count
+
+    
   end
 
   desc "Перетягиваем теги из AE в Open-cook"

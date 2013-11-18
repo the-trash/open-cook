@@ -115,11 +115,6 @@ class AE_UploadedFile < ActiveRecord::Base
   self.table_name = :uploaded_files
 end
 
-class AE_UploadedFile < ActiveRecord::Base
-  establish_connection CONNECTION_PARAMS_AE
-  self.table_name = :uploaded_files
-end
-
 class AE_User < ActiveRecord::Base
   establish_connection CONNECTION_PARAMS_AE
   self.table_name = :users
