@@ -1,12 +1,24 @@
 require "#{Rails.root}/lib/tasks/includes/connect_ae_db"
 require "#{Rails.root}/lib/tasks/includes/ae2oc_db"
 
+# helpers
+def create_system_hub slug, title, type
+  User.root.hubs.where(title: title).first_or_create!(
+    slug:  slug,
+    title: title,
+    pubs_type: type,
+    state: :published
+  )
+end
+
 # rake ae:user_start
 namespace :ae do
   desc "Clean up DB"
   task clean_db: :environment do
     Role.destroy_all
     User.destroy_all
+
+    Hub.delete_all
   end
 
   desc "Create Role"
@@ -111,9 +123,45 @@ namespace :ae do
       )
 
       if user.save
-        puts "#{index} #{aeuser.nick} => #{index}/#{user_count}"
+        puts "#{aeuser.nick} => #{index+1}/#{user_count}"
       else
-        puts "#{aeuser.nick} - #{user.errors.to_a.to_s.red} => #{index}/#{user_count}"
+        puts "#{aeuser.nick} - #{user.errors.to_a.to_s.red} => #{index+1}/#{user_count}"
+      end
+    end
+  end
+
+  desc "Создаем основной hub для категорий статей"
+  task create_root_category_hub: [:environment, :user_start] do
+    puts "Создаем основной hub для категорий статей"
+    create_system_hub(:system_article_categories, "КатегорииСтатей", :categories)
+  end
+
+  desc "Перетаскиваем категории в основной hub для категорий статей"
+  task categories_start: [:environment, :create_root_category_hub] do
+    ae_categories = AE_Category.all
+    ae_categories_count = ae_categories.count
+
+    root_hub_categories = Hub.where(title: "КатегорииСтатей").first
+    user_root = User.root
+
+    ae_categories.each_with_index do |ae_category, index|
+      hub_category = Hub.nested_set.new(
+        title: ae_category.title,
+        # main_image_file_name: ae_category.big_image_file_name,
+        # main_image_content_type: ae_category.big_image_content_type,
+        # main_image_file_size: ae_category.big_image_file_size,
+        slug: ae_category.slug,
+        keywords: ae_category.meta_keywords,
+        # description: ae_category.meta_description,
+        state: :published,
+        user: user_root
+      )
+
+      if hub_category.save
+        hub_category.move_to_child_of root_hub_categories
+        puts "#{ae_category.slug} => #{index+1}/#{ae_categories_count}"
+      else
+        puts "#{ae_category.slug} - #{hub_category.errors.to_a.to_s.red} => #{index+1}/#{ae_categories_count}"
       end
     end
   end
