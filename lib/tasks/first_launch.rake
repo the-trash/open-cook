@@ -1,92 +1,35 @@
 # encoding: UTF-8
 require "#{Rails.root}/db/seeds/support/hubs_build"
-
-def basic_permissions
-  {
-    new:     true,
-    index:   true,
-    show:    true,
-    create:  true,
-    edit:    true,
-    update:  true,
-    delete:  true,
-
-    manage:  true,
-    rebuild: true
-  }
-end
+require "#{Rails.root}/db/seeds/support/users_build"
+require "#{Rails.root}/db/seeds/support/roles_build"
 
 namespace :db do
-  # rake db:check
-  # task check: :environment do     
-  # end
-
   namespace :create do
     # rake db:create:admin
     desc "create admin"
     task admin: :environment do
-      TheRole.create_admin_role!
-      User.create_admin!
-
-      puts "First User (admin) created"
-      puts "Login: [admin], Password: [qwerty]"
-      puts '~'*40
+      UsersBuild.create_admin!
     end
 
     # rake db:create:user_role
     desc "create user role"
     task user_role: :environment do
-      Role.create!(
-        name:  :user,
-        title: :user,
-        description: "regular user",
-        the_role: {
-          users: {
-            cabinet: true
-          },
-          posts: basic_permissions,
-          available_hubs: {
-            posts: true,
-
-            interviews: true,
-            articles: true,
-            recipes: true,
-            videos: true,
-            blogs: true
-          }
-        }
-      )
+      RolesBuild.regular_user!
+      puts "Regular user role created"
     end
 
     # rake db:create:blogger_role
     desc "create blogger role"
     task blogger_role: :environment do
-      Role.create!(
-        name:  :blogger,
-        title: :blogger,
-        description: "blogger",
-        the_role: {
-          users: {
-            cabinet: true
-          },
-          posts: basic_permissions,
-          available_hubs: {
-            blogs: true
-          }
-        }
-      )
+      RolesBuild.blogger!
+      puts "Blogger role created"
     end
 
     # rake db:create:first_user
     desc "create first user"
     task first_user: :environment do
-      User.create!(
-        login: :ilya_zykin,
-        username: "Ilya N. Zykin",
-        email: "zykin-ilya@ya.ru",
-        password: "qwerty",
-        role: Role.with_name(:user)
-      )
+      UsersBuild.ilya_zykin!
+      puts "First user created"
     end
 
     # rake db:create:system_hubs
