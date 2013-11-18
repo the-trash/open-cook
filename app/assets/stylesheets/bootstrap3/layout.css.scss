@@ -11,7 +11,7 @@ html, body {
 }
 
 /* Footer */
-$footer_height: 62px;
+$footer_height: 100px;
 
 .fguard{ height: $footer_height; }
 
@@ -27,6 +27,5 @@ $footer_height: 62px;
 }
 
 /* styles */
-.mb15{
-  margin-bottom: 15px;
-}
+.mt5{ margin-top: 5px; }
+.mb15{ margin-bottom: 15px; }

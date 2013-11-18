@@ -1,18 +1,17 @@
 = paginate @users
 
 - @users.each do |user|
-  - 30.times do
-    .navbar.navbar-default{ role: :navigation }
-      .navbar-header
-        = link_to user.login, user_url(user), class: 'navbar-brand'
+  .navbar.navbar-default{ role: :navigation }
+    .navbar-header
+      = link_to user.login, user_url(user), class: 'navbar-brand'
 
-      .collapse.navbar-collapse
-        %p.navbar-text
-          Name: #{ user.username }
+    .collapse.navbar-collapse
+      %p.navbar-text
+        Name: #{ user.username }
 
-        %p.navbar-text
-          Role: #{ user.role_name }
+      %p.navbar-text
+        Role: #{ user.role_name }
 
-        = render partial: 'users/change_role'
+      = render partial: 'users/change_role'
 
 = paginate @users

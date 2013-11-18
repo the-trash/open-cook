@@ -1,6 +1,10 @@
-.panel.panel-success
-  .panel-body
-    %ul
-      %li= link_to 'Пользователи', users_url
-      - system_pages do |page|
-        %li= link_to page.title, page_url(page.slug)
+%table.table
+  %tr
+    %td
+      = link_to 'Пользователи', users_url
+  - if !(spages = system_pages).blank?
+    %tr
+      %td
+        %ul.nav.nav-pills.nav-justified
+          - spages.each do |page|
+            %li= link_to page.title, page_url(page.slug)

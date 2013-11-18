@@ -1,11 +1,12 @@
 module ApplicationHelper
   def system_pages
-    return hub.pubs.published_set if hub = Hub.with_slug(:system_pages)
+    hub = Hub.with_slug(:system_pages)
+    return hub.pubs.published_set if hub
     Page.none
   end
 
-  def top_sections
-    Hub.top_sections
+  def system_hubs
+    Hub.system_hubs
   end
 
   def model_name
