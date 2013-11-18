@@ -11,6 +11,29 @@ def create_system_hub slug, title, type
   )
 end
 
+def create_hub_category category
+  user_root = User.root
+
+  hub_category = Hub.nested_set.new(
+    title: category.title,
+    # main_image_file_name: category.big_image_file_name,
+    # main_image_content_type: category.big_image_content_type,
+    # main_image_file_size: category.big_image_file_size,
+    slug: category.slug,
+    keywords: category.meta_keywords,
+    description: category.meta_description.to_s[0..250],
+    state: :published,
+    user: user_root
+  )
+  hub_category
+end
+
+def find_parent_category category
+  ae_category = AE_Category.where('id = ?', category.category_id).first
+  hub_category = Hub.where('slug = ?', ae_category.slug)
+  hub_category
+end
+
 # rake ae:user_start
 namespace :ae do
   desc "Clean up DB"
@@ -92,7 +115,8 @@ namespace :ae do
   desc "Перетягиваем пользователей"
   task user_start: [:environment, :create_roles] do
     puts "User start =>"
-    ae_users = AE_User.all
+    # ae_users = AE_User.all
+    ae_users = AE_User.limit(2)
     user_count = ae_users.count
 
     # create admin
@@ -142,26 +166,31 @@ namespace :ae do
     ae_categories_count = ae_categories.count
 
     root_hub_categories = Hub.where(title: "КатегорииСтатей").first
-    user_root = User.root
 
     ae_categories.each_with_index do |ae_category, index|
-      hub_category = Hub.nested_set.new(
-        title: ae_category.title,
-        # main_image_file_name: ae_category.big_image_file_name,
-        # main_image_content_type: ae_category.big_image_content_type,
-        # main_image_file_size: ae_category.big_image_file_size,
-        slug: ae_category.slug,
-        keywords: ae_category.meta_keywords,
-        # description: ae_category.meta_description,
-        state: :published,
-        user: user_root
-      )
+      hub_category = create_hub_category ae_category
 
       if hub_category.save
         hub_category.move_to_child_of root_hub_categories
         puts "#{ae_category.slug} => #{index+1}/#{ae_categories_count}"
       else
         puts "#{ae_category.slug} - #{hub_category.errors.to_a.to_s.red} => #{index+1}/#{ae_categories_count}"
+      end
+    end
+
+    # перетягиваем подкатегории
+    ae_subcategories = AE_Subcategory.all
+    ae_subcategories_count = ae_subcategories.count
+
+    puts "Перетягиваем подкатегории"
+    ae_subcategories.each_with_index do |ae_subcategory, index|
+      hub_subcategory = create_hub_category ae_subcategory
+
+      if hub_subcategory.save
+        hub_subcategory.move_to_child_of find_parent_category(ae_subcategory)
+        puts "#{ae_subcategory.slug} => #{index+1}/#{ae_subcategories_count}"
+      else
+        puts "#{ae_subcategory.slug} - #{hub_subcategory.errors.to_a.to_s.red} => #{index+1}/#{ae_subcategories_count}"
       end
     end
   end
