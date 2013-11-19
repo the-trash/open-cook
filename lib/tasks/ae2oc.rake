@@ -134,6 +134,10 @@ namespace :ae do
     ae_categories = AE_Category.all
     ae_categories_count = ae_categories.count
 
+    # перетягиваем подкатегории
+    ae_subcategories = AE_Subcategory.all
+    ae_subcategories_count = ae_subcategories.count
+
     root_hub_categories = Hub.where(title: "КатегорииСтатей").first
 
     ae_categories.each_with_index do |ae_category, index|
@@ -142,25 +146,24 @@ namespace :ae do
       if hub_category.save
         hub_category.move_to_child_of root_hub_categories
         puts "#{ae_category.slug} => #{index+1}/#{ae_categories_count}"
+        
+        puts "Перетягиваем подкатегории для #{ae_category.slug}"
+        ae_subcategories.each_with_index do |ae_subcategory, index|
+          hub_subcategory = create_hub_category ae_subcategory
+
+          if ae_subcategory.category_id == ae_category.id
+            if hub_subcategory.save
+              hub_subcategory.move_to_child_of hub_category
+              puts "#{hub_subcategory.slug} => #{index+1}/#{ae_subcategories_count}"
+            else
+              puts "#{hub_subcategory.slug} - #{hub_subcategory.errors.to_a.to_s.red} => #{index+1}/#{ae_subcategories_count}"
+            end
+          else
+            next
+          end
+        end
       else
         puts "#{ae_category.slug} - #{hub_category.errors.to_a.to_s.red} => #{index+1}/#{ae_categories_count}"
-      end
-    end
-
-    # перетягиваем подкатегории
-    ae_subcategories = AE_Subcategory.all
-    ae_subcategories_count = ae_subcategories.count
-
-    puts "Перетягиваем подкатегории"
-    ae_subcategories.each_with_index do |ae_subcategory, index|
-      ae_subcategory.slug = make_slug ae_subcategory
-      hub_subcategory = create_hub_category ae_subcategory
-
-      if hub_subcategory.save
-        hub_subcategory.move_to_child_of find_parent_category ae_subcategory
-        puts "#{hub_subcategory.slug} => #{index+1}/#{ae_subcategories_count}"
-      else
-        puts "#{hub_subcategory.slug} - #{hub_subcategory.errors.to_a.to_s.red} => #{index+1}/#{ae_subcategories_count}"
       end
     end
   end

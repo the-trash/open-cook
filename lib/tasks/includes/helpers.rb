@@ -10,13 +10,14 @@ end
 
 def create_hub_category category
   user_root = User.root
+  slug = make_slug category
 
   hub_category = Hub.nested_set.new(
     title: category.title,
     # main_image_file_name: category.big_image_file_name,
     # main_image_content_type: category.big_image_content_type,
     # main_image_file_size: category.big_image_file_size,
-    slug: category.slug,
+    slug: slug,
     keywords: category.meta_keywords,
     description: category.meta_description.to_s[0..250],
     state: :published,
@@ -45,5 +46,7 @@ def make_slug category
       salt = (0..8).map { (65 + rand(26)).chr }.join
       "#{salt}-#{category.slug}"
     end
+  else
+    category.slug
   end
 end
