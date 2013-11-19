@@ -12,7 +12,7 @@ def create_hub_category category
   user_root = User.root
   slug = make_slug category
 
-  hub_category = Hub.nested_set.new(
+  hub_category = Hub.new(
     title: category.title,
     # main_image_file_name: category.big_image_file_name,
     # main_image_content_type: category.big_image_content_type,
@@ -61,5 +61,5 @@ end
 def find_user node
   ae_user = AE_User.find node.user_id
   user = User.where('username = ?', ae_user.nick)
-  user
+  user.first
 end

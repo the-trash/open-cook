@@ -169,7 +169,7 @@ namespace :ae do
   end
 
   desc "Перетаскиваем посты"
-  task posts_start: [:environment] do
+  task posts_start: [:environment, :categories_start] do
     Post.delete_all
 
     ae_articles = AE_Article.all
@@ -196,6 +196,42 @@ namespace :ae do
         puts "#{post.title} => #{index+1}/#{ae_articles_count}"
       else
         puts "#{post.title} - #{post.errors.to_a.to_s.red} => #{index+1}/#{ae_articles_count}"
+      end
+    end
+  end
+
+  desc "Создаем Hub для блогов"
+  task create_hub_blog: [:environment] do
+    puts "Создаем основной hub для блогов"
+    create_system_hub(:system_blogs, "Блоги", :posts)
+  end
+
+  desc "Перетягиваем блоги"
+  # допилить не связанные 3 блога, связать с админом
+  task blogs_start: [:environment] do
+    ae_blogs = AE_Blog.where.not('user_id IN (4,17,33)')
+    ae_blogs_count = ae_blogs.count
+    hub_blog = Hub.roots.where("title = ?", "Блоги").first
+
+    puts "Перетягиваем блоги:"
+    ae_blogs.each_with_index do |ae_blog, index|
+      user_blog = find_user ae_blog
+
+      blog = Post.new(
+        title: ae_blog.name,
+        raw_intro: ae_blog.body,
+        raw_content: ae_blog.body,
+        # main_image_file_name: ae_blog.image_file_name,
+        # main_image_file_size: ae_blog.image_file_size,
+        # main_image_content_type: ae_blog.image_content_type,
+        hub_id: hub_blog.id,
+        user_id: user_blog.id
+      )
+
+      if blog.save
+        puts "#{blog.title} => #{index+1}/#{ae_blogs_count}"
+      else
+        puts "#{blog.title} - #{blog.errors.to_a.to_s.red} => #{index+1}/#{ae_blogs_count}"
       end
     end
   end
