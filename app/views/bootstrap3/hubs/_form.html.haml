@@ -1,39 +1,45 @@
 = render partial: 'shared/crop_image_form', locals: { object: @hub }
 
-= form_for @hub, html: { enctype: "multipart/form-data" } do |f|
-  = error_messages_for @hub
+= form_for @hub, html: { enctype: "multipart/form-data", role: :form } do |f|
+  = render partial: 'the_notification/form', locals: { object: @hub }
 
   = hidden_field_tag 'hub_id',    @hub.id
   = hidden_field_tag 'hub_klass', @hub.class
 
-  = render partial: 'shared/main_image_toolbar', locals: { f: f, object: @hub }
+  =# render partial: 'shared/main_image_toolbar', locals: { f: f, object: @hub }
   
-  .field
-    %b= f.label :title, t('pubs.title')
-    = f.text_field :title
+  .form-group
+    = f.label :title, t('pubs.title')
+    = f.text_field :title, class: 'form-control'
 
   = render partial: "shared/top_fields", locals: { f: f, object: @post, selector_hubs: @selector_hubs }
 
-  .field
-    %p
-      %b= t('pubs.intro')
+  .form-group
+    = f.label :raw_intro, t('pubs.intro')
     = f.text_area :raw_intro, class: :redactor_intro
 
-  .field
+  .form-group
     - options = options_for_select(hub_pubs_types, @hub.pubs_type)
-    %b= f.label :pubs_type, t('hubs.pubs_type')
-    = f.select  :pubs_type, options
+    .row
+      .col-md-12
+        = f.label  :pubs_type, t('hubs.pubs_type')
+    .row
+      .col-md-5
+        = f.select :pubs_type, options, {}, class: 'form-control input-medium'
 
-  .field
-    - options = options_for_select(publication_states, @hub.state)
-    %b= f.label :state, t('pubs.state')
-    = f.select :state, options
+  - if !@hub.new_record?
+    .form-group
+      - options = options_for_select(publication_states, @hub.state)
+      .row
+        .col-md-12= f.label  :state, t('pubs.state')
+      .row
+        .col-md-6= f.select :state, options, {}, class: 'form-control input-medium'
 
-  .field
-    %b= f.label :state, t('hubs.optgroup')
+  .checkbox
     = f.check_box :optgroup
+    = t('hubs.optgroup')
 
   .actions
-    = f.submit t('pubs.save')
+    = f.submit t('pubs.save'), class: 'btn btn-info'
 
   = render partial: 'shared/pub_stats', locals: { object: @hub }

@@ -1,19 +1,14 @@
-= form_for @user do |f|
-  - if @user.errors.any?
-    .error_messages
-      %h2 Form is invalid
-      %ul
-        - for message in @user.errors.full_messages
-          %li= message
-  .field
+= form_for @user, html: { role: :form } do |f|
+  .form-group
+    = render partial: "the_notification/form", locals: { object: @user }
+  .form-group
     = f.label :login
-    = f.text_field :login
-  .field
+    = f.text_field :login, class: 'form-control'
+  .form-group
     = f.label :email
-    = f.text_field :email
-  .field
+    = f.text_field :email, class: 'form-control'
+  .form-group
     = f.label :password
-    = f.password_field :password
-
-
-  .actions= f.submit
+    = f.password_field :password, class: 'form-control'
+  .form-group
+    = f.submit class: 'btn btn-info'

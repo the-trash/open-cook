@@ -10,27 +10,34 @@
     = stylesheet_link_tag    [:application, AppConfig.theme].join('_')
     = javascript_include_tag [:application, AppConfig.theme].join('_')
     = csrf_meta_tags
-  %body
-    .container
+  %body    
+    .body.container
+      .mb15
+        .row
+          .col-md-12
+            = render partial: "layouts/items/header"
+            = render partial: "layouts/items/sections"
+        .row
+          .col-md-3
+            = render partial: "layouts/widgets/express_nav"
+            = yield :hubs_widget
+
+            = yield :role_sidebar
+            = yield :comments_sidebar
+            = yield :recent_comments_widget
+
+            = yield :tags_widget
+            = yield :tag_search_widget
+          .col-md-9
+            = render partial: 'the_notification/flash'
+            = yield
+            = yield :role_main
+            = yield :comments_main
+      .fguard
+    .footer.container
       .row
         .col-md-12
-          = render partial: "layouts/items/sections"
-      .row
-        .col-md-3
-          = render partial: "layouts/widgets/express_nav"
-          = yield :hubs_widget
-
-          = yield :role_sidebar
-          = yield :comments_sidebar
-          = yield :recent_comments_widget
-
-          = yield :tags_widget
-          = yield :tag_search_widget
-        .col-md-9
-          = render partial: 'the_notification/flash'
-          = yield
-          = yield :role_main
-          = yield :comments_main
+          = render partial: "layouts/items/footer"
 
     =# stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"
     = stylesheet_link_tag "//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css"

@@ -1,13 +1,13 @@
-= form_tag sessions_path do 
-  .field
+= form_tag sessions_path, html: { role: :form } do 
+  .form-group
     = label_tag :login 
-    = text_field_tag :login, params[:login] 
-  .field
+    = text_field_tag :login, params[:login], class: 'form-control'
+  .form-group
     = label_tag :password 
-    = password_field_tag :password 
-  .field
+    = password_field_tag :password, '', class: 'form-control'
+  .form-group
     = label_tag :remember_me do
       = check_box_tag :remember_me, true, params[:remember_me], checked: true
       = t 'sessions.remember_me'
-    
-  .actions= submit_tag t('sessions.login'), class: :btn
+  .form-group
+    = submit_tag t('sessions.login'), class: 'btn btn-info'

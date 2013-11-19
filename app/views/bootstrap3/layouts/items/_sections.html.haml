@@ -1,5 +1,8 @@
-.sections
-  = link_to 'На главную', root_url, rel: :nofollow
-  - Hub.top_sections.each do |hub|
-    - current = (@root_hub == hub) ? :current : nil
-    = link_to hub.title, system_hub_url(hub.slug), class: current
+- if !(shubs = system_hubs).blank?
+  .navbar.navbar{ role: :navigation }
+    .collapse.navbar-collapse
+      %ul.nav.nav-pills.nav-justified
+        - shubs.each do |hub|
+          - active = (@root_hub == hub) ? :active : nil
+          %li{ class: active }
+            = link_to hub.title, system_hub_url(hub.slug)

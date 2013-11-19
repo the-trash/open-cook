@@ -1,5 +1,5 @@
 .users_cabinet
-  %h3 Кабинет пользователя #{@user.login}
+  %h3= t ".cabinet", login: @user.login
 
   - if current_user.any_role?(posts: :new, pages: :new)
     .fn_block
@@ -42,7 +42,9 @@
     %h4= t '.comments'
     
     %ul.marked_list
-      %li= link_to "Комментарии (+#{@user.draft_comcoms_count})", [:manage, :comments]
+      %li
+        = link_to [:manage, :comments] do
+          = t(".incoming_comments") + "(+#{@user.draft_comcoms_count})"
 
   - if @user.has_role?(:roles, :manage)
     .fn_block
