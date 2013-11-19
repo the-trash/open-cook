@@ -27,6 +27,7 @@ gem 'kaminari'
 gem 'haml'
 gem 'sanitize'
 gem 'state_machine', '~> 1.2.0'
+gem 'russian'
 
 gem 'acts-as-taggable-on', github: "mbleigh/acts-as-taggable-on",       branch: "master"
 gem 'awesome_nested_set',  github: "collectiveidea/awesome_nested_set", branch: "master"

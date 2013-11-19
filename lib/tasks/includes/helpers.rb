@@ -27,7 +27,14 @@ def create_hub_category category
 end
 
 def find_parent_category category
-  ae_category = AE_Category.where('id = ?', category.category_id).first
+  if category.respond_to?(:category_id)
+    cat_id = category.category_id
+    ae_category = AE_Category.where('id = ?', cat_id).first
+  else
+    cat_id = category.subcategory_id
+    ae_category = AE_Subcategory.where('id = ?', cat_id).first
+  end
+
   hub_category = Hub.where('slug = ?', ae_category.slug).first
   hub_category
 end
@@ -49,4 +56,21 @@ def make_slug category
   else
     category.slug
   end
+end
+
+def find_user node
+  ae_user = AE_User.find node.user_id
+  user = User.where('username = ?', ae_user.nick)
+  user
+end 
+
+def generate_slug node
+  translite_slug = Russian.translit node
+  slug = translite_slug.gsub(' ','-')
+         .gsub(/[^\x00-\x7F]+/, '')
+         .gsub(/[^\w_ \-]+/i,'')
+         .gsub(/[ \-]+/i,'-')
+         .gsub(/^\-|\-$/i,'')
+         .downcase
+  slug
 end

@@ -83,8 +83,8 @@ namespace :ae do
   desc "Перетягиваем пользователей"
   task user_start: [:environment, :create_roles] do
     puts "User start =>"
-    # ae_users = AE_User.all
-    ae_users = AE_User.limit(2)
+    ae_users = AE_User.all
+    # ae_users = AE_User.limit(2)
     user_count = ae_users.count
 
     # create admin
@@ -164,6 +164,39 @@ namespace :ae do
         end
       else
         puts "#{ae_category.slug} - #{hub_category.errors.to_a.to_s.red} => #{index+1}/#{ae_categories_count}"
+      end
+    end
+  end
+
+  desc "Перетаскиваем посты"
+  task posts_start: [:environment] do
+    Post.delete_all
+
+    ae_articles = AE_Article.all
+    ae_articles_count = ae_articles.count
+
+    ae_articles.each_with_index do |ae_article, index|
+      # user = find_user ae_article
+      user = User.root
+      hub = find_parent_category ae_article
+
+      # решить вопрос с: image_file_name, pdf_file_name, swf_file_name, swf_see_file_name
+      post = Post.nested_set.new(
+        user_id: user.id,
+        hub_id: hub.id,
+        keywords: ae_article.meta_keywords,
+        description: ae_article.meta_description.to_s[0..250],
+        title: ae_article.title,
+        raw_intro: ae_article.description,
+        raw_content: ae_article.body.to_s[0..21844],
+        state: ae_article.state,
+        slug: generate_slug(ae_article.title)
+      )
+
+      if post.save
+        puts "#{post.title} => #{index+1}/#{ae_articles_count}"
+      else
+        puts "#{post.title} - #{post.errors.to_a.to_s.red} => #{index+1}/#{ae_articles_count}"
       end
     end
   end
