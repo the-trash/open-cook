@@ -62,15 +62,4 @@ def find_user node
   ae_user = AE_User.find node.user_id
   user = User.where('username = ?', ae_user.nick)
   user
-end 
-
-def generate_slug node
-  translite_slug = Russian.translit node
-  slug = translite_slug.gsub(' ','-')
-         .gsub(/[^\x00-\x7F]+/, '')
-         .gsub(/[^\w_ \-]+/i,'')
-         .gsub(/[ \-]+/i,'-')
-         .gsub(/^\-|\-$/i,'')
-         .downcase
-  slug
 end

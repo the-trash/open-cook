@@ -181,16 +181,15 @@ namespace :ae do
       hub = find_parent_category ae_article
 
       # решить вопрос с: image_file_name, pdf_file_name, swf_file_name, swf_see_file_name
-      post = Post.nested_set.new(
+      post = Post.new(
         user_id: user.id,
         hub_id: hub.id,
         keywords: ae_article.meta_keywords,
         description: ae_article.meta_description.to_s[0..250],
         title: ae_article.title,
         raw_intro: ae_article.description,
-        raw_content: ae_article.body.to_s[0..21844],
-        state: ae_article.state,
-        slug: generate_slug(ae_article.title)
+        raw_content: ae_article.body,
+        state: ae_article.state
       )
 
       if post.save
