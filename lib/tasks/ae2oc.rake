@@ -11,6 +11,7 @@ namespace :ae do
 
     Hub.delete_all
     Post.delete_all
+    Comment.delete_all
   end
 
   desc "Create Role"
@@ -255,6 +256,13 @@ namespace :ae do
         puts "#{blog.title} - #{blog.errors.to_a.to_s.red} => #{index+1}/#{not_relation_blogs.count}"
       end
     end
+  end
+
+  desc "Перетягиваем комментарии"
+  task comment_start: [:environment, :blogs_start] do
+    puts 'Перетаскиваем комментарии:'
+    ae_roots_comments = AE_Comment.where('depth = ?', 0)
+    ae_roots_comments.each {|ae_root_comment| create_comment ae_root_comment}
   end
 
   desc "Перетягиваем загруженные файлы (uploaded_files)"

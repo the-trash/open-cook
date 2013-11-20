@@ -59,7 +59,58 @@ def make_slug category
 end
 
 def find_user node
+  case node.user_id
+    when nil then return User.root
+    when 4 then return User.root
+    when 17 then return User.root
+    when 33 then return User.root
+    else return_user node
+  end
+end
+
+def return_user node
   ae_user = AE_User.find node.user_id
   user = User.where('username = ?', ae_user.nick)
   user.first
+end
+
+def create_comment node, parent = nil
+  print '.'
+
+  user = find_user node
+  obj = return_obj_for_comment node
+
+  root_comment = obj.comments.create!(
+    user:        user,
+    commentable: obj,
+    raw_content: node.text,
+    referer:     node.referer,
+    user_agent:  node.user_agent,
+    ip:          node.ip,
+    parent_id:   parent.try(:id)
+  )
+
+  children = return_children_comment node
+  children.each {|comment| create_comment comment, root_comment} if children.present?
+end
+
+def return_blog id
+  blog = AE_Blog.find id
+  return Post.find_by_title blog.name
+end
+
+def return_article id
+  article = AE_Article.find id
+  return Post.find_by_title article.title
+end
+
+def return_obj_for_comment comment
+  obj = case comment.commentable_type
+    when 'Blog' then return_blog comment.commentable_id
+    when 'Article' then return_article comment.commentable_id
+  end
+end
+
+def return_children_comment comment
+  AE_Comment.where('parent_id = ?', comment.id)
 end
