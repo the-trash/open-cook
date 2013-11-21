@@ -267,10 +267,18 @@ namespace :ae do
 
   desc "Перетягиваем загруженные файлы (uploaded_files)"
   task uploaded_files_start: [:environment] do
+    AttachedFile.delete_all
     ae_uploaded_files = AE_UploadedFile.all
-    ae_uploaded_files_count = ae_uploaded_files.count
+    # ae_uploaded_files = AE_UploadedFile.limit(5)
 
-    
+    ae_uploaded_files.each do |ae_uploaded_file|
+      # Положил в папку с проектом, указывать путь под себя
+      old_file = "#{Rails.root}/public/system/old_uploads/uploads/" +
+                  "#{ae_uploaded_file.storage_type.downcase}/#{ae_uploaded_file.storage_id}/"+
+                  "files/original/#{ae_uploaded_file.file_file_name}"
+
+      create_attached_files ae_uploaded_file, old_file
+    end
   end
 
   desc "Перетягиваем теги из AE в Open-cook"

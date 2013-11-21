@@ -95,13 +95,21 @@ def create_comment node, parent = nil
 end
 
 def return_blog id
-  blog = AE_Blog.find id
-  return Post.find_by_title blog.name
+  begin
+    blog = AE_Blog.find id
+    return Post.find_by_title blog.name
+  rescue ActiveRecord::RecordNotFound
+    return false
+  end
 end
 
 def return_article id
-  article = AE_Article.find id
-  return Post.find_by_title article.title
+  begin
+    article = AE_Article.find id
+    return Post.find_by_title article.title
+  rescue ActiveRecord::RecordNotFound
+    return false
+  end
 end
 
 def return_obj_for_comment comment
@@ -113,4 +121,26 @@ end
 
 def return_children_comment comment
   AE_Comment.where('parent_id = ?', comment.id)
+end
+
+def return_obj_for_storage node
+  obj = case node.storage_type
+    when 'Blog' then return_blog node.storage_id
+    when 'Article' then return_article node.storage_id
+  end
+end
+
+def create_attached_files node, old_file
+  user = find_user node
+  obj = return_obj_for_storage node
+
+  if (File.exists?(old_file) && obj )
+    obj.attached_files.create(
+      user: user,
+      attachment: File.open(old_file)
+    )
+    print '*'
+  else
+    puts old_file.to_s.yellow
+  end
 end
