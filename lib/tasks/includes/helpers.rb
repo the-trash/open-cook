@@ -59,12 +59,10 @@ def make_slug category
 end
 
 def find_user node
-  case node.user_id
-    when nil then return User.root
-    when 4 then return User.root
-    when 17 then return User.root
-    when 33 then return User.root
-    else return_user node
+  begin
+    return_user node
+  rescue
+    User.root
   end
 end
 
@@ -143,4 +141,19 @@ def create_attached_files node, old_file
   else
     puts old_file.to_s.yellow
   end
+end
+
+def create_main_image_file obj, old_file
+  if File.exists?(old_file)
+    obj.main_image(main_image: File.open(old_file))
+    print '(f*)' if obj.save
+  else
+    puts old_file.to_s.yellow
+  end
+end
+
+def puts_error obj, index, obj_count
+  puts ''
+  puts "#{obj.errors.to_a.to_s.red} => #{index+1}/#{obj_count}"
+  puts ''
 end
