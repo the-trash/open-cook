@@ -8,12 +8,11 @@ require "#{Rails.root}/lib/tasks/includes/helpers"
 namespace :ae do
   desc "Clean up DB"
   task clean_db: :environment do
-    puts "Роли очищены" if Role.destroy_all
-    puts "Пользователи очищены" if User.destroy_all
-
-    puts "Хабы очишены" if Hub.delete_all
-    puts "Посты очищены" if Post.delete_all
-    puts "Комменты очищены" if Comment.delete_all
+    puts "Роли очищены"              if Role.destroy_all
+    puts "Пользователи очищены"      if User.destroy_all
+    puts "Хабы очишены"              if Hub.delete_all
+    puts "Посты очищены"             if Post.delete_all
+    puts "Комменты очищены"          if Comment.delete_all
     puts "Загруженные файлы очищены" if AttachedFile.delete_all
   end
 
@@ -302,6 +301,12 @@ namespace :ae do
 
   desc "Перетягиваем теги из AE в Open-cook"
   task tags_start: :environment do
-    
+  end
+
+  # rake ae:data_move
+  desc "data moving"
+  task data_move: :environment do
+    Rake::Task["db:bootstrap"].invoke
+    Rake::Task["ae:clean_db"].invoke
   end
 end
