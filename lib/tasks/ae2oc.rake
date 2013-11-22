@@ -2,8 +2,13 @@ require "#{Rails.root}/lib/tasks/includes/connect_ae_db"
 require "#{Rails.root}/lib/tasks/includes/ae2oc_db"
 require "#{Rails.root}/lib/tasks/includes/helpers"
 
-# проверить путь и права на переносимые файлы перед стартом
+# =================================
+# How to move data to new Engine?
+# =================================
+# rake ae:data_move
+# =================================
 
+# проверить путь и права на переносимые файлы перед стартом
 # rake ae:user_start
 namespace :ae do
   desc "Clean up DB"
@@ -97,7 +102,7 @@ namespace :ae do
       username: 'admin',
       email: 'admin@example.com',
       password: 'admin',
-      role_id: 1
+      role: Role.with_name(:admin)
     )
 
     if admin.save
@@ -106,6 +111,7 @@ namespace :ae do
       puts "#{admin.errors.to_a.to_s.red}"
     end
 
+    puts "Users export"
     ae_users.each_with_index do |aeuser, index|
       user = User.new(
         login: aeuser.email,
@@ -127,7 +133,7 @@ namespace :ae do
   end
 
   desc "Создаем основной hub для категорий статей"
-  task create_root_category_hub: [:environment, :user_start] do
+  task create_root_category_hub: [:environment] do
     # Hub.delete_all
     puts ''
     puts "Создаем основной hub для категорий статей"
@@ -135,7 +141,7 @@ namespace :ae do
   end
 
   desc "Перетаскиваем категории в основной hub для категорий статей"
-  task categories_start: [:environment, :create_root_category_hub] do
+  task categories_start: [:environment] do
     ae_categories = AE_Category.all
     ae_categories_count = ae_categories.count
 
@@ -179,11 +185,11 @@ namespace :ae do
   end
 
   desc "Перетаскиваем посты"
-  task posts_start: [:environment, :categories_start] do
+  task posts_start: [:environment] do
     puts ''
     puts 'Перетаскиваем посты'
 
-    ae_articles = AE_Article.all
+    ae_articles       = AE_Article.all
     ae_articles_count = ae_articles.count
 
     ae_articles.each_with_index do |ae_article, index|
@@ -207,7 +213,8 @@ namespace :ae do
 
       if post.save
         print '*'
-        create_main_image_file post, old_file
+        
+        # create_main_image_file post, old_file
         # print "(#{index+1}/#{ae_articles_count})"
       else
         puts_error post, index, ae_articles_count
@@ -216,7 +223,7 @@ namespace :ae do
   end
 
   desc "Создаем Hub для блогов"
-  task create_hub_blog: [:environment, :posts_start] do
+  task create_hub_blog: [:environment] do
     puts ''
     puts "Создаем основной hub для блогов"
     create_system_hub(:system_blogs, "Блоги", :posts)
@@ -224,7 +231,7 @@ namespace :ae do
 
   desc "Перетягиваем блоги"
   # допилить не связанные 3 блога, связать с админом
-  task blogs_start: [:environment, :create_hub_blog] do
+  task blogs_start: [:environment] do
     ae_blogs = AE_Blog.where.not('user_id IN (4,17,33)')
     ae_blogs_count = ae_blogs.count
     hub_blog = Hub.roots.where("title = ?", "Блоги").first
@@ -275,7 +282,7 @@ namespace :ae do
   end
 
   desc "Перетягиваем комментарии"
-  task comment_start: [:environment, :blogs_start] do
+  task comment_start: [:environment] do
     puts ''
     puts 'Перетаскиваем комментарии:'
     ae_roots_comments = AE_Comment.where('depth = ?', 0)
@@ -283,7 +290,7 @@ namespace :ae do
   end
 
   desc "Перетягиваем загруженные файлы (uploaded_files)"
-  task uploaded_files_start: [:environment, :comment_start] do
+  task uploaded_files_start: [:environment] do
     puts ''
     puts 'Перетаскиваем загруженные файлы (uploaded_files)'
     ae_uploaded_files = AE_UploadedFile.all
@@ -307,6 +314,17 @@ namespace :ae do
   desc "data moving"
   task data_move: :environment do
     Rake::Task["db:bootstrap"].invoke
-    Rake::Task["ae:clean_db"].invoke
+    %w[
+      clean_db
+      user_start
+      create_root_category_hub
+      categories_start    
+      posts_start
+      create_hub_blog
+      blogs_start
+      comment_start
+    ].each{ |task| Rake::Task["ae:#{task}"].invoke }
+
+    # uploaded_files_start
   end
 end
