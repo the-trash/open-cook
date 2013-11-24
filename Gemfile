@@ -60,9 +60,9 @@ gem 'the_role',
   branch: 'kiss_version'
 
 gem 'the_storages',
-  path: '../the_storages'
-  # github: 'the-teacher/the_storages',
-  # branch: 'kiss_version'
+  # path: '../the_storages'
+  github: 'the-teacher/the_storages',
+  branch: 'master'
 
 gem "the_comments",
   # path: '../the_comments',

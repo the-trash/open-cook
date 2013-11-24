@@ -13,7 +13,6 @@ set :user,        :open_cook_web
 set :socket_name, :zykin_ilya_server
 set :users_home,  "/var/www/open_cook_web/data"
 set :deploy_to,   "#{users_home}/www/#{application}"
-set :repository,  "git@github.com:open-cook/open-cook.git"
 default_run_options[:shell] = "/bin/bash --login"
 
 # helper vars
@@ -24,9 +23,12 @@ set :to_app,  "cd #{release_path} "
 
 # deploy params
 set :scm,         :git
-set :branch,      :master
 set :deploy_via,  :remote_cache
 server server_addr, :app, :web, :db, primary: true
+
+# main repo params
+set :repository,  "git@github.com:open-cook/open-cook.git"
+set :branch,      :ae_project
 
 # connection params
 set :use_sudo, false
