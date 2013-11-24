@@ -130,16 +130,15 @@ end
 
 def create_attached_files node, old_file
   user = find_user node
-  obj = return_obj_for_storage node
+  obj  = return_obj_for_storage node
 
-  if (File.exists?(old_file) && obj )
+  if obj && File.exists?(old_file)
     obj.attached_files.create(
       user: user,
       attachment: File.open(old_file)
     )
-    print '*'
   else
-    puts old_file.to_s.yellow
+    puts old_file.to_s.red
   end
 end
 

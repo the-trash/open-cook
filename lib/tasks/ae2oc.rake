@@ -8,6 +8,9 @@ require "#{Rails.root}/lib/tasks/includes/helpers"
 # rake ae:data_move
 # =================================
 
+# FILE_DUMP_DIR = "#{Rails.root}/public/system"
+FILE_DUMP_DIR = "/home/the_teacher/vbox/system"
+
 # проверить путь и права на переносимые файлы перед стартом
 # rake ae:user_start
 namespace :ae do
@@ -196,8 +199,6 @@ namespace :ae do
       # user = find_user ae_article
       user = User.root
       hub = find_parent_category ae_article
-      old_file = "#{Rails.root}/public/system/old_uploads/articles"+
-                 "/original/#{ae_article.id}#{File.extname(ae_article.image_file_name)}"
 
       # решить вопрос с: image_file_name, pdf_file_name, swf_file_name, swf_see_file_name
       post = Post.new(
@@ -212,10 +213,11 @@ namespace :ae do
       )
 
       if post.save
-        print '*'
-        
+        old_file = "#{FILE_DUMP_DIR}/articles"+
+                   "/original/#{ae_article.id}#{File.extname(ae_article.image_file_name)}"
+
         # create_main_image_file post, old_file
-        # print "(#{index+1}/#{ae_articles_count})"
+        puts "(#{index+1}/#{ae_articles_count})"
       else
         puts_error post, index, ae_articles_count
       end
@@ -240,8 +242,6 @@ namespace :ae do
     puts "Перетягиваем блоги:"
     ae_blogs.each_with_index do |ae_blog, index|
       user_blog = find_user ae_blog
-      old_file = "#{Rails.root}/public/system/old_uploads/blogs"+
-                 "/original/#{ae_blog.id}#{File.extname(ae_blog.image_file_name)}"
 
       blog = Post.new(
         title: ae_blog.name,
@@ -253,7 +253,9 @@ namespace :ae do
 
       if blog.save
         print "*"
-        create_main_image_file blog, old_file
+        old_file = "#{FILE_DUMP_DIR}/blogs"+
+           "/original/#{ae_blog.id}#{File.extname(ae_blog.image_file_name.to_s)}"
+        # create_main_image_file blog, old_file
       else
         puts_error blog, index, ae_blogs_count
       end
@@ -261,7 +263,7 @@ namespace :ae do
 
     not_relation_blogs = AE_Blog.where('user_id IN (4,17,33)')
     not_relation_blogs.each_with_index do |bl, index|
-      old_file = "#{Rails.root}/public/system/old_uploads/blogs"+
+      old_file = "#{FILE_DUMP_DIR}/blogs"+
                  "/original/#{bl.id}#{File.extname(bl.image_file_name)}"
 
       blog = Post.new(
@@ -274,7 +276,7 @@ namespace :ae do
 
       if blog.save
         print "*"
-        create_main_image_file blog, old_file
+        # create_main_image_file blog, old_file
       else
         puts_error blog, index, not_relation_blogs.count
       end
@@ -294,15 +296,17 @@ namespace :ae do
     puts ''
     puts 'Перетаскиваем загруженные файлы (uploaded_files)'
     ae_uploaded_files = AE_UploadedFile.all
+    upfiles_count     = ae_uploaded_files.count
     # ae_uploaded_files = AE_UploadedFile.limit(5)
 
-    ae_uploaded_files.each do |ae_uploaded_file|
+    ae_uploaded_files.each_with_index do |ae_uploaded_file, index|
       # Положил в папку с проектом, указывать путь под себя
-      old_file = "#{Rails.root}/public/system/old_uploads/uploads/" +
+      old_file = "#{FILE_DUMP_DIR}/uploads/" +
                   "#{ae_uploaded_file.storage_type.downcase}/#{ae_uploaded_file.storage_id}/"+
                   "files/original/#{ae_uploaded_file.file_file_name}"
 
-      create_attached_files ae_uploaded_file, old_file
+      # create_attached_files ae_uploaded_file, old_file
+      puts "UpFile #{index}/#{upfiles_count}"
     end
   end
 
@@ -324,7 +328,6 @@ namespace :ae do
       blogs_start
       comment_start
     ].each{ |task| Rake::Task["ae:#{task}"].invoke }
-
     # uploaded_files_start
   end
 end

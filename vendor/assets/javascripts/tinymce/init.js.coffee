@@ -5,6 +5,9 @@
 # removeformat subscript superscript
 $ ->
   tinymce.init
+    relative_urls : false
+    remove_script_host : true
+
     selector: ".redactor_intro, .redactor_content"
     language_url : '/assets/tinymce/langs/ru.js'
     content_css : "/assets/tinymce/content_css.css"

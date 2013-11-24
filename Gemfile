@@ -54,9 +54,9 @@ gem 'the_string_to_slug',
   branch: 'master'
 
 gem 'the_role',
-  # path: '../the_role'
-  github: 'the-teacher/the_role',
-  branch: 'kiss_version'
+  path: '../the_role'
+  # github: 'the-teacher/the_role',
+  # branch: 'kiss_version'
 
 gem 'the_storages',
   # path: '../the_storages'
