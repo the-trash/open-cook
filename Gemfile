@@ -81,12 +81,13 @@ gem 'the_audit',
 
 # Gems used only for assets and not required
 # in production environments by default.
+gem 'sass-rails'
+gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
+
 group :assets do  
-  gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
   gem 'uglifier', '>= 1.0.3'
   gem 'sprockets-rails'
   gem 'coffee-rails'
-  gem 'sass-rails'
 end
 
 group :development, :test do
