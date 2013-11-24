@@ -28,7 +28,7 @@ server server_addr, :app, :web, :db, primary: true
 
 # main repo params
 set :repository,  "git@github.com:open-cook/open-cook.git"
-set :branch,      :ae_project
+set :branch,      "ae_project"
 
 # connection params
 set :use_sudo, false
