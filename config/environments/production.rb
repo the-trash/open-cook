@@ -1,3 +1,4 @@
+require 'uglifier'
 require "#{Rails.root}/config/initializers/application_config"
 
 TheApp::Application.configure do
@@ -25,7 +26,9 @@ TheApp::Application.configure do
   config.serve_static_assets = false
 
   # Compress JavaScripts and CSS.
-  config.assets.js_compressor  = :uglifier
+  config.assets.js_compressor = Uglifier.new(output: { ascii_only: true, quote_keys: true })
+  
+  # config.assets.js_compressor  = :uglifier
   # config.assets.css_compressor = :sass
 
   # Whether to fallback to assets pipeline if a precompiled asset is missed.

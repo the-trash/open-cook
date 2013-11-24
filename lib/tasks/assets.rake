@@ -1,4 +1,10 @@
 namespace :assets do
+  # rake assets:remove
+  desc "Assets remove"
+  task :remove do
+    Rake::Task["assets:clobber"].invoke
+  end
+
   # rake assets:rebuild
   desc "Assets rebuild"
   task :rebuild do

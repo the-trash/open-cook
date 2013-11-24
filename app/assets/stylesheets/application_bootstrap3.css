@@ -4,7 +4,7 @@
   *= require tree
   *= require sortable_tree
   *= require expandable_tree
-  *= require select2
+  *= require select2/select2
 
   *= require ./the_comments/base
   *= require ./bootstrap3/layout

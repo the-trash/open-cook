@@ -20,8 +20,8 @@
 //= require tinymce/tinymce.min.js
 //= require tinymce/init
 
-//= require select2
-//= require select2_locale_ru
+//= require select2/select2.js
+//= require select2/select2_locale_ru.js
 
 //= require ./common/app
 //= require ./common/select2_init

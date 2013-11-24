@@ -23,8 +23,8 @@
 //= require open_cook/multi_input
 //= require open_cook/tag_search
 
-//= require select2
-//= require select2_locale_ru
+//= require select2/select2
+//= require select2/select2_locale_ru
 //= require ./select2_init
 
 //= require open_cook/initializer

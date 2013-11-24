@@ -27,7 +27,7 @@
   *= require expandable_tree
   *= require the_storages
 
-  *= require select2
+  *= require select2/select2
   *= require the_role
 
   *= require ../the_comments/base

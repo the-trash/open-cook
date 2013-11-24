@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout 
+    logout
     redirect_back notice: t('sessions.destroy.notice')
   end
 end
