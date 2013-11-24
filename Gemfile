@@ -8,7 +8,7 @@ gem 'unicorn'
 
 gem 'mysql2'
 gem 'sqlite3'
-gem 'capistrano'
+gem 'capistrano', "2.15.5"
 
 # App level
 gem 'sorcery'
@@ -65,7 +65,7 @@ gem 'the_storages',
   branch: 'master'
 
 gem "the_comments",
-  # path: '../the_comments'
+  # path: '../the_comments',
   github: 'the-teacher/the_comments',
   branch: 'kiss_version'
 
@@ -81,12 +81,13 @@ gem 'the_audit',
 
 # Gems used only for assets and not required
 # in production environments by default.
+gem 'sass-rails'
+gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
+
 group :assets do  
-  gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
   gem 'uglifier', '>= 1.0.3'
   gem 'sprockets-rails'
   gem 'coffee-rails'
-  gem 'sass-rails'
 end
 
 group :development, :test do

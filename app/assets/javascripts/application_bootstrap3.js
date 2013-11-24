@@ -22,4 +22,6 @@
 
 //= require select2
 //= require select2_locale_ru
+
+//= require ./common/app
 //= require ./common/select2_init

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131105080446) do
+ActiveRecord::Schema.define(version: 20131119095510) do
 
   create_table "attached_files", force: true do |t|
     t.integer  "user_id"
@@ -189,9 +189,9 @@ ActiveRecord::Schema.define(version: 20131105080446) do
     t.string   "title"
     t.text     "raw_intro"
     t.text     "intro"
-    t.text     "raw_content"
-    t.text     "content"
-    t.string   "hub_state",                default: "draft"
+    t.text     "raw_content",              limit: 2147483647
+    t.text     "content",                  limit: 2147483647
+    t.string   "hub_state",                                   default: "draft"
     t.string   "inline_tags"
     t.string   "legacy_url"
     t.datetime "published_at"
@@ -200,23 +200,23 @@ ActiveRecord::Schema.define(version: 20131105080446) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",                    default: 0
+    t.integer  "depth",                                       default: 0
     t.string   "main_image_file_name"
     t.string   "main_image_content_type"
-    t.integer  "main_image_file_size",     default: 0
+    t.integer  "main_image_file_size",                        default: 0
     t.datetime "main_image_updated_at"
-    t.integer  "show_count",               default: 0
-    t.string   "state",                    default: "draft"
-    t.string   "moderation_state",         default: "raw"
+    t.integer  "show_count",                                  default: 0
+    t.string   "state",                                       default: "draft"
+    t.string   "moderation_state",                            default: "raw"
     t.text     "moderator_note"
     t.string   "slug"
     t.string   "short_id"
     t.string   "friendly_id"
-    t.integer  "storage_files_count",      default: 0
-    t.integer  "storage_files_size",       default: 0
-    t.integer  "draft_comments_count",     default: 0
-    t.integer  "published_comments_count", default: 0
-    t.integer  "deleted_comments_count",   default: 0
+    t.integer  "storage_files_count",                         default: 0
+    t.integer  "storage_files_size",                          default: 0
+    t.integer  "draft_comments_count",                        default: 0
+    t.integer  "published_comments_count",                    default: 0
+    t.integer  "deleted_comments_count",                      default: 0
   end
 
   create_table "roles", force: true do |t|

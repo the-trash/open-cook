@@ -16,11 +16,11 @@ module MainImageUploading
     validates_attachment :main_image,
       content_type: {
         content_type: AttachedFile::IMAGE_CONTENT_TYPES,
-        message: I18n.translate('post.validation.main_image_file_type')
+        message: I18n.translate('posts.validation.main_image_file_type')
       },
       size: {
         in: 10.kilobytes..5.megabytes,
-        message: I18n.translate('post.validation.main_image_file_size'),
+        message: I18n.translate('posts.validation.main_image_file_size'),
         if: ->{ main_image? }
       }
   end

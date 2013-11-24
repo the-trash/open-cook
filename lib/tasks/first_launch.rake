@@ -1,103 +1,60 @@
-def basic_permissions
-  {
-    new:     true,
-    index:   true,
-    show:    true,
-    create:  true,
-    edit:    true,
-    update:  true,
-    delete:  true,
-
-    manage:  true,
-    rebuild: true
-  }
-end
+# encoding: UTF-8
+require "#{Rails.root}/db/seeds/support/hubs_build"
+require "#{Rails.root}/db/seeds/support/users_build"
+require "#{Rails.root}/db/seeds/support/roles_build"
 
 namespace :db do
   namespace :create do
     # rake db:create:admin
     desc "create admin"
     task admin: :environment do
-      TheRole.create_admin_role!
-      User.create_admin!
-
-      puts "First User (admin) created"
-      puts "Login: [admin], Password: [qwerty]"
-      puts '~'*40
+      UsersBuild.create_admin!
     end
 
     # rake db:create:user_role
     desc "create user role"
     task user_role: :environment do
-      Role.create!(
-        name:  :user,
-        title: :user,
-        description: "regular user",
-        the_role: {
-          users: {
-            cabinet: true
-          },
-          posts: basic_permissions,
-          available_hubs: {
-            blogs: true
-          }
-        }
-      )
+      RolesBuild.regular_user!
+      puts "Regular user role created"
+    end
+
+    # rake db:create:blogger_role
+    desc "create blogger role"
+    task blogger_role: :environment do
+      RolesBuild.blogger!
+      puts "Blogger role created"
     end
 
     # rake db:create:first_user
     desc "create first user"
     task first_user: :environment do
-      User.create!(
-        login: :ilya_zykin,
-        username: "Ilya N. Zykin",
-        email: "zykin-ilya@ya.ru",
-        password: "qwerty",
-        role: Role.with_name(:user)
-      )
+      UsersBuild.ilya_zykin!
+      puts "First user created"
+    end
+
+    # rake db:create:system_hubs
+    desc "create system_hubs"
+    task system_hubs: :environment do
+      HubsBuild.create_system_hub(:system_pages, 'System pages', :pages)
+
+      system_hub = HubsBuild.create_system_hub(:system_hubs, 'System hubs', :pages)
+
+      HubsBuild.create_system_hub(:interviews, 'Interviews',   :posts, system_hub)
+      HubsBuild.create_system_hub(:articles,   'Articles',     :posts, system_hub)
+      HubsBuild.create_system_hub(:recipes,    'Recipes',      :posts, system_hub)
+      HubsBuild.create_system_hub(:videos,     'Videos',       :posts, system_hub)
+      HubsBuild.create_system_hub(:blogs,      'Blogs',        :posts, system_hub)
+
+      puts "Basic Hubs created"
     end
   end
 
   namespace :first do
-    # rake db:first:top_sections
-    desc "create top sections"
-    task top_sections: :environment do
-      admin = User.root
-
-      hub = Hub.create!(
-        user:  admin,
-        title: :TopSections,
-        slug:  :top_sections,
-        state: :published
-      )
-
-      %w[Recipes Posts Interviews Videos Blogs].each do |name|
-        section = Hub.create!(
-          user:  admin,
-          title: name,
-          slug:  name.downcase,
-          state: :published
-        )
-        section.move_to_child_of hub
-        print '.'
-      end
-
-      puts
-      puts "Top sections created"
-    end
-
     # rake db:first:pages
     desc "create static pages"
     task pages: :environment do
       admin = User.root
-
-      hub = Hub.create!(
-        user:  admin,
-        title: :StaticPages,
-        slug:  :static_pages,
-        pubs_type: :pages,
-        state: :published
-      )
+      hub   = Hub.with_slug(:system_pages)
 
       %w[About Help Policy].each do |name|
         section = Page.create!(
@@ -119,10 +76,12 @@ namespace :db do
       Rake::Task["db:bootstrap"].invoke
       Rake::Task["db:create:admin"].invoke
       Rake::Task["db:create:user_role"].invoke
+      Rake::Task["db:create:blogger_role"].invoke
+
       Rake::Task["db:create:first_user"].invoke
+      Rake::Task["db:create:system_hubs"].invoke
 
       Rake::Task["db:first:pages"].invoke
-      Rake::Task["db:first:top_sections"].invoke
     end
   end
 end

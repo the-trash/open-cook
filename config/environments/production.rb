@@ -1,3 +1,5 @@
+require "#{Rails.root}/config/initializers/application_config"
+
 TheApp::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -59,7 +61,12 @@ TheApp::Application.configure do
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-  # config.assets.precompile += %w( search.js )
+  
+  theme = [:application, AppConfig.theme].join('_')
+
+  config.assets.precompile += %W[
+    #{theme}.css #{theme}.js
+  ]
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

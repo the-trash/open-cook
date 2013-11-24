@@ -16,8 +16,8 @@ class Hub < ActiveRecord::Base
       where(slug: name.to_s.to_slug_param).first
     end
 
-    def top_sections
-      tops = with_slug(:top_sections)
+    def system_hubs
+      tops = with_slug(:system_hubs)
       tops ? tops.children.where(pubs_type: :posts).published_set : none
     end
   end
