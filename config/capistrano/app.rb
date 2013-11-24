@@ -40,6 +40,9 @@ namespace :app do
     run _join [to_app, gemset, app_env + "rake db:migrate"]
   end
 
+  # cap app:db_drop
+  # mysql -u [username] -p[password] -e 'drop database db-name;'
+
   # cap app:assets_build
   desc "cap app:assets_build"
   task :assets_build do
