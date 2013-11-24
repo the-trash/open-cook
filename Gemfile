@@ -8,7 +8,7 @@ gem 'unicorn'
 
 gem 'mysql2'
 gem 'sqlite3'
-gem 'capistrano'
+gem 'capistrano', "2.15.5"
 
 # App level
 gem 'sorcery'
