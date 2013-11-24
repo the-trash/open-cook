@@ -6,6 +6,6 @@
   *= require expandable_tree
   *= require select2/select2
 
-  *= require ./the_comments/base
-  *= require ./bootstrap3/layout
+  *= require ../the_comments/base
+  *= require ./layout
 */

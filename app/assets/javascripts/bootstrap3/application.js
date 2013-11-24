@@ -23,5 +23,5 @@
 //= require select2/select2.js
 //= require select2/select2_locale_ru.js
 
-//= require ./common/app
-//= require ./common/select2_init
+//= require ../common/app
+//= require ../common/select2_init
