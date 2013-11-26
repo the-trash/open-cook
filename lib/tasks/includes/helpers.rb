@@ -1,13 +1,4 @@
 # helpers
-def create_system_hub slug, title, type
-  User.root.hubs.where(title: title).first_or_create!(
-    slug:  slug,
-    title: title,
-    pubs_type: type,
-    state: :published
-  )
-end
-
 def create_hub_category category
   user_root = User.root
   slug = make_slug category
@@ -82,7 +73,7 @@ def return_user node
 end
 
 def create_comment node, parent = nil
-  print '.'
+  print '*'
 
   user = find_user node
   obj = return_obj_for_comment node

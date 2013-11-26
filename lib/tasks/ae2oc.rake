@@ -12,10 +12,9 @@ namespace :ae do
       Rake::Task["ae:create:clean_db"].invoke
       Rake::Task["ae:create:create_roles"].invoke
       Rake::Task["ae:create:user_start"].invoke
-      Rake::Task["ae:create:create_root_category_hub"].invoke
+      Rake::Task["ae:create:system_hubs"].invoke
       Rake::Task["ae:create:categories_start"].invoke
       Rake::Task["ae:create:posts_start"].invoke
-      Rake::Task["ae:create:create_hub_blog"].invoke
       Rake::Task["ae:create:blogs_start"].invoke
       Rake::Task["ae:create:comment_start"].invoke
       puts 'Data transfer is complete'.green
@@ -162,13 +161,6 @@ namespace :ae do
 
       puts "Basic Hubs created".yellow
     end
-
-    # rake ae:create:create_root_category_hub
-    desc "Create the main hub for articles"
-    task create_root_category_hub: :environment do
-      puts "Create the main hub for articles".yellow
-      create_system_hub(:system_article_categories, "ArticleCategories", :categories)
-    end
     
     # rake ae:create:categories_start
     desc "Drag the categories in the main hub for articles"
@@ -181,7 +173,7 @@ namespace :ae do
       ae_subcategories = AE_Subcategory.all
       ae_subcategories_count = ae_subcategories.count
 
-      root_hub_categories = Hub.find_by_title "ArticleCategories"
+      root_hub_categories = Hub.find_by_title "Articles"
 
       ae_categories.each_with_index do |ae_category, index|
         hub_category = create_hub_category ae_category
@@ -239,13 +231,6 @@ namespace :ae do
       end
 
       puts ''
-    end
-
-    # rake ae:create:create_hub_blog
-    desc "Create Hub for blogs"
-    task create_hub_blog: :environment do
-      puts "Create Hub for blogs".yellow
-      create_system_hub(:system_blogs, "Blogs", :posts)
     end
 
     # rake ae:create:blogs_start
