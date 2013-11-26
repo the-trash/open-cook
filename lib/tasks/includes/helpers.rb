@@ -26,28 +26,30 @@ end
 
 def make_legacy_url_for_hub category
   legacy_url = if category.try(:category_id)
-    parent_cat = AE_Category.find(category.category_id)
+    parent_cat = AE_Category.find category.category_id
     "#{parent_cat.slug}/#{category.slug}"
   else
     "#{category.slug}"
   end
 end
 
-def find_parent_category category
-  if category.respond_to?(:category_id)
-    cat_id = category.category_id
-    ae_category = AE_Category.where('id = ?', cat_id).first
-  else
-    cat_id = category.subcategory_id
-    ae_category = AE_Subcategory.where('id = ?', cat_id).first
-  end
+def find_ae_category category
+  AE_Category.find category.id
+end
 
-  hub_category = Hub.where('slug = ?', ae_category.slug).first
+def find_ae_subcategory category
+  AE_Subcategory.find category.category_id
+end
+
+def find_parent_category category
+  ae_category = (category.try(:category_id))? find_ae_subcategory(category) : find_ae_category(category)
+
+  hub_category = Hub.find_by_slug ae_category.slug
   hub_category
 end
 
 def check_slug category
-  hub = Hub.where('slug = ?', category.slug)
+  hub = Hub.find_by_slug category.slug
   hub.present?
 end
 
@@ -85,18 +87,20 @@ def create_comment node, parent = nil
   user = find_user node
   obj = return_obj_for_comment node
 
-  root_comment = obj.comments.create!(
-    user:        user,
-    commentable: obj,
-    raw_content: node.text,
-    referer:     node.referer,
-    user_agent:  node.user_agent,
-    ip:          node.ip,
-    parent_id:   parent.try(:id)
-  )
+  if obj
+    root_comment = obj.comments.create!(
+      user:        user,
+      commentable: obj,
+      raw_content: node.text,
+      referer:     node.referer,
+      user_agent:  node.user_agent,
+      ip:          node.ip,
+      parent_id:   parent.try(:id)
+    )
 
-  children = return_children_comment node
-  children.each {|comment| create_comment comment, root_comment} if children.present?
+    children = return_children_comment node
+    children.each {|comment| create_comment comment, root_comment} if children.present?
+  end
 end
 
 def return_blog id
@@ -163,4 +167,37 @@ def puts_error obj, index, obj_count
   puts ''
   puts "#{obj.errors.to_a.to_s.red} => #{index+1}/#{obj_count}"
   puts ''
+end
+
+def create_blog node, hub
+  user = find_user node
+
+  blog = Post.new(
+    title: node.name,
+    raw_intro: node.body,
+    raw_content: node.body,
+    hub: hub,
+    user: user,
+    legacy_url: "blogs/#{node.id}"
+  )
+  blog
+end
+
+def create_post node
+  user = find_user node
+  article_category_slug = make_legacy_url_for_hub(AE_Subcategory.find(node.subcategory_id))
+  hub = find_parent_category AE_Subcategory.find node.subcategory_id 
+
+  post = Post.new(
+    user: user,
+    hub: hub,
+    keywords: node.meta_keywords,
+    description: node.meta_description.to_s[0..250],
+    title: node.title,
+    raw_intro: node.description,
+    raw_content: node.body,
+    state: node.state,
+    legacy_url: "#{article_category_slug}/#{node.id}"
+  )
+  post
 end

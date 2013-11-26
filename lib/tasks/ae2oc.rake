@@ -156,11 +156,9 @@ namespace :ae do
 
       system_hub = HubsBuild.create_system_hub(:system_hubs, 'System hubs', :pages)
 
-      HubsBuild.create_system_hub(:interviews, 'Interviews',   :posts, system_hub)
-      HubsBuild.create_system_hub(:articles,   'Articles',     :posts, system_hub)
-      HubsBuild.create_system_hub(:recipes,    'Recipes',      :posts, system_hub)
-      HubsBuild.create_system_hub(:videos,     'Videos',       :posts, system_hub)
-      HubsBuild.create_system_hub(:blogs,      'Blogs',        :posts, system_hub)
+      HubsBuild.create_system_hub(:news, 'News', :posts, system_hub)
+      HubsBuild.create_system_hub(:articles, 'Articles', :posts, system_hub)
+      HubsBuild.create_system_hub(:blogs, 'Blogs', :posts, system_hub)
 
       puts "Basic Hubs created".yellow
     end
@@ -169,7 +167,7 @@ namespace :ae do
     desc "Create the main hub for articles"
     task create_root_category_hub: :environment do
       puts "Create the main hub for articles".yellow
-      create_system_hub(:system_article_categories, "КатегорииСтатей", :categories)
+      create_system_hub(:system_article_categories, "ArticleCategories", :categories)
     end
     
     # rake ae:create:categories_start
@@ -183,7 +181,7 @@ namespace :ae do
       ae_subcategories = AE_Subcategory.all
       ae_subcategories_count = ae_subcategories.count
 
-      root_hub_categories = Hub.where(title: "КатегорииСтатей").first
+      root_hub_categories = Hub.find_by_title "ArticleCategories"
 
       ae_categories.each_with_index do |ae_category, index|
         hub_category = create_hub_category ae_category
@@ -226,25 +224,10 @@ namespace :ae do
       ae_articles_count = ae_articles.count
 
       ae_articles.each_with_index do |ae_article, index|
-        # user = find_user ae_article
-        user = User.root
-        hub = find_parent_category ae_article
         old_file = "#{Rails.root}/public/system/old_uploads/articles"+
                    "/original/#{ae_article.id}#{File.extname(ae_article.image_file_name)}"
-        article_category_slug = make_legacy_url_for_hub(AE_Subcategory.find(ae_article.subcategory_id))
 
-        # add legacy_url !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        post = Post.new(
-          user_id: user.id,
-          hub_id: hub.id,
-          keywords: ae_article.meta_keywords,
-          description: ae_article.meta_description.to_s[0..250],
-          title: ae_article.title,
-          raw_intro: ae_article.description,
-          raw_content: ae_article.body,
-          state: ae_article.state,
-          legacy_url: "#{article_category_slug}/#{ae_article.id}"
-        )
+        post = create_post ae_article
 
         if post.save
           print '*'
@@ -262,7 +245,7 @@ namespace :ae do
     desc "Create Hub for blogs"
     task create_hub_blog: :environment do
       puts "Create Hub for blogs".yellow
-      create_system_hub(:system_blogs, "Блоги", :posts)
+      create_system_hub(:system_blogs, "Blogs", :posts)
     end
 
     # rake ae:create:blogs_start
@@ -270,48 +253,20 @@ namespace :ae do
     task blogs_start: :environment do
       ae_blogs = AE_Blog.where.not('user_id IN (4,17,33)')
       ae_blogs_count = ae_blogs.count
-      hub_blog = Hub.roots.where("title = ?", "Блоги").first
+      hub_blog = Hub.roots.where("title = ?", "Blogs").first
 
       puts "Drag Blogs:".yellow
       ae_blogs.each_with_index do |ae_blog, index|
-        user_blog = find_user ae_blog
         old_file = "#{Rails.root}/public/system/old_uploads/blogs"+
                    "/original/#{ae_blog.id}#{File.extname(ae_blog.image_file_name)}"
 
-        blog = Post.new(
-          title: ae_blog.name,
-          raw_intro: ae_blog.body,
-          raw_content: ae_blog.body,
-          hub_id: hub_blog.id,
-          user_id: user_blog.id
-        )
+        blog = create_blog ae_blog, hub_blog
 
         if blog.save
           print "*"
           # create_main_image_file blog, old_file
         else
           puts_error blog, index, ae_blogs_count
-        end
-      end
-
-      not_relation_blogs = AE_Blog.where('user_id IN (4,17,33)')
-      not_relation_blogs.each_with_index do |bl, index|
-        old_file = "#{Rails.root}/public/system/old_uploads/blogs"+
-                   "/original/#{bl.id}#{File.extname(bl.image_file_name)}"
-
-        blog = Post.new(
-          title: bl.name,
-          raw_intro: bl.body,
-          raw_content: bl.body,
-          hub_id: hub_blog.id,
-          user_id: User.root
-        )
-
-        if blog.save
-          print "*"
-          # create_main_image_file blog, old_file
-        else
-          puts_error blog, index, not_relation_blogs.count
         end
       end
 
