@@ -231,6 +231,7 @@ namespace :ae do
         hub = find_parent_category ae_article
         old_file = "#{Rails.root}/public/system/old_uploads/articles"+
                    "/original/#{ae_article.id}#{File.extname(ae_article.image_file_name)}"
+        article_category_slug = make_legacy_url_for_hub(AE_Subcategory.find(ae_article.subcategory_id))
 
         # add legacy_url !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         post = Post.new(
@@ -241,7 +242,8 @@ namespace :ae do
           title: ae_article.title,
           raw_intro: ae_article.description,
           raw_content: ae_article.body,
-          state: ae_article.state
+          state: ae_article.state,
+          legacy_url: "#{article_category_slug}/#{ae_article.id}"
         )
 
         if post.save
