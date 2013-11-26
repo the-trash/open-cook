@@ -14,16 +14,23 @@ def create_hub_category category
 
   hub_category = Hub.new(
     title: category.title,
-    # main_image_file_name: category.big_image_file_name,
-    # main_image_content_type: category.big_image_content_type,
-    # main_image_file_size: category.big_image_file_size,
     slug: slug,
     keywords: category.meta_keywords,
     description: category.meta_description.to_s[0..250],
     state: :published,
-    user: user_root
+    user: user_root,
+    legacy_url: make_legacy_url_for_hub(category)
   )
   hub_category
+end
+
+def make_legacy_url_for_hub category
+  legacy_url = if category.try(:category_id)
+    parent_cat = AE_Category.find(category.category_id)
+    "#{parent_cat.slug}/#{category.slug}"
+  else
+    "#{category.slug}"
+  end
 end
 
 def find_parent_category category

@@ -1,6 +1,7 @@
 require "#{Rails.root}/lib/tasks/includes/connect_ae_db"
 require "#{Rails.root}/lib/tasks/includes/ae2oc_db"
 require "#{Rails.root}/lib/tasks/includes/helpers"
+require "#{Rails.root}/db/seeds/support/hubs_build"
 
 namespace :ae do
   namespace :first do
@@ -31,7 +32,7 @@ namespace :ae do
       puts "Hubs cleaned" if Hub.delete_all
       puts "Posts cleaned" if Post.delete_all
       puts "Comments cleaned" if Comment.delete_all
-      puts "Downloaded files cleaned" if AttachedFile.delete_all
+      # puts "Downloaded files cleaned" if AttachedFile.delete_all
     end
 
     # rake ae:create:create_roles
@@ -146,6 +147,22 @@ namespace :ae do
       end
 
       puts ''
+    end
+
+    # rake ae:create:system_hubs
+    desc "create system_hubs"
+    task system_hubs: :environment do
+      HubsBuild.create_system_hub(:system_pages, 'System pages', :pages)
+
+      system_hub = HubsBuild.create_system_hub(:system_hubs, 'System hubs', :pages)
+
+      HubsBuild.create_system_hub(:interviews, 'Interviews',   :posts, system_hub)
+      HubsBuild.create_system_hub(:articles,   'Articles',     :posts, system_hub)
+      HubsBuild.create_system_hub(:recipes,    'Recipes',      :posts, system_hub)
+      HubsBuild.create_system_hub(:videos,     'Videos',       :posts, system_hub)
+      HubsBuild.create_system_hub(:blogs,      'Blogs',        :posts, system_hub)
+
+      puts "Basic Hubs created".yellow
     end
 
     # rake ae:create:create_root_category_hub
@@ -305,6 +322,7 @@ namespace :ae do
       puts 'Drag comments:'.yellow
       ae_roots_comments = AE_Comment.where('depth = ?', 0)
       ae_roots_comments.each {|ae_root_comment| create_comment ae_root_comment}
+      puts ''
     end
   end
 
