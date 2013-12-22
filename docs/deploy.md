@@ -15,6 +15,10 @@ Enter passphrase (empty for no passphrase): ENTER
 ```
 
 ```
+cat ~/.ssh/id_rsa.pub | ssh root@open-cook.ru 'cat >> ~/.ssh/authorized_keys'
+```
+
+```
 scp ~/.ssh/zykin_ilya.pub open_cook_web@185.4.85.70:~/zykin_ilya.pub
 ```
 
