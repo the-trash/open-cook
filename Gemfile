@@ -19,7 +19,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 1.0.1'
 
-gem 'compass-rails', '~> 2.0.alpha.0'
+gem "compass-rails", "~> 1.1.3"
 
 gem 'kaminari'
 
