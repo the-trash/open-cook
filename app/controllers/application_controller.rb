@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   include RedirectBack
   include SorceryAddons
   include TheRoleAddons
-  include TheRoleController
+  include TheRole::Controller
   include TheComments::ViewToken
 
   prepend_view_path "app/views/#{ AppConfig.theme }"

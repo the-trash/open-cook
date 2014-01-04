@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   authenticates_with_sorcery!
   include DefineOpenPassword
 
-  include TheRoleUserModel
+  include TheRole::User
   
   include ActAsStorage
   include HasAttachedFiles
