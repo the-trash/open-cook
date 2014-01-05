@@ -24,12 +24,6 @@ git clone git@github.com:the-teacher/the_notification.git
 git clone git@github.com:the-teacher/the_sortable_tree.git
 ```
 
-rails 4 required
-
-```
-gem update rails
-```
-
 Change directory
 
 ```

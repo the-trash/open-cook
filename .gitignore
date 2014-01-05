@@ -3,6 +3,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore binstubs
+bin/*
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
@@ -17,8 +20,10 @@ public/system
 public/system/*
 
 # local config files
-Gemfile.lock
+# Gemfile.lock
 .rvmrc
+.ruby-gemset
+.ruby-version
 
 # OS files
 .DS_Store

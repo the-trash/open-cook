@@ -1,0 +1,354 @@
+GIT
+  remote: git://github.com/collectiveidea/awesome_nested_set.git
+  revision: dbe4555222758f39a60ba15afd81f23d769146b3
+  branch: master
+  specs:
+    awesome_nested_set (3.0.0.rc.3)
+      activerecord (>= 4.0.0, < 5)
+
+GIT
+  remote: git://github.com/james2m/seedbank.git
+  revision: ad4079d7381c5a5ffc58a1cf89adc969a680ebd1
+  specs:
+    seedbank (0.3.0)
+
+GIT
+  remote: git://github.com/mbleigh/acts-as-taggable-on.git
+  revision: 3a7719655f4423fe0da4cb48ad4661e4f6480868
+  branch: master
+  specs:
+    acts-as-taggable-on (3.0.0)
+      rails (>= 3, < 5)
+
+GIT
+  remote: git://github.com/open-cook/the_audit.git
+  revision: c33413fdc2d4bf1fd823440cf29d93ebd558b27e
+  branch: master
+  specs:
+    the_audit (0.0.1)
+
+GIT
+  remote: git://github.com/the-teacher/the_comments.git
+  revision: 21253eabf821daf3c98f57e0afd4a244ace9fc70
+  branch: kiss_version
+  specs:
+    the_comments (2.2.0)
+      state_machine
+      the_sortable_tree
+
+GIT
+  remote: git://github.com/the-teacher/the_notification.git
+  revision: 5939543b7ea827aef829e085a1dc8c28be03172f
+  branch: master
+  specs:
+    the_notification (0.0.1)
+
+GIT
+  remote: git://github.com/the-teacher/the_role.git
+  revision: ae6f87ee6295b78a4fe53fc4ae295baf8c67efb2
+  branch: master
+  specs:
+    the_role (2.3)
+      haml
+      rails (>= 3, < 5)
+
+GIT
+  remote: git://github.com/the-teacher/the_storages.git
+  revision: 8f7f2cc3b9ceb9990941f216ac3b6144eade6df4
+  branch: master
+  specs:
+    the_storages (0.0.2)
+      state_machine
+      the_sortable_tree
+      the_string_to_slug (~> 0.0.6)
+
+GIT
+  remote: git://github.com/the-teacher/the_string_to_slug.git
+  revision: 08c9571bf2d3b355440e745827a1c0807255f96d
+  branch: master
+  specs:
+    the_string_to_slug (0.0.8)
+      rails-i18n (~> 4.0.0.pre)
+
+GIT
+  remote: git://github.com/thomas-mcdonald/bootstrap-sass.git
+  revision: 0146e5dca0fc644a9a6a51d0258082be2975b4f1
+  specs:
+    bootstrap-sass (3.0.3.0)
+      sass (~> 3.2)
+
+GIT
+  remote: https://github.com/collectiveidea/delayed_job.git
+  revision: 47f28bdad66d02d4a301812ea08e16ee9d70f914
+  tag: v4.0.0.beta2
+  specs:
+    delayed_job (4.0.0.beta2)
+      activesupport (>= 3.0, < 4.1)
+
+GIT
+  remote: https://github.com/collectiveidea/delayed_job_active_record.git
+  revision: 20077b3ff9f630b7db19c8a12c6b53ea4ec94543
+  tag: v4.0.0.beta3
+  specs:
+    delayed_job_active_record (4.0.0.beta3)
+      activerecord (>= 3.0, < 4.1)
+      delayed_job (>= 3.0, < 4.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    RedCloth (4.2.9)
+    actionmailer (4.1.0.beta1)
+      actionpack (= 4.1.0.beta1)
+      actionview (= 4.1.0.beta1)
+      mail (~> 2.5.4)
+    actionpack (4.1.0.beta1)
+      actionview (= 4.1.0.beta1)
+      activesupport (= 4.1.0.beta1)
+      rack (~> 1.5.2)
+      rack-test (~> 0.6.2)
+    actionview (4.1.0.beta1)
+      activesupport (= 4.1.0.beta1)
+      builder (~> 3.1)
+      erubis (~> 2.7.0)
+    activemodel (4.1.0.beta1)
+      activesupport (= 4.1.0.beta1)
+      builder (~> 3.1)
+    activerecord (4.1.0.beta1)
+      activemodel (= 4.1.0.beta1)
+      activesupport (= 4.1.0.beta1)
+      arel (~> 5.0.0)
+    activesupport (4.1.0.beta1)
+      i18n (~> 0.6, >= 0.6.9)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.1)
+      tzinfo (~> 1.1)
+    arel (5.0.0)
+    atomic (1.1.14)
+    bcrypt-ruby (3.1.2)
+    builder (3.2.2)
+    capybara (2.2.0)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    chunky_png (1.2.9)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.3)
+      climate_control (>= 0.0.3, < 1.0)
+    coffee-rails (4.0.1)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0, < 5.0)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.6.3)
+    colored (1.2)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
+    compass-rails (1.1.3)
+      compass (>= 0.12.2)
+    daemons (1.1.9)
+    database_cleaner (1.2.0)
+    diff-lcs (1.2.5)
+    erubis (2.7.0)
+    eventmachine (1.0.3)
+    execjs (2.0.2)
+    factory_girl (4.3.0)
+      activesupport (>= 3.0.0)
+    faker (1.2.0)
+      i18n (~> 0.5)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
+    fssm (0.2.10)
+    haml (4.0.4)
+      tilt
+    hike (1.2.3)
+    httpauth (0.2.0)
+    i18n (0.6.9)
+    jbuilder (1.0.2)
+      activesupport (>= 3.0.0)
+    jquery-rails (3.0.4)
+      railties (>= 3.0, < 5.0)
+      thor (>= 0.14, < 2.0)
+    jquery-ui-rails (4.1.1)
+      railties (>= 3.1.0)
+    json (1.8.1)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
+    kaminari (0.15.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+    kgio (2.8.1)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.25.1)
+    mini_magick (3.7.0)
+      subexec (~> 0.2.1)
+    mini_portile (0.5.2)
+    minitest (5.2.0)
+    multi_json (1.8.2)
+    multi_xml (0.5.5)
+    multipart-post (1.2.0)
+    mysql2 (0.3.14)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
+    oauth (0.4.7)
+    oauth2 (0.9.2)
+      faraday (~> 0.8)
+      httpauth (~> 0.2)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
+    paperclip (3.5.2)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
+    polyglot (0.3.3)
+    quiet_assets (1.0.2)
+      railties (>= 3.1, < 5.0)
+    rack (1.5.2)
+    rack-test (0.6.2)
+      rack (>= 1.0)
+    rails (4.1.0.beta1)
+      actionmailer (= 4.1.0.beta1)
+      actionpack (= 4.1.0.beta1)
+      actionview (= 4.1.0.beta1)
+      activemodel (= 4.1.0.beta1)
+      activerecord (= 4.1.0.beta1)
+      activesupport (= 4.1.0.beta1)
+      bundler (>= 1.3.0, < 2.0)
+      railties (= 4.1.0.beta1)
+      sprockets-rails (~> 2.0.0)
+    rails-i18n (4.0.1)
+      i18n (~> 0.6)
+      rails (~> 4.0)
+    railties (4.1.0.beta1)
+      actionpack (= 4.1.0.beta1)
+      activesupport (= 4.1.0.beta1)
+      rake (>= 0.8.7)
+      thor (>= 0.18.1, < 2.0)
+    raindrops (0.12.0)
+    rake (10.1.1)
+    rspec (2.14.1)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    rspec-core (2.14.7)
+    rspec-expectations (2.14.4)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.14.4)
+    rspec-rails (2.14.1)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.14.0)
+      rspec-expectations (~> 2.14.0)
+      rspec-mocks (~> 2.14.0)
+    sanitize (2.0.6)
+      nokogiri (>= 1.4.4)
+    sass (3.2.13)
+    sass-rails (4.0.1)
+      railties (>= 4.0.0, < 5.0)
+      sass (>= 3.1.10)
+      sprockets-rails (~> 2.0.0)
+    sorcery (0.8.5)
+      bcrypt-ruby (>= 3.0)
+      oauth (~> 0.4.4)
+      oauth2 (>= 0.8.0, < 1.0.0)
+    sprockets (2.10.1)
+      hike (~> 1.2)
+      multi_json (~> 1.0)
+      rack (~> 1.0)
+      tilt (~> 1.1, != 1.3.0)
+    sprockets-rails (2.0.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      sprockets (~> 2.8)
+    sqlite3 (1.3.8)
+    state_machine (1.2.0)
+    subexec (0.2.3)
+    the_sortable_tree (2.4.0)
+      rails (>= 3.1)
+    thin (1.6.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 1.0.0)
+      rack (>= 1.0.0)
+    thor (0.18.1)
+    thread_safe (0.1.3)
+      atomic
+    tilt (1.4.1)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
+    tzinfo (1.1.0)
+      thread_safe (~> 0.1)
+    uglifier (2.4.0)
+      execjs (>= 0.3.0)
+      json (>= 1.8.0)
+    unicorn (4.7.0)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  RedCloth
+  acts-as-taggable-on!
+  awesome_nested_set!
+  bootstrap-sass!
+  capybara
+  coffee-rails
+  colored
+  compass-rails (~> 1.1.3)
+  daemons
+  database_cleaner
+  delayed_job!
+  delayed_job_active_record!
+  factory_girl
+  faker
+  haml
+  jbuilder (~> 1.0.1)
+  jquery-rails
+  jquery-ui-rails
+  kaminari
+  mini_magick
+  mysql2
+  paperclip
+  quiet_assets
+  rails (~> 4.1.0.beta1)
+  rspec
+  rspec-core
+  rspec-expectations
+  rspec-mocks
+  rspec-rails
+  sanitize
+  sass-rails
+  seedbank!
+  sorcery
+  sprockets-rails
+  sqlite3
+  state_machine (~> 1.2.0)
+  the_audit!
+  the_comments!
+  the_notification!
+  the_role!
+  the_sortable_tree
+  the_storages!
+  the_string_to_slug!
+  thin
+  uglifier (>= 1.0.3)
+  unicorn
