@@ -22,6 +22,9 @@ gem 'haml'
 gem 'kaminari'
 gem "compass-rails", "~> 1.1.3"
 
+gem 'sass-rails'
+gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
+
 # Models
 gem 'sanitize'
 gem 'state_machine', '~> 1.2.0'
@@ -81,11 +84,6 @@ gem 'the_audit',
   #, path: '../the_audit'
   github: 'open-cook/the_audit',
   branch: 'master'
-
-group :development, :assets do
-  gem 'sass-rails'
-  gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
-end
 
 group :development, :test do
   gem 'colored'
