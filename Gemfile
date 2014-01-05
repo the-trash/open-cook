@@ -3,34 +3,38 @@ source 'https://rubygems.org'
 # Delete all gems: gem list | cut -d' ' -f1 | xargs gem uninstall -aIx
 # for i in `gem list --no-versions`; do gem uninstall -aIx $i; done
 
-gem 'rails', '~> 4.0.1'
+gem 'rails', '~> 4.1.0.beta1'
 gem 'unicorn'
 
+# Datebase
 gem 'mysql2'
-gem 'sqlite3'
-gem 'capistrano', "2.15.5"
 
 # App level
 gem 'sorcery'
 gem 'RedCloth', require: 'redcloth'
-gem 'quiet_assets', group: :development
 
+# views
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 1.0.1'
 
+gem 'haml'
+gem 'kaminari'
 gem "compass-rails", "~> 1.1.3"
 
-gem 'kaminari'
-
-gem 'haml'
+# Models
 gem 'sanitize'
 gem 'state_machine', '~> 1.2.0'
 
-gem 'acts-as-taggable-on', github: "mbleigh/acts-as-taggable-on",       branch: "master"
-gem 'awesome_nested_set',  github: "collectiveidea/awesome_nested_set", branch: "master"
+gem 'acts-as-taggable-on', 
+  github: "mbleigh/acts-as-taggable-on",
+  branch: "master"
 
-# gem 'rmagick'
+gem 'awesome_nested_set',
+  github: "collectiveidea/awesome_nested_set",
+  branch: "master"
+
+# Images and files
 gem 'mini_magick'
 gem 'paperclip'
 
@@ -78,15 +82,9 @@ gem 'the_audit',
   github: 'open-cook/the_audit',
   branch: 'master'
 
-# Gems used only for assets and not required
-# in production environments by default.
-gem 'sass-rails'
-gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
-
-group :assets do  
-  gem 'uglifier', '>= 1.0.3'
-  gem 'sprockets-rails'
-  gem 'coffee-rails'
+group :development, :assets do
+  gem 'sass-rails'
+  gem 'bootstrap-sass', github: 'thomas-mcdonald/bootstrap-sass'
 end
 
 group :development, :test do
@@ -100,6 +98,17 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec-mocks'
   gem 'rspec-expectations'
+end
+
+group :development do
+  gem 'quiet_assets'
+  gem 'sqlite3'
+end
+
+group :assets do  
+  gem 'uglifier', '>= 1.0.3'
+  gem 'sprockets-rails'
+  gem 'coffee-rails'
 end
 
 group :test do
