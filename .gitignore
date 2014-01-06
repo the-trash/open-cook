@@ -17,7 +17,7 @@ public/system
 public/system/*
 
 # local config files
-Gemfile.lock
+# Gemfile.lock
 .rvmrc
 
 # OS files
