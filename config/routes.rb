@@ -1,8 +1,6 @@
 TheApp::Application.routes.draw do
   root to: 'welcome#index'
 
-  resources :audits
-
   # Legacy Urls
   # /recipes/rc56797---lavandovyy-limonad
   # /recipes/tags/milk
