@@ -31,6 +31,7 @@ namespace :ae do
       puts "Hubs cleaned" if Hub.delete_all
       puts "Posts cleaned" if Post.delete_all
       puts "Comments cleaned" if Comment.delete_all
+      #taichiman: puts deleted tags and taggings base
       # puts "Downloaded files cleaned" if AttachedFile.delete_all
     end
 
@@ -285,10 +286,5 @@ namespace :ae do
 
       create_attached_files ae_uploaded_file, old_file
     end
-  end
-
-  desc "Перетягиваем теги из AE в Open-cook"
-  task tags_start: :environment do
-    
   end
 end

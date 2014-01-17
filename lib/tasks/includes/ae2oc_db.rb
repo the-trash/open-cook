@@ -161,5 +161,35 @@
 	t.integer  "published_comments_count", default: 0
 	t.integer  "deleted_comments_count",   default: 0
 
+  ***********************************************************************
+  
+
+  ***********************************************************************
+
+  1. tags ae - tags oc
+  id = id
+  name = name
+
+  2. taggings ae - taggings oc
+  id            = id
+  tag_id        = tag_id
+  taggable_id   = taggable_id
+  taggable_type = taggable_type
+  tagger_id     = tagger_id
+  tagger_type   = tagger_type
+  context       = context
+  created_at    = created_at
+
+  metrics:
+  "taggable_type" "count(*)"
+  "Article" "5113"
+  "Author"  "113"
+
+  "context" "count(*)"
+  "alphabet_letter" "113"
+  "names" "967"
+  "titles"  "1190"
+  "words" "2956"
+
 	***********************************************************************
 =end

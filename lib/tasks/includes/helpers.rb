@@ -191,3 +191,11 @@ def create_post node
   )
   post
 end
+
+def create_tag tag
+  tag = ActsAsTaggableOn::Tag.new(
+    id: tag.id,
+    name: tag.name
+  )
+  tag
+end

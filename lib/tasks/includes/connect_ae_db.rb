@@ -4,8 +4,8 @@ CONNECTION_PARAMS_AE = {
   :adapter  => "mysql2",
   :host     => "localhost",
   :username => "root",
-  :password => "qwerty",
-  :database => "ae_project_old",
+  :password => "1",
+  :database => "art_electronics_dev",
   :encoding => "utf8"
 }
 
