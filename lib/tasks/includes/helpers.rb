@@ -199,3 +199,20 @@ def create_tag tag
   )
   tag
 end
+
+def create_tagging tagging
+  tagging = ActsAsTaggableOn::Tagging.new(
+    id:            tagging.id,
+    tag_id:        tagging.tag_id,
+    taggable_id:   tagging.taggable_id,
+    taggable_type: tagging.taggable_type,
+    tagger_id:     tagging.tagger_id,
+    tagger_type:   tagging.tagger_type,
+    context:       tagging.context,
+    created_at:    tagging.created_at
+  )
+
+  tagging.taggable_type = 'Post' if tagging.taggable_type == 'Article'
+
+  tagging
+end

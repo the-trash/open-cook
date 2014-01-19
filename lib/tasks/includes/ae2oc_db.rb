@@ -180,6 +180,8 @@
   context       = context
   created_at    = created_at
 
+  Taggble model only:  Author, Article
+
   metrics:
   "taggable_type" "count(*)"
   "Article" "5113"
