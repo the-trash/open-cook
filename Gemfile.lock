@@ -21,6 +21,14 @@ GIT
       rails (>= 3, < 5)
 
 GIT
+  remote: git://github.com/open-cook/the_audit.git
+  revision: 3ee01ccd0f77ca8d9027375284d469a1dfc87082
+  branch: master
+  specs:
+    the_audit (0.0.1)
+      haml
+
+GIT
   remote: git://github.com/the-teacher/the_comments.git
   revision: 21253eabf821daf3c98f57e0afd4a244ace9fc70
   branch: kiss_version
@@ -86,12 +94,6 @@ GIT
     delayed_job_active_record (4.0.0.beta3)
       activerecord (>= 3.0, < 4.1)
       delayed_job (>= 3.0, < 4.1)
-
-PATH
-  remote: ../the_audit
-  specs:
-    the_audit (0.0.1)
-      haml
 
 GEM
   remote: https://rubygems.org/
