@@ -7,7 +7,6 @@ gem 'rails', '~> 4.1.0.beta1'
 gem 'unicorn'
 
 # Datebase
-gem 'pg'
 gem 'mysql2'
 
 # App level
